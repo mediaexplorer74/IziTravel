@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionLoading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="ToastDownloadUpdateStarted" xml:space="preserve">
+    <value>Updating {0}</value>
+  </data>
+  <data name="DialogLocationServicesDisabledTitle" xml:space="preserve">
+    <value>Unable to determine location</value>
+  </data>
+  <data name="MessageReferenceListIsEmpty" xml:space="preserve">
+    <value>No related guides set by the author</value>
+  </data>
+  <data name="MessageAboutContactWebSite" xml:space="preserve">
+    <value>For additional information and enquires, please visit our website</value>
+  </data>
+  <data name="LabelSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MessageDownloadItemError" xml:space="preserve">
+    <value>Attention required. Tap here</value>
+  </data>
+  <data name="LabelAroundMe" xml:space="preserve">
+    <value>Around me</value>
+  </data>
+  <data name="LabelPrivacyStatement" xml:space="preserve">
+    <value>Privacy Statement</value>
+  </data>
+  <data name="StringTimeSpanDays" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MessageExploreSearchResultNoContentLanguage" xml:space="preserve">
+    <value>No audio guides available for your language settings</value>
+  </data>
+  <data name="LabelNoAudio" xml:space="preserve">
+    <value>no audio</value>
+  </data>
+  <data name="HintSponsors" xml:space="preserve">
+    <value>Tap the sponsor logo to visit its information page.</value>
+  </data>
+  <data name="MessageExploreSearchResultIsEmptyQueryInfo" xml:space="preserve">
+    <value>No results found for the query "{0}"</value>
+  </data>
+  <data name="PlayerCongratulation" xml:space="preserve">
+    <value>You've completed the tour!</value>
+  </data>
+  <data name="MessageMediaVideoPauseTour" xml:space="preserve">
+    <value>Tour will be paused, and you must resume it manually. Play video?</value>
+  </data>
+  <data name="LabelUpdated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="MessageExploreSearchResultIsEmptyFilterInfo" xml:space="preserve">
+    <value>No items matched your filter criteria</value>
+  </data>
+  <data name="MessageExploreSearchResultNoContentOffline" xml:space="preserve">
+    <value>No audio guides available offline</value>
+  </data>
+  <data name="ActionSocialTwitter" xml:space="preserve">
+    <value>Follow on Twitter</value>
+  </data>
+  <data name="ErrorPurchaseConnectionErrorMessage" xml:space="preserve">
+    <value>Purchasing is unavailable. Please try again later.</value>
+  </data>
+  <data name="CommandCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MessageListPurchasesIsEmpty" xml:space="preserve">
+    <value>Your purchases will be here.</value>
+  </data>
+  <data name="EmptyReviewerName" xml:space="preserve">
+    <value>Traveler</value>
+  </data>
+  <data name="MessageAboutContactEmail" xml:space="preserve">
+    <value>or you can contact us directly at</value>
+  </data>
+  <data name="MessageListBoomarksIsEmpty" xml:space="preserve">
+    <value>Your bookmarks will be here.</value>
+  </data>
+  <data name="LabelDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="LabelContacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="CommandBuyFor" xml:space="preserve">
+    <value>Buy for {0}</value>
+  </data>
+  <data name="ActionDownloading" xml:space="preserve">
+    <value>Downloading...</value>
+  </data>
+  <data name="ActionSearching" xml:space="preserve">
+    <value>Searching…</value>
+  </data>
+  <data name="LabelLicenses" xml:space="preserve">
+    <value>Licenses</value>
+  </data>
+  <data name="LabelDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="MessageNoData" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="QuizIncorrectResult" xml:space="preserve">
+    <value>Wrong answer</value>
+  </data>
+  <data name="CommandDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PlayerReturnCommand" xml:space="preserve">
+    <value>Back to museum</value>
+  </data>
+  <data name="CommandRateTheApp" xml:space="preserve">
+    <value>Rate the app</value>
+  </data>
+  <data name="PromptTourStop" xml:space="preserve">
+    <value>Are you sure you want to stop the current tour?</value>
+  </data>
+  <data name="LabelEmulationMode" xml:space="preserve">
+    <value>Emulation mode</value>
+  </data>
+  <data name="LabelShortRatingCount" xml:space="preserve">
+    <value>({0})</value>
+  </data>
+  <data name="FlyoutNumpadMessageExhibitNotFound" xml:space="preserve">
+    <value>Exhibit not found</value>
+  </data>
+  <data name="MessageExploreSearchResultIsEmptyQueryPrompt" xml:space="preserve">
+    <value>Please modify your query and try again</value>
+  </data>
+  <data name="PromptEnterPasscode" xml:space="preserve">
+    <value>Please enter passcode</value>
+  </data>
+  <data name="SettingsLanguageSearchHint" xml:space="preserve">
+    <value>Search language…</value>
+  </data>
+  <data name="MessageNowPlayingEmpty" xml:space="preserve">
+    <value>Stories will be played here.</value>
+  </data>
+  <data name="PromptDownloadStart" xml:space="preserve">
+    <value>Are you sure you want to download this audio guide ({0:0.00} MB)?
+
+Don't forget to download the appropriate map to get full app functionality without an internet connection.</value>
+  </data>
+  <data name="PlayerReadReviewsCommand" xml:space="preserve">
+    <value>Read reviews</value>
+  </data>
+  <data name="FlyoutExploreLocationSearchHint" xml:space="preserve">
+    <value>Enter location name</value>
+  </data>
+  <data name="RateLabelName" xml:space="preserve">
+    <value>Your name</value>
+  </data>
+  <data name="QuizCorrectAnswersCount" xml:space="preserve">
+    <value>{0} correct</value>
+  </data>
+  <data name="MessageExploreSearchResultIsEmptyFilterPrompt" xml:space="preserve">
+    <value>Please modify your filter and try again</value>
+  </data>
+  <data name="PromptClearHistory" xml:space="preserve">
+    <value>Your whole history will be cleared. Are you sure?</value>
+  </data>
+  <data name="LabelBeTheFirstToReview" xml:space="preserve">
+    <value>Be the first to review this guide</value>
+  </data>
+  <data name="LabelTouristAttraction" xml:space="preserve">
+    <value>Tourist attraction</value>
+  </data>
+  <data name="QuizCorrectResultTitle" xml:space="preserve">
+    <value>Correct!</value>
+  </data>
+  <data name="PurchaseDialogMessage" xml:space="preserve">
+    <value>Are you sure you want to buy {0} for {1}?
+
+You have to buy the audio guide to experience all of its features and listen to all of the items.</value>
+  </data>
+  <data name="RateTitle" xml:space="preserve">
+    <value>Rate and review</value>
+  </data>
+  <data name="LabelItinerary" xml:space="preserve">
+    <value>Itinerary</value>
+  </data>
+  <data name="MessageListIsEmpty" xml:space="preserve">
+    <value>The list is empty</value>
+  </data>
+  <data name="LabelSponsors" xml:space="preserve">
+    <value>Sponsors</value>
+  </data>
+  <data name="MessageBarcodeScannerFindBarcode" xml:space="preserve">
+    <value>Place the QR code into scanning area</value>
+  </data>
+  <data name="LabelPackages" xml:space="preserve">
+    <value>Packages</value>
+  </data>
+  <data name="ErrorBarcodeObjectLoad" xml:space="preserve">
+    <value>An error occurred while retrieving data</value>
+  </data>
+  <data name="SettingsInfoCodeName" xml:space="preserve">
+    <value>Passcode for objects with limited visibility</value>
+  </data>
+  <data name="MessageListHistoryIsEmpty" xml:space="preserve">
+    <value>Your recently used audio guides will be here.</value>
+  </data>
+  <data name="StringDistanceMeters" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="LabelQrScanner" xml:space="preserve">
+    <value>Scan QR code</value>
+  </data>
+  <data name="FeedbackEmailHint" xml:space="preserve">
+    <value>Your e-mail address</value>
+  </data>
+  <data name="LabelCodeName" xml:space="preserve">
+    <value>Passcode</value>
+  </data>
+  <data name="SendFeedbackSuccessMessage" xml:space="preserve">
+    <value>Thank you. Your message has been successfully sent. Our support team will get back to you shortly.</value>
+  </data>
+  <data name="EnumCategoryBoat" xml:space="preserve">
+    <value>Boat tour</value>
+  </data>
+  <data name="EnumCategoryBike" xml:space="preserve">
+    <value>Bike tour</value>
+  </data>
+  <data name="EnumCategoryWalk" xml:space="preserve">
+    <value>Walking tour</value>
+  </data>
+  <data name="CommandSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="CommandSelect" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="MessageListQuizesIsEmpty" xml:space="preserve">
+    <value>Information about completed quizzes will be here.</value>
+  </data>
+  <data name="LabelAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="QuizPickAnswerLabel" xml:space="preserve">
+    <value>Pick an answer</value>
+  </data>
+  <data name="ActionUpdateCheck" xml:space="preserve">
+    <value>Check for updates...</value>
+  </data>
+  <data name="MessageExploreLocationLoadError" xml:space="preserve">
+    <value>An error occurred while loading location list</value>
+  </data>
+  <data name="FlyoutFeaturedTitle" xml:space="preserve">
+    <value>Editor's choice</value>
+  </data>
+  <data name="StringTimeSpanSeconds" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="PlayerRemoveBookmarkCommand" xml:space="preserve">
+    <value>Remove bookmark</value>
+  </data>
+  <data name="LabelHistory" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="QuizIncorrectResultMessage" xml:space="preserve">
+    <value>You've picked:</value>
+  </data>
+  <data name="CommandDeleteAll" xml:space="preserve">
+    <value>Delete all</value>
+  </data>
+  <data name="ErrorTitleDataLoading" xml:space="preserve">
+    <value>An error occurred while retrieving data</value>
+  </data>
+  <data name="LabelAuthor" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="PromptDownloadDeleteAllInfo" xml:space="preserve">
+    <value>Would you like to delete all of the downloaded guides of ~{0:0.00} MB in size?
+
+You can download all purchased guides again at any time.</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Select language</value>
+  </data>
+  <data name="StringOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="StringOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="StringOf" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="StringNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="PromptDownloadErrorCommon" xml:space="preserve">
+    <value>A problem occurred during your download. Please check your internet connection and available space.</value>
+  </data>
+  <data name="ErrorBarcodeCantLoadObjectForLink" xml:space="preserve">
+    <value>The link '{0}' cannot be opened</value>
+  </data>
+  <data name="CommandUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="EnumCategoryCar" xml:space="preserve">
+    <value>Auto tour</value>
+  </data>
+  <data name="EnumCategoryBus" xml:space="preserve">
+    <value>Bus tour</value>
+  </data>
+  <data name="MessageSeeBelow" xml:space="preserve">
+    <value>See below</value>
+  </data>
+  <data name="ActionProcessing" xml:space="preserve">
+    <value>Processing…</value>
+  </data>
+  <data name="LabelExhibits" xml:space="preserve">
+    <value>Exhibits</value>
+  </data>
+  <data name="CommandHideTriggerZones" xml:space="preserve">
+    <value>hide trigger zones</value>
+  </data>
+  <data name="PromptTourStartInfo" xml:space="preserve">
+    <value>The story will begin to play automatically as you approach an object</value>
+  </data>
+  <data name="LabelReviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="LabelResults" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="FlyoutExploreLocationTitle" xml:space="preserve">
+    <value>Select location</value>
+  </data>
+  <data name="LabelLocationServices" xml:space="preserve">
+    <value>Location services</value>
+  </data>
+  <data name="ErrorInvalidExternalLinkTitle" xml:space="preserve">
+    <value>Invalid external link</value>
+  </data>
+  <data name="LabelRelated" xml:space="preserve">
+    <value>See also</value>
+  </data>
+  <data name="PurchaseDialogTitle" xml:space="preserve">
+    <value>Paid audio guide</value>
+  </data>
+  <data name="ToastDownloadRemoved" xml:space="preserve">
+    <value>Removed {0}</value>
+  </data>
+  <data name="StringDistanceKilometers" xml:space="preserve">
+    <value>km</value>
+  </data>
+  <data name="PromptDownloadRemove" xml:space="preserve">
+    <value>Are you sure you want to delete this downloaded audio guide?</value>
+  </data>
+  <data name="PromptDownloadUpdateAllInfo" xml:space="preserve">
+    <value>Would you like to update all downloaded guides and install {0:0.00} MB of updates?</value>
+  </data>
+  <data name="LabelLanguages" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="CommandDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="FeedbackMessageHint" xml:space="preserve">
+    <value>Your question or request…</value>
+  </data>
+  <data name="SetupLanguages" xml:space="preserve">
+    <value>Check language settings</value>
+  </data>
+  <data name="QuizIncorrectAnswersCount" xml:space="preserve">
+    <value>{0} wrong</value>
+  </data>
+  <data name="MessageAboutShortDescription" xml:space="preserve">
+    <value>is a free MTG (Mobile Traveler Guide) application. It works with any content that conforms to the MTG standard.</value>
+  </data>
+  <data name="PlayerAddBookmarkCommand" xml:space="preserve">
+    <value>Add bookmark</value>
+  </data>
+  <data name="CommandBuyForToStart" xml:space="preserve">
+    <value>Buy for {0} to start</value>
+  </data>
+  <data name="QuizQuestionLabel" xml:space="preserve">
+    <value>Answer this question</value>
+  </data>
+  <data name="ActionSocialGooglePlus" xml:space="preserve">
+    <value>Follow on Google+</value>
+  </data>
+  <data name="LabelDownloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="SendFeedbackFailureMessage" xml:space="preserve">
+    <value>Sorry, the message cannot be sent. Please try again later.</value>
+  </data>
+  <data name="LabelMuseum" xml:space="preserve">
+    <value>Museum</value>
+  </data>
+  <data name="SettingsInfoHoldToModify" xml:space="preserve">
+    <value>Press and hold to modify</value>
+  </data>
+  <data name="PromptQuizResetTitle" xml:space="preserve">
+    <value>Reset quiz results</value>
+  </data>
+  <data name="LabelNumpad" xml:space="preserve">
+    <value>Numpad</value>
+  </data>
+  <data name="LabelLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="ToastDownloadUpdateCompleted" xml:space="preserve">
+    <value>Updated {0}</value>
+  </data>
+  <data name="QrScannerHint" xml:space="preserve">
+    <value>Place a QR code into the scanning area</value>
+  </data>
+  <data name="LabelAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="LabelMap" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MessageTourMapLocationServicesDisabledTitle" xml:space="preserve">
+    <value>Unable to determine location</value>
+  </data>
+  <data name="LabelBookmarks" xml:space="preserve">
+    <value>Bookmarks</value>
+  </data>
+  <data name="MessageQuizDetailsTitleIncompleted" xml:space="preserve">
+    <value>Take a quiz</value>
+  </data>
+  <data name="CommandTryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="LabelQuizes" xml:space="preserve">
+    <value>Quizzes</value>
+  </data>
+  <data name="ActionSocialInstagram" xml:space="preserve">
+    <value>See photos on Instagram</value>
+  </data>
+  <data name="FeedbackSubjectHint" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="LabelMapLocation" xml:space="preserve">
+    <value>Map location</value>
+  </data>
+  <data name="CommandUpdateAll" xml:space="preserve">
+    <value>Update all</value>
+  </data>
+  <data name="LabelSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="PageTitleAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="LabelServer" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="LabelContentProvidedBy" xml:space="preserve">
+    <value>Content provided by</value>
+  </data>
+  <data name="ActionUpdating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="CommandNavigateNowPlaying" xml:space="preserve">
+    <value>Now playing</value>
+  </data>
+  <data name="ErrorBarcodeIncorrectData" xml:space="preserve">
+    <value>QR code cannot be processed: '{0}'</value>
+  </data>
+  <data name="LabelUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="ToastTouristAttractionReached" xml:space="preserve">
+    <value>You have arrived at the tourist attraction</value>
+  </data>
+  <data name="LabelVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="QuizAnsweredQuestionLabel" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="PromptDownloadDeleteAllTitle" xml:space="preserve">
+    <value>Delete all downloaded guides</value>
+  </data>
+  <data name="MessageQuizDetailsTitleCompleted" xml:space="preserve">
+    <value>The quiz is done</value>
+  </data>
+  <data name="RateFailure" xml:space="preserve">
+    <value>Sorry, we can't submit your review right now. Please check your internet connection and try again.</value>
+  </data>
+  <data name="StringTimeSpanHours" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="ActionSocialFacebook" xml:space="preserve">
+    <value>Like on Facebook</value>
+  </data>
+  <data name="LabelPurchased" xml:space="preserve">
+    <value>Purchased</value>
+  </data>
+  <data name="LabelPurchases" xml:space="preserve">
+    <value>Purchases</value>
+  </data>
+  <data name="LabelCollections" xml:space="preserve">
+    <value>Collections</value>
+  </data>
+  <data name="ActionSocialYouTube" xml:space="preserve">
+    <value>Watch on YouTube</value>
+  </data>
+  <data name="LabelUserProfile" xml:space="preserve">
+    <value>User profile</value>
+  </data>
+  <data name="MessageFeaturedListEmptyAction" xml:space="preserve">
+    <value>Go explore all guides</value>
+  </data>
+  <data name="LabelRatedTitle" xml:space="preserve">
+    <value>You have rated</value>
+  </data>
+  <data name="ErrorInvalidExternalLinkInfo" xml:space="preserve">
+    <value>Cannot open selected link in the web browser</value>
+  </data>
+  <data name="LabelLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LabelDownloaded" xml:space="preserve">
+    <value>Downloaded</value>
+  </data>
+  <data name="FlyoutSelectorTitle" xml:space="preserve">
+    <value>Choose one</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="PromptDownloadUpdateStartTitle" xml:space="preserve">
+    <value>An update is available</value>
+  </data>
+  <data name="PromptAppExitWhenTourStartedInfo" xml:space="preserve">
+    <value>Do you want to finish the tour playback and leave the application?</value>
+  </data>
+  <data name="LabelRatingCount" xml:space="preserve">
+    <value>({0} ratings)</value>
+  </data>
+  <data name="PlayerRateCommand" xml:space="preserve">
+    <value>Write a review</value>
+  </data>
+  <data name="PromtEnterExhibitNumber" xml:space="preserve">
+    <value>Please enter the exhibit number</value>
+  </data>
+  <data name="MessageMainPlayerEmptyInfoPart02" xml:space="preserve">
+    <value>or scan the QR-code.</value>
+  </data>
+  <data name="MessageMainPlayerEmptyInfoPart01" xml:space="preserve">
+    <value>Choose the story in</value>
+  </data>
+  <data name="MessageSearchAudioguides" xml:space="preserve">
+    <value>Search audio guides</value>
+  </data>
+  <data name="LabelFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="LabelInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="LabelList" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="LabelNews" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="LabelPlan" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="LabelQuiz" xml:space="preserve">
+    <value>Quiz</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="LabelTour" xml:space="preserve">
+    <value>Tour</value>
+  </data>
+  <data name="ErrorMessageDataLoading" xml:space="preserve">
+    <value>Unable to retrieve object information from server. Check your internet connection.</value>
+  </data>
+  <data name="DialogLocationServicesDisabledLink" xml:space="preserve">
+    <value>Go to Location Settings</value>
+  </data>
+  <data name="PromptDownloadUpdateAllTitle" xml:space="preserve">
+    <value>Update all downloaded guides</value>
+  </data>
+  <data name="MessageAboutMotto" xml:space="preserve">
+    <value>create your own audio guide.</value>
+  </data>
+  <data name="ActionViewProfile" xml:space="preserve">
+    <value>View profile</value>
+  </data>
+  <data name="ErrorMessageOpenNotSupportedObject" xml:space="preserve">
+    <value>Tours are not yet supported by application</value>
+  </data>
+  <data name="MessageExploreErrorNetworkInfo" xml:space="preserve">
+    <value>Check network settings and refresh data</value>
+  </data>
+  <data name="CommandBookmark" xml:space="preserve">
+    <value>Bookmark</value>
+  </data>
+  <data name="RateSuccess" xml:space="preserve">
+    <value>Thank you for your review!</value>
+  </data>
+  <data name="ErrorDownload" xml:space="preserve">
+    <value>Unable to download object</value>
+  </data>
+  <data name="LabelAttractions" xml:space="preserve">
+    <value>Attractions</value>
+  </data>
+  <data name="LabelBasedOnRatings" xml:space="preserve">
+    <value>Total No of ratings: {0}</value>
+  </data>
+  <data name="MessageQuizDetailsSubtitleIncorrect" xml:space="preserve">
+    <value>It is an incorrect answer</value>
+  </data>
+  <data name="SettingsInfoFeedback" xml:space="preserve">
+    <value>Ask for help or make a suggestion</value>
+  </data>
+  <data name="LabelApplication" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="LabelExplore" xml:space="preserve">
+    <value>Explore</value>
+  </data>
+  <data name="LabelFeedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="LabelExhibit" xml:space="preserve">
+    <value>Exhibit</value>
+  </data>
+  <data name="MessageFeaturedActionExplore" xml:space="preserve">
+    <value>Browse all guides</value>
+  </data>
+  <data name="PromptTourStartTitle" xml:space="preserve">
+    <value>Start tour</value>
+  </data>
+  <data name="CommandBuy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="CommandAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ErrorMapRouteNotAvailableForTravelMode" xml:space="preserve">
+    <value>Unable to build a route for the selected travel mode</value>
+  </data>
+  <data name="LabelReviewsAreCurrentlyUnavailable" xml:space="preserve">
+    <value>Reviews are currently unavailable</value>
+  </data>
+  <data name="SearchNoResults" xml:space="preserve">
+    <value>No results found for this query.</value>
+  </data>
+  <data name="StringYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="StringOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="PlayerJumpListFlyoutTitle" xml:space="preserve">
+    <value>All items</value>
+  </data>
+  <data name="LabelAudioguides" xml:space="preserve">
+    <value>Audio guides</value>
+  </data>
+  <data name="QuizCorrectResult" xml:space="preserve">
+    <value>Correct answer!</value>
+  </data>
+  <data name="LabelDirections" xml:space="preserve">
+    <value>Directions</value>
+  </data>
+  <data name="ActionSocialWebSite" xml:space="preserve">
+    <value>Visit Website</value>
+  </data>
+  <data name="PromptTourReset" xml:space="preserve">
+    <value>Are you sure you want to reset the current tour progress?</value>
+  </data>
+  <data name="CommandRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="QuizYourAnswerLabel" xml:space="preserve">
+    <value>Your answer</value>
+  </data>
+  <data name="PromptClearBookmarks" xml:space="preserve">
+    <value>All bookmarks will be cleared. Are you sure?</value>
+  </data>
+  <data name="PlayerStartCommand" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="MessageGoToMapDownload" xml:space="preserve">
+    <value>Go to map download</value>
+  </data>
+  <data name="PageTitleSettingsLanguageSelector" xml:space="preserve">
+    <value>Select languages</value>
+  </data>
+  <data name="CommandCheckForUpdates" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="CommandCheck" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="CommandClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CommandClear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="FlyoutExploreTypeTitle" xml:space="preserve">
+    <value>Select guide type</value>
+  </data>
+  <data name="CommandStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="CommandShare" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="CommandRetry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="CommandReset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="PromptDownloadErrorTitle" xml:space="preserve">
+    <value>Download Error</value>
+  </data>
+  <data name="SendFeedbackSuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="CommandGetDirections" xml:space="preserve">
+    <value>Get directions</value>
+  </data>
+  <data name="CommandOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="CommandNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="CommandStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="CommandSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ToastBookmarkAdded" xml:space="preserve">
+    <value>Bookmark added</value>
+  </data>
+  <data name="LabelProvidedBy" xml:space="preserve">
+    <value>Provided by</value>
+  </data>
+  <data name="ErrorDownloadNotEnoughSpaceErrorMessage" xml:space="preserve">
+    <value>Insufficient space available to download the content. Please free up some space and try again.</value>
+  </data>
+  <data name="ErrorDownloadUnspecifiedErrorMessage" xml:space="preserve">
+    <value>Unable to download object from server. Please check your internet connection.</value>
+  </data>
+  <data name="ActionShow" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="ActionHide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="MessageTourMapLocationServicesDisabledLink" xml:space="preserve">
+    <value>Go to Location Settings</value>
+  </data>
+  <data name="MessageTourMapLocationServicesDisabledInfo" xml:space="preserve">
+    <value>Cannot determine the current user location. The location services may be disabled. The tour will be stopped.</value>
+  </data>
+  <data name="CommandRateAndReview" xml:space="preserve">
+    <value>rate and review</value>
+  </data>
+  <data name="MessageAboutCopyright" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+  <data name="CommandSetDefault" xml:space="preserve">
+    <value>Set as default</value>
+  </data>
+  <data name="MessageGoToNetworkSettings" xml:space="preserve">
+    <value>Go to network settings</value>
+  </data>
+  <data name="MessageQuizDetailsSubtitleCorrect" xml:space="preserve">
+    <value>Correct answer</value>
+  </data>
+  <data name="MessageFeaturedListHeader" xml:space="preserve">
+    <value>Choose from museum and city audio guides in over 260 destinations worldwide</value>
+  </data>
+  <data name="PageTitleExhibitSearch" xml:space="preserve">
+    <value>Search for exhibit</value>
+  </data>
+  <data name="SettingsInfoLicenses" xml:space="preserve">
+    <value>Licenses</value>
+  </data>
+  <data name="StringEmpty" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="LabelWorkingHours" xml:space="preserve">
+    <value>Opening hours</value>
+  </data>
+  <data name="PlayerShareCommand" xml:space="preserve">
+    <value>Share with friends</value>
+  </data>
+  <data name="QuizCorrectAnswerLabel" xml:space="preserve">
+    <value>It is a correct answer</value>
+  </data>
+  <data name="FeedbackHint" xml:space="preserve">
+    <value>Please, enter your e-mail and the topic of your request. Our support team will get back to you shortly.</value>
+  </data>
+  <data name="IntroductionTitle" xml:space="preserve">
+    <value>Introduction</value>
+  </data>
+  <data name="ToastBookmarkRemoved" xml:space="preserve">
+    <value>Bookmark deleted</value>
+  </data>
+  <data name="ToastDownloadCompleted" xml:space="preserve">
+    <value>Downloaded {0}</value>
+  </data>
+  <data name="LabelNotFoundByNumber" xml:space="preserve">
+    <value>Item not found</value>
+  </data>
+  <data name="RestorePurchases" xml:space="preserve">
+    <value>Restore purchases</value>
+  </data>
+  <data name="MessageQuizDetailsSubtitleIncompleted" xml:space="preserve">
+    <value>Answer the simple question on facts you have just listened to</value>
+  </data>
+  <data name="LabelIncorrect" xml:space="preserve">
+    <value>Wrong</value>
+  </data>
+  <data name="MessageExploreClearFilterAndSearch" xml:space="preserve">
+    <value>Clear filter and search again</value>
+  </data>
+  <data name="MessageExploreSearchResultIsEmpty" xml:space="preserve">
+    <value>No results found for this query</value>
+  </data>
+  <data name="MessageDontShowAgain" xml:space="preserve">
+    <value>Don't show this again</value>
+  </data>
+  <data name="ActionReadMore" xml:space="preserve">
+    <value>Read more</value>
+  </data>
+  <data name="PlayerJumpListFlyoutNowPlayingLabel" xml:space="preserve">
+    <value>now playing</value>
+  </data>
+  <data name="LabelRatedMessage" xml:space="preserve">
+    <value>The average rating will be updated in 24 hours</value>
+  </data>
+  <data name="StringTimeSpanMinutes" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="PlayerQuizCommand" xml:space="preserve">
+    <value>Take a quiz</value>
+  </data>
+  <data name="LabelCollection" xml:space="preserve">
+    <value>Collection</value>
+  </data>
+  <data name="PromptDownloadUpdateStartInfo" xml:space="preserve">
+    <value>Update downloaded content for this audioguide ({0:0.00} MB)?
+  
+You can always install this update from Downloads section.
+    </value>
+  </data>
+  <data name="LabelYesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="PlayerJumpListFlyoutToStartCommand" xml:space="preserve">
+    <value>Start the tour over</value>
+  </data>
+  <data name="MessageFeaturedListFooter" xml:space="preserve">
+    <value>Find the best guide for you</value>
+  </data>
+  <data name="ActionSocialVk" xml:space="preserve">
+    <value>Visit public page</value>
+  </data>
+  <data name="QuizIncorrectResultTitle" xml:space="preserve">
+    <value>Incorrect answer</value>
+  </data>
+  <data name="LabelAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="LabelError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LabelIntro" xml:space="preserve">
+    <value>Intro</value>
+  </data>
+  <data name="LabelImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="LabelLater" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="LabelSpeed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="LabelRoute" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="LabelToday" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="LabelVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="HintRating1" xml:space="preserve">
+    <value>The worst ever!</value>
+  </data>
+  <data name="HintRating0" xml:space="preserve">
+    <value>(tap on the stars to set)</value>
+  </data>
+  <data name="HintRating3" xml:space="preserve">
+    <value>It's okay!</value>
+  </data>
+  <data name="HintRating2" xml:space="preserve">
+    <value>Dislike it!</value>
+  </data>
+  <data name="HintRating5" xml:space="preserve">
+    <value>Excellent!</value>
+  </data>
+  <data name="HintRating4" xml:space="preserve">
+    <value>Good!</value>
+  </data>
+  <data name="MessageListDownloadsIsEmpty" xml:space="preserve">
+    <value>Your downloads will be stored here.</value>
+  </data>
+  <data name="LabelTourEmulation" xml:space="preserve">
+    <value>Tour emulation</value>
+  </data>
+  <data name="DialogLocationServicesDisabledMessage" xml:space="preserve">
+    <value>Cannot determine the current user location. The location services may be disabled.</value>
+  </data>
+  <data name="PromptQuizResetInfo" xml:space="preserve">
+    <value>Do you want to reset this Quiz?</value>
+  </data>
+  <data name="MessageExploreErrorNetwork" xml:space="preserve">
+    <value>No internet connection</value>
+  </data>
+  <data name="QuizCorrectResultMessage" xml:space="preserve">
+    <value>You've picked correct answer:</value>
+  </data>
+  <data name="CommandShowTriggerZones" xml:space="preserve">
+    <value>show trigger zones</value>
+  </data>
+  <data name="QuizTotalAnswersCount" xml:space="preserve">
+    <value>Answers: {0}</value>
+  </data>
+  <data name="LabelComment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="LabelContent" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="LabelCorrect" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+  <data name="ToastDownloadError" xml:space="preserve">
+    <value>Error downloading {0}</value>
+  </data>
+  <data name="ActionSending" xml:space="preserve">
+    <value>Sending…</value>
+  </data>
+  <data name="ToastDownloadStarted" xml:space="preserve">
+    <value>Downloading {0}</value>
+  </data>
+  <data name="DefaultReviewerName" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="RateLabelRating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="RateLabelReview" xml:space="preserve">
+    <value>Write a review</value>
+  </data>
+  <data name="MessageFeaturedListEmpty" xml:space="preserve">
+    <value>We are selecting the most suitable guides for you, please try later.</value>
+  </data>
+  <data name="SendFeedbackFailureTitle" xml:space="preserve">
+    <value>An error occured</value>
+  </data>
+  <data name="PlayerStartLabel" xml:space="preserve">
+    <value>{0} items, {1} mins</value>
+  </data>
+  <data name="PromptDownloadRemoveTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="CommandPreview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="HintSearchFor" xml:space="preserve">
+    <value>Search for</value>
+  </data>
+  <data name="ToastTourStopped" xml:space="preserve">
+    <value>The tour has stopped due to inactivity (30 min)</value>
+  </data>
+  <data name="LabelNoRatings" xml:space="preserve">
+    <value>No ratings</value>
+  </data>
+</root>

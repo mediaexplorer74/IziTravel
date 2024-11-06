@@ -1,0 +1,495 @@
+﻿<phone:PhoneApplicationPage x:Class="Izi.Travel.Shell.Mtg.Views.Tour.Map.TourMapPartView"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                            xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+                            xmlns:corecontrols="clr-namespace:Izi.Travel.Shell.Core.Controls"
+                            xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
+                            xmlns:modulecontrols="clr-namespace:Izi.Travel.Shell.Mtg.Controls"
+                            xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+                            xmlns:maptoolkit="clr-namespace:Izi.Travel.Shell.Toolkit.Controls.Maps"
+                            xmlns:viewmodels="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Tour.Map"
+                            xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:coreconverters="clr-namespace:Izi.Travel.Shell.Core.Converters"
+                            xmlns:moduleconverters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
+                            xmlns:extensions="clr-namespace:Izi.Travel.Shell.Core.Components.Extensions"
+                            xmlns:audio="clr-namespace:Izi.Travel.Shell.Media.Views.Audio"
+                            xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
+                            xmlns:controls="clr-namespace:Izi.Travel.Shell.Toolkit.Controls"
+                            SupportedOrientations="Portrait" Orientation="Portrait"
+                            mc:Ignorable="d"
+                            Style="{StaticResource IziTravelPageStyle}">
+    <!-- Resources -->
+    <phone:PhoneApplicationPage.Resources>
+        <!-- Converters -->
+        <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToForegroundConverter" 
+                                                           NormalBrush="{StaticResource IziTravelBlueBrush}"
+                                                           SelectedBrush="{StaticResource IziTravelLightBrush}" 
+                                                           VisitedBrush="{StaticResource IziTravelGrayBrush}" />
+        <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToBorderConverter" 
+                                                           NormalBrush="{StaticResource IziTravelBlueBrush}"
+                                                           SelectedBrush="{StaticResource IziTravelLightBrush}" 
+                                                           VisitedBrush="{StaticResource IziTravelGrayBrush}" />
+        <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToBackgroundConverter" 
+                                                           NormalBrush="{StaticResource IziTravelLightBrush}"
+                                                           SelectedBrush="{StaticResource IziTravelBlueBrush}">
+            <moduleconverters:TourMapItemStateToBrushConverter.VisitedBrush>
+                <SolidColorBrush Color="{StaticResource IziTravelLightColor}" Opacity="0.6" />
+            </moduleconverters:TourMapItemStateToBrushConverter.VisitedBrush>
+        </moduleconverters:TourMapItemStateToBrushConverter>
+
+        <coreconverters:BoolToObjectConverter x:Key="MapPinIsSelectedToPlayContentMarginConverter"
+                                              PositiveValue="0,8,0,0" NegativeValue="0,2,0,0" />
+        <coreconverters:BoolToObjectConverter x:Key="MapPinIsSelectedToTextContentMarginConverter"
+                                              PositiveValue="0,2,0,0" NegativeValue="0,0,0,2" />
+
+        <Style TargetType="corecontrols:ActionRoundButton" x:Name="MapButton">
+            <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" />
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource IziTravelDarkColor}" Opacity="0.4" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="PressedBackground" Value="{StaticResource PhoneAccentBrush}" />
+            <Setter Property="PressedForeground" Value="{StaticResource PhoneForegroundColor}" />
+            <Setter Property="ImageSource" Value="/Assets/Icons/add.png" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="corecontrols:ActionRoundButton">
+                        <Grid Name="PartGrid">
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                                           Storyboard.TargetName="PartBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                        Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill"
+                                                                           Storyboard.TargetName="PartEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                        Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness"
+                                                                           Storyboard.TargetName="PartBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                        Value="0" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                                                           Storyboard.TargetName="PartGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                        Value="0.6" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused" />
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Border Name="PartBorder" Background="Transparent">
+                                <Grid>
+                                    <Ellipse Name="PartEllipse" Fill="{TemplateBinding Foreground}" />
+                                    <Image Source="{TemplateBinding ImageSource}" Stretch="Uniform" />
+                                </Grid>
+                            </Border>
+
+                            <ContentPresenter Name="PartContentPresenter" Visibility="Collapsed" />
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </phone:PhoneApplicationPage.Resources>
+
+    <!-- Application Bar -->
+    <bar:Bindable.ApplicationBar>
+        <bar:BindableApplicationBar BindableOpacity="{StaticResource IziTravelAppBarOpacity}">
+            <bar:BindableApplicationBar.Buttons>
+                <bar:BindableApplicationBarButton IconUri="/Assets/Icons/appbar.nowplaying.png" 
+                                                  Text="{Binding LocalizedResources.CommandNavigateNowPlaying, Source={StaticResource LocalizedStrings}}" 
+                                                  Command="{Binding NowPlayingCommand}" />
+                <bar:BindableApplicationBarButton IconUri="/Assets/Icons/appbar.list.png"
+                                                  Text="{Binding LocalizedResources.LabelList, Source={StaticResource LocalizedStrings}}"
+                                                  Command="{Binding OpenListCommand}" />
+                <bar:BindableApplicationBarButton IconUri="/Assets/Icons/appbar.getdirections.png"
+                                                  Text="{Binding LocalizedResources.LabelDirections, Source={StaticResource LocalizedStrings}}"
+                                                  Command="{Binding GetDirectionsCommand}" />
+            </bar:BindableApplicationBar.Buttons>
+            <bar:BindableApplicationBar.MenuItems>
+                <bar:BindableApplicationBarMenuItem Text="{Binding ToggleTriggerZoneModeLabel}" 
+                                                    Command="{Binding ToggleTriggerZoneModeCommand}" />
+            </bar:BindableApplicationBar.MenuItems>
+        </bar:BindableApplicationBar>
+    </bar:Bindable.ApplicationBar>
+
+    <!-- Flyouts -->
+    <flyout:FlyoutBase.AttachedFlyouts>
+        <!-- Flyout: Attraction List -->
+        <flyout:Flyout Key="TourMapFlyoutAttractionList"
+                       IsFullScreen="True"
+                       CloseOnNavigation="False"
+                       Background="{StaticResource IziTravelLightGrayBrush}"
+                       flyout:FlyoutBase.IsOpen="{Binding FlyoutAttractionListViewModel.IsOpen, Mode=TwoWay}">
+            <i:Interaction.Behaviors>
+                <flyout:FlyoutBehavior ClosedCommand="{Binding FlyoutAttractionListViewModel.ClosedCommand}" />
+            </i:Interaction.Behaviors>
+            <flyout:Flyout.Content>
+                <Grid Margin="24,24,0,0" DataContext="{Binding FlyoutAttractionListViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding LocalizedResources.LabelAttractions, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToUpperConverter}}" 
+                               Style="{StaticResource FlyoutTitleStyle}" />
+
+                    <!-- List -->
+                    <phone:LongListSelector Grid.Row="1" ItemsSource="{Binding Items}">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <modulecontrols:ListItemRowControl toolkit:TiltEffect.IsTiltEnabled="True"
+                                                                   Title="{Binding Title}" 
+                                                                   ImageSource="{Binding ImageUrl}"
+                                                                   Number="{Binding Order}"
+                                                                   ShowNumber="True"
+                                                                   Margin="0,0,24,12"
+                                                                   d:DataContext="{d:DesignInstance viewmodels:TourMapItemViewModel}">
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Tap">
+                                            <i:EventTrigger.Actions>
+                                                <i:InvokeCommandAction Command="{Binding NavigateCommand}" />
+                                            </i:EventTrigger.Actions>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+
+                                </modulecontrols:ListItemRowControl>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </Grid>
+            </flyout:Flyout.Content>
+        </flyout:Flyout>
+
+        <!-- Flyout: Start Prompt -->
+        <flyout:Flyout Key="TourMapFlyoutStartPrompt" 
+                       Background="{StaticResource IziTravelLightBrush}"
+                       flyout:FlyoutBase.IsOpen="{Binding FlyoutStartViewModel.IsOpen, Mode=TwoWay}">
+            <i:Interaction.Behaviors>
+                <flyout:FlyoutBehavior ClosedCommand="{Binding FlyoutStartViewModel.ClosedCommand}" />
+            </i:Interaction.Behaviors>
+            <flyout:Flyout.OverlayBrush>
+                <SolidColorBrush Color="{StaticResource IziTravelLightGrayColor}" Opacity="0.75" />
+            </flyout:Flyout.OverlayBrush>
+            <flyout:Flyout.Content>
+                <Grid Margin="24,37,24,24" DataContext="{Binding FlyoutStartViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding LocalizedResources.PromptTourStartTitle, 
+                                              Source={StaticResource LocalizedStrings}, 
+                                              Converter={StaticResource StringToUpperConverter}}" 
+                               Style="{StaticResource FlyoutTitleStyle}" />
+
+                    <!-- Message -->
+                    <TextBlock Grid.Row="1" 
+                               Text="{Binding LocalizedResources.PromptTourStartInfo, 
+                                              Source={StaticResource LocalizedStrings}}"
+                               FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                               FontSize="{StaticResource IziTravelFontSizeNormal}"
+                               TextWrapping="Wrap" 
+                               Foreground="{StaticResource IziTravelDarkBrush}" 
+                               Margin="0,0,0,12" />
+
+                    <!-- Check box -->
+                    <CheckBox Grid.Row="2" 
+                              Content="{Binding LocalizedResources.MessageDontShowAgain, 
+                                                Source={StaticResource LocalizedStrings}}" 
+                              IsChecked="{Binding IsEnabled, Mode=TwoWay, Converter={StaticResource BoolToOppositeConverter}}"                                
+                              Margin="-12,0,-12,37" />
+
+                    <!-- Buttons -->
+                    <Button Grid.Row="3" 
+                            Background="{StaticResource IziTravelBlueBrush}"                            
+                            Content="{Binding LocalizedResources.StringOk, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToUpperConverter}}"
+                            Command="{Binding CloseCommand}"
+                            Style="{StaticResource IziTravelCommonButtonStyle}" 
+                            HorizontalAlignment="Left" 
+                            MinWidth="204" />
+                </Grid>
+            </flyout:Flyout.Content>
+        </flyout:Flyout>
+
+        <!-- Flyout: GPS prompt -->
+        <flyout:Flyout Key="TourMapFlyoutGpsPrompt"
+                       Background="{StaticResource IziTravelLightBrush}"
+                       flyout:FlyoutBase.IsOpen="{Binding FlyoutGpsViewModel.IsOpen, Mode=TwoWay}">
+            <i:Interaction.Behaviors>
+                <flyout:FlyoutBehavior ClosedCommand="{Binding FlyoutGpsViewModel.ClosedCommand}" />
+            </i:Interaction.Behaviors>
+            <flyout:Flyout.OverlayBrush>
+                <SolidColorBrush Color="{StaticResource IziTravelLightGrayColor}" Opacity="0.75" />
+            </flyout:Flyout.OverlayBrush>
+            <flyout:Flyout.Content>
+                <Grid Margin="24,37,24,24" DataContext="{Binding FlyoutGpsViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding LocalizedResources.MessageTourMapLocationServicesDisabledTitle, 
+                                              Source={StaticResource LocalizedStrings}, 
+                                              Converter={StaticResource StringToUpperConverter}}" 
+                               Style="{StaticResource FlyoutTitleStyle}" />
+
+                    <!-- Message -->
+                    <TextBlock Grid.Row="1" 
+                               Text="{Binding LocalizedResources.MessageTourMapLocationServicesDisabledInfo, 
+                                              Source={StaticResource LocalizedStrings}}"
+                               FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                               FontSize="{StaticResource IziTravelFontSizeNormal}"
+                               TextWrapping="Wrap" 
+                               Foreground="{StaticResource IziTravelDarkBrush}" 
+                               Margin="0,0,0,12" />
+
+                    <!-- Link -->
+                    <HyperlinkButton Grid.Row="2" 
+                                     Content="{Binding LocalizedResources.MessageTourMapLocationServicesDisabledLink, Source={StaticResource LocalizedStrings}}" 
+                                     Command="{Binding NavigateToLocationSettingsCommand}"
+                                     FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                                     FontSize="{StaticResource IziTravelFontSizeNormal}"
+                                     Foreground="{StaticResource IziTravelBlueBrush}"
+                                     HorizontalAlignment="Left" 
+                                     Style="{StaticResource HyperlinkButtonWrapStyle}"
+                                     Margin="-12,0,-12,37" />
+
+                    <!-- Buttons -->
+                    <Button Grid.Row="3" 
+                            Background="{StaticResource IziTravelBlueBrush}"                            
+                            Content="{Binding LocalizedResources.StringOk, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToUpperConverter}}"
+                            Command="{Binding CloseCommand}"
+                            Style="{StaticResource IziTravelCommonButtonStyle}" 
+                            HorizontalAlignment="Left" 
+                            MinWidth="204" />
+                </Grid>
+            </flyout:Flyout.Content>
+        </flyout:Flyout>
+    </flyout:FlyoutBase.AttachedFlyouts>
+
+    <!-- Layout -->
+    <corecontrols:ProgressOverlay IsBusy="{Binding IsBusy}">
+        <Grid>
+            <!-- Map -->
+            <maps:Map Center="{Binding Center, Mode=TwoWay}"
+                      ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
+                      extensions:MapBindingExtensions.BindableElements="{Binding Elements}">
+                <i:Interaction.Behaviors>
+                    <behaviors:MapViewBehavior ZoomDesiredMargin="0,50,0,150" 
+                                               View="{Binding LocationRect, Mode=TwoWay}" 
+                                               ViewCenter="{Binding ViewCenter, Mode=TwoWay}" 
+                                               ViewZoomLevel="{Binding ViewZoomLevel, Mode=TwoWay}" />
+                </i:Interaction.Behaviors>
+                <maptoolkit:MapExtensions.Children>
+                    <!-- Attractions -->
+                    <maptoolkit:MapItemsControl extensions:MapBindingExtensions.BindableItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+                        <maptoolkit:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <maptoolkit:MapChildControl GeoCoordinate="{Binding Location}"
+                                                            Width="60"
+                                                            Height="60"
+                                                            Margin="-30,-30,0,0"
+                                                            d:DataContext="{d:DesignInstance viewmodels:TourMapItemViewModel}">
+                                    <RadioButton IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                 Visibility="{Binding IsHidden, Converter={StaticResource BoolToInvisibilityConverter}}"
+                                                 IsHitTestVisible="{Binding IsSelected, Converter={StaticResource BoolToOppositeConverter}}"
+                                                 Content="{Binding}"
+                                                 GroupName="RBGroupAttraction"
+                                                 BorderBrush="{Binding State, Converter={StaticResource TourMapItemStateToBorderConverter}}"
+                                                 Foreground="{Binding State, Converter={StaticResource TourMapItemStateToForegroundConverter}}"                                                               
+                                                 Background="{Binding State, Converter={StaticResource TourMapItemStateToBackgroundConverter}}"
+                                                 Style="{StaticResource IziTravelMapPinStyle}">
+                                        <RadioButton.ContentTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock Text="{Binding Order}"
+                                                               FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                                                               FontSize="{StaticResource IziTravelFontSizeNormal}"
+                                                               Foreground="{Binding State, Converter={StaticResource TourMapItemStateToForegroundConverter}}" 
+                                                               Visibility="{Binding IsPlaying, Converter={StaticResource BoolToInvisibilityConverter}}" 
+                                                               Margin="{Binding IsSelected, Converter={StaticResource MapPinIsSelectedToTextContentMarginConverter}}"/>
+                                                    <modulecontrols:MapPushpinPlayIndicator IsActive="{Binding IsPlaying}"
+                                                                                            Foreground="{Binding State, Converter={StaticResource TourMapItemStateToForegroundConverter}}"
+                                                                                            VerticalAlignment="Center"
+                                                                                            HorizontalAlignment="Center"
+                                                                                            Width="18" Height="18" 
+                                                                                            Margin="{Binding IsSelected, Converter={StaticResource MapPinIsSelectedToPlayContentMarginConverter}}"
+                                                                                            Visibility="{Binding IsPlaying, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </RadioButton.ContentTemplate>
+                                    </RadioButton>
+                                </maptoolkit:MapChildControl>
+                            </DataTemplate>
+                        </maptoolkit:MapItemsControl.ItemTemplate>
+                    </maptoolkit:MapItemsControl>
+
+                    <!-- User Pin -->
+                    <maptoolkit:UserLocationMarker IsActive="{Binding IsActive}" />
+
+                </maptoolkit:MapExtensions.Children>
+            </maps:Map>
+
+            <!-- Tour Buttons -->
+            <Grid Visibility="{Binding MtgObject, Converter={StaticResource NullToInvisibilityConverter}}" 
+                  VerticalAlignment="Top" 
+                  HorizontalAlignment="Stretch" 
+                  Margin="24,32,24,24">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource IziTravelCommonButtonStyle}">
+                            <Setter Property="MinWidth" Value="210" />
+                        </Style>
+                    </Grid.Resources>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Start -->
+                    <Button Grid.Column="0"
+                            Content="{Binding StartTourLabel}"
+                            Command="{Binding StartTourCommand}"
+                            Visibility="{Binding IsStartTourButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                    <!-- Reset -->
+                    <Button Grid.Column="1" 
+                            Content="{Binding LocalizedResources.CommandReset, Source={StaticResource LocalizedStrings}}"
+                            Command="{Binding StopTourCommand}"
+                            Background="#FF83878A"
+                            Visibility="{Binding IsStopTourButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Margin="12,0,0,0" />
+                </Grid>
+
+                <!-- Pause -->
+                <Button Grid.Column="0"
+                        Background="{StaticResource IziTravelDarkBrush}"                            
+                        Content="{Binding LocalizedResources.CommandStop, Source={StaticResource LocalizedStrings}}"
+                        Command="{Binding PauseTourCommand}"
+                        Visibility="{Binding IsPauseTourButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                        Style="{StaticResource IziTravelCommonButtonStyle}" />
+            </Grid>
+
+            <!-- Bottom Panel -->
+            <controls:FlipView ItemsSource="{Binding Items}"
+                               SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                               UpdateSelectionMode="BeforeTransition"
+                               UseTouchAnimationsForAllNavigation="False"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Stretch"
+                               Background="{StaticResource IziTravelLightBrush}"
+                               extensions:FrameworkElementExtensions.MarginBottom="{Binding DefaultSize, Source={StaticResource ApplicationBarSizeInformation}}">
+                <controls:FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="120" 
+                              Background="Transparent"
+                              d:DataContext="{d:DesignData TourMapItemViewModel}">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Image -->
+                            <commoncontrols:ImagePlaceholder Grid.Column="0" 
+                                                             Width="120"
+                                                             ImageSource="{Binding ImageUrl}" 
+                                                             ImageStretch="UniformToFill"
+                                                             VerticalAlignment="Center" 
+                                                             HorizontalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <i:EventTrigger.Actions>
+                                            <i:InvokeCommandAction Command="{Binding NavigateCommand}" />
+                                        </i:EventTrigger.Actions>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </commoncontrols:ImagePlaceholder>
+
+                            <!-- Title -->
+                            <TextBlock Grid.Column="1" 
+                                       Text="{Binding Title}"
+                                       Foreground="{StaticResource IziTravelDarkBrush}" 
+                                       FontSize="{StaticResource IziTravelFontSizeNormal}"
+                                       FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                                       Margin="20,15,20,15" 
+                                       TextWrapping="Wrap"
+                                       TextTrimming="WordEllipsis">
+                                 <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <i:EventTrigger.Actions>
+                                            <i:InvokeCommandAction Command="{Binding NavigateCommand}" />
+                                        </i:EventTrigger.Actions>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBlock>
+
+                            <!-- Audio -->
+                            <audio:AudioContentView Grid.Column="2" 
+                                                    DataContext="{Binding AudioViewModel}"
+                                                    VerticalAlignment="Center" 
+                                                    HorizontalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </controls:FlipView.ItemTemplate>
+            </controls:FlipView>
+
+            <StackPanel Margin="0,248,12,0" 
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right">
+                <Button Margin="0,-4,0,0"
+                        Command="{Binding ZoomOutCommand}"
+                        Style="{StaticResource ZoomInMapButtonStyle}" />
+                <Button Margin="0,-4,0,0"
+                        Command="{Binding ZoomInCommand}"
+                        Style="{StaticResource ZoomOutMapButtonStyle}" />
+                <Button Margin="0,-4,0,0" 
+                        Command="{Binding LocateUserCommand}"
+                        Style="{StaticResource CenterMapButtonStyle}" />
+            </StackPanel>
+
+        </Grid>
+    </corecontrols:ProgressOverlay>
+</phone:PhoneApplicationPage>

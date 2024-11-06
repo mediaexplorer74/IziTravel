@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Izi.Travel.Shell.Common.Controls.PageTitleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="PartPageTitleControl">
+    
+    <StackPanel Margin="24,37,0,12">
+        
+        <TextBlock Text="{Binding Title, ElementName=PartPageTitleControl, Converter={StaticResource StringToUpperConverter}}"
+                   Visibility="{Binding Title, ElementName=PartPageTitleControl, Converter={StaticResource NullOrEmptyStringToInvisibilityConverter}}"
+                   Style="{StaticResource PageTitleStyle}" />
+        
+        <TextBlock Text="{Binding SubTitle, ElementName=PartPageTitleControl, Converter={StaticResource StringToLowerConverter}}" 
+                   Visibility="{Binding SubTitle, ElementName=PartPageTitleControl, Converter={StaticResource NullOrEmptyStringToInvisibilityConverter}}"
+                   Style="{StaticResource PageSubTitleStyle}" />
+        
+    </StackPanel>
+    
+</UserControl>

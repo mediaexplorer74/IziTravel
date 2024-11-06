@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\Admin\Desktop\RE\Izi.Travel\BugSense-WP8.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA8B6C47-9D2D-4D42-B59C-C82886694C1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>BugSense-WP8</AssemblyName>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <ApplicationVersion>3.6.8.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>BugSense</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Splunk\Mi\Utilities\CommonHelper.cs" />
+    <Compile Include="Splunk\Mi\Utilities\ConsoleManager.cs" />
+    <Compile Include="Splunk\Mi\Utilities\SplunkTransactionManager.cs" />
+    <Compile Include="BugSenseHandler.cs" />
+    <Compile Include="Core\BugSenseHandlerBase.cs" />
+    <Compile Include="Core\BugSenseSyncContextHandler.cs" />
+    <Compile Include="Core\IBugSenseFileClient.cs" />
+    <Compile Include="Core\FileRepository.cs" />
+    <Compile Include="Core\BugSenseEventTag.cs" />
+    <Compile Include="Core\BugSenseEventFactory.cs" />
+    <Compile Include="Core\ExtraData.cs" />
+    <Compile Include="Core\ScreenProperties.cs" />
+    <Compile Include="Core\BugSenseProperties.cs" />
+    <Compile Include="Core\FileNameType.cs" />
+    <Compile Include="Core\DeviceConnectionState.cs" />
+    <Compile Include="Core\LoggedRequestResultDelegate.cs" />
+    <Compile Include="Core\SplunkInterceptionHttpHandler.cs" />
+    <Compile Include="Core\ServiceRepository.cs" />
+    <Compile Include="Core\Helpers\Extensions.cs" />
+    <Compile Include="Core\Helpers\ErrorHashSignature.cs" />
+    <Compile Include="Core\Helpers\BugSenseRequestWorker.cs" />
+    <Compile Include="Core\Helpers\EntropyUUID.cs" />
+    <Compile Include="Core\Helpers\ExceptionExtension.cs" />
+    <Compile Include="Core\Helpers\SplunkRequestWorker.cs" />
+    <Compile Include="Core\Interfaces\IHashSignature.cs" />
+    <Compile Include="Core\Interfaces\IRequestWorker.cs" />
+    <Compile Include="Core\Interfaces\IBugSenseServiceClient.cs" />
+    <Compile Include="Core\Interfaces\IContentResolver.cs" />
+    <Compile Include="Core\Interfaces\IRequestJsonSerializer.cs" />
+    <Compile Include="Core\Model\BugSenseCheckTaskFaultResult.cs" />
+    <Compile Include="Core\Model\BugSenseContentType.cs" />
+    <Compile Include="Core\Model\StacktraceHelper.cs" />
+    <Compile Include="Core\Model\BugSenseException.cs" />
+    <Compile Include="Core\Model\AppEnvironment.cs" />
+    <Compile Include="Core\Model\BugSenseExceptionRequest.cs" />
+    <Compile Include="Core\Model\BugSenseClient.cs" />
+    <Compile Include="Core\Model\BugSensePerformance.cs" />
+    <Compile Include="Core\Model\BugSenseInternalRequest.cs" />
+    <Compile Include="Core\Model\BugSenseErrorResponse.cs" />
+    <Compile Include="Core\Model\DataResponse.cs" />
+    <Compile Include="Core\Model\BugSenseLoggedRequestEventArgs.cs" />
+    <Compile Include="Core\Model\BugSenseMessageException.cs" />
+    <Compile Include="Core\Model\BugSenseResponseResultEventArgs.cs" />
+    <Compile Include="Core\Model\BugSenseResultState.cs" />
+    <Compile Include="Core\Model\BugSenseRequestType.cs" />
+    <Compile Include="Core\Model\BugSenseLogType.cs" />
+    <Compile Include="Core\Model\BugSenseResult.cs" />
+    <Compile Include="Core\Model\BugSenseResponseResult.cs" />
+    <Compile Include="Core\Model\BugSenseLogResult.cs" />
+    <Compile Include="Core\Model\BugSenseUnhandledHandlerEventArgs.cs" />
+    <Compile Include="Core\Model\LimitedCrashExtraDataList.cs" />
+    <Compile Include="Core\Model\CrashExtraData.cs" />
+    <Compile Include="Core\Model\CrashExtraMap.cs" />
+    <Compile Include="Core\Model\CrashOnLastRun.cs" />
+    <Compile Include="Core\Model\StateStatus.cs" />
+    <Compile Include="Core\Model\ConnectionType.cs" />
+    <Compile Include="Core\Model\DataType.cs" />
+    <Compile Include="Core\Model\CrashType.cs" />
+    <Compile Include="Core\Model\TransactionCompletedStatus.cs" />
+    <Compile Include="Core\Model\DataFixture.cs" />
+    <Compile Include="Core\Model\NetworkDataFixture.cs" />
+    <Compile Include="Core\Model\ScreenDataFixture.cs" />
+    <Compile Include="Core\Model\ExceptionDataFixture.cs" />
+    <Compile Include="Core\Model\EventDataFixture.cs" />
+    <Compile Include="Core\Model\Transaction.cs" />
+    <Compile Include="Core\Model\TrStart.cs" />
+    <Compile Include="Core\Model\TrStop.cs" />
+    <Compile Include="Core\Model\HashSignature.cs" />
+    <Compile Include="Core\Model\JsonRequestType.cs" />
+    <Compile Include="Core\Model\LimitedBreadCrumbList.cs" />
+    <Compile Include="Core\Model\PublicContentResolver.cs" />
+    <Compile Include="Core\Model\PublicRequestJsonSerializer.cs" />
+    <Compile Include="Core\Model\RemoteSettingsData.cs" />
+    <Compile Include="Core\Model\RemoteSettingsResponse.cs" />
+    <Compile Include="Core\Model\SerializeResult.cs" />
+    <Compile Include="Core\Model\SessionManager.cs" />
+    <Compile Include="Core\Model\SplunkTransaction.cs" />
+    <Compile Include="Core\Model\SyncContextExceptionDelegate.cs" />
+    <Compile Include="Core\Model\SyncContextExceptionEventArgs.cs" />
+    <Compile Include="Core\Model\TransactionStatus.cs" />
+    <Compile Include="Core\Model\TransactionResult.cs" />
+    <Compile Include="Core\Model\TransactionStartResult.cs" />
+    <Compile Include="Core\Model\TransactionStopResult.cs" />
+    <Compile Include="Core\Model\IExceptionManager.cs" />
+    <Compile Include="Core\Model\ExceptionManager.cs" />
+    <Compile Include="Core\Model\MockExceptionManager.cs" />
+    <Compile Include="Device\Specific\IDeviceUtil.cs" />
+    <Compile Include="Device\Specific\DeviceUtil.cs" />
+    <Compile Include="Helpers\MD5.cs" />
+    <Compile Include="Helpers\MD5InitializerConstant.cs" />
+    <Compile Include="Helpers\Digest.cs" />
+    <Compile Include="Helpers\MD5Helper.cs" />
+    <Compile Include="Helpers\MD5ChangingEventArgs.cs" />
+    <Compile Include="Helpers\MD5ChangedEventArgs.cs" />
+    <Compile Include="Windows\Specific\ManifestAppInfo.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

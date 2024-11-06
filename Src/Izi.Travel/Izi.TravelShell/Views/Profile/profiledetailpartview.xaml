@@ -1,0 +1,54 @@
+﻿<phone:PhoneApplicationPage x:Class="Izi.Travel.Shell.Views.Profile.ProfileDetailPartView"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+                            xmlns:microcore="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+                            xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+                            Style="{StaticResource IziTravelPageStyle}"
+                            mc:Ignorable="d">
+    
+    <!-- Application bar -->
+    <bar:Bindable.ApplicationBar>
+        <bar:BindableApplicationBar IsMenuEnabled="True"
+                                    Mode="Minimized"
+                                    BindableOpacity="{StaticResource IziTravelAppBarOpacity}"
+                                    ButtonsSource="{Binding ActiveItem.AppBarButtons}" 
+                                    MenuItemsSource="{Binding ActiveItem.AppBarMenuItems}" />
+    </bar:Bindable.ApplicationBar>
+        
+    <!-- Layout -->
+    <phone:Pivot ItemsSource="{Binding Items}"
+                 Title="{Binding DisplayName}"
+                 SelectedItem="{Binding ActiveItem, Mode=TwoWay}"
+                 Padding="12,12,-12,0"
+                 Margin="0,0,0,0">
+        <phone:Pivot.ItemTemplate>
+            <DataTemplate>
+                <ContentControl micro:View.Model="{Binding}"
+                                Content="{Binding}" 
+                                VerticalContentAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch" />
+            </DataTemplate>
+        </phone:Pivot.ItemTemplate>
+        <phone:Pivot.TitleTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                           FontSize="{StaticResource IziTravelFontSizeMedium}"
+                           Margin="-2,29,0,22" />
+            </DataTemplate>
+        </phone:Pivot.TitleTemplate>
+        <phone:Pivot.HeaderTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding DisplayName, Converter={StaticResource StringToLowerConverter}}" 
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemilight}" 
+                           FontSize="{StaticResource IziTravelFontSizeExtraLarge}"
+                           Margin="-2,0,0,0"
+                           d:DataContext="{d:DesignInstance microcore:IScreen}" />
+            </DataTemplate>
+        </phone:Pivot.HeaderTemplate>
+    </phone:Pivot>    
+</phone:PhoneApplicationPage>

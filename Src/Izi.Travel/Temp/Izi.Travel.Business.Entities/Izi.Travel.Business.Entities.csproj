@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.Entities.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5186E88C-6275-445B-845D-E6F8057A969C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Izi.Travel.Business.Entities</AssemblyName>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <ApplicationVersion>2.3.4.18</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Izi.Travel.Business.Entities</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Izi.Travel.Data.Entities">
+      <HintPath>lib\Izi.Travel.Data.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Izi.Travel.Geofencing">
+      <HintPath>lib\Izi.Travel.Geofencing.dll</HintPath>
+    </Reference>
+    <Reference Include="Izi.Travel.Utility">
+      <HintPath>lib\Izi.Travel.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Maps" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TourPlayback\TourPlayback.cs" />
+    <Compile Include="TourPlayback\TourPlaybackAttraction.cs" />
+    <Compile Include="TourPlayback\TourPlaybackState.cs" />
+    <Compile Include="TourPlayback\TourPlaybackTriggerZone.cs" />
+    <Compile Include="TourPlayback\TourPlaybackTriggerZoneState.cs" />
+    <Compile Include="Settings\ServerEnvironment.cs" />
+    <Compile Include="Settings\AppSettings.cs" />
+    <Compile Include="Quiz\QuizData.cs" />
+    <Compile Include="Quiz\QuizDataStatistics.cs" />
+    <Compile Include="Purchase\StoreReceipt.cs" />
+    <Compile Include="Purchase\StoreProductReceipt.cs" />
+    <Compile Include="Media\AudioServiceState.cs" />
+    <Compile Include="Media\ImageExtension.cs" />
+    <Compile Include="Media\ImageFormat.cs" />
+    <Compile Include="Media\MediaFormat.cs" />
+    <Compile Include="Media\MediaInfo.cs" />
+    <Compile Include="Media\AudioTrackInfo.cs" />
+    <Compile Include="Filters\GetReviewsFilter.cs" />
+    <Compile Include="Filters\HistoryListFilter.cs" />
+    <Compile Include="Filters\ListFilter.cs" />
+    <Compile Include="Filters\MtgObjectBatchFilter.cs" />
+    <Compile Include="Filters\MtgObjectChildrenCountFilter.cs" />
+    <Compile Include="Filters\MtgObjectChildrenExtendedFilter.cs" />
+    <Compile Include="Filters\MtgObjectChildrenFilter.cs" />
+    <Compile Include="Filters\MtgObjectFilter.cs" />
+    <Compile Include="Filters\MtgObjectListFilter.cs" />
+    <Compile Include="Filters\MtgPublisherChildrenCountFilter.cs" />
+    <Compile Include="Filters\MtgPublisherChildrenFilter.cs" />
+    <Compile Include="Filters\PaidMtgObjectListFilter.cs" />
+    <Compile Include="Filters\PostReviewFilter.cs" />
+    <Compile Include="Filters\ProductIdFilter.cs" />
+    <Compile Include="Filters\QuizDataFilter.cs" />
+    <Compile Include="Filters\QuizDataListFilter.cs" />
+    <Compile Include="Filters\QuizDataStatisticsFilter.cs" />
+    <Compile Include="Filters\Base\MtgObjectFilterBase.cs" />
+    <Compile Include="Filters\Base\MtgObjectListFilterBase.cs" />
+    <Compile Include="Exceptions\BusinessConnectionFailedException.cs" />
+    <Compile Include="Exceptions\BusinessException.cs" />
+    <Compile Include="Exceptions\BusinessDownloadProcessException.cs" />
+    <Compile Include="Download\DownloadObjectInfo.cs" />
+    <Compile Include="Download\DownloadPackageItem.cs" />
+    <Compile Include="Download\DownloadPackageItemAction.cs" />
+    <Compile Include="Download\DownloadPackageMediaItem.cs" />
+    <Compile Include="Download\DownloadProcess.cs" />
+    <Compile Include="Download\DownloadProcessError.cs" />
+    <Compile Include="Download\DownloadProcessState.cs" />
+    <Compile Include="Download\DownloadProcessStep.cs" />
+    <Compile Include="Data\Contacts.cs" />
+    <Compile Include="Data\Content.cs" />
+    <Compile Include="Data\ContentProvider.cs" />
+    <Compile Include="Data\ContentSection.cs" />
+    <Compile Include="Data\CoreObject.cs" />
+    <Compile Include="Data\GeoLocation.cs" />
+    <Compile Include="Data\GeoRectangle.cs" />
+    <Compile Include="Data\Location.cs" />
+    <Compile Include="Data\MapInfo.cs" />
+    <Compile Include="Data\Media.cs" />
+    <Compile Include="Data\MediaType.cs" />
+    <Compile Include="Data\MtgObject.cs" />
+    <Compile Include="Data\MtgObjectAccessType.cs" />
+    <Compile Include="Data\MtgObjectCategory.cs" />
+    <Compile Include="Data\MtgObjectForm.cs" />
+    <Compile Include="Data\MtgObjectStatus.cs" />
+    <Compile Include="Data\MtgObjectType.cs" />
+    <Compile Include="Data\Playback.cs" />
+    <Compile Include="Data\PlaybackType.cs" />
+    <Compile Include="Data\Purchase.cs" />
+    <Compile Include="Data\Quiz.cs" />
+    <Compile Include="Data\QuizAnswer.cs" />
+    <Compile Include="Data\Rating.cs" />
+    <Compile Include="Data\Review.cs" />
+    <Compile Include="Data\Schedule.cs" />
+    <Compile Include="Data\ScheduleDay.cs" />
+    <Compile Include="Data\Sponsor.cs" />
+    <Compile Include="Data\TriggerZone.cs" />
+    <Compile Include="Data\TriggerZoneType.cs" />
+    <Compile Include="Data\MtgChildrenListResult.cs" />
+    <Compile Include="Data\MtgChildrenListResultMetadata.cs" />
+    <Compile Include="Culture\LanguageData.cs" />
+    <Compile Include="Culture\RegionData.cs" />
+    <Compile Include="Analytics\EventAction.cs" />
+    <Compile Include="Analytics\EventCategory.cs" />
+    <Compile Include="Analytics\EventContentType.cs" />
+    <Compile Include="Analytics\View\ViewInfo.cs" />
+    <Compile Include="Analytics\Transaction\TransactionInfo.cs" />
+    <Compile Include="Analytics\Transaction\TransactionItemInfo.cs" />
+    <Compile Include="Analytics\Parameters\AccessTypeParameter.cs" />
+    <Compile Include="Analytics\Parameters\ActivationTypeParameter.cs" />
+    <Compile Include="Analytics\Parameters\BaseParameter.cs" />
+    <Compile Include="Analytics\Parameters\CompletionReasonParameter.cs" />
+    <Compile Include="Analytics\Parameters\ContentTypeParameter.cs" />
+    <Compile Include="Analytics\Parameters\LanguageParameter.cs" />
+    <Compile Include="Analytics\Parameters\RentalParameter.cs" />
+    <Compile Include="Analytics\Parameters\ShareAndFollowUsParameter.cs" />
+    <Compile Include="Analytics\Parameters\TitleParameter.cs" />
+    <Compile Include="Analytics\Parameters\UidParameter.cs" />
+    <Compile Include="Analytics\Events\BaseEvent.cs" />
+    <Compile Include="Analytics\Events\Content\BaseContentEvent.cs" />
+    <Compile Include="Analytics\Events\Content\OpenEvent.cs" />
+    <Compile Include="Analytics\Events\Content\PlayEvent.cs" />
+    <Compile Include="Analytics\Events\Content\ReviewEvent.cs" />
+    <Compile Include="Analytics\Events\Content\ShareEvent.cs" />
+    <Compile Include="Analytics\Events\Application\BaseApplicationEvent.cs" />
+    <Compile Include="Analytics\Events\Application\SearchEvent.cs" />
+    <Compile Include="Analytics\Events\Application\ShareAndFollowUsEvent.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

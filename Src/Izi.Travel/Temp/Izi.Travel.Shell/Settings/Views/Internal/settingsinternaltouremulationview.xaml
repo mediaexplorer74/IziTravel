@@ -1,0 +1,63 @@
+﻿<phone:PhoneApplicationPage x:Class="Izi.Travel.Shell.Settings.Views.Internal.SettingsInternalTourEmulationView"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:controls="clr-namespace:Izi.Travel.Shell.Common.Controls"
+                            xmlns:toolkitcontrols="clr-namespace:Izi.Travel.Shell.Toolkit.Controls"
+                            SupportedOrientations="Portrait" Orientation="Portrait"
+                            mc:Ignorable="d"
+                            Style="{StaticResource IziTravelPageStyle}">
+    <!-- Layout -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <controls:PageTitleControl Grid.Row="0"
+                                   Title="{Binding LocalizedResources.LabelSettings, Source={StaticResource LocalizedStrings}}" 
+                                   SubTitle="{Binding LocalizedResources.LabelTourEmulation, Source={StaticResource LocalizedStrings}}" />
+
+        <!-- Settings -->
+        <Grid Grid.Row="1" Margin="24,0,24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Enabled -->
+            <TextBlock Grid.Row="0"
+                       Text="{Binding LocalizedResources.LabelEmulationMode, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToUpperConverter}}" 
+                       Style="{StaticResource DetailInfoSectionHeaderStyle}" />
+            <toolkit:ToggleSwitch Grid.Row="1"          
+                                  Content="{Binding Enabled, Converter={StaticResource BoolToOnOffStringConverter}}"
+                                  IsChecked="{Binding Enabled, Mode=TwoWay}" 
+                                  Margin="-12,-4,-12,0" />
+            
+            <!-- Speed -->
+            <TextBlock Grid.Row="2"
+                       Text="{Binding LocalizedResources.LabelSpeed, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToUpperConverter}}" 
+                       Style="{StaticResource DetailInfoSectionHeaderStyle}" />
+            <toolkitcontrols:PhoneSlider Grid.Row="3" 
+                                         Value="{Binding Speed, Mode=TwoWay}" 
+                                         Minimum="1.0" Maximum="50.0" 
+                                         TickFrequency="1.0" 
+                                         SmallChange="1.0" 
+                                         LargeChange="1.0"
+                                         Margin="-12,8,-12,0" />
+            <TextBlock Grid.Row="4"
+                       Text="{Binding Speed, StringFormat='{0:F2} km/h'}" 
+                       Foreground="{StaticResource IziTravelDarkBrush}" 
+                       FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                       FontSize="{StaticResource IziTravelFontSizeNormal}"
+                       Margin="0,-12,0,0" />
+        </Grid>
+    </Grid>
+</phone:PhoneApplicationPage>

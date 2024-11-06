@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Izi.Travel.Shell.Mtg.Views.Publisher.Detail.PublisherDetailInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
+             xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
+             xmlns:model="clr-namespace:Izi.Travel.Shell.Mtg.Model"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             mc:Ignorable="d">
+    <!-- Layout -->
+    <ScrollViewer>
+        <Grid Margin="0,0,25,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />               
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+                        
+            <!-- Name -->
+            <TextBlock Grid.Row="0" 
+                       Text="{Binding Title}"
+                       FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                       FontSize="{StaticResource IziTravelFontSizeNormal}"
+                       TextWrapping="Wrap" />
+                        
+            <!-- Description -->
+            <controls:ExpandableTextBlock Grid.Row="1" 
+                                          Text="{Binding Description}"
+                                          CollapsedLineCount="4"                        
+                                          FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                                          FontSize="{StaticResource IziTravelFontSizeNormal}" 
+                                          LinkTextCollapsed="{Binding LocalizedResources.ActionReadMore, Source={StaticResource LocalizedStrings}}" 
+                                          LinkTextExpanded="{Binding LocalizedResources.ActionHide, Source={StaticResource LocalizedStrings}}"
+                                          LinkForeground="{StaticResource IziTravelBlueBrush}"
+                                          LinkPressedForeground="{StaticResource IziTravelGrayBrush}"
+                                          Visibility="{Binding Description, Converter={StaticResource NullToInvisibilityConverter}}" 
+                                          Margin="0,25,0,0" />
+            
+            <!-- Contacts -->
+            <TextBlock Grid.Row="2" 
+                       Text="{Binding LocalizedResources.LabelContacts, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToUpperConverter}}" 
+                       Style="{StaticResource DetailInfoSectionHeaderStyle}" 
+                       Visibility="{Binding HasContacts, Converter={StaticResource BoolToVisibilityConverter}}" 
+                       Margin="0,25,0,0"/>
+            <ItemsControl Grid.Row="3"
+                          x:Name="PartContactList"
+                          ItemsSource="{Binding Contacts}"
+                          Visibility="{Binding HasContacts, Converter={StaticResource BoolToVisibilityConverter}}"
+                          Margin="0,25,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate d:DataContext="{d:DesignInstance model:PublisherContactInfo}">
+                        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                        <Button toolkit:TiltEffect.IsTiltEnabled="True"
+                                Content="{Binding}"
+                                Command="{Binding DataContext.NavigateSocialCommand, ElementName=PartContactList}"
+                                CommandParameter="{Binding}"
+                                Margin="0,0,0,25">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid Background="Transparent"
+                                          d:DataContext="{d:DesignInstance model:PublisherContactInfo}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Image -->
+                                        <commoncontrols:ImagePlaceholder Grid.Column="0"
+                                                                         ImageSource="{Binding ImageUrl}"
+                                                                         ImageStretch="Fill"
+                                                                         Background="Transparent"
+                                                                         Width="48" Height="48" />
+
+                                        <!-- Text -->
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="{Binding Description}"
+                                                   FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                                                   FontSize="{StaticResource IziTravelFontSizeNormal}"
+                                                   Margin="25,0,0,0" 
+                                                   TextWrapping="Wrap" 
+                                                   TextTrimming="WordEllipsis" 
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Left" />
+                                    </Grid>                                                                                                          
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+                        
+            <!-- Footer -->
+            <Border Grid.Row="4" Height="90" />
+        </Grid>
+    </ScrollViewer>
+</UserControl>

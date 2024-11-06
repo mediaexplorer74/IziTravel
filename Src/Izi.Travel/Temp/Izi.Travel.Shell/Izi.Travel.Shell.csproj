@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{62D8A0B9-4D35-4992-BEE7-C1EE1FC8FFB4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Izi.Travel.Shell</AssemblyName>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <ApplicationVersion>2.3.4.18</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Izi.Travel.Shell</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BugSense-WP8">
+      <HintPath>lib\BugSense-WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>lib\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Extensions">
+      <HintPath>lib\Caliburn.Micro.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Extras">
+      <HintPath>lib\Caliburn.Micro.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform">
+      <HintPath>lib\Caliburn.Micro.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack-PCL">
+      <HintPath>lib\HtmlAgilityPack-PCL.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib.Portable">
+      <HintPath>lib\ICSharpCode.SharpZipLib.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Izi.Travel.Business">
+      <HintPath>lib\Izi.Travel.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Izi.Travel.Business.Entities">
+      <HintPath>lib\Izi.Travel.Business.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Izi.Travel.Geofencing">
+      <HintPath>lib\Izi.Travel.Geofencing.dll</HintPath>
+    </Reference>
+    <Reference Include="Izi.Travel.Utility">
+      <HintPath>lib\Izi.Travel.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls">
+      <HintPath>lib\Microsoft.Phone.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>lib\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Maps" />
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Runtime.WindowsRuntime" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>lib\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Uservoice">
+      <HintPath>lib\Uservoice.dll</HintPath>
+    </Reference>
+    <Reference Include="Weakly">
+      <HintPath>lib\Weakly.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.wp8.0">
+      <HintPath>lib\zxing.wp8.0.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="UriMapper.cs" />
+    <Compile Include="Views\BootView.cs" />
+    <Compile Include="Views\LogView.cs" />
+    <Compile Include="Views\MainView.cs" />
+    <Compile Include="Views\RedirectView.cs" />
+    <Compile Include="Views\QuickAccess\QuickAccessView.cs" />
+    <Compile Include="Views\NowPlaying\NowPlayingView.cs" />
+    <Compile Include="Views\Profile\ProfileDetailPartView.cs" />
+    <Compile Include="Views\Profile\ProfileTabView.cs" />
+    <Compile Include="Views\Profile\ProfileView.cs" />
+    <Compile Include="Views\Profile\Quiz\ProfileQuizListView.cs" />
+    <Compile Include="Views\Profile\Purchase\ProfilePurchaseListView.cs" />
+    <Compile Include="Views\Profile\History\ProfileHistoryListView.cs" />
+    <Compile Include="Views\Profile\Download\ProfileDownloadListView.cs" />
+    <Compile Include="Views\Profile\Bookmark\ProfileBookmarkListView.cs" />
+    <Compile Include="Views\Featured\FeaturedListFlyoutView.cs" />
+    <Compile Include="Views\Featured\FeaturedListView.cs" />
+    <Compile Include="Views\Featured\FeaturedPartView.cs" />
+    <Compile Include="Views\Featured\FeaturedWelcomeView.cs" />
+    <Compile Include="Views\Explore\ExploreView.cs" />
+    <Compile Include="ViewModels\IMainTabViewModel.cs" />
+    <Compile Include="ViewModels\LogViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RedirectViewModel.cs" />
+    <Compile Include="ViewModels\QuickAccess\QuickAccessViewModel.cs" />
+    <Compile Include="ViewModels\QuickAccess\Items\QuickAccessBaseItemViewModel.cs" />
+    <Compile Include="ViewModels\QuickAccess\Items\QuickAccessInfoItemViewModel.cs" />
+    <Compile Include="ViewModels\QuickAccess\Items\QuickAccessPlayerItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\IProfileListViewModel.cs" />
+    <Compile Include="ViewModels\Profile\IProfileTabViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileListItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileListViewModel`1.cs" />
+    <Compile Include="ViewModels\Profile\ProfileTabViewModel`1.cs" />
+    <Compile Include="ViewModels\Profile\ProfileTileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileDetailPartViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Settings\ProfileSettingsTileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Quiz\ProfileQuizTabViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Quiz\ProfileQuizTileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Quiz\ProfileQuizListItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Quiz\ProfileQuizListViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Purchase\ProfilePurchaseListItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Purchase\ProfilePurchaseListViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Purchase\ProfilePurchaseTabViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Purchase\ProfilePurchaseTileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\History\ProfileHistoryTabViewModel.cs" />
+    <Compile Include="ViewModels\Profile\History\ProfileHistoryTileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\History\ProfileHistoryListGroupItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\History\ProfileHistoryListItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\History\ProfileHistoryListViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Download\ProfileDownloadTabViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Download\ProfileDownloadListItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Download\ProfileDownloadListViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Download\ProfileDownloadTileViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkListItemViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkListViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkTabViewModel.cs" />
+    <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkTileViewModel.cs" />
+    <Compile Include="ViewModels\Featured\FeaturedListFlyoutViewModel.cs" />
+    <Compile Include="ViewModels\Featured\FeaturedListItemViewModel.cs" />
+    <Compile Include="ViewModels\Featured\FeaturedListTask.cs" />
+    <Compile Include="ViewModels\Featured\FeaturedListViewModel.cs" />
+    <Compile Include="ViewModels\Featured\FeaturedPartViewModel.cs" />
+    <Compile Include="ViewModels\Explore\ExploreItemStatus.cs" />
+    <Compile Include="ViewModels\Explore\ExploreItemViewModel.cs" />
+    <Compile Include="ViewModels\Explore\ExploreLocationGroup.cs" />
+    <Compile Include="ViewModels\Explore\ExploreLocationItem.cs" />
+    <Compile Include="ViewModels\Explore\ExploreViewModel.cs" />
+    <Compile Include="ViewModels\Explore\Flyouts\ExploreFlyoutLocationViewModel.cs" />
+    <Compile Include="ViewModels\Explore\Flyouts\ExploreFlyoutTypeViewModel.cs" />
+    <Compile Include="ViewModels\Explore\Flyouts\ExploreFlyoutViewModel.cs" />
+    <Compile Include="Toolkit\Controls\FlipView.cs" />
+    <Compile Include="Toolkit\Controls\FlipViewItem.cs" />
+    <Compile Include="Toolkit\Controls\InternalUtils.cs" />
+    <Compile Include="Toolkit\Controls\NumericExtensions.cs" />
+    <Compile Include="Toolkit\Controls\PhoneSlider.cs" />
+    <Compile Include="Toolkit\Controls\TemplatedVisualTreeExtensions.cs" />
+    <Compile Include="Toolkit\Controls\TickBar.cs" />
+    <Compile Include="Toolkit\Controls\UpdateSelectionMode.cs" />
+    <Compile Include="Toolkit\Controls\VisualTreeExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\CollectionChangeListener`1.cs" />
+    <Compile Include="Toolkit\Controls\Maps\GeocoordinateExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapChild.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapChildCollection.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapChildControl.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapExtensionsChildrenChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapItemsControl.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapItemsControlChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapItemsSourceChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapOverlayItem.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Pushpin.cs" />
+    <Compile Include="Toolkit\Controls\Maps\QueryExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\UserLocationMarker.cs" />
+    <Compile Include="TemplateSelectors\PlayerActionSelector.cs" />
+    <Compile Include="TemplateSelectors\QuickAccess\QuickAccessTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\Explore\ExploreLoadResultTemplateSelector.cs" />
+    <Compile Include="Settings\Views\SettingsListView.cs" />
+    <Compile Include="Settings\Views\SettingsView.cs" />
+    <Compile Include="Settings\Views\Internal\SettingsInternalServerView.cs" />
+    <Compile Include="Settings\Views\Internal\SettingsInternalTourEmulationView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppAboutView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppFeedbackMessageView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppFeedbackView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppLanguageSelectorView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppLanguageView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppLicenseView.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppLocationView.cs" />
+    <Compile Include="Settings\ViewModels\PasscodeFlyoutViewModel.cs" />
+    <Compile Include="Settings\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Items\SettingsListItemBaseViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Items\SettingsListItemNavigationViewModel`1.cs" />
+    <Compile Include="Settings\ViewModels\Internal\SettingsInternalServerViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Internal\SettingsInternalTourEmulationViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Internal\SettingsInternalViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Internal\SettingsListItemContentViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Internal\SettingsListItemServerViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Internal\SettingsListItemTourEmulationViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppAboutViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppFeedbackMessageViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppFeedbackViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppLanguageListItemViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppLanguageSelectorViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppLanguageViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppLicenseViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppLocationViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsAppViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsListItemAboutViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsListItemCodeNameViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsListItemLanguageViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsListItemLicenseViewModel.cs" />
+    <Compile Include="Settings\ViewModels\Application\SettingsListItemLocationViewModel.cs" />
+    <Compile Include="Settings\Model\Header.cs" />
+    <Compile Include="Settings\Model\License.cs" />
+    <Compile Include="Settings\Model\LicenseInfo.cs" />
+    <Compile Include="Settings\Model\LicenseTemplateSelector.cs" />
+    <Compile Include="Settings\Model\Package.cs" />
+    <Compile Include="Settings\Helpers\UserVoiceHelper.cs" />
+    <Compile Include="Mtg\Views\Tour\Map\TourMapPartView.cs" />
+    <Compile Include="Mtg\Views\Tour\Detail\TourDetailInfoView.cs" />
+    <Compile Include="Mtg\Views\Quiz\QuizPartView.cs" />
+    <Compile Include="Mtg\Views\Quiz\QuizView.cs" />
+    <Compile Include="Mtg\Views\Publisher\Detail\PublisherDetailContentView.cs" />
+    <Compile Include="Mtg\Views\Publisher\Detail\PublisherDetailInfoView.cs" />
+    <Compile Include="Mtg\Views\Publisher\Detail\PublisherDetailPartView.cs" />
+    <Compile Include="Mtg\Views\Publisher\Detail\PublisherDetailView.cs" />
+    <Compile Include="Mtg\Views\Museum\Map\MuseumMapPartView.cs" />
+    <Compile Include="Mtg\Views\Museum\Detail\MuseumDetailNewsView.cs" />
+    <Compile Include="Mtg\Views\Common\NowPlayingControlView.cs" />
+    <Compile Include="Mtg\Views\Common\RatePartView.cs" />
+    <Compile Include="Mtg\Views\Common\ReviewListPartView.cs" />
+    <Compile Include="Mtg\Views\Common\QrCode\QrCodeScannerFlyoutView.cs" />
+    <Compile Include="Mtg\Views\Common\Player\InfoPartView.cs" />
+    <Compile Include="Mtg\Views\Common\Player\PlayerPartView.cs" />
+    <Compile Include="Mtg\Views\Common\Player\PlayerView.cs" />
+    <Compile Include="Mtg\Views\Common\Numpad\NumpadFlyoutView.cs" />
+    <Compile Include="Mtg\Views\Common\List\ChildrenListView.cs" />
+    <Compile Include="Mtg\Views\Common\List\ReferenceListView.cs" />
+    <Compile Include="Mtg\Views\Common\List\ReviewListView.cs" />
+    <Compile Include="Mtg\Views\Common\List\SponsorListView.cs" />
+    <Compile Include="Mtg\Views\Common\Detail\DetailInfoView.cs" />
+    <Compile Include="Mtg\Views\Common\Detail\DetailPartView.cs" />
+    <Compile Include="Mtg\Views\Common\Detail\DetailTabView.cs" />
+    <Compile Include="Mtg\Views\Common\Detail\DetailView.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Map\TourMapItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Map\TourMapItemState.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Map\TourMapPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Map\Flyouts\TourMapFlyoutAttractionListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Map\Flyouts\TourMapFlyoutStartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Map\Flyouts\TourMapFlyoutViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Detail\TourDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Detail\TourDetailRouteViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Tour\Detail\TourDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\TouristAttraction\List\TouristAttractionListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\TouristAttraction\List\TouristAttractionListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\TouristAttraction\Detail\TouristAttractionDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\TouristAttraction\Detail\TouristAttractionDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Quiz\FlyoutQuizCommentViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Quiz\QuizPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Quiz\QuizViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Quiz\QuizAnswerViewModelExtended.cs" />
+    <Compile Include="Mtg\ViewModels\Publisher\Detail\PublisherDetailContentListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Publisher\Detail\PublisherDetailContentListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Publisher\Detail\PublisherDetailContentViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Publisher\Detail\PublisherDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Publisher\Detail\PublisherDetailPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Publisher\Detail\PublisherDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Map\MuseumMapItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Map\MuseumMapListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Map\MuseumMapPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Map\RouteFlyoutViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailCollectionListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailNewsViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Exhibit\List\ExhibitListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Exhibit\List\ExhibitListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Exhibit\Detail\ExhibitDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Exhibit\Detail\ExhibitDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\BaseSearchFlyoutViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\IFlyoutSearchResultHandler.cs" />
+    <Compile Include="Mtg\ViewModels\Common\IMtgObjectPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\IMtgObjectProvider.cs" />
+    <Compile Include="Mtg\ViewModels\Common\MtgObjectPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\RatePartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\ReviewListPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\QrCode\QrCodeScannerFlyoutViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\InfoPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\IPlayerParentViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\JumpListFlyoutViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\PlayerPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\PlayerViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\Items\PlayerEndItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\Items\PlayerItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\Items\PlayerRegularItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Player\Items\PlayerStartItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Numpad\NumpadFlyoutViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Map\BaseMapItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Map\BaseMapViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\ChildrenListViewModel`1.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\ListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\ReferenceListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\ReferenceListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\ReviewListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\ReviewListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\SponsorListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\List\SponsorListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\ChildObjectDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailExhibitListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailReferenceListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailReviewListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailSponsorListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailTabViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\DetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\MtgObjectTabViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\ParentObjectDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\ParentObjectDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\Interfaces\IDetailPartViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\Interfaces\IDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\Interfaces\IMtgObjectViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\Flyouts\FlyoutLanguageItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Common\Detail\Flyouts\FlyoutLanguageViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Collection\List\CollectionListItemViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Collection\List\CollectionListViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Collection\Detail\CollectionDetailInfoViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Collection\Detail\CollectionDetailViewModel.cs" />
+    <Compile Include="Mtg\TemplateSelectors\ListItemTemplateSelector.cs" />
+    <Compile Include="Mtg\TemplateSelectors\PlayerItemTemplateSelector.cs" />
+    <Compile Include="Mtg\Model\MtgObjectInfo.cs" />
+    <Compile Include="Mtg\Model\NumpadButtonInfo.cs" />
+    <Compile Include="Mtg\Model\PublisherContactInfo.cs" />
+    <Compile Include="Mtg\Model\SearchFlyoutResult.cs" />
+    <Compile Include="Mtg\Model\WorkingHoursInfo.cs" />
+    <Compile Include="Mtg\Messages\DataLoadedMessage.cs" />
+    <Compile Include="Mtg\Messages\DataLoadingMessage.cs" />
+    <Compile Include="Mtg\Messages\RefreshCommandMessage.cs" />
+    <Compile Include="Mtg\Helpers\DialogHelper.cs" />
+    <Compile Include="Mtg\Helpers\DownloadHelper.cs" />
+    <Compile Include="Mtg\Helpers\LocationRectangleExtensions.cs" />
+    <Compile Include="Mtg\Helpers\MapHelper.cs" />
+    <Compile Include="Mtg\Helpers\NavigationHelper.cs" />
+    <Compile Include="Mtg\Helpers\RateHelper.cs" />
+    <Compile Include="Mtg\Helpers\TourHelper.cs" />
+    <Compile Include="Mtg\Helpers\UriHelper.cs" />
+    <Compile Include="Mtg\Converters\BoolToResultTextConverter.cs" />
+    <Compile Include="Mtg\Converters\CategoryToStringConverter.cs" />
+    <Compile Include="Mtg\Converters\DistanceToStringConverter.cs" />
+    <Compile Include="Mtg\Converters\MtgObjectTypeToStringConverter.cs" />
+    <Compile Include="Mtg\Converters\TourMapItemStateToBrushConverter.cs" />
+    <Compile Include="Mtg\Controls\BarcodeScanner.cs" />
+    <Compile Include="Mtg\Controls\BarcodeScannerEventArgs.cs" />
+    <Compile Include="Mtg\Controls\ImagesFlipView.cs" />
+    <Compile Include="Mtg\Controls\ImagesFlipViewItem.cs" />
+    <Compile Include="Mtg\Controls\ListItemControl.cs" />
+    <Compile Include="Mtg\Controls\ListItemRowControl.cs" />
+    <Compile Include="Mtg\Controls\MapPushpinPlayIndicator.cs" />
+    <Compile Include="Mtg\Controls\RatedListItemRowControl.cs" />
+    <Compile Include="Mtg\Constants\AppBarButtonKeys.cs" />
+    <Compile Include="Mtg\Constants\AppBarMenuItemKeys.cs" />
+    <Compile Include="Mtg\Components\BarcodeScannerBehavior.cs" />
+    <Compile Include="Mtg\Components\Tasks\BarcodeScannerTask.cs" />
+    <Compile Include="Mtg\Components\Tasks\BaseSearchTask.cs" />
+    <Compile Include="Mtg\Components\Tasks\NumpadSearchTask.cs" />
+    <Compile Include="Mtg\Components\Enums\FlyoutSearchActivationMode.cs" />
+    <Compile Include="Mtg\Components\Enums\FlyoutSearchCloseMode.cs" />
+    <Compile Include="Mtg\Components\Enums\FlyoutSearchNavigationMode.cs" />
+    <Compile Include="Mtg\Commands\NowPlayingCommand.cs" />
+    <Compile Include="Mtg\Commands\OpenImageCommand.cs" />
+    <Compile Include="Mtg\Commands\OpenQrCodeScannerCommand.cs" />
+    <Compile Include="Mtg\Commands\OpenQuizCommand.cs" />
+    <Compile Include="Mtg\Commands\OpenReviewListCommand.cs" />
+    <Compile Include="Mtg\Commands\OpenVideoCommand.cs" />
+    <Compile Include="Mtg\Commands\RateCommand.cs" />
+    <Compile Include="Mtg\Commands\ShareCommand.cs" />
+    <Compile Include="Mtg\Commands\ToggleBookmarkCommand.cs" />
+    <Compile Include="Model\QuickAccess\QuickAccessMode.cs" />
+    <Compile Include="Model\Profile\ProfileType.cs" />
+    <Compile Include="Model\Explore\ExploreLoadResult.cs" />
+    <Compile Include="Model\Explore\ExploreMapClusterType.cs" />
+    <Compile Include="Media\Views\MediaPlayerPartView.cs" />
+    <Compile Include="Media\Views\Video\VideoMediaPlayerView.cs" />
+    <Compile Include="Media\Views\Image\ImageMediaPlayerView.cs" />
+    <Compile Include="Media\Views\Audio\AudioContentView.cs" />
+    <Compile Include="Media\ViewModels\MediaPlayerItemViewModel.cs" />
+    <Compile Include="Media\ViewModels\MediaPlayerPartViewModel.cs" />
+    <Compile Include="Media\ViewModels\MediaPlayerViewModel.cs" />
+    <Compile Include="Media\ViewModels\Video\VideoMediaPlayerItemViewModel.cs" />
+    <Compile Include="Media\ViewModels\Video\VideoMediaPlayerViewModel.cs" />
+    <Compile Include="Media\ViewModels\Image\ImageMediaPlayerItemViewModel.cs" />
+    <Compile Include="Media\ViewModels\Image\ImageMediaPlayerViewModel.cs" />
+    <Compile Include="Media\ViewModels\Common\MediaItemViewModel.cs" />
+    <Compile Include="Media\ViewModels\Audio\AudioContentPlayState.cs" />
+    <Compile Include="Media\ViewModels\Audio\AudioContentViewModel.cs" />
+    <Compile Include="Media\TemplateSelectors\VideoPlayerTemplateSelector.cs" />
+    <Compile Include="Media\Provider\MediaPlayerDataProvider.cs" />
+    <Compile Include="Media\Converters\AudioPlayStateToImageConverter.cs" />
+    <Compile Include="Media\Controls\ImageViewer.cs" />
+    <Compile Include="Media\Controls\VideoExternalPlayer.cs" />
+    <Compile Include="Media\Controls\YoutubeHelper.cs" />
+    <Compile Include="Media\Controls\VideoPlayer.cs" />
+    <Compile Include="Core\Buffer.cs" />
+    <Compile Include="Core\CustomLogger.cs" />
+    <Compile Include="Core\Transitions\CustomTransition.cs" />
+    <Compile Include="Core\Themes\ThemeHelper.cs" />
+    <Compile Include="Core\Services\ShellServiceFacade.cs" />
+    <Compile Include="Core\Services\Implementation\DialogService.cs" />
+    <Compile Include="Core\Services\Entities\MessageBoxButtonContent.cs" />
+    <Compile Include="Core\Services\Contract\IDialogService.cs" />
+    <Compile Include="Core\Resources\AppResources.cs" />
+    <Compile Include="Core\Resources\LocalizedStrings.cs" />
+    <Compile Include="Core\Resources\ManifestManager.cs" />
+    <Compile Include="Core\Resources\ManifestResources.cs" />
+    <Compile Include="Core\Helpers\FlowDirectionHelper.cs" />
+    <Compile Include="Core\Helpers\ImageHelper.cs" />
+    <Compile Include="Core\Helpers\MtgLinkHelper.cs" />
+    <Compile Include="Core\Helpers\MtgLinkInfo.cs" />
+    <Compile Include="Core\Helpers\MtgLinkType.cs" />
+    <Compile Include="Core\Helpers\PhoneStateHelper.cs" />
+    <Compile Include="Core\Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="Core\Extensions\PropertyChangedExtensions.cs" />
+    <Compile Include="Core\Extensions\StringExtensions.cs" />
+    <Compile Include="Core\Converters\BoolToAccentBrushConverter.cs" />
+    <Compile Include="Core\Converters\BoolToInvisibilityConverter.cs" />
+    <Compile Include="Core\Converters\BoolToObjectConverter.cs" />
+    <Compile Include="Core\Converters\BoolToOnOffStringConverter.cs" />
+    <Compile Include="Core\Converters\BoolToOppositeConverter.cs" />
+    <Compile Include="Core\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Core\Converters\DateTimeToShortDateStringConverter.cs" />
+    <Compile Include="Core\Converters\DivideConverter.cs" />
+    <Compile Include="Core\Converters\LanguageToFlowDirectionConverter.cs" />
+    <Compile Include="Core\Converters\NullOrEmptyStringToInvisibilityConverter.cs" />
+    <Compile Include="Core\Converters\NullToInvisibilityConverter.cs" />
+    <Compile Include="Core\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Core\Converters\RoundedTimeSpanToStringConverter.cs" />
+    <Compile Include="Core\Converters\RoundToHalfConverter.cs" />
+    <Compile Include="Core\Converters\SecondsToTimeSpanConverter.cs" />
+    <Compile Include="Core\Converters\StringToLowerConverter.cs" />
+    <Compile Include="Core\Converters\StringToUpperConverter.cs" />
+    <Compile Include="Core\Converters\TimeSpanToSecondsConverter.cs" />
+    <Compile Include="Core\Converters\TimeSpanToStringConverter.cs" />
+    <Compile Include="Core\Controls\ActionImageButton.cs" />
+    <Compile Include="Core\Controls\ActionRoundButton.cs" />
+    <Compile Include="Core\Controls\ActionRoundRadioButton.cs" />
+    <Compile Include="Core\Controls\CircleSegment.cs" />
+    <Compile Include="Core\Controls\ExpandablePanel.cs" />
+    <Compile Include="Core\Controls\ExpandableTextBlock.cs" />
+    <Compile Include="Core\Controls\LabeledRating.cs" />
+    <Compile Include="Core\Controls\LinkButton.cs" />
+    <Compile Include="Core\Controls\ProgressOverlay.cs" />
+    <Compile Include="Core\Controls\SemanticZoom.cs" />
+    <Compile Include="Core\Controls\SplitPanel.cs" />
+    <Compile Include="Core\Controls\SplitteredContainer.cs" />
+    <Compile Include="Core\Controls\TextButton.cs" />
+    <Compile Include="Core\Controls\ViewboxTextBlock.cs" />
+    <Compile Include="Core\Controls\Tiles\BaseTileControl.cs" />
+    <Compile Include="Core\Controls\Tiles\ITileService.cs" />
+    <Compile Include="Core\Controls\Tiles\TileServiceBase.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileControl.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileService.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileState.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileControlBehavior.cs" />
+    <Compile Include="Core\Controls\Flyout\Flyout.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutBase.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutBehavior.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutCollection.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutDialog.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutDialogResult.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutOpenAction.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewer.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerDisplayedElementType.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerInitiallyDisplayedElementType.cs" />
+    <Compile Include="Core\Controls\FlipViewer\DragState.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerItemDisplayedEventArgs.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerItem.cs" />
+    <Compile Include="Core\Context\IFrameNavigationContext.cs" />
+    <Compile Include="Core\Context\FrameNavigationContext.cs" />
+    <Compile Include="Core\Constants\PhoneStateKeys.cs" />
+    <Compile Include="Core\Components\DataTemplateSelector.cs" />
+    <Compile Include="Core\Components\UIElementHelper.cs" />
+    <Compile Include="Core\Components\Extensions\AnimationExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\FocusExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\MapBindingExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\MapElementCollectionManager.cs" />
+    <Compile Include="Core\Components\Extensions\TextBlockExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\UIElementExtensions.cs" />
+    <Compile Include="Core\Components\Display\ApplicationBarSizeInformation.cs" />
+    <Compile Include="Core\Components\Display\DisplayConstants.cs" />
+    <Compile Include="Core\Components\Display\DisplayInformationSource.cs" />
+    <Compile Include="Core\Components\Display\DisplayInformationEx.cs" />
+    <Compile Include="Core\Components\Display\MathHelpers.cs" />
+    <Compile Include="Core\Components\Display\ScreenInfo.cs" />
+    <Compile Include="Core\Components\Display\ScreenSizeInformation.cs" />
+    <Compile Include="Core\Components\Display\SizeHelpers.cs" />
+    <Compile Include="Core\Components\Display\StandardScreenSize.cs" />
+    <Compile Include="Core\Components\Behaviors\ControlSetFocusBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\LongListSelectorLoadBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\LongListSelectorSelectBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\MapViewBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\PhoneTextBoxBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\ScrollViewerBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\SelectorSelectBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\SliderManipulationBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\ZoomableImageBehavior.cs" />
+    <Compile Include="Core\Command\BaseCommand.cs" />
+    <Compile Include="Core\Command\RelayCommand.cs" />
+    <Compile Include="Core\Command\RelayCommand`1.cs" />
+    <Compile Include="Core\Attributes\ViewAttribute.cs" />
+    <Compile Include="Converters\ExploreItemStatusToForegroundConverter.cs" />
+    <Compile Include="Converters\ExploreItemStatusToStringConverter.cs" />
+    <Compile Include="Converters\ExploreMapClusterTypeToObjectConverter.cs" />
+    <Compile Include="Common\ViewModels\List\BaseListEmptyViewModel.cs" />
+    <Compile Include="Common\ViewModels\List\BaseListViewModel`1.cs" />
+    <Compile Include="Common\ViewModels\List\BaseListWithSearchViewModel`1.cs" />
+    <Compile Include="Common\ViewModels\List\IListViewModel.cs" />
+    <Compile Include="Common\ViewModels\List\IListWithSearchViewModel.cs" />
+    <Compile Include="Common\ViewModels\Flyout\FlyoutViewModel.cs" />
+    <Compile Include="Common\Model\ButtonInfo.cs" />
+    <Compile Include="Common\Model\KeyValueModel.cs" />
+    <Compile Include="Common\Model\MenuItemInfo.cs" />
+    <Compile Include="Common\Model\ScreenProperties.cs" />
+    <Compile Include="Common\Helpers\MtgObjectHelper.cs" />
+    <Compile Include="Common\Controls\ImagePlaceholder.cs" />
+    <Compile Include="Common\Controls\PageTitleControl.cs" />
+    <Compile Include="Common\Controls\PurchaseFlyoutDialog.cs" />
+    <Compile Include="Common\Components\ViewAnalyticsBehavior.cs" />
+    <Compile Include="Common\Commands\LaunchUriCommand.cs" />
+    <Compile Include="Commands\FeedbackCommand.cs" />
+    <Compile Include="Commands\RateApplicationCommand.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app.xaml" />
+    <Resource Include="common\controls\pagetitlecontrol.xaml" />
+    <Resource Include="common\controls\purchaseflyoutdialog.xaml" />
+    <Resource Include="common\themes\generic.xaml" />
+    <Resource Include="core\controls\flyout\flyoutdialog.xaml" />
+    <Resource Include="media\views\audio\audiocontentview.xaml" />
+    <Resource Include="media\views\image\imagemediaplayerview.xaml" />
+    <Resource Include="media\views\mediaplayerpartview.xaml" />
+    <Resource Include="media\views\video\videomediaplayerview.xaml" />
+    <Resource Include="mtg\controls\imagesflipview.xaml" />
+    <Resource Include="mtg\views\common\detail\detailinfoview.xaml" />
+    <Resource Include="mtg\views\common\detail\detailpartview.xaml" />
+    <Resource Include="mtg\views\common\detail\detailtabview.xaml" />
+    <Resource Include="mtg\views\common\detail\detailview.xaml" />
+    <Resource Include="mtg\views\common\list\childrenlistview.xaml" />
+    <Resource Include="mtg\views\common\list\referencelistview.xaml" />
+    <Resource Include="mtg\views\common\list\reviewlistview.xaml" />
+    <Resource Include="mtg\views\common\list\sponsorlistview.xaml" />
+    <Resource Include="mtg\views\common\nowplayingcontrolview.xaml" />
+    <Resource Include="mtg\views\common\numpad\numpadflyoutview.xaml" />
+    <Resource Include="mtg\views\common\player\infopartview.xaml" />
+    <Resource Include="mtg\views\common\player\playerpartview.xaml" />
+    <Resource Include="mtg\views\common\player\playerview.xaml" />
+    <Resource Include="mtg\views\common\qrcode\qrcodescannerflyoutview.xaml" />
+    <Resource Include="mtg\views\common\ratepartview.xaml" />
+    <Resource Include="mtg\views\common\reviewlistpartview.xaml" />
+    <Resource Include="mtg\views\museum\detail\museumdetailnewsview.xaml" />
+    <Resource Include="mtg\views\museum\map\museummappartview.xaml" />
+    <Resource Include="mtg\views\publisher\detail\publisherdetailcontentview.xaml" />
+    <Resource Include="mtg\views\publisher\detail\publisherdetailinfoview.xaml" />
+    <Resource Include="mtg\views\publisher\detail\publisherdetailpartview.xaml" />
+    <Resource Include="mtg\views\publisher\detail\publisherdetailview.xaml" />
+    <Resource Include="mtg\views\quiz\quizpartview.xaml" />
+    <Resource Include="mtg\views\quiz\quizview.xaml" />
+    <Resource Include="mtg\views\tour\detail\tourdetailinfoview.xaml" />
+    <Resource Include="mtg\views\tour\map\tourmappartview.xaml" />
+    <Resource Include="properties\designtimeresources.xaml" />
+    <Resource Include="settings\views\application\settingsappaboutview.xaml" />
+    <Resource Include="settings\views\application\settingsappfeedbackmessageview.xaml" />
+    <Resource Include="settings\views\application\settingsappfeedbackview.xaml" />
+    <Resource Include="settings\views\application\settingsapplanguageselectorview.xaml" />
+    <Resource Include="settings\views\application\settingsapplanguageview.xaml" />
+    <Resource Include="settings\views\application\settingsapplicenseview.xaml" />
+    <Resource Include="settings\views\application\settingsapplocationview.xaml" />
+    <Resource Include="settings\views\internal\settingsinternalserverview.xaml" />
+    <Resource Include="settings\views\internal\settingsinternaltouremulationview.xaml" />
+    <Resource Include="settings\views\settingslistview.xaml" />
+    <Resource Include="settings\views\settingsview.xaml" />
+    <Resource Include="themes\colors.xaml" />
+    <Resource Include="themes\converters.xaml" />
+    <Resource Include="themes\fonts.xaml" />
+    <Resource Include="themes\generic.xaml" />
+    <Resource Include="themes\theme.xaml" />
+    <Resource Include="views\bootview.xaml" />
+    <Resource Include="views\explore\exploreview.xaml" />
+    <Resource Include="views\featured\featuredlistflyoutview.xaml" />
+    <Resource Include="views\featured\featuredlistview.xaml" />
+    <Resource Include="views\featured\featuredpartview.xaml" />
+    <Resource Include="views\featured\featuredwelcomeview.xaml" />
+    <Resource Include="views\logview.xaml" />
+    <Resource Include="views\mainview.xaml" />
+    <Resource Include="views\nowplaying\nowplayingview.xaml" />
+    <Resource Include="views\profile\bookmark\profilebookmarklistview.xaml" />
+    <Resource Include="views\profile\download\profiledownloadlistview.xaml" />
+    <Resource Include="views\profile\history\profilehistorylistview.xaml" />
+    <Resource Include="views\profile\profiledetailpartview.xaml" />
+    <Resource Include="views\profile\profiletabview.xaml" />
+    <Resource Include="views\profile\profileview.xaml" />
+    <Resource Include="views\profile\purchase\profilepurchaselistview.xaml" />
+    <Resource Include="views\profile\quiz\profilequizlistview.xaml" />
+    <Resource Include="views\quickaccess\quickaccessview.xaml" />
+    <Resource Include="views\redirectview.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Resources\AppResources.resx" />
+    <EmbeddedResource Include="Settings\Model\licenses.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

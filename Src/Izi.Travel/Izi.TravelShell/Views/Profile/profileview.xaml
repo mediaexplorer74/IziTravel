@@ -1,0 +1,276 @@
+﻿<UserControl x:Class="Izi.Travel.Shell.Views.Profile.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:tiles="clr-namespace:Izi.Travel.Shell.Core.Controls.Tiles"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             xmlns:download="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Download"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:purchase="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Purchase"
+             xmlns:bookmark="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Bookmark"
+             xmlns:history="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.History"
+             xmlns:quiz="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Quiz"
+             xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
+             mc:Ignorable="d">
+
+    <!-- Behaviors -->
+    <i:Interaction.Behaviors>
+        <components:ViewAnalyticsBehavior />
+    </i:Interaction.Behaviors>
+
+    <!-- Resources -->
+    <UserControl.Resources>
+        <!-- Bookmark tile -->
+        <DataTemplate x:Key="TileBookmarkFrontTemplate">
+            <Grid Background="{StaticResource IziTravelBlueBrush}" 
+                  d:DataContext="{d:DesignInstance bookmark:ProfileBookmarkTileViewModel}">
+                <Image Source="/Assets/Icons/dashboard.bookmarks.png"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" 
+                       Width="94" Height="94" />
+
+                <TextBlock Text="{Binding Title, Converter={StaticResource StringToLowerConverter}}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Bottom" 
+                           Margin="10,0,0,10" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="TileBookmarkBackTemplate">
+            <Border Background="{StaticResource IziTravelBlueBrush}" />
+        </DataTemplate>
+
+        <!-- Quiz tile -->
+        <DataTemplate x:Key="TileQuizFrontTemplate">
+            <Grid Background="{StaticResource IziTravelDarkGrayBrush}" 
+                  d:DataContext="{d:DesignInstance quiz:ProfileQuizTileViewModel}">
+                <Image Source="/Assets/Icons/dashboard.quizes.png"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Width="94" Height="94" />
+
+                <TextBlock Text="{Binding Title, Converter={StaticResource StringToLowerConverter}}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Bottom" 
+                           Margin="10,0,0,10" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="TileQuizBackTemplate">
+            <Border Background="{StaticResource IziTravelBlueBrush}" />
+        </DataTemplate>
+        
+        <!-- Download tile -->
+        <DataTemplate x:Key="TileDownloadFrontTemplate">
+            <Grid Background="{StaticResource IziTravelDarkBrush}" 
+                  d:DataContext="{d:DesignInstance download:ProfileDownloadTileViewModel}">
+                <Image Source="/Assets/Icons/dashboard.downloads.png"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" 
+                       Width="94" Height="94" />
+
+                <TextBlock Text="{Binding Title, Converter={StaticResource StringToLowerConverter}}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Bottom" 
+                           Margin="10,0,0,10" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="TileDownloadBackTemplate">
+            <Grid Background="{StaticResource IziTravelDarkBrush}" 
+                  d:DataContext="{d:DesignInstance download:ProfileDownloadTileViewModel}">
+                <!-- Image -->
+                <Image Source="{Binding ItemImageUrl}" 
+                       Stretch="UniformToFill" />
+
+                <!-- Image overlay -->
+                <Border Background="{StaticResource IziTravelDarkBrush}" Opacity="0.5" />
+
+                <!-- Audioguides count -->
+                <TextBlock Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Top" 
+                           Margin="10,10,0,0">
+                    <Run Text="{Binding LocalizedResources.LabelAudioguides, Source={StaticResource LocalizedStrings}, StringFormat='{}{0}:', Converter={StaticResource StringToLowerConverter}}" />
+                    <Run Text="{Binding TotalCount}" />
+                </TextBlock>
+                
+                <!-- Audioguides size -->
+                <TextBlock Text="{Binding TotalSizeString}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Right"
+                           Margin="0,10,10,0" />
+                
+                <!-- Title -->
+                <TextBlock Text="{Binding ItemTitle}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeSmall}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           TextTrimming="WordEllipsis"
+                           Margin="10,0,0,10" />
+            </Grid>
+        </DataTemplate>
+
+        <!-- History tile -->
+        <DataTemplate x:Key="TileHistoryFrontTemplate">
+            <Grid Background="{StaticResource IziTravelDarkGrayBrush}" 
+                  d:DataContext="{d:DesignInstance history:ProfileHistoryTileViewModel}">
+                <Image Source="/Assets/Icons/dashboard.history.png"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" 
+                       Width="94" Height="94" />
+
+                <TextBlock Text="{Binding Title, Converter={StaticResource StringToLowerConverter}}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Bottom" 
+                           Margin="10,0,0,10" />
+            </Grid>                       
+        </DataTemplate>
+        <DataTemplate x:Key="TileHistoryBackTemplate">
+            <Border Background="{StaticResource IziTravelBlueBrush}" />
+        </DataTemplate>
+
+        <!-- Purchase tile -->
+        <DataTemplate x:Key="TilePurchaseFrontTemplate">
+            <Grid Background="{StaticResource IziTravelVioletBrush}" 
+                  d:DataContext="{d:DesignInstance purchase:ProfilePurchaseTileViewModel}">
+                <Image Source="/Assets/Icons/dashboard.purchases.png"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" 
+                       Width="94" Height="94" 
+                       Margin="0,0,0,6" />
+
+                <TextBlock Text="{Binding Title, Converter={StaticResource StringToLowerConverter}}"
+                           Foreground="{StaticResource IziTravelLightBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" 
+                           VerticalAlignment="Bottom" 
+                           Margin="10,0,0,10" />
+            </Grid>                     
+        </DataTemplate>
+        <DataTemplate x:Key="TilePurchaseBackTemplate">
+            <Border Background="{StaticResource IziTravelBlueBrush}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Margin="25,0,25,72" 
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Bookmark -->
+        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                HorizontalAlignment="Left"
+                Command="{Binding TileBookmarkViewModel.NavigateCommand}"
+                Margin="10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <tiles:FlipTileControl IsFrozen="True"
+                                           FrontContent="{Binding TileBookmarkViewModel}"
+                                           FrontContentTemplate="{StaticResource TileBookmarkFrontTemplate}" 
+                                           BackContent="{Binding TileBookmarkViewModel}"
+                                           BackContentTemplate="{StaticResource TileBookmarkBackTemplate}" 
+                                           Width="180" Height="180" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Quiz -->
+        <Button Grid.Row="0" 
+                Grid.Column="1"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                HorizontalAlignment="Right"
+                Command="{Binding TileQuizViewModel.NavigateCommand}"
+                Margin="10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <tiles:FlipTileControl IsFrozen="True"
+                                           FrontContent="{Binding TileQuizViewModel}"
+                                           FrontContentTemplate="{StaticResource TileQuizFrontTemplate}" 
+                                           BackContent="{Binding TileQuizViewModel}"
+                                           BackContentTemplate="{StaticResource TileQuizBackTemplate}" 
+                                           Width="180" Height="180" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Downloads -->
+        <Button Grid.Row="1"
+                Grid.Column="0" Grid.ColumnSpan="2"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                Command="{Binding TileDownloadViewModel.NavigateCommand}"
+                Margin="10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <tiles:FlipTileControl IsFrozen="{Binding TileDownloadViewModel.IsFrozen}"
+                                           FrontContent="{Binding TileDownloadViewModel}"
+                                           FrontContentTemplate="{StaticResource TileDownloadFrontTemplate}" 
+                                           BackContent="{Binding TileDownloadViewModel}"
+                                           BackContentTemplate="{StaticResource TileDownloadBackTemplate}" 
+                                           Width="380" Height="180">
+                        <i:Interaction.Behaviors>
+                            <tiles:FlipTileControlBehavior StateChangeCommand="{Binding TileDownloadViewModel.StateChangeCommand}" />
+                        </i:Interaction.Behaviors>
+                    </tiles:FlipTileControl>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- History -->
+        <Button Grid.Row="2"
+                Grid.Column="0"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                Command="{Binding TileHistoryViewModel.NavigateCommand}"
+                Margin="10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <tiles:FlipTileControl IsFrozen="True"                                               
+                                           FrontContent="{Binding TileHistoryViewModel}"
+                                           FrontContentTemplate="{StaticResource TileHistoryFrontTemplate}" 
+                                           BackContent="{Binding TileHistoryViewModel}"
+                                           BackContentTemplate="{StaticResource TileHistoryBackTemplate}" 
+                                           Width="180" Height="180" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+       
+        <!-- Purchase -->
+        <Button Grid.Row="2"
+                Grid.Column="1"
+                toolkit:TiltEffect.IsTiltEnabled="True"                    
+                Command="{Binding TilePurchaseViewModel.NavigateCommand}"
+                Margin="10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <tiles:FlipTileControl IsFrozen="True"
+                                           FrontContent="{Binding TilePurchaseViewModel}"
+                                           FrontContentTemplate="{StaticResource TilePurchaseFrontTemplate}" 
+                                           BackContent="{Binding TilePurchaseViewModel}"
+                                           BackContentTemplate="{StaticResource TilePurchaseBackTemplate}" 
+                                           Width="180" Height="180" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</UserControl>

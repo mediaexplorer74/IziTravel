@@ -1,0 +1,30 @@
+﻿<phone:PhoneApplicationPage x:Class="Izi.Travel.Shell.Mtg.Views.Common.Detail.DetailPartView"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:corecontrols="clr-namespace:Izi.Travel.Shell.Core.Controls"
+                            xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+                            xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+                            SupportedOrientations="Portrait" 
+                            Orientation="Portrait"                       
+                            Style="{StaticResource IziTravelPageStyle}"
+                            mc:Ignorable="d">
+    
+    <!-- Application bar -->
+    <bar:Bindable.ApplicationBar>
+        <bar:BindableApplicationBar IsMenuEnabled="True"
+                                    BindableOpacity="{StaticResource IziTravelAppBarOpacity}"
+                                    ButtonsSource="{Binding ActiveItem.ActiveItem.AppBarButtons}" 
+                                    MenuItemsSource="{Binding ActiveItem.ActiveItem.AppBarMenuItems}" />
+    </bar:Bindable.ApplicationBar>
+
+    <!-- Layout -->
+    <corecontrols:ProgressOverlay IsBusy="{Binding IsDataLoading}">
+        <ContentControl Content="{Binding ActiveItem}"
+                        micro:View.Model="{Binding ActiveItem}"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch" />
+    </corecontrols:ProgressOverlay>    
+</phone:PhoneApplicationPage>

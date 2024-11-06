@@ -1,0 +1,255 @@
+﻿<UserControl x:Class="Izi.Travel.Shell.Views.Profile.Quiz.ProfileQuizListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
+             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:converters="clr-namespace:Izi.Travel.Shell.Core.Converters"
+             xmlns:mtgconverters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
+             xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
+             xmlns:quiz="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Quiz"
+             mc:Ignorable="d">
+
+    <!-- Behaviors -->
+    <i:Interaction.Behaviors>
+        <components:ViewAnalyticsBehavior />
+    </i:Interaction.Behaviors>
+
+    <!-- Resources -->
+    <UserControl.Resources>
+        <mtgconverters:MtgObjectTypeToStringConverter x:Key="MtgObjectTypeToStringConverter" />
+
+        <Style x:Key="SliderStyle" TargetType="Slider">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Maximum" Value="1" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Background" Value="{StaticResource IziTravelGrayBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource IziTravelQuizBlueBrush}" />
+            <Setter Property="Height" Value="10" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="HorizontalTemplate">
+                                <Rectangle x:Name="HorizontalTrack" Fill="{TemplateBinding Background}" Height="10" IsHitTestVisible="False" Margin="0,0,0,0"/>
+                                <Rectangle x:Name="HorizontalFill" Fill="{TemplateBinding Foreground}" Height="10" IsHitTestVisible="False" Margin="0,0,0,0">
+                                    <Rectangle.Clip>
+                                        <RectangleGeometry Rect="0, 0, 0, 10"/>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                                <Rectangle x:Name="HorizontalCenterElement" Visibility="Collapsed" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="10" Margin="0,0,0,0" Width="12">
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                            <Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
+                                <Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12"/>
+                                <Rectangle x:Name="VerticalFill" Fill="{TemplateBinding Foreground}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12">
+                                    <Rectangle.Clip>
+                                        <RectangleGeometry Rect="0, 0, 12, 6"/>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                                <Rectangle x:Name="VerticalCenterElement" Fill="{StaticResource PhoneForegroundBrush}" Height="12" Margin="12,0,12,0" VerticalAlignment="Top" Width="24">
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="QuizListItemTemplate">
+            <Grid x:Name="DataTemplateRoot"
+                  toolkit:TiltEffect.IsTiltEnabled="True"
+                  Background="Transparent"
+                  Height="90"
+                  VerticalAlignment="Top" 
+                  d:DataContext="{d:DesignInstance quiz:ProfileQuizListItemViewModel}"
+                  Margin="0,0,25,25">
+                <Grid.Resources>
+                    <converters:BoolToObjectConverter x:Key="QuizAnswerResultToForegroundConverter" 
+                                                      PositiveValue="{StaticResource IziTravelQuizBlueBrush}" 
+                                                      NegativeValue="{StaticResource IziTravelVioletBrush}" />
+
+                    <mtgconverters:BoolToResultTextConverter x:Key="BoolToResultTextConverter" />
+                </Grid.Resources>
+
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu Style="{StaticResource ContextMenuStyle}">
+                        <toolkit:MenuItem Header="{Binding LocalizedResources.CommandDelete, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringToLowerConverter}}" 
+                                          Command="{Binding ListViewModel.DeleteItemCommand}"
+                                          CommandParameter="{Binding ElementName=DataTemplateRoot}" />
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Image -->
+                <commoncontrols:ImagePlaceholder Grid.Column="0" 
+                                                 ImageSource="{Binding ImageUrl}" 
+                                                 HorizontalAlignment="Center" 
+                                                 ImageStretch="UniformToFill"
+                                                 Width="90"
+                                                 Margin="0,0,20,0" />
+
+                <Grid Grid.Column="1" 
+                      Margin="0,-2,0,0"
+                      VerticalAlignment="Center">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Text -->
+                    <TextBlock Grid.Row="0"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,5"
+                               Text="{Binding Title}"
+                               FlowDirection="{Binding Language, Converter={StaticResource LanguageToFlowDirectionConverter}}"
+                               Foreground="{StaticResource IziTravelDarkBrush}"
+                               FontSize="{StaticResource IziTravelFontSizeNormal}"
+                               FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                               TextWrapping="Wrap"
+                               TextTrimming="WordEllipsis"
+                               MaxHeight="62" />
+
+                    <!-- Type -->
+                    <TextBlock Grid.Row="1"
+                               Foreground="{StaticResource IziTravelDarkGrayBrush}"
+                               FontSize="{StaticResource IziTravelFontSizeSmall}"
+                               FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                               Text="{Binding Type, Converter={StaticResource MtgObjectTypeToStringConverter}}"
+                               TextTrimming="WordEllipsis" />
+
+                    <!-- Result -->
+                    <TextBlock Grid.Row="1"
+                               HorizontalAlignment="Right"
+                               Foreground="{Binding Correct, Converter={StaticResource QuizAnswerResultToForegroundConverter}}"
+                               FontSize="{StaticResource IziTravelFontSizeSmall}"
+                               FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                               Text="{Binding Correct, Converter={StaticResource BoolToResultTextConverter}}" />
+                </Grid>
+
+
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <!-- Layout -->
+    <Grid Margin="0,0,25,0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Height="170"
+              Margin="0,0,0,25"
+              Visibility="{Binding IsStatisticsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+              Background="{StaticResource IziTravelLightBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0"
+                   Source="/Assets/Icons/quiz.png" 
+                   Margin="20,34,18,0"
+                   Stretch="None" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left" />
+            <StackPanel Grid.Column="1" 
+                        Margin="0,5,20,0"
+                        VerticalAlignment="Center">
+                <!-- Total -->
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding AnswersLabel}"
+                           LineStackingStrategy="BlockLineHeight"
+                           LineHeight="42"
+                           FontSize="{StaticResource IziTravelFontSizeMedium}"
+                           FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" />
+                <!-- Ratio -->
+                <Slider Margin="0,15,0,12"
+                        Value="{Binding Ratio}"
+                        Style="{StaticResource SliderStyle}" />
+                <toolkit:WrapPanel>
+                    <!-- Correct -->
+                    <StackPanel Margin="0,3,0,0"
+                                Orientation="Horizontal">
+                        <Image VerticalAlignment="Center"
+                               Source="/Assets/Icons/quiz.correct.small.png" 
+                               Width="25" Height="25" />
+                        <TextBlock Margin="5,0,20,0"
+                                   Foreground="{StaticResource IziTravelDarkGrayBrush}"
+                                   FontSize="{StaticResource IziTravelFontSizeSmall}"
+                                   FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                                   Text="{Binding CorrectAnswersLabel}" />
+                    </StackPanel>
+                    
+                    <!-- Incorrect -->
+                    <StackPanel Margin="0,3,0,0" 
+                                Orientation="Horizontal">
+                        <Image VerticalAlignment="Center"
+                               Source="/Assets/Icons/quiz.incorrect.small.png" 
+                               Width="25" Height="25" />
+                        <TextBlock Margin="5,0,20,0"
+                                   Foreground="{StaticResource IziTravelDarkGrayBrush}"
+                                   FontSize="{StaticResource IziTravelFontSizeSmall}"
+                                   FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                                   Text="{Binding IncorrectAnswersLabel}" />
+
+                    </StackPanel>
+                </toolkit:WrapPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- List -->
+        <Grid Grid.Row="1" Margin="0,0,-25,0">
+            <phone:LongListSelector ItemsSource="{Binding Items}"
+                                    ItemTemplate="{StaticResource QuizListItemTemplate}"
+                                    Visibility="{Binding IsListEmpty, Converter={StaticResource BoolToInvisibilityConverter}}">
+                <i:Interaction.Behaviors>
+                    <behaviors:LongListSelectorLoadBehavior LoadCommand="{Binding LoadDataCommand}" />
+                    <behaviors:LongListSelectorSelectBehavior SelectCommand="{Binding NavigateCommand}" />
+                </i:Interaction.Behaviors>
+                <phone:LongListSelector.ListFooterTemplate>
+                    <DataTemplate>
+                        <Border Height="30" />
+                    </DataTemplate>
+                </phone:LongListSelector.ListFooterTemplate>
+            </phone:LongListSelector>
+
+            <StackPanel Margin="-25,70,0,0"
+                        Visibility="{Binding IsListEmpty, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="/Assets/Images/image.empty.quiz.png" 
+                       Stretch="None" />
+                <TextBlock Margin="25,50,25,0"
+                           Foreground="{StaticResource IziTravelDarkBrush}"
+                           FontSize="{StaticResource IziTravelFontSizeNormal}"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Text="{Binding LocalizedResources.MessageListQuizesIsEmpty, Source={StaticResource LocalizedStrings}}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

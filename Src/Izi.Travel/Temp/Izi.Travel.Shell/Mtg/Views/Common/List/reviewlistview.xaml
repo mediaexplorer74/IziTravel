@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="Izi.Travel.Shell.Mtg.Views.Common.List.ReviewListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="AverageRatingStyle" TargetType="toolkit:Rating">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="ReadOnly" Value="True" />
+            <Setter Property="FilledItemStyle">
+                <Setter.Value>
+                    <Style TargetType="toolkit:RatingItem">
+                        <Setter Property="Margin" Value="8" />
+                        <Setter Property="Background" Value="{StaticResource IziTravelVioletBrush}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="UnfilledItemStyle">
+                <Setter.Value>
+                    <Style TargetType="toolkit:RatingItem">
+                        <Setter Property="Margin" Value="8" />
+                        <Setter Property="Background" Value="{StaticResource IziTravelLightGrayBrush}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ReviewRatingStyle" TargetType="toolkit:Rating">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="ReadOnly" Value="True" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Margin" Value="-2,0,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FilledItemStyle">
+                <Setter.Value>
+                    <Style TargetType="toolkit:RatingItem">
+                        <Setter Property="Margin" Value="3" />
+                        <Setter Property="Background" Value="{StaticResource IziTravelDarkBrush}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="UnfilledItemStyle">
+                <Setter.Value>
+                    <Style TargetType="toolkit:RatingItem">
+                        <Setter Property="Margin" Value="3" />
+                        <Setter Property="Background" Value="{StaticResource IziTravelGrayBrush}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RateButtonStyle" TargetType="Button">
+            <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="Ellipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource IziTravelBlueBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource IziTravelLightBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="Ellipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource IziTravelGrayBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource IziTravelGrayBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="LabelTextBlock">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource IziTravelGrayBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Margin="{TemplateBinding Padding}" 
+                                  Height="48" 
+                                  VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0"
+                                         x:Name="Ellipse"
+                                         Height="48"
+                                         Width="48"
+                                         Stroke="{StaticResource IziTravelBlueBrush}"
+                                         StrokeThickness="3" />
+                                <TextBlock Grid.Column="0"
+                                           x:Name="TextBlock"
+                                           Margin="9,-3,0,0"
+                                           Text="★"
+                                           FontSize="36"
+                                           Foreground="{StaticResource IziTravelBlueBrush}" />
+                                <TextBlock Grid.Column="1"
+                                           x:Name="LabelTextBlock"
+                                           Margin="23,3,0,0"
+                                           Foreground="{StaticResource IziTravelBlueBrush}" 
+                                           Text="{Binding LocalizedResources.CommandRateAndReview, Source={StaticResource LocalizedStrings}}" 
+                                           FontSize="{StaticResource IziTravelFontSizeMedium}" />
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <!-- Layout -->
+    <Grid Margin="24,0,24,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <phone:LongListSelector Grid.Row="1"
+                                Margin="0,0,-25,0"
+                                ItemsSource="{Binding Items}">
+            <i:Interaction.Behaviors>
+                <behaviors:LongListSelectorLoadBehavior LoadCommand="{Binding LoadDataCommand}" />
+            </i:Interaction.Behaviors>
+            <phone:LongListSelector.ListHeader>
+                <Grid Margin="0,0,25,40">
+                    <StackPanel>
+                        <StackPanel Height="136"
+                                    Orientation="Horizontal" 
+                                    Margin="0,0,0,1"
+                                    Background="{StaticResource IziTravelLightBrush}">
+                            <TextBlock Margin="31,14,-10,0"
+                                       Visibility="{Binding IsRated, Converter={StaticResource BoolToVisibilityConverter}}"
+                                       Text="{Binding AverageString}"
+                                       FontSize="74"
+                                       FontFamily="{StaticResource IziTravelFontFamilySegoeLight}"
+                                       Foreground="{StaticResource IziTravelVioletBrush}" />
+                            <StackPanel Margin="10,0,0,0">
+                                <toolkit:Rating Margin="16,31,0,0" 
+                                                Value="{Binding Average, Converter={StaticResource RoundToHalfConverter}}" 
+                                                Style="{StaticResource AverageRatingStyle}" />
+                                <TextBlock Margin="26,2,0,0"
+                                           Visibility="{Binding IsRated, Converter={StaticResource BoolToVisibilityConverter}}"
+                                           Text="{Binding CountString}"
+                                           Foreground="{StaticResource IziTravelGrayBrush}"
+                                           FontSize="{StaticResource IziTravelFontSizeSmall}" />
+                                <TextBlock Margin="26,2,0,0"
+                                           Visibility="{Binding IsRated, Converter={StaticResource BoolToInvisibilityConverter}}"
+                                           Text="{Binding LocalizedResources.LabelNoRatings, Source={StaticResource LocalizedStrings}}"
+                                           Foreground="{StaticResource IziTravelGrayBrush}"
+                                           FontSize="{StaticResource IziTravelFontSizeSmall}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Grid Background="{StaticResource IziTravelLightBrush}">
+                            <Button Padding="34,16,0,16"
+                                    Command="{Binding RateCommand}"
+                                    Visibility="{Binding CanRate, Converter={StaticResource BoolToVisibilityConverter}}"
+                                    Style="{StaticResource RateButtonStyle}" />
+                            <StackPanel Margin="33,8,24,14"
+                                        Visibility="{Binding CanRate, Converter={StaticResource BoolToInvisibilityConverter}}">
+                                <TextBlock Text="{Binding LocalizedResources.LabelRatedTitle, Source={StaticResource LocalizedStrings}}"
+                                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                                           FontSize="{StaticResource IziTravelFontSizeMedium}" />
+                                <TextBlock Text="{Binding LocalizedResources.LabelRatedMessage, Source={StaticResource LocalizedStrings}}"
+                                           Foreground="{StaticResource IziTravelGrayBrush}"
+                                           TextWrapping="Wrap"
+                                           FontSize="{StaticResource IziTravelFontSizeSmall}" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                    <TextBlock Height="100"
+                               VerticalAlignment="Bottom"
+                               TextWrapping="Wrap"
+                               Text="{Binding IsListEmptyPlaceholder}"
+                               Visibility="{Binding IsListEmpty, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Foreground="{StaticResource IziTravelGrayBrush}"
+                               FontSize="{StaticResource IziTravelFontSizeNormal}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="140" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Height="100"
+                               VerticalAlignment="Bottom"
+                               TextWrapping="Wrap"
+                               Text="{Binding LocalizedResources.ActionLoading, Source={StaticResource LocalizedStrings}}" 
+                               FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                               FontSize="{StaticResource IziTravelFontSizeMedium}"
+                               Foreground="{StaticResource IziTravelDarkGrayBrush}"
+                               Visibility="{Binding IsDataLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="140" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+            </phone:LongListSelector.ListHeader>
+            <phone:LongListSelector.ListFooterTemplate>
+                <DataTemplate>
+                    <Border Height="72" />
+                </DataTemplate>
+            </phone:LongListSelector.ListFooterTemplate>
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,24,38" 
+                          Background="{StaticResource IziTravelLightGrayBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" 
+                                   Margin="0,0,0,5"
+                                   Text="{Binding ReviewerName}" 
+                                   FontSize="{StaticResource IziTravelFontSizeMedium}" 
+                                   FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" />
+                        <toolkit:Rating Grid.Row="1" 
+                                        Value="{Binding Rating}"
+                                        Style="{StaticResource ReviewRatingStyle}" />
+                        <TextBlock Grid.Row="1" 
+                                   HorizontalAlignment="Right"
+                                   FontSize="{StaticResource IziTravelFontSizeSmall}"
+                                   Foreground="{StaticResource IziTravelGrayBrush}"
+                                   Text="{Binding Date, Converter={StaticResource DateTimeToShortDateStringConverter}}" />
+                        <TextBlock Grid.Row="2" 
+                                   Margin="0,6,0,0"
+                                   Text="{Binding Text}" 
+                                   FontSize="{StaticResource IziTravelFontSizeNormal}"
+                                   Visibility="{Binding Text, Converter={StaticResource NullToInvisibilityConverter}}"
+                                   TextWrapping="Wrap" />
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+        </phone:LongListSelector>
+    </Grid>
+</UserControl>
