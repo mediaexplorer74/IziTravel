@@ -4,7 +4,8 @@
 // MVID: 67B57F63-A085-4500-9D6D-5D3E58E5548F
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Geofencing.dll
 
-using System.Device.Location;
+//using System.Device.Location;
+using Izi.Travel.Data.Entities.Common; //RnD
 using Windows.Devices.Geolocation;
 
 #nullable disable
@@ -26,17 +27,20 @@ namespace Izi.Travel.Geofencing.Helpers
       };
     }
 
-    public static GeoCoordinate ToGeoCoordinate(this Izi.Travel.Geofencing.Primitives.Geolocation geolocation)
+    public static GeoCoordinate ToGeoCoordinate(
+        this Izi.Travel.Geofencing.Primitives.Geolocation geolocation)
     {
       if (geolocation == null)
         return (GeoCoordinate) null;
+
+      //RnD
       return new GeoCoordinate()
       {
         Latitude = geolocation.Latitude,
         Longitude = geolocation.Longitude,
-        Altitude = geolocation.Altitude.GetValueOrDefault(),
-        HorizontalAccuracy = geolocation.Accuracy,
-        VerticalAccuracy = geolocation.Accuracy
+        //Altitude = geolocation.Altitude.GetValueOrDefault(),
+        //HorizontalAccuracy = geolocation.Accuracy,
+        //VerticalAccuracy = geolocation.Accuracy
       };
     }
   }

@@ -150,6 +150,10 @@
       <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
       <Name>Izi.Travel.Business.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
+      <Project>{2260b987-9887-4aa1-b726-0d898fb3b44f}</Project>
+      <Name>Izi.Travel.Data.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Izi.Travel.Utility\Izi.Travel.Utility.csproj">
       <Project>{cdcecd6c-d5fa-46c2-ba54-b70be30ad919}</Project>
       <Name>Izi.Travel.Utility</Name>

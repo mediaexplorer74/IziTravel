@@ -5,16 +5,13 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.Entities.dll
 
 using Izi.Travel.Data.Entities.Local;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
 #nullable disable
 namespace Izi.Travel.Data.Entities.Download
 {
-    //RnD
-  [Table("DownloadMedia")]
+  [Table]
   public class DownloadMedia : BaseEntity
   {
     private int _id;
@@ -22,17 +19,17 @@ namespace Izi.Travel.Data.Entities.Download
     private EntityRef<DownloadObject> _object;
     private string _path;
     private DownloadStatus _status;
-    [Column]//(IsVersion = true)]
+    [Column(IsVersion = true)]
     private Binary _version;
 
-    [Column]//(IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+    [Column(IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, AutoSync = AutoSync.OnInsert)]
     public int Id
     {
       get => this._id;
       set => this.SetProperty<int>(ref this._id, value, nameof (Id));
     }
 
-    [Column]//(CanBeNull = false)]
+    [Column(CanBeNull = false)]
     public int ObjectId
     {
       get => this._objectId;
@@ -40,8 +37,7 @@ namespace Izi.Travel.Data.Entities.Download
     }
 
     
-    [Association]//(IsForeignKey = true, ThisKey = "ObjectId", OtherKey = "Id", Storage = "_object")]
-   
+    [Association(IsForeignKey = true, ThisKey = "ObjectId", OtherKey = "Id", Storage = "_object")]
     public DownloadObject Object
     {
       get => this._object.Entity;
@@ -56,14 +52,15 @@ namespace Izi.Travel.Data.Entities.Download
     }
 
     
-    [Column]//(CanBeNull = true)]
+    [Column(CanBeNull = true)]
     public string Path
     {
       get => this._path;
       set => this.SetProperty<string>(ref this._path, value, nameof (Path));
     }
 
-    [Column]//(CanBeNull = false)]
+    //RnD
+    [Column(CanBeNull = false)]
     public DownloadStatus Status
     {
       get => this._status;

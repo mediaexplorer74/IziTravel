@@ -32,7 +32,8 @@ namespace Izi.Travel.Geofencing.Geotracker
     private int _lastRouteIndex;
     private double _lastRouteDistance;
 
-    public RouteGeotracker(Izi.Travel.Geofencing.Primitives.Geolocation[] route, double speed, long period = 500)
+    public RouteGeotracker(Izi.Travel.Geofencing.Primitives.Geolocation[] route, 
+        double speed, long period = 500)
     {
       this._startTime = 0L;
       this._routeDistance = 0.0;
@@ -50,7 +51,8 @@ namespace Izi.Travel.Geofencing.Geotracker
     {
       get
       {
-        return (this._locationStatusGeolocator = this._locationStatusGeolocator ?? new Geolocator()).LocationStatus != 3;
+        return (this._locationStatusGeolocator = this._locationStatusGeolocator 
+                    ?? new Geolocator()).LocationStatus != PositionStatus.Disabled;
       }
     }
 
@@ -58,7 +60,11 @@ namespace Izi.Travel.Geofencing.Geotracker
     {
       if (!this.IsEnabled || this._route == null || this._route.Length == 0)
         return (Izi.Travel.Geofencing.Primitives.Geolocation) null;
-      return this._actualPosition != null ? this._actualPosition : await Task.FromResult<Izi.Travel.Geofencing.Primitives.Geolocation>(this._route[0]);
+
+      return this._actualPosition != null 
+                ? this._actualPosition
+                : await Task.FromResult<Izi.Travel.Geofencing.Primitives.Geolocation>(
+                    this._route[0]);
     }
 
     protected override void OnStart()
@@ -66,12 +72,20 @@ namespace Izi.Travel.Geofencing.Geotracker
       if (!this.IsEnabled)
         return;
       Geolocator geolocator1 = new Geolocator();
-      geolocator1.put_ReportInterval((uint) this._period);
+      geolocator1.ReportInterval = (uint) this._period;
       this._geolocator = geolocator1;
       Geolocator geolocator2 = this._geolocator;
-      // ISSUE: method pointer
-      WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<Geolocator, PositionChangedEventArgs>>(new Func<TypedEventHandler<Geolocator, PositionChangedEventArgs>, EventRegistrationToken>(geolocator2.add_PositionChanged), new Action<EventRegistrationToken>(geolocator2.remove_PositionChanged), new TypedEventHandler<Geolocator, PositionChangedEventArgs>((object) this, __methodptr(OnGeolocatorPositionChanged)));
-      this._timer = new Timer(new TimerCallback(this.RouteTimerCallback), (object) null, 0L, this._period);
+
+      // RnD / TODO
+      //WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<Geolocator, 
+      //    PositionChangedEventArgs>>(new Func<TypedEventHandler<Geolocator,
+      //    PositionChangedEventArgs>, EventRegistrationToken>(geolocator2.add_PositionChanged),
+      //    new Action<EventRegistrationToken>(geolocator2.remove_PositionChanged), 
+      //    new TypedEventHandler<Geolocator, PositionChangedEventArgs>((object) this, 
+      //    __methodptr(OnGeolocatorPositionChanged)));
+
+      this._timer = new Timer(new TimerCallback(this.RouteTimerCallback), 
+          (object) null, 0, (int)this._period);
     }
 
     protected override void OnStop()
@@ -83,8 +97,13 @@ namespace Izi.Travel.Geofencing.Geotracker
       }
       if (this._geolocator != null)
       {
+        //RnD / TODO
         // ISSUE: method pointer
-        WindowsRuntimeMarshal.RemoveEventHandler<TypedEventHandler<Geolocator, PositionChangedEventArgs>>(new Action<EventRegistrationToken>(this._geolocator.remove_PositionChanged), new TypedEventHandler<Geolocator, PositionChangedEventArgs>((object) this, __methodptr(OnGeolocatorPositionChanged)));
+        //WindowsRuntimeMarshal.RemoveEventHandler<TypedEventHandler<Geolocator, 
+        //    PositionChangedEventArgs>>(new Action<EventRegistrationToken>(
+        //        this._geolocator.remove_PositionChanged), 
+        //        new TypedEventHandler<Geolocator, PositionChangedEventArgs>(
+        //            (object) this, __methodptr(OnGeolocatorPositionChanged)));
       }
       this._geolocator = (Geolocator) null;
       this._actualPosition = (Izi.Travel.Geofencing.Primitives.Geolocation) null;
@@ -112,8 +131,12 @@ namespace Izi.Travel.Geofencing.Geotracker
         {
           for (; this._lastRouteIndex < this._route.Length; ++this._lastRouteIndex)
           {
-            Izi.Travel.Geofencing.Primitives.Geolocation source = this._route[this._lastRouteIndex - 1];
-            Izi.Travel.Geofencing.Primitives.Geolocation target = this._route[this._lastRouteIndex];
+            Izi.Travel.Geofencing.Primitives.Geolocation source
+                            = this._route[this._lastRouteIndex - 1];
+
+            Izi.Travel.Geofencing.Primitives.Geolocation target
+                            = this._route[this._lastRouteIndex];
+
             double distance = GeoHelper.CalculateDistance(source, target);
             if (Math.Abs(num2 - (this._lastRouteDistance + distance)) < double.Epsilon)
             {
@@ -123,7 +146,11 @@ namespace Izi.Travel.Geofencing.Geotracker
             if (num2 < this._lastRouteDistance + distance)
             {
               double num3 = (num2 - this._lastRouteDistance) / distance;
-              this._actualPosition = new Izi.Travel.Geofencing.Primitives.Geolocation(source.Latitude + (target.Latitude - source.Latitude) * num3, source.Longitude + (target.Longitude - source.Longitude) * num3);
+              this._actualPosition = 
+                                new Izi.Travel.Geofencing.Primitives.Geolocation(
+                                    source.Latitude + (target.Latitude - source.Latitude)
+                                    * num3, source.Longitude + (
+                                    target.Longitude - source.Longitude) * num3);
               break;
             }
             this._lastRouteDistance += distance;

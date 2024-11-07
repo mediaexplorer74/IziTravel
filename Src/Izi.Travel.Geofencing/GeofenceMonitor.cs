@@ -57,86 +57,107 @@ namespace Izi.Travel.Geofencing
     {
       add
       {
-        TypedEventHandler<GeofenceMonitor, object> typedEventHandler1 = this.GeofenceStateChanged;
-        TypedEventHandler<GeofenceMonitor, object> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, object>>(ref this.GeofenceStateChanged, (TypedEventHandler<GeofenceMonitor, object>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-        }
-        while (typedEventHandler1 != typedEventHandler2);
+            TypedEventHandler<GeofenceMonitor, object> typedEventHandler1 
+                    = this.GeofenceStateChanged;
+            TypedEventHandler<GeofenceMonitor, object> typedEventHandler2;
+            do
+            {
+                typedEventHandler2 = typedEventHandler1;
+                typedEventHandler1 = Interlocked.CompareExchange(
+                    ref this.GeofenceStateChanged,
+                    (TypedEventHandler<GeofenceMonitor, object>)Delegate.Combine(
+                        typedEventHandler2, value),
+                    typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<GeofenceMonitor, object> typedEventHandler1 = this.GeofenceStateChanged;
+        TypedEventHandler<GeofenceMonitor, object> typedEventHandler1 
+                    = this.GeofenceStateChanged;
         TypedEventHandler<GeofenceMonitor, object> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, object>>(ref this.GeofenceStateChanged, (TypedEventHandler<GeofenceMonitor, object>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = 
+                        Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, object>>
+                        (ref this.GeofenceStateChanged, 
+                        (TypedEventHandler<GeofenceMonitor, object>) 
+                        Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value),
+                        typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
     }
 
-    public event TypedEventHandler<GeofenceMonitor, PositionStatus> StatusChanged
-    {
-      add
-      {
-        TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 = this.StatusChanged;
-        TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler2;
-        do
+        public event TypedEventHandler<GeofenceMonitor, PositionStatus> StatusChanged
         {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, PositionStatus>>(ref this.StatusChanged, (TypedEventHandler<GeofenceMonitor, PositionStatus>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            add
+            {
+                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 = this.StatusChanged;
+                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler2;
+                do
+                {
+                    typedEventHandler2 = typedEventHandler1;
+                    typedEventHandler1 = Interlocked.CompareExchange(ref this.StatusChanged,
+                        (TypedEventHandler<GeofenceMonitor, PositionStatus>)
+                        Delegate.Combine(typedEventHandler2, value), typedEventHandler2);
+                }
+                while (typedEventHandler1 != typedEventHandler2);
+            }
+            remove
+            {
+                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 = this.StatusChanged;
+                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler2;
+                do
+                {
+                    typedEventHandler2 = typedEventHandler1;
+                    typedEventHandler1 = Interlocked.CompareExchange(ref this.StatusChanged,
+                        (TypedEventHandler<GeofenceMonitor, PositionStatus>)
+                        Delegate.Remove(typedEventHandler2, value), typedEventHandler2);
+                }
+                while (typedEventHandler1 != typedEventHandler2);
+            }
         }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-      remove
-      {
-        TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 = this.StatusChanged;
-        TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, PositionStatus>>(ref this.StatusChanged, (TypedEventHandler<GeofenceMonitor, PositionStatus>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-        }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-    }
 
-    public event TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> PositionChanged
-    {
-      add
-      {
-        TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 = this.PositionChanged;
-        TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
-        do
+        public event TypedEventHandler<GeofenceMonitor, 
+            Izi.Travel.Geofencing.Primitives.Geolocation> PositionChanged
         {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>>(ref this.PositionChanged, (TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            add
+            {
+                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 = this.PositionChanged;
+                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
+                do
+                {
+                    typedEventHandler2 = typedEventHandler1;
+                    typedEventHandler1 = Interlocked.CompareExchange(ref this.PositionChanged,
+                        (TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>)
+                        Delegate.Combine(typedEventHandler2, value), typedEventHandler2);
+                }
+                while (typedEventHandler1 != typedEventHandler2);
+            }
+            remove
+            {
+                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 = this.PositionChanged;
+                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
+                do
+                {
+                    typedEventHandler2 = typedEventHandler1;
+                    typedEventHandler1 = Interlocked.CompareExchange(ref this.PositionChanged,
+                        (TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>)
+                        Delegate.Remove(typedEventHandler2, value), typedEventHandler2);
+                }
+                while (typedEventHandler1 != typedEventHandler2);
+            }
         }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-      remove
-      {
-        TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 = this.PositionChanged;
-        TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>>(ref this.PositionChanged, (TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-        }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-    }
 
     private GeofenceMonitor()
     {
       this._log = LogManager.GetLog(typeof (GeofenceMonitor));
       GeofenceMonitor._report = new List<GeofenceStateChangeReport>();
       this._geofences = new GeofenceCollection();
-      this._geofences.CollectionChanged += new NotifyCollectionChangedEventHandler(this.OnGeofencesCollectionChanged);
+      this._geofences.CollectionChanged += new NotifyCollectionChangedEventHandler(
+          this.OnGeofencesCollectionChanged);
     }
 
     public async void Start()
@@ -145,11 +166,17 @@ namespace Izi.Travel.Geofencing
       {
         this._geotracker = this._geotracker ?? GeofenceMonitor.GetGeotracker();
         // ISSUE: method pointer
-        this._geotracker.PositionChanged += new TypedEventHandler<IGeotracker, Izi.Travel.Geofencing.Primitives.Geolocation>((object) this, __methodptr(OnGeotrackerPositionChanged));
+        //this._geotracker.PositionChanged += 
+        //            new TypedEventHandler<IGeotracker,
+        //            Izi.Travel.Geofencing.Primitives.Geolocation>((object) this, 
+        //            __methodptr(OnGeotrackerPositionChanged));
+        this._geotracker.PositionChanged += OnGeotrackerPositionChanged;
+
         this.IsStarted = true;
         this._log.Info(nameof (Start));
         IGeotracker sender = this._geotracker;
-        Izi.Travel.Geofencing.Primitives.Geolocation position = await this._geotracker.GetPosition();
+        Izi.Travel.Geofencing.Primitives.Geolocation position
+                    = await this._geotracker.GetPosition();
         this.OnGeotrackerPositionChanged(sender, position);
         sender = (IGeotracker) null;
       }
@@ -162,8 +189,7 @@ namespace Izi.Travel.Geofencing
       if (this.IsStarted)
       {
         GeofenceMonitor._report.Clear();
-        // ISSUE: method pointer
-        this._geotracker.PositionChanged -= new TypedEventHandler<IGeotracker, Izi.Travel.Geofencing.Primitives.Geolocation>((object) this, __methodptr(OnGeotrackerPositionChanged));
+        this._geotracker.PositionChanged -= OnGeotrackerPositionChanged;
         this.IsStarted = false;
         this._log.Info(nameof (Stop));
       }
@@ -188,7 +214,9 @@ namespace Izi.Travel.Geofencing
         bool flag = geofence.Geoshape.Contains(position);
         if (geofenceState == GeofenceState.Entered && !flag)
           newState = GeofenceState.Exited;
-        else if (((geofenceState == GeofenceState.Exited ? 1 : (geofenceState == GeofenceState.None ? 1 : 0)) & (flag ? 1 : 0)) != 0)
+        else if (((geofenceState == GeofenceState.Exited 
+                    ? 1 
+                    : (geofenceState == GeofenceState.None ? 1 : 0)) & (flag ? 1 : 0)) != 0)
           newState = GeofenceState.Entered;
         if (newState != geofenceState)
         {
@@ -201,7 +229,8 @@ namespace Izi.Travel.Geofencing
     private GeofenceStateChangeReport GetLastReport(string geofenceId)
     {
       lock (GeofenceMonitor._report)
-        return GeofenceMonitor._report.LastOrDefault<GeofenceStateChangeReport>((Func<GeofenceStateChangeReport, bool>) (x => x.Geofence.Id == geofenceId));
+        return GeofenceMonitor._report.LastOrDefault<GeofenceStateChangeReport>(
+            (Func<GeofenceStateChangeReport, bool>) (x => x.Geofence.Id == geofenceId));
     }
 
     private void AddReport(GeofenceStateChangeReport report)
@@ -210,27 +239,41 @@ namespace Izi.Travel.Geofencing
         GeofenceMonitor._report.Add(report);
     }
 
-    private void OnGeofenceStateChanged() => this.GeofenceStateChanged?.Invoke(this, (object) null);
+        private void OnGeofenceStateChanged()
+        {
+            this.GeofenceStateChanged?.Invoke(this, EventArgs.Empty);
+        }
 
-    private void OnStatusChanged() => this.StatusChanged?.Invoke(this, this.Status);
+        private void OnStatusChanged()
+        {
+            //this.StatusChanged?.Invoke(this, this.Status);
+            this.StatusChanged?.Invoke(this, EventArgs.Empty);
 
-    private void OnPositionChanged() => this.PositionChanged?.Invoke(this, this.Position);
+        }
 
-    private void OnGeotrackerStatusChanged(IGeotracker sender, PositionStatus status)
+        private void OnPositionChanged()
+        {
+            this.PositionChanged += this.Position;
+        }
+
+        private void OnGeotrackerStatusChanged(IGeotracker sender, PositionStatus status)
     {
       this.Status = status;
       this.OnStatusChanged();
     }
 
-    private void OnGeotrackerPositionChanged(IGeotracker sender, Izi.Travel.Geofencing.Primitives.Geolocation position)
+    private void OnGeotrackerPositionChanged(IGeotracker sender, 
+        Izi.Travel.Geofencing.Primitives.Geolocation position)
     {
       this.Position = position;
       this.OnPositionChanged();
       this.TrackGeofences(this.Position);
     }
 
-    private void OnGeofencesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnGeofencesCollectionChanged(object sender, 
+        NotifyCollectionChangedEventArgs e)
     {
+       //
     }
   }
 }

@@ -220,10 +220,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
-      <Project>{af49e386-a362-4c99-9dc6-59fe8c58ec0c}</Project>
-      <Name>Izi.Travel.Data.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj">
       <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
       <Name>Izi.Travel.Business.Entities</Name>
@@ -231,6 +227,10 @@
     <ProjectReference Include="..\Izi.Travel.Client.WindowsPhone\Izi.Travel.Client.WindowsPhone.csproj">
       <Project>{155c86c1-644e-4e0c-902e-b6c892bdb94a}</Project>
       <Name>Izi.Travel.Client.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
+      <Project>{2260b987-9887-4aa1-b726-0d898fb3b44f}</Project>
+      <Name>Izi.Travel.Data.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Izi.Travel.Data\Izi.Travel.Data.csproj">
       <Project>{f9f9f68c-045e-48f8-8322-4eaed7cea3e9}</Project>

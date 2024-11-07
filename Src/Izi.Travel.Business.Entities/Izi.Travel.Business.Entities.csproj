@@ -235,7 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
-      <Project>{af49e386-a362-4c99-9dc6-59fe8c58ec0c}</Project>
+      <Project>{2260b987-9887-4aa1-b726-0d898fb3b44f}</Project>
       <Name>Izi.Travel.Data.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Izi.Travel.Geofencing\Izi.Travel.Geofencing.csproj">

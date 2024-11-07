@@ -148,6 +148,12 @@
       <Version>6.2.14</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
+      <Project>{2260B987-9887-4AA1-B726-0D898FB3B44F}</Project>
+      <Name>Izi.Travel.Data.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
