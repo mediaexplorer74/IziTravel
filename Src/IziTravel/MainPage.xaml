@@ -11,5 +11,74 @@
              VerticalAlignment="Stretch"
              NavigationCompleted="Browser_NavigationCompleted" 
     />
-    
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarToggleButton
+                    x:Name="Back"
+                    x:Uid="Back"
+                    Click="Back_Click"
+                    Icon="Back"
+                    Label="Back"/>
+                
+                <AppBarToggleButton
+                    x:Name="Forward"
+                    x:Uid="Forward"
+                    Click="Forward_Click"
+                    Icon="Forward"
+                    Label="Forward"/>
+                
+                <AppBarButton
+                    x:Name="ZoomIn"
+                    x:Uid="ZoomIn"
+                    Click="ZoomIn_Click"
+                    Icon="ZoomIn"
+                    Label="Zoom in"/>
+                <AppBarButton
+                    x:Name="ZoomOut"
+                    x:Uid="ZoomOut"
+                    Click="ZoomOut_Click"
+                    Icon="ZoomOut"
+                    Label="Zoom out"/>
+
+                <AppBarToggleButton
+                    x:Name="Settings"
+                    x:Uid="Settings"
+                    Click="Settings_Click"
+                    Icon="Setting"
+                    Label="settings"/>
+
+            </CommandBar.PrimaryCommands>
+            
+            
+            <CommandBar.SecondaryCommands>
+                <AppBarButton
+                    x:Name="AboutMe"
+                    x:Uid="AboutMe"
+                    Click="AboutApp_Click"
+                    Icon="Contact"
+                    Label="About"/>
+                <AppBarButton
+                    x:Name="Home"
+                    x:Uid="Home"
+                    Click="Home_Click"
+                    Icon="Home"
+                    Label="Home"/>
+                <AppBarToggleButton
+                    x:Name="UiThemeToggle"
+                    x:Uid="UiThemeToggle"
+                    Click="UiThemeToggle_Click"
+                    Icon="Clock"
+                    Label="Dark theme"/>
+                <AppBarToggleButton
+                    x:Name="AppModeToggle"
+                    x:Uid="AppModeToggle"
+                    Click="AppModeToggle_Click"
+                    Icon="Document"
+                    Label="Listen mode at startup"/>    
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
 </Page>
