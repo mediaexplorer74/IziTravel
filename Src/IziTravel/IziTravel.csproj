@@ -22,7 +22,8 @@
     <AppxBundle>Never</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <PackageCertificateThumbprint>C13E5F76B8596D3C0B713E4A205B26462B40B8DE</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>
+    </PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>

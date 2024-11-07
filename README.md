@@ -8,8 +8,8 @@ I noticed that IziTravel "deal makers" decided to erase/delete IziTravel project
 So, I created the simplest "pseudo-PWA" app to display IziTravel web site on "winphone" with Windows 10 Mobile.
 
 ## Screenshots
-![](Images/shot01.png)
-
+![Win11](Images/shot01.png)
+![W10M](Images/shot02.png)
 
 ## Tech/dev details
 - Platforms: UWP
