@@ -13,20 +13,12 @@ namespace IziTravel
         public MainPage()
         {
             InitializeComponent();
-
-
         }
 
         // button_Clicked handler
         void button_Clicked(object sender, EventArgs e)
         {
-            //webView.Source = new UrlWebViewSource 
-            //{ 
-            //    Url = urlEntry.Text 
-            //};
-            // or
-            webView.Source = urlEntry.Text;
-           // webView.Reload();
+           webView.Source = urlEntry.Text;           
         }
     }
 }
