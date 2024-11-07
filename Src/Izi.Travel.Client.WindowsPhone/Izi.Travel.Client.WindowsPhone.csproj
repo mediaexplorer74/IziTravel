@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{155C86C1-644E-4E0C-902E-B6C892BDB94A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Izi.Travel.Client.WindowsPhone</RootNamespace>
+    <AssemblyName>Izi.Travel.Client.WindowsPhone</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Converters\JsonEnumConverterBase`1.cs" />
+    <Compile Include="Converters\JsonMediaTypeEnumConverter.cs" />
+    <Compile Include="Converters\JsonMtgObjectTypeEnumConverter.cs" />
+    <Compile Include="Entities\CityBase.cs" />
+    <Compile Include="Entities\CityCompact.cs" />
+    <Compile Include="Entities\CityContent.cs" />
+    <Compile Include="Entities\CityFull.cs" />
+    <Compile Include="Entities\ContentBase.cs" />
+    <Compile Include="Entities\ContentProvider.cs" />
+    <Compile Include="Entities\ContentSection.cs" />
+    <Compile Include="Entities\CountryBase.cs" />
+    <Compile Include="Entities\CountryCompact.cs" />
+    <Compile Include="Entities\CountryContent.cs" />
+    <Compile Include="Entities\CountryFull.cs" />
+    <Compile Include="Entities\FeaturedContent.cs" />
+    <Compile Include="Entities\FeaturedContentImage.cs" />
+    <Compile Include="Entities\Geopoint.cs" />
+    <Compile Include="Entities\ImageExtension.cs" />
+    <Compile Include="Entities\ImageFormat.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Map.cs" />
+    <Compile Include="Entities\Media.cs" />
+    <Compile Include="Entities\MediaType.cs" />
+    <Compile Include="Entities\MtgObjectBase.cs" />
+    <Compile Include="Entities\MtgObjectCategory.cs" />
+    <Compile Include="Entities\MtgObjectChildrenListMetadata.cs" />
+    <Compile Include="Entities\MtgObjectChildrenListResult`1.cs" />
+    <Compile Include="Entities\MtgObjectCompact.cs" />
+    <Compile Include="Entities\MtgObjectContacts.cs" />
+    <Compile Include="Entities\MtgObjectContent.cs" />
+    <Compile Include="Entities\MtgObjectFull.cs" />
+    <Compile Include="Entities\MtgObjectProduct.cs" />
+    <Compile Include="Entities\MtgObjectType.cs" />
+    <Compile Include="Entities\Paging.cs" />
+    <Compile Include="Entities\Playback.cs" />
+    <Compile Include="Entities\PlaybackType.cs" />
+    <Compile Include="Entities\PublicationStatus.cs" />
+    <Compile Include="Entities\PublisherBase.cs" />
+    <Compile Include="Entities\PublisherCompact.cs" />
+    <Compile Include="Entities\PublisherContacts.cs" />
+    <Compile Include="Entities\PublisherContent.cs" />
+    <Compile Include="Entities\PublisherFull.cs" />
+    <Compile Include="Entities\Purchase.cs" />
+    <Compile Include="Entities\Quiz.cs" />
+    <Compile Include="Entities\QuizAnswer.cs" />
+    <Compile Include="Entities\Rating.cs" />
+    <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\ReviewListMetadata.cs" />
+    <Compile Include="Entities\ReviewListResult.cs" />
+    <Compile Include="Entities\Schedule.cs" />
+    <Compile Include="Entities\Sponsor.cs" />
+    <Compile Include="Entities\Translation.cs" />
+    <Compile Include="Entities\TriggerZone.cs" />
+    <Compile Include="Entities\TriggerZoneType.cs" />
+    <Compile Include="Entities\Version.cs" />
+    <Compile Include="Exceptions\IziTravelException.cs" />
+    <Compile Include="Exceptions\IziTravelNotFoundException.cs" />
+    <Compile Include="Helpers\EntityEnumHelper.cs" />
+    <Compile Include="IziTravelClient.cs" />
+    <Compile Include="IziTravelEnvironment.cs" />
+    <Compile Include="IziTravelParameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Base\MtgObjectListQueryBase.cs" />
+    <Compile Include="Queries\Base\MtgObjectQueryBase.cs" />
+    <Compile Include="Queries\CityChildrenCountQuery.cs" />
+    <Compile Include="Queries\CityChildrenQuery.cs" />
+    <Compile Include="Queries\CityCountryQuery.cs" />
+    <Compile Include="Queries\CityListQuery.cs" />
+    <Compile Include="Queries\CityQuery.cs" />
+    <Compile Include="Queries\CountryChildrenQuery.cs" />
+    <Compile Include="Queries\CountryCityQuery.cs" />
+    <Compile Include="Queries\CountryListQuery.cs" />
+    <Compile Include="Queries\CountryQuery.cs" />
+    <Compile Include="Queries\FeaturedContentQuery.cs" />
+    <Compile Include="Queries\MtgObjectBatchQuery.cs" />
+    <Compile Include="Queries\MtgObjectChildrenCountQuery.cs" />
+    <Compile Include="Queries\MtgObjectChildrenListQuery.cs" />
+    <Compile Include="Queries\MtgObjectChildrenQuery.cs" />
+    <Compile Include="Queries\MtgObjectPaidListQuery.cs" />
+    <Compile Include="Queries\MtgObjectProductQuery.cs" />
+    <Compile Include="Queries\MtgObjectQuery.cs" />
+    <Compile Include="Queries\MtgObjectSearchQuery.cs" />
+    <Compile Include="Queries\PublisherChildrenCountQuery.cs" />
+    <Compile Include="Queries\PublisherChildrenLanguageListQuery.cs" />
+    <Compile Include="Queries\PublisherChildrenQuery.cs" />
+    <Compile Include="Queries\PublisherQuery.cs" />
+    <Compile Include="Queries\ReviewListQuery.cs" />
+    <Compile Include="Queries\ReviewPostQuery.cs" />
+    <Compile Include="Rest\IRestClient.cs" />
+    <Compile Include="Rest\IRestRequest.cs" />
+    <Compile Include="Rest\IRestResponse`1.cs" />
+    <Compile Include="Rest\Method.cs" />
+    <Compile Include="Rest\Parameter.cs" />
+    <Compile Include="Rest\ParameterType.cs" />
+    <Compile Include="Rest\RestClient.cs" />
+    <Compile Include="Rest\RestRequest.cs" />
+    <Compile Include="Rest\RestResponse`1.cs" />
+    <EmbeddedResource Include="Properties\Izi.Travel.Client.WindowsPhone.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>6.0.8</Version>
+    </PackageReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

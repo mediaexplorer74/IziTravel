@@ -1,7 +1,33 @@
-﻿<Application
+﻿<Application x:Class="Izi.Travel.Shell.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shell="clr-namespace:Izi.Travel.Shell"
+             xmlns:display="clr-namespace:Izi.Travel.Shell.Core.Components.Display">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <!-- Resource dictionary -->
+        <ResourceDictionary>
+            <!-- Application Bar size information -->
+            <display:ApplicationBarSizeInformation x:Key="ApplicationBarSizeInformation" />
+
+            <!-- Screen size information -->
+            <display:ScreenSizeInformation x:Key="ScreenSizeInformation" />
+
+            <!-- Bootstrapper -->
+            <shell:Bootstrapper x:Key="Bootstrapper" />
+
+            <!-- Merged dictionaries -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Izi.Travel.Shell;component/Themes/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+<!--Application
     x:Class="Izi.Travel.Shell.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Izi.Travel.Shell">
 
-</Application>
+</Application-->
