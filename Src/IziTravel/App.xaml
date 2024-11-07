@@ -1,0 +1,53 @@
+﻿<micro:CaliburnApplication
+    x:Class="IziTravel.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:micro="using:Caliburn.Micro"
+    xmlns:cnv="using:IziTravel.Converters"
+    xmlns:appServices="local:IziTravel.AppServices;assembly=IziTravel.AppServices">
+
+    <micro:CaliburnApplication.Resources>
+       <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
+        <!--ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <cnv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <cnv:BooleanToVisibilityConverter x:Key="InverterBooleanToVisibilityConverter" Invert="True" />
+            <cnv:StringCaseConverter x:Key="StringCaseConverter"/>
+
+            < ! - - appServices:OrientationManager x:Key="OrientationMgr"/- - >
+
+        </ResourceDictionary-->
+    </micro:CaliburnApplication.Resources>
+
+</micro:CaliburnApplication>
+
+<!--
+<Application 
+    x:Class="IziTravel.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wp7="clr-namespace:IziTravel" 
+	xmlns:cnv="clr-namespace:IziTravel.Converters"
+    xmlns:appServices="clr-namespace:IziTravel.AppServices;assembly=IziTravel.AppServices">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <cnv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <cnv:BooleanToVisibilityConverter x:Key="InverterBooleanToVisibilityConverter" Invert="True" />
+            <cnv:StringCaseConverter x:Key="StringCaseConverter"/>
+            
+            <appServices:OrientationManager x:Key="OrientationMgr"/>
+            
+            <wp7:Bootstrapper x:Key="Bootstrapper"/>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>
+-->

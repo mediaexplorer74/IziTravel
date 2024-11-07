@@ -1,12 +1,25 @@
-# IziTravel - re branch
-![](Images/logo.png)
+# IziTravel Reburn v2.0.0 ("reburn" codename) - reburn branch
+![New logo](Images/logo.png)
 
-Special branch for R.E. discontinued "Izi.Travel for WindowsMobile 8" app. 
+## About
+Very early bird; draft UWP application to "parse" Izi.Travel web site on some winphone with Windows 10 Mobile os...
 
-Maybe, one day some clever man this will use my "quick decomp" for some cool "IziTravel UWP app" "re-creation"/building... idk.
+## Screenshots
+![](Images/shot01.png)
 
-## Reference(s)
-- [Izi.Travel](https://izi.travel)  Izi.Travel web site (No any good uwp app here!!!)
+
+## What's it? Status
+- My another attempt to remake fully discontinued & obsolete [Izi.Travel for WP8](https://4pda.to/forum/index.php?showtopic=478458#entry23314163) app. 
+- Draft. Prototype / Pre-Pre-Pre-Alpha version.
+- "Web parsing" not realized yet ... so, no push notifications, etc.
+- IziTravelWP8 decomp. completed but over 100500 bugs there!
+- I plan to learn some MVVM deals at now ("CaliburnMicro" MVVM pattern)
+
+## Tech/dev details
+- Platforms: UWP only
+- Targets: x64; x64; ARM
+- OSes: Windows 10 (Mobile) ; build: 15063 or above
+
 
 ## Licensing
 MIT License
