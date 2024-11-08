@@ -26,7 +26,8 @@ namespace Izi.Travel.Geofencing.Geotracker
     {
       get
       {
-        return (this._locationStatusGeolocator = this._locationStatusGeolocator ?? new Geolocator()).LocationStatus != 3;
+        return (this._locationStatusGeolocator = this._locationStatusGeolocator 
+                    ?? new Geolocator()).LocationStatus != PositionStatus.Disabled;
       }
     }
 
@@ -62,26 +63,23 @@ namespace Izi.Travel.Geofencing.Geotracker
     {
       if (!this.IsEnabled)
         return;
+
       Geolocator geolocator1 = new Geolocator();
-      geolocator1.put_DesiredAccuracy((PositionAccuracy) 1);
-      geolocator1.put_MovementThreshold(1.0);
+      geolocator1.DesiredAccuracy = ((PositionAccuracy) 1);
+      geolocator1.MovementThreshold = (1.0);
+
       this._geolocator = geolocator1;
-      Geolocator geolocator2 = this._geolocator;
-      // ISSUE: method pointer
-      WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<Geolocator, StatusChangedEventArgs>>(new Func<TypedEventHandler<Geolocator, StatusChangedEventArgs>, EventRegistrationToken>(geolocator2.add_StatusChanged), new Action<EventRegistrationToken>(geolocator2.remove_StatusChanged), new TypedEventHandler<Geolocator, StatusChangedEventArgs>((object) this, __methodptr(Geolocator_StatusChanged)));
-      Geolocator geolocator3 = this._geolocator;
-      // ISSUE: method pointer
-      WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<Geolocator, PositionChangedEventArgs>>(new Func<TypedEventHandler<Geolocator, PositionChangedEventArgs>, EventRegistrationToken>(geolocator3.add_PositionChanged), new Action<EventRegistrationToken>(geolocator3.remove_PositionChanged), new TypedEventHandler<Geolocator, PositionChangedEventArgs>((object) this, __methodptr(Geolocator_PositionChanged)));
+
+        this._geolocator.StatusChanged += this.Geolocator_StatusChanged;
+        this._geolocator.PositionChanged += this.Geolocator_PositionChanged;
     }
 
     protected override void OnStop()
     {
       if (this._geolocator != null)
       {
-        // ISSUE: method pointer
-        WindowsRuntimeMarshal.RemoveEventHandler<TypedEventHandler<Geolocator, StatusChangedEventArgs>>(new Action<EventRegistrationToken>(this._geolocator.remove_StatusChanged), new TypedEventHandler<Geolocator, StatusChangedEventArgs>((object) this, __methodptr(Geolocator_StatusChanged)));
-        // ISSUE: method pointer
-        WindowsRuntimeMarshal.RemoveEventHandler<TypedEventHandler<Geolocator, PositionChangedEventArgs>>(new Action<EventRegistrationToken>(this._geolocator.remove_PositionChanged), new TypedEventHandler<Geolocator, PositionChangedEventArgs>((object) this, __methodptr(Geolocator_PositionChanged)));
+        this._geolocator.StatusChanged -= this.Geolocator_StatusChanged;
+        this._geolocator.PositionChanged -= this.Geolocator_PositionChanged;
       }
       this._geolocator = (Geolocator) null;
       this._actualPosition = (Izi.Travel.Geofencing.Primitives.Geolocation) null;

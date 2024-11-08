@@ -21,7 +21,9 @@ namespace Izi.Travel.Utility
       using (StringWriter stringWriter = new StringWriter(sb))
       {
         new XmlSerializer(typeof (T)).Serialize((TextWriter) stringWriter, (object) obj);
-        stringWriter.Close();
+        
+        stringWriter.Flush();
+        stringWriter.Dispose();//.Close();
       }
       return sb.ToString();
     }
@@ -32,7 +34,7 @@ namespace Izi.Travel.Utility
       using (StringReader stringReader = new StringReader(str))
       {
         obj = (T) new XmlSerializer(typeof (T)).Deserialize((TextReader) stringReader);
-        stringReader.Close();
+        stringReader.Dispose();//.Close();
       }
       return obj;
     }
@@ -44,7 +46,9 @@ namespace Izi.Travel.Utility
       using (stream)
       {
         obj = (T) xmlSerializer.Deserialize(stream);
-        stream.Close();
+        
+        stream.Flush(); 
+        stream.Dispose();//.Close();
       }
       return obj;
     }
@@ -57,7 +61,9 @@ namespace Izi.Travel.Utility
         {
           using (XmlWriter xmlWriter = XmlWriter.Create((Stream) output))
             new XmlSerializer(typeof (T)).Serialize(xmlWriter, (object) obj);
-          output.Close();
+            
+            output.Flush();  
+            output.Dispose();//.Close();
         }
       }
     }

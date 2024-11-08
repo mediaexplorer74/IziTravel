@@ -4,8 +4,9 @@
 // MVID: 6E74EF73-7EB1-46AA-A84C-A1A7E0B11FE0
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Utility.dll
 
-using Caliburn.Micro;
+//using Caliburn.Micro;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -18,11 +19,13 @@ namespace Izi.Travel.Utility
     {
       try
       {
-        return string.Format("C:/Data/Users/DefApps/AppData/{0}/Local/", (object) new Guid(XDocument.Load("WMAppManifest.xml").Root.Element((XName) "App").Attributes().FirstOrDefault<XAttribute>((Func<XAttribute, bool>) (x => x.Name.LocalName.ToLower() == "productid")).Value).ToString("B"));
+        return string.Format("C:/Data/Users/DefApps/AppData/{0}/Local/", 
+            (object) new Guid(XDocument.Load("WMAppManifest.xml").Root.Element((XName) "App").Attributes().FirstOrDefault<XAttribute>((Func<XAttribute, bool>) (x => x.Name.LocalName.ToLower() == "productid")).Value).ToString("B"));
       }
       catch (Exception ex)
       {
-        LogManager.GetLog(typeof (ApplicationManager)).Error(ex);
+        //LogManager.GetLog(typeof (ApplicationManager)).Error(ex);
+        Debug.WriteLine("[ex] Load WMAppManifest.xml error: " + ex.Message);
       }
       return (string) null;
     }));

@@ -138,9 +138,6 @@
     <EmbeddedResource Include="Properties\Izi.Travel.Utility.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro">
-      <Version>2.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>

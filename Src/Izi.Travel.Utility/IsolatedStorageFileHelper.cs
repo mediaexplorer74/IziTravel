@@ -4,8 +4,9 @@
 // MVID: 6E74EF73-7EB1-46AA-A84C-A1A7E0B11FE0
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Utility.dll
 
-using Caliburn.Micro;
+//using Caliburn.Micro;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Threading.Tasks;
@@ -16,11 +17,12 @@ namespace Izi.Travel.Utility
   public static class IsolatedStorageFileHelper
   {
     private const double MegabytesDivider = 1048576.0;
-    private static readonly ILog Logger = LogManager.GetLog(typeof (IsolatedStorageFileHelper));
+    //private static readonly ILog Logger = LogManager.GetLog(typeof (IsolatedStorageFileHelper));
 
     public static Task SerializeAsync<T>(string path, T obj)
     {
-      return Task.Factory.StartNew((Action) (() =>
+
+      return Task.Factory.StartNew(new System.Action(() =>
       {
         using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
         {
@@ -46,17 +48,23 @@ namespace Izi.Travel.Utility
       {
         try
         {
-          using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+          using (IsolatedStorageFile storeForApplication 
+              = IsolatedStorageFile.GetUserStoreForApplication())
           {
             if (!storeForApplication.FileExists(path))
               return default (T);
-            using (IsolatedStorageFileStream storageFileStream = storeForApplication.OpenFile(path, FileMode.Open, FileAccess.Read))
-              return JsonSerializerHelper.Deserialize<T>((Stream) storageFileStream);
+
+            using (IsolatedStorageFileStream storageFileStream
+                = storeForApplication.OpenFile(path, FileMode.Open, FileAccess.Read))
+            {
+                return JsonSerializerHelper.Deserialize<T>((Stream)storageFileStream);
+            }
           }
         }
         catch (Exception ex)
         {
-          IsolatedStorageFileHelper.Logger.Error(ex);
+          //IsolatedStorageFileHelper.Logger.Error(ex);
+          Debug.WriteLine("[ex] IsolatedStorage error: " + ex.Message);
           return default (T);
         }
       }));
@@ -102,12 +110,13 @@ namespace Izi.Travel.Utility
     {
       try
       {
-        using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
-          return (double) storeForApplication.AvailableFreeSpace;
+         //RnD
+         using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+         return 100000000;//(double) storeForApplication.AvailableFreeSpace;
       }
       catch (Exception ex)
       {
-        IsolatedStorageFileHelper.Logger.Error(ex);
+        //IsolatedStorageFileHelper.Logger.Error(ex);
         return 0.0;
       }
     }
@@ -132,7 +141,7 @@ namespace Izi.Travel.Utility
       }
       catch (Exception ex)
       {
-        IsolatedStorageFileHelper.Logger.Error(ex);
+        //IsolatedStorageFileHelper.Logger.Error(ex);
         return 0.0;
       }
     }

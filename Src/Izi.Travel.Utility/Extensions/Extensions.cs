@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media.Animation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Animation;
+
 
 #nullable disable
 namespace Izi.Travel.Utility.Extensions
@@ -73,7 +75,10 @@ namespace Izi.Travel.Utility.Extensions
     {
       storyboard.Children.Add(timeline);
       Storyboard.SetTarget(timeline, target);
-      Storyboard.SetTargetProperty(timeline, new PropertyPath(path, new object[0]));
+
+      //RnD
+      Storyboard.SetTargetProperty( timeline, 
+          /*new Windows.UI.Xaml.PropertyPath(path)*/path );
     }
 
     public static void ForEach<T1, T2>(this Dictionary<T1, T2> dictionary, Action<T1, T2> action)
@@ -84,7 +89,14 @@ namespace Izi.Travel.Utility.Extensions
 
     public static List<string> SplitBy(this string source, int chunkSize)
     {
-      return source == null ? (List<string>) null : Enumerable.Range(0, (int) Math.Ceiling((double) source.Length / (double) chunkSize)).Select<int, string>((Func<int, string>) (x => source.Substring(x * chunkSize, Math.Min(chunkSize, source.Length - x * chunkSize)))).ToList<string>();
+      return source == null 
+                ? (List<string>) null 
+                : Enumerable.Range(0, 
+                (int) Math.Ceiling((double) source.Length
+                / (double) chunkSize)).Select<int, string>(
+                    (Func<int, string>) (x => source.Substring(
+                        x * chunkSize, Math.Min(chunkSize, source.Length - x * chunkSize)
+                        ))).ToList<string>();
     }
 
     public static void Set<TKey, TValue>(

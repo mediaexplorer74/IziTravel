@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Threading;
+using Windows.UI.Xaml;
+//using System.Windows.Threading;
 
 #nullable disable
 namespace Izi.Travel.Utility
@@ -23,8 +24,8 @@ namespace Izi.Travel.Utility
       if (!Counter._isEnabled)
         return;
       DispatcherTimer dispatcherTimer = new DispatcherTimer();
-      dispatcherTimer.Interval = TimeSpan.FromSeconds(3.0);
-      dispatcherTimer.Tick += (EventHandler) ((s, e) => { });
+      dispatcherTimer.Interval = TimeSpan.FromSeconds(3.0);      
+      dispatcherTimer.Tick += (sender, e) => { };
       dispatcherTimer.Start();
     }
 
