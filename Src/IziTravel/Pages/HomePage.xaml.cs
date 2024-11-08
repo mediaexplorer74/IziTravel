@@ -48,9 +48,9 @@ namespace IziTravel
         /// <summary>
         /// MUST CHANGE THESE BEFORE EACH PUBLIC GITHUB RELEASE
         /// </summary>
-        public static string CurrentBuildVersion = "2.0.0-alpha";//"1.13.20-prerelease";
+        public static string CurrentBuildVersion = "10.0.0-pre-alpha";
         public static string PreviousBuildVersion = "1.9.9";
-        public static string NextBuildVersion = "2.0.1-alpha";
+        public static string NextBuildVersion = "10.0.0-alpha";
         public static string UploadedFileName = "IziTravel.zip";
         public static string AppxUpdateName = "IziTravel_x86_x64_arm_Debug.appxbundle";
         /// <summary>

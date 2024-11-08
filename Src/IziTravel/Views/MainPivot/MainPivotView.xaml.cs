@@ -29,49 +29,4 @@ namespace IziTravel.Views.MainPivot
     }
 }
 
-/*
- // IziTravel.Views.MainPivot.MainPivotView
 
-//using FluentAppBar;
-using IziTravel.AppServices.ViewModels.MainPivot;
-using IziTravel.Controls;
-//using Microsoft.Phone.Controls;
-//using Microsoft.Phone.Shell;
-using System;
-using System.Diagnostics;
-using System.Windows;
-using Windows.UI.Xaml.Controls;
-
-#nullable disable
-namespace IziTravel.Views.MainPivot
-{
-  public class MainPivotView : Page
-  {
-    //internal Grid LayoutRoot;
-    //private bool _contentLoaded;
-
-    public MainPivotView()
-    {
-      this.InitializeComponent();
-      ((FrameworkElement) this).Loaded += new EventHandler(this.PageLoaded);
-    }
-
-    private void PageLoaded(object sender, EventArgs e)
-    {
-      AppBar.Setup<MainPivotViewModel>((Page) this).Third((Action<IApplicationBarIconButton, MainPivotViewModel>)
-          ((btn, vm) => vm.RefreshData()));
-    }
-
-    //[DebuggerNonUserCode]
-    //public void InitializeComponent()
-    //{
-    //  if (this._contentLoaded)
-    //    return;
-    //  this._contentLoaded = true;
-    //  Application.LoadComponent((object) this, new Uri("/IziTravel;component/Views/MainPivot/MainPivotView.xaml", UriKind.Relative));
-    //  this.LayoutRoot = (Grid) ((FrameworkElement) this).FindName("LayoutRoot");
-    }
-  }
-}
- 
- */

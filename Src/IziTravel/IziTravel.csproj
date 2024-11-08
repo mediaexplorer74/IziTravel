@@ -405,6 +405,36 @@
   <ItemGroup>
     <None Include="IziTravel_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj">
+      <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
+      <Name>Izi.Travel.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Business\Izi.Travel.Business.csproj">
+      <Project>{01628e84-bb32-4f0a-b131-4841fe0e4b85}</Project>
+      <Name>Izi.Travel.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Geofencing\Izi.Travel.Geofencing.csproj">
+      <Project>{91866363-6a66-481e-878c-29878220294f}</Project>
+      <Name>Izi.Travel.Geofencing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Utility\Izi.Travel.Utility.csproj">
+      <Project>{cdcecd6c-d5fa-46c2-ba54-b70be30ad919}</Project>
+      <Name>Izi.Travel.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestSharp.UWP\RestSharp.UWP\RestSharp.UWP.csproj">
+      <Project>{0136d105-745e-44ce-9215-161833b25d84}</Project>
+      <Name>RestSharp.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Uservoice\Uservoice.csproj">
+      <Project>{9f94dbb9-081a-4b31-ac06-d779d1bb7292}</Project>
+      <Name>Uservoice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZXing.UWP\ZXing.UWP.csproj">
+      <Project>{a4f96d26-b214-437a-b138-c3facdaea60b}</Project>
+      <Name>ZXing.UWP</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

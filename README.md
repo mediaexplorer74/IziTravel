@@ -1,11 +1,8 @@
-# IziTravel Reburn v2.0.0 ("reburn" codename) - reburn branch
+# IziTravel  v10.0.0.0-prealpha ("reburn" codename) - reburn branch 
 ![New logo](Images/logo.png)
 
 ## About
 Very early bird; draft UWP application to "parse" Izi.Travel web site on some winphone with Windows 10 Mobile os...
-
-## Screenshots
-![](Images/shot01.png)
 
 
 ## What's it? Status
