@@ -1,0 +1,38 @@
+Izi.Travel.Shell refs:
+
+Caliburn.Micro.dll
+Caliburn.Micro.Extensions.dll
+Caliburn.Micro.Extras.dll
+Caliburn.Micro.Platform.dll
+HtmlAgilityPack-PCL.dll
+ICSharpCode.SharpZipLib.Portable.dll
+
+Izi.Travel.Business
+Izi.Travel.Business.Entities.dll
+Izi.Travel.Geofencing
+Izi.Travel.Utility
+
+Uservoice
+Weakly
+zxing.wp8.0
+
+
+
+Newtonsoft.Json
+System.Windows.Interactivity.
+BugSense-WP8.dll
+
+ <Reference Include="Microsoft.Phone.Controls.Toolkit">
+   <HintPath>lib\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+ </Reference>
+ <Reference Include="Microsoft.Phone.Maps" />
+ <Reference Include="Microsoft.Xna.Framework" />
+ <Reference Include="Newtonsoft.Json">
+   <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="System" />
+ <Reference Include="System.Core" />
+ <Reference Include="System.Device" />
+ <Reference Include="System.Runtime.WindowsRuntime" />
+ <Reference Include="System.Windows" />
+ <Reference Include="System.Windows.Interactivity">

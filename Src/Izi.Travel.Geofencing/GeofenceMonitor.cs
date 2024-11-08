@@ -94,7 +94,8 @@ namespace Izi.Travel.Geofencing
         {
             add
             {
-                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 = this.StatusChanged;
+                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1
+                    = this.StatusChanged;
                 TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler2;
                 do
                 {
@@ -107,7 +108,8 @@ namespace Izi.Travel.Geofencing
             }
             remove
             {
-                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 = this.StatusChanged;
+                TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler1 
+                    = this.StatusChanged;
                 TypedEventHandler<GeofenceMonitor, PositionStatus> typedEventHandler2;
                 do
                 {
@@ -125,26 +127,37 @@ namespace Izi.Travel.Geofencing
         {
             add
             {
-                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 = this.PositionChanged;
-                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
+                //TypedEventHandler<GeofenceMonitor, 
+                //    Izi.Travel.Geofencing.Primitives.Geolocation> 
+                var typedEventHandler1 
+                    = this.PositionChanged;
+
+                TypedEventHandler<GeofenceMonitor, 
+                    Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
                 do
                 {
                     typedEventHandler2 = typedEventHandler1;
                     typedEventHandler1 = Interlocked.CompareExchange(ref this.PositionChanged,
-                        (TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>)
+                        (TypedEventHandler<GeofenceMonitor, 
+                        Izi.Travel.Geofencing.Primitives.Geolocation>)
                         Delegate.Combine(typedEventHandler2, value), typedEventHandler2);
                 }
                 while (typedEventHandler1 != typedEventHandler2);
             }
             remove
             {
-                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 = this.PositionChanged;
-                TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
+                TypedEventHandler<GeofenceMonitor, 
+                    Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler1 
+                    = this.PositionChanged;
+
+                TypedEventHandler<GeofenceMonitor, 
+                    Izi.Travel.Geofencing.Primitives.Geolocation> typedEventHandler2;
                 do
                 {
                     typedEventHandler2 = typedEventHandler1;
                     typedEventHandler1 = Interlocked.CompareExchange(ref this.PositionChanged,
-                        (TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>)
+                        (TypedEventHandler<GeofenceMonitor, 
+                        Izi.Travel.Geofencing.Primitives.Geolocation>)
                         Delegate.Remove(typedEventHandler2, value), typedEventHandler2);
                 }
                 while (typedEventHandler1 != typedEventHandler2);
@@ -246,9 +259,7 @@ namespace Izi.Travel.Geofencing
 
         private void OnStatusChanged()
         {
-            //this.StatusChanged?.Invoke(this, this.Status);
-            this.StatusChanged?.Invoke(this, EventArgs.Empty);
-
+           this.StatusChanged?.Invoke(this, this.Status);// EventArgs.Empty);
         }
 
         private void OnPositionChanged()

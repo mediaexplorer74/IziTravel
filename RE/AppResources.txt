@@ -1,0 +1,337 @@
+ActionDownloading	Downloading...	
+ActionHide	Hide	
+ActionLoading	Loading...	
+ActionProcessing	Processing…	
+ActionReadMore	Read more	
+ActionSearching	Searching…	
+ActionSending	Sending…	
+ActionShow	Show	
+ActionSocialFacebook	Like on Facebook	
+ActionSocialGooglePlus	Follow on Google+	
+ActionSocialInstagram	See photos on Instagram	
+ActionSocialTwitter	Follow on Twitter	
+ActionSocialVk	Visit public page	
+ActionSocialWebSite	Visit Website	
+ActionSocialYouTube	Watch on YouTube	
+ActionUpdateCheck	Check for updates...	
+ActionUpdating	Updating...	
+ActionViewProfile	View profile	
+CommandAdd	Add	
+CommandBookmark	Bookmark	
+CommandBuy	Buy	
+CommandBuyFor	Buy for {0}	
+CommandBuyForToStart	Buy for {0} to start	
+CommandCancel	Cancel	
+CommandCheck	Check	
+CommandCheckForUpdates	Check for updates	
+CommandClear	Clear	
+CommandClose	Close	
+CommandDelete	Delete	
+CommandDeleteAll	Delete all	
+CommandDownload	Download	
+CommandGetDirections	Get directions	
+CommandHideTriggerZones	hide trigger zones	
+CommandNavigateNowPlaying	Now playing	
+CommandNext	Next	
+CommandOpen	Open	
+CommandPreview	Preview	
+CommandRateAndReview	rate and review	
+CommandRateTheApp	Rate the app	
+CommandRefresh	Refresh	
+CommandReset	Reset	
+CommandRetry	Retry	
+CommandSelect	Select	
+CommandSend	Send	
+CommandSetDefault	Set as default	
+CommandShare	Share	
+CommandShowTriggerZones	show trigger zones	
+CommandStart	Start	
+CommandStop	Stop	
+CommandSubmit	Submit	
+CommandTryAgain	Try again	
+CommandUpdate	Update	
+CommandUpdateAll	Update all	
+DefaultReviewerName	User	
+DialogLocationServicesDisabledLink	Go to Location Settings	
+DialogLocationServicesDisabledMessage	Cannot determine the current user location. The location services may be disabled.	
+DialogLocationServicesDisabledTitle	Unable to determine location	
+EmptyReviewerName	Traveler	
+EnumCategoryBike	Bike tour	
+EnumCategoryBoat	Boat tour	
+EnumCategoryBus	Bus tour	
+EnumCategoryCar	Auto tour	
+EnumCategoryWalk	Walking tour	
+ErrorBarcodeCantLoadObjectForLink	The link '{0}' cannot be opened	
+ErrorBarcodeIncorrectData	QR code cannot be processed: '{0}'	
+ErrorBarcodeObjectLoad	An error occurred while retrieving data	
+ErrorDownload	Unable to download object	
+ErrorDownloadNotEnoughSpaceErrorMessage	Insufficient space available to download the content. Please free up some space and try again.	
+ErrorDownloadUnspecifiedErrorMessage	Unable to download object from server. Please check your internet connection.	
+ErrorInvalidExternalLinkInfo	Cannot open selected link in the web browser	
+ErrorInvalidExternalLinkTitle	Invalid external link	
+ErrorMapRouteNotAvailableForTravelMode	Unable to build a route for the selected travel mode	
+ErrorMessageDataLoading	Unable to retrieve object information from server. Check your internet connection.	
+ErrorMessageOpenNotSupportedObject	Tours are not yet supported by application	
+ErrorPurchaseConnectionErrorMessage	Purchasing is unavailable. Please try again later.	
+ErrorTitle	An error occurred	
+ErrorTitleDataLoading	An error occurred while retrieving data	
+FeedbackEmailHint	Your e-mail address	
+FeedbackHint	Please, enter your e-mail and the topic of your request. Our support team will get back to you shortly.	
+FeedbackMessageHint	Your question or request…	
+FeedbackSubjectHint	Subject	
+FlyoutExploreLocationSearchHint	Enter location name	
+FlyoutExploreLocationTitle	Select location	
+FlyoutExploreTypeTitle	Select guide type	
+FlyoutFeaturedTitle	Editor's choice	
+FlyoutNumpadMessageExhibitNotFound	Exhibit not found	
+FlyoutSelectorTitle	Choose one	
+HintRating0	(tap on the stars to set)	
+HintRating1	The worst ever!	
+HintRating2	Dislike it!	
+HintRating3	It's okay!	
+HintRating4	Good!	
+HintRating5	Excellent!	
+HintSearchFor	Search for	
+HintSponsors	Tap the sponsor logo to visit its information page.	
+IntroductionTitle	Introduction	
+LabelAddress	Address	
+LabelAll	All	
+LabelApplication	Application	
+LabelAroundMe	Around me	
+LabelAttractions	Attractions	
+LabelAudio	Audio	
+LabelAudioguides	Audio guides	
+LabelAuthor	Author	
+LabelBasedOnRatings	Total No of ratings: {0}	
+LabelBeTheFirstToReview	Be the first to review this guide	
+LabelBookmarks	Bookmarks	
+LabelCodeName	Passcode	
+LabelCollection	Collection	
+LabelCollections	Collections	
+LabelComment	Comment	
+LabelContacts	Contacts	
+LabelContent	Content	
+LabelContentProvidedBy	Content provided by	
+LabelCorrect	Correct	
+LabelDefault	Default	
+LabelDirections	Directions	
+LabelDownload	Download	
+LabelDownloaded	Downloaded	
+LabelDownloads	Downloads	
+LabelEmulationMode	Emulation mode	
+LabelError	Error	
+LabelExhibit	Exhibit	
+LabelExhibits	Exhibits	
+LabelExplore	Explore	
+LabelFeedback	Feedback	
+LabelFree	Free	
+LabelHistory	History	
+LabelImage	Image	
+LabelIncorrect	Wrong	
+LabelInfo	Info	
+LabelIntro	Intro	
+LabelItinerary	Itinerary	
+LabelLanguage	Language	
+LabelLanguages	Languages	
+LabelLater	Later	
+LabelLicenses	Licenses	
+LabelList	List	
+LabelLocation	Location	
+LabelLocationServices	Location services	
+LabelMap	Map	
+LabelMapLocation	Map location	
+LabelMuseum	Museum	
+LabelNews	News	
+LabelNoAudio	no audio	
+LabelNoRatings	No ratings	
+LabelNotFoundByNumber	Item not found	
+LabelNumpad	Numpad	
+LabelPackages	Packages	
+LabelPlan	Plan	
+LabelPrivacyStatement	Privacy Statement	
+LabelProvidedBy	Provided by	
+LabelPurchased	Purchased	
+LabelPurchases	Purchases	
+LabelQrScanner	Scan QR code	
+LabelQuiz	Quiz	
+LabelQuizes	Quizzes	
+LabelRatedMessage	The average rating will be updated in 24 hours	
+LabelRatedTitle	You have rated	
+LabelRatingCount	({0} ratings)	
+LabelRelated	See also	
+LabelResults	Results	
+LabelReviews	Reviews	
+LabelReviewsAreCurrentlyUnavailable	Reviews are currently unavailable	
+LabelRoute	Route	
+LabelServer	Server	
+LabelSettings	Settings	
+LabelShortRatingCount	({0})	
+LabelSpeed	Speed	
+LabelSponsors	Sponsors	
+LabelSystem	System	
+LabelToday	Today	
+LabelTour	Tour	
+LabelTourEmulation	Tour emulation	
+LabelTouristAttraction	Tourist attraction	
+LabelType	Type	
+LabelUpdate	Update	
+LabelUpdated	Updated	
+LabelUserProfile	User profile	
+LabelVersion	Version	
+LabelVideo	Video	
+LabelWorkingHours	Opening hours	
+LabelYesterday	Yesterday	
+MessageAboutContactEmail	or you can contact us directly at	
+MessageAboutContactWebSite	For additional information and enquires, please visit our website	
+MessageAboutCopyright	All rights reserved.	
+MessageAboutMotto	create your own audio guide.	
+MessageAboutShortDescription	is a free MTG (Mobile Traveler Guide) application. It works with any content that conforms to the MTG standard.	
+MessageBarcodeScannerFindBarcode	Place the QR code into scanning area	
+MessageDontShowAgain	Don't show this again	
+MessageDownloadItemError	Attention required. Tap here	
+MessageExploreClearFilterAndSearch	Clear filter and search again	
+MessageExploreErrorNetwork	No internet connection	
+MessageExploreErrorNetworkInfo	Check network settings and refresh data	
+MessageExploreLocationLoadError	An error occurred while loading location list	
+MessageExploreSearchResultIsEmpty	No results found for this query	
+MessageExploreSearchResultIsEmptyFilterInfo	No items matched your filter criteria	
+MessageExploreSearchResultIsEmptyFilterPrompt	Please modify your filter and try again	
+MessageExploreSearchResultIsEmptyQueryInfo	No results found for the query "{0}"	
+MessageExploreSearchResultIsEmptyQueryPrompt	Please modify your query and try again	
+MessageExploreSearchResultNoContentLanguage	No audio guides available for your language settings	
+MessageExploreSearchResultNoContentOffline	No audio guides available offline	
+MessageFeaturedActionExplore	Browse all guides	
+MessageFeaturedListEmpty	We are selecting the most suitable guides for you, please try later.	
+MessageFeaturedListEmptyAction	Go explore all guides	
+MessageFeaturedListFooter	Find the best guide for you	
+MessageFeaturedListHeader	Choose from museum and city audio guides in over 260 destinations worldwide	
+MessageGoToMapDownload	Go to map download	
+MessageGoToNetworkSettings	Go to network settings	
+MessageListBoomarksIsEmpty	Your bookmarks will be here.	
+MessageListDownloadsIsEmpty	Your downloads will be stored here.	
+MessageListHistoryIsEmpty	Your recently used audio guides will be here.	
+MessageListIsEmpty	The list is empty	
+MessageListPurchasesIsEmpty	Your purchases will be here.	
+MessageListQuizesIsEmpty	Information about completed quizzes will be here.	
+MessageMainPlayerEmptyInfoPart01	Choose the story in	
+MessageMainPlayerEmptyInfoPart02	or scan the QR-code.	
+MessageMediaVideoPauseTour	Tour will be paused, and you must resume it manually. Play video?	
+MessageNoData	No data	
+MessageNowPlayingEmpty	Stories will be played here.	
+MessageQuizDetailsSubtitleCorrect	Correct answer	
+MessageQuizDetailsSubtitleIncompleted	Answer the simple question on facts you have just listened to	
+MessageQuizDetailsSubtitleIncorrect	It is an incorrect answer	
+MessageQuizDetailsTitleCompleted	The quiz is done	
+MessageQuizDetailsTitleIncompleted	Take a quiz	
+MessageReferenceListIsEmpty	No related guides set by the author	
+MessageSearchAudioguides	Search audio guides	
+MessageSeeBelow	See below	
+MessageTourMapLocationServicesDisabledInfo	Cannot determine the current user location. The location services may be disabled. The tour will be stopped.	
+MessageTourMapLocationServicesDisabledLink	Go to Location Settings	
+MessageTourMapLocationServicesDisabledTitle	Unable to determine location	
+PageTitleAbout	About	
+PageTitleExhibitSearch	Search for exhibit	
+PageTitleSettingsLanguageSelector	Select languages	
+PlayerAddBookmarkCommand	Add bookmark	
+PlayerCongratulation	You've completed the tour!	
+PlayerJumpListFlyoutNowPlayingLabel	now playing	
+PlayerJumpListFlyoutTitle	All items	
+PlayerJumpListFlyoutToStartCommand	Start the tour over	
+PlayerQuizCommand	Take a quiz	
+PlayerRateCommand	Write a review	
+PlayerReadReviewsCommand	Read reviews	
+PlayerRemoveBookmarkCommand	Remove bookmark	
+PlayerReturnCommand	Back to museum	
+PlayerShareCommand	Share with friends	
+PlayerStartCommand	Start	
+PlayerStartLabel	{0} items, {1} mins	
+PromptAppExitWhenTourStartedInfo	Do you want to finish the tour playback and leave the application?	
+PromptClearBookmarks	All bookmarks will be cleared. Are you sure?	
+PromptClearHistory	Your whole history will be cleared. Are you sure?	
+PromptDownloadDeleteAllInfo	"Would you like to delete all of the downloaded guides of ~{0:0.00} MB in size?
+
+You can download all purchased guides again at any time."	
+PromptDownloadDeleteAllTitle	Delete all downloaded guides	
+PromptDownloadErrorCommon	A problem occurred during your download. Please check your internet connection and available space.	
+PromptDownloadErrorTitle	Download Error	
+PromptDownloadRemove	Are you sure you want to delete this downloaded audio guide?	
+PromptDownloadRemoveTitle	Delete	
+PromptDownloadStart	"Are you sure you want to download this audio guide ({0:0.00} MB)?
+
+Don't forget to download the appropriate map to get full app functionality without an internet connection."	
+PromptDownloadUpdateAllInfo	Would you like to update all downloaded guides and install {0:0.00} MB of updates?	
+PromptDownloadUpdateAllTitle	Update all downloaded guides	
+PromptDownloadUpdateStartInfo	"Update downloaded content for this audioguide ({0:0.00} MB)?
+  
+You can always install this update from Downloads section.
+    "	
+PromptDownloadUpdateStartTitle	An update is available	
+PromptEnterPasscode	Please enter passcode	
+PromptQuizResetInfo	Do you want to reset this Quiz?	
+PromptQuizResetTitle	Reset quiz results	
+PromptTourReset	Are you sure you want to reset the current tour progress?	
+PromptTourStartInfo	The story will begin to play automatically as you approach an object	
+PromptTourStartTitle	Start tour	
+PromptTourStop	Are you sure you want to stop the current tour?	
+PromtEnterExhibitNumber	Please enter the exhibit number	
+PurchaseDialogMessage	"Are you sure you want to buy {0} for {1}?
+
+You have to buy the audio guide to experience all of its features and listen to all of the items."	
+PurchaseDialogTitle	Paid audio guide	
+QrScannerHint	Place a QR code into the scanning area	
+QuizAnsweredQuestionLabel	Question	
+QuizCorrectAnswerLabel	It is a correct answer	
+QuizCorrectAnswersCount	{0} correct	
+QuizCorrectResult	Correct answer!	
+QuizCorrectResultMessage	You've picked correct answer:	
+QuizCorrectResultTitle	Correct!	
+QuizIncorrectAnswersCount	{0} wrong	
+QuizIncorrectResult	Wrong answer	
+QuizIncorrectResultMessage	You've picked:	
+QuizIncorrectResultTitle	Incorrect answer	
+QuizPickAnswerLabel	Pick an answer	
+QuizQuestionLabel	Answer this question	
+QuizTotalAnswersCount	Answers: {0}	
+QuizYourAnswerLabel	Your answer	
+RateFailure	Sorry, we can't submit your review right now. Please check your internet connection and try again.	
+RateLabelName	Your name	
+RateLabelRating	Rating	
+RateLabelReview	Write a review	
+RateSuccess	Thank you for your review!	
+RateTitle	Rate and review	
+RestorePurchases	Restore purchases	
+SearchNoResults	No results found for this query.	
+SelectLanguage	Select language	
+SendFeedbackFailureMessage	Sorry, the message cannot be sent. Please try again later.	
+SendFeedbackFailureTitle	An error occured	
+SendFeedbackSuccessMessage	Thank you. Your message has been successfully sent. Our support team will get back to you shortly.	
+SendFeedbackSuccessTitle	Success	
+SettingsInfoCodeName	Passcode for objects with limited visibility	
+SettingsInfoFeedback	Ask for help or make a suggestion	
+SettingsInfoHoldToModify	Press and hold to modify	
+SettingsInfoLicenses	Licenses	
+SettingsLanguageSearchHint	Search language…	
+SetupLanguages	Check language settings	
+StringDistanceKilometers	km	
+StringDistanceMeters	m	
+StringEmpty	-	
+StringNo	No	
+StringOf	of	
+StringOff	Off	
+StringOk	OK	
+StringOn	On	
+StringTimeSpanDays	d	
+StringTimeSpanHours	h	
+StringTimeSpanMinutes	min	
+StringTimeSpanSeconds	sec	
+StringYes	Yes	
+ToastBookmarkAdded	Bookmark added	
+ToastBookmarkRemoved	Bookmark deleted	
+ToastDownloadCompleted	Downloaded {0}	
+ToastDownloadError	Error downloading {0}	
+ToastDownloadRemoved	Removed {0}	
+ToastDownloadStarted	Downloading {0}	
+ToastDownloadUpdateCompleted	Updated {0}	
+ToastDownloadUpdateStarted	Updating {0}	
+ToastTouristAttractionReached	You have arrived at the tourist attraction	
+ToastTourStopped	The tour has stopped due to inactivity (30 min)	

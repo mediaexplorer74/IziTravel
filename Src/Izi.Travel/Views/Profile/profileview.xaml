@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:tiles="clr-namespace:Izi.Travel.Shell.Core.Controls.Tiles"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              xmlns:download="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Download"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:purchase="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Purchase"

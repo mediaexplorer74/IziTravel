@@ -4,6 +4,7 @@
 // MVID: 038B5345-2117-47AA-93A0-4A054BBF5C1C
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Uservoice.dll
 
+using RestSharp.Extensions.MonoHttp;
 using System.Net;
 
 #nullable disable

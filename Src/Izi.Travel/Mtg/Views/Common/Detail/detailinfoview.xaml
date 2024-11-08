@@ -11,7 +11,7 @@
              xmlns:toolkitcontrols="clr-namespace:Izi.Travel.Shell.Toolkit.Controls"
              xmlns:mediacommon="clr-namespace:Izi.Travel.Shell.Media.ViewModels.Common"
              xmlns:coreconverters="clr-namespace:Izi.Travel.Shell.Core.Converters"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              mc:Ignorable="d"
              x:Name="PartDetailInfoView">
 
@@ -112,15 +112,15 @@
             </Border>
 
             <!-- Media -->
-            <toolkit:WrapPanel>
-                <!-- Audio -->
+            <!--toolkit:WrapPanel>
+                // Audio 
                 <audio:AudioContentView DataContext="{Binding AudioViewModel}"
                                         MinWidth="215"
                                         Margin="0,30,0,0" 
                                         Title="{Binding DataContext.AudioLabel, ElementName=PartDetailInfoView}"
                                         HorizontalContentAlignment="Stretch" />
 
-                <!-- Video -->
+                // Video
                 <controls:ActionRoundButton ImageSource="/Assets/Icons/appbar.video.png"
                                             MinWidth="215"
                                             Margin="0,30,0,0"
@@ -130,7 +130,7 @@
                     <TextBlock Text="{Binding LocalizedResources.LabelVideo, Source={StaticResource LocalizedStrings}}"
                                Style="{StaticResource MediaRoundButtonContentTextBoxStyle}"/>
                 </controls:ActionRoundButton>
-            </toolkit:WrapPanel>
+            </toolkit:WrapPanel-->
 
             <!-- Description -->
             <controls:ExpandableTextBlock Text="{Binding Description}"

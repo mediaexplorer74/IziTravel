@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
              xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
              xmlns:model="clr-namespace:Izi.Travel.Shell.Mtg.Model"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              mc:Ignorable="d">
     <!-- Layout -->
     <ScrollViewer>

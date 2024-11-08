@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+             
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              xmlns:detail="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail"
              xmlns:controls="clr-namespace:Izi.Travel.Shell.Common.Controls"
              xmlns:converters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"

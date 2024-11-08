@@ -1,0 +1,13 @@
+CannotHostBehaviorCollectionMultipleTimesExceptionMessage	Cannot set the same BehaviorCollection on multiple objects.	
+CannotHostBehaviorMultipleTimesExceptionMessage	An instance of a Behavior cannot be attached to more than one object at a time.	
+CannotHostTriggerActionMultipleTimesExceptionMessage	Cannot host an instance of a TriggerAction in multiple TriggerCollections simultaneously. Remove it from one TriggerCollection before adding it to another.	
+CannotHostTriggerCollectionMultipleTimesExceptionMessage	Cannot set the same TriggerCollection on multiple objects.	
+CannotHostTriggerMultipleTimesExceptionMessage	An instance of a trigger cannot be attached to more than one object at a time.	
+CommandDoesNotExistOnBehaviorWarningMessage	The command "{0}" does not exist or is not publicly exposed on {1}.	
+DefaultTriggerAttributeInvalidTriggerTypeSpecifiedExceptionMessage	"{0}" is not a valid type for the TriggerType parameter. Make sure "{0}" derives from TriggerBase.	
+DuplicateItemInCollectionExceptionMessage	Cannot add the same instance of "{0}" to a "{1}" more than once.	
+EventTriggerBaseInvalidEventExceptionMessage	The event "{0}" on type "{1}" has an incompatible signature. Make sure the event is public and satisfies the EventHandler delegate.	
+EventTriggerCannotFindEventNameExceptionMessage	Cannot find an event named "{0}" on type "{1}".	
+RetargetedTypeConstraintViolatedExceptionMessage	An object of type "{0}" cannot have a {3} property of type "{1}". Instances of type "{0}" can have only a {3} property of type "{2}".	
+TypeConstraintViolatedExceptionMessage	Cannot attach type "{0}" to type "{1}". Instances of type "{0}" can only be attached to objects of type "{2}".	
+UnableToResolveTargetNameWarningMessage	Unable to resolve TargetName "{0}".	

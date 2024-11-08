@@ -1,7 +1,7 @@
-﻿<phone:PhoneApplicationPage x:Class="Izi.Travel.Shell.Mtg.Views.Common.Player.PlayerPartView"
+﻿<Page x:Class="Izi.Travel.Shell.Mtg.Views.Common.Player.PlayerPartView"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             Style="{StaticResource IziTravelPageStyle}"
@@ -12,4 +12,4 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Stretch" />
     
-</phone:PhoneApplicationPage>
+</Page>

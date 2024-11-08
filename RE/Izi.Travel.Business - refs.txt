@@ -1,0 +1,20 @@
+Izi.Travel.Business - refs:
+
+Izi.Travel.Business.Entities
+Izi.Travel.Client.WindowsPhone
+Izi.Travel.Data
+Izi.Travel.Data.Entities
+Izi.Travel.Geofencing
+Izi.Travel.Utility
+-----------------
+AdjustWP80
+GoogleAnalytics.Core
+GoogleAnalytics
+System.Collections.Immutable
+WindowsPCL
+
+
+
+
+
+

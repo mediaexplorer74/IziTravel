@@ -141,9 +141,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestSharp.WindowsPhone\RestSharp.WindowsPhone.csproj">
-      <Project>{99d7a6a0-d603-48e0-bbda-a5882fc19984}</Project>
-      <Name>RestSharp.WindowsPhone</Name>
+    <ProjectReference Include="..\RestSharp.UWP\RestSharp.UWP\RestSharp.UWP.csproj">
+      <Project>{0136d105-745e-44ce-9215-161833b25d84}</Project>
+      <Name>RestSharp.UWP</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

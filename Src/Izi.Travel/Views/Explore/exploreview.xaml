@@ -6,8 +6,8 @@
              xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
              xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+             
+             
              xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
              xmlns:explore="clr-namespace:Izi.Travel.Shell.ViewModels.Explore"
              xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"

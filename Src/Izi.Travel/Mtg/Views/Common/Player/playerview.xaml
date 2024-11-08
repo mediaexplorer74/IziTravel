@@ -12,10 +12,10 @@
              xmlns:templateSelectors="clr-namespace:Izi.Travel.Shell.Mtg.TemplateSelectors"
              xmlns:transitions="clr-namespace:Izi.Travel.Shell.Core.Transitions"
              xmlns:extensions="clr-namespace:Izi.Travel.Shell.Core.Components.Extensions"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              xmlns:mediaConverters="clr-namespace:Izi.Travel.Shell.Media.Converters"
              xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
-             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+             
              xmlns:quiz="clr-namespace:Izi.Travel.Shell.Mtg.Views.Quiz"
              xmlns:ts="clr-namespace:Izi.Travel.Shell.TemplateSelectors"
              mc:Ignorable="d">

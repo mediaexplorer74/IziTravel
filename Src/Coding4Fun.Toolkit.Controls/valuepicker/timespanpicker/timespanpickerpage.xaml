@@ -19,7 +19,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480">
 
     <Primitives:TimeSpanPickerBasePage.Resources>

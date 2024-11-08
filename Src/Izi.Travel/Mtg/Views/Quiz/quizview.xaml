@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
              xmlns:quiz="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Quiz"
              xmlns:converters="clr-namespace:Izi.Travel.Shell.Core.Converters"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"

@@ -1,0 +1,4 @@
+Argument_EmptyArray	'{0}' must contain at least one element.	
+Argument_EmptyString	'{0}' cannot be an empty string ("") or start with the null character.	
+Argument_NullElement	'{0}' cannot contain a null (Nothing in Visual Basic) element.	
+Argument_Whitespace	The parameter "{0}" cannot consist entirely of white space characters.	

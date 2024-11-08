@@ -6,7 +6,7 @@
              xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
              mc:Ignorable="d">
 

@@ -7,7 +7,7 @@
              xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
              xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
              xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             
              xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
              xmlns:converters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
              xmlns:purchase="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Purchase"

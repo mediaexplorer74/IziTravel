@@ -1,0 +1,6 @@
+ArrayInitializedStateNotEqual	Object is not a array with the same initialization state as the array to compare it to.	
+ArrayLengthsNotEqual	Object is not a array with the same number of elements as the array to compare it to.	
+CannotFindOldValue	Cannot find the old value	
+CollectionModifiedDuringEnumeration	Collection was modified; enumeration operation may not execute.	
+DuplicateKey	An element with the same key but a different value already exists.	
+InvalidEmptyOperation	This operation does not apply to an empty instance.	

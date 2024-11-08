@@ -1,7 +1,7 @@
-﻿<phone:PhoneApplicationPage x:Class="Izi.Travel.Shell.Mtg.Views.Tour.Map.TourMapPartView"
+﻿<Page x:Class="Izi.Travel.Shell.Mtg.Views.Tour.Map.TourMapPartView"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
@@ -13,18 +13,18 @@
                             xmlns:maptoolkit="clr-namespace:Izi.Travel.Shell.Toolkit.Controls.Maps"
                             xmlns:viewmodels="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Tour.Map"
                             xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
-                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            
                             xmlns:coreconverters="clr-namespace:Izi.Travel.Shell.Core.Converters"
                             xmlns:moduleconverters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
                             xmlns:extensions="clr-namespace:Izi.Travel.Shell.Core.Components.Extensions"
                             xmlns:audio="clr-namespace:Izi.Travel.Shell.Media.Views.Audio"
                             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
                             xmlns:controls="clr-namespace:Izi.Travel.Shell.Toolkit.Controls"
-                            SupportedOrientations="Portrait" Orientation="Portrait"
+                            
                             mc:Ignorable="d"
                             Style="{StaticResource IziTravelPageStyle}">
     <!-- Resources -->
-    <phone:PhoneApplicationPage.Resources>
+    <Page.Resources>
         <!-- Converters -->
         <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToForegroundConverter" 
                                                            NormalBrush="{StaticResource IziTravelBlueBrush}"
@@ -119,7 +119,7 @@
             </Setter>
         </Style>
 
-    </phone:PhoneApplicationPage.Resources>
+    </Page.Resources>
 
     <!-- Application Bar -->
     <bar:Bindable.ApplicationBar>
@@ -492,4 +492,4 @@
 
         </Grid>
     </corecontrols:ProgressOverlay>
-</phone:PhoneApplicationPage>
+</Page>
