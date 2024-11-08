@@ -48,9 +48,10 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       if (query == null)
         throw new ArgumentNullException(nameof (query));
+
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        IQueryable<Purchase> source1 = localDataContext.Purchases.AsQueryable<Purchase>();
+                IQueryable<Purchase> source1 = default;//localDataContext.Purchases.AsQueryable<Purchase>();
         if (query.Types != null)
           source1 = source1.Where<Purchase>((Expression<Func<Purchase, bool>>) (x => query.Types.Contains<string>(x.Type)));
         if (query.Languages != null)
@@ -77,8 +78,10 @@ namespace Izi.Travel.Data.Services.Implementation
 
     public string[] GetPurchaseUidList()
     {
-      using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.Purchases.Select<Purchase, string>((Expression<Func<Purchase, string>>) (x => x.Uid)).ToArray<string>();
+        using (LocalDataContext localDataContext = new LocalDataContext())
+        {
+            return default;//localDataContext.Purchases.Select<Purchase, string>((Expression<Func<Purchase, string>>)(x => x.Uid)).ToArray<string>();
+        }
     }
 
     public int CreateBookmark(Bookmark bookmark)
@@ -97,8 +100,11 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       if (string.IsNullOrWhiteSpace(uid))
         throw new ArgumentNullException(nameof (uid));
-      using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.Bookmarks.Any<Bookmark>((Expression<Func<Bookmark, bool>>) (x => x.Uid == uid && x.Language == language));
+
+        using (LocalDataContext localDataContext = new LocalDataContext())
+        {
+            return default;//localDataContext.Bookmarks.Any<Bookmark>((Expression<Func<Bookmark, bool>>)(x => x.Uid == uid && x.Language == language));
+        }
     }
 
     public void DeleteBookmark(string uid, string language)
@@ -107,7 +113,7 @@ namespace Izi.Travel.Data.Services.Implementation
         throw new ArgumentNullException(nameof (uid));
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        Bookmark entity = localDataContext.Bookmarks.FirstOrDefault<Bookmark>((Expression<Func<Bookmark, bool>>) (x => x.Uid == uid && x.Language == language));
+        Bookmark entity = default;//localDataContext.Bookmarks.FirstOrDefault<Bookmark>((Expression<Func<Bookmark, bool>>) (x => x.Uid == uid && x.Language == language));
         if (entity == null)
           return;
         localDataContext.Bookmarks.DeleteOnSubmit(entity);
@@ -122,7 +128,7 @@ namespace Izi.Travel.Data.Services.Implementation
       string[] languages = query.Languages ?? new string[0];
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        IQueryable<Bookmark> source1 = localDataContext.Bookmarks.Where<Bookmark>((Expression<Func<Bookmark, bool>>) (x => query.Types == default (object) || query.Types.Contains<string>(x.Type))).Where<Bookmark>((Expression<Func<Bookmark, bool>>) (x => languages.Length == 0 || languages.Contains<string>(x.Language)));
+        IQueryable<Bookmark> source1 = default;//localDataContext.Bookmarks.Where<Bookmark>((Expression<Func<Bookmark, bool>>) (x => query.Types == default (object) || query.Types.Contains<string>(x.Type))).Where<Bookmark>((Expression<Func<Bookmark, bool>>) (x => languages.Length == 0 || languages.Contains<string>(x.Language)));
         int? nullable = query.Offset;
         int count;
         if (!nullable.HasValue)
@@ -154,7 +160,7 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        localDataContext.Bookmarks.DeleteAllOnSubmit<Bookmark>((IEnumerable<Bookmark>) localDataContext.Bookmarks);
+        //localDataContext.Bookmarks.DeleteAllOnSubmit<Bookmark>((IEnumerable<Bookmark>) localDataContext.Bookmarks);
         localDataContext.SubmitChanges();
       }
     }
@@ -177,9 +183,11 @@ namespace Izi.Travel.Data.Services.Implementation
         throw new ArgumentNullException();
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        History history1 = localDataContext.Histories.FirstOrDefault<History>((Expression<Func<History, bool>>) (x => x.Id == history.Id));
+        History history1 = default;//localDataContext.Histories.FirstOrDefault<History>((Expression<Func<History, bool>>) (x => x.Id == history.Id));
+        
         if (history1 == null)
           return;
+        
         history1.Title = history.Title;
         history1.Uid = history.Uid;
         history1.ContentProviderUid = history.ContentProviderUid;
@@ -196,8 +204,12 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       if (string.IsNullOrWhiteSpace(uid))
         throw new ArgumentNullException(nameof (uid));
-      using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.Histories.FirstOrDefault<History>((Expression<Func<History, bool>>) (x => x.Uid == uid && x.Language == language));
+
+            using (LocalDataContext localDataContext = new LocalDataContext())
+            {
+                return default;//localDataContext.Histories.FirstOrDefault<History>(
+                    //(Expression<Func<History, bool>>)(x => x.Uid == uid && x.Language == language));
+            }
     }
 
     public History[] GetHistoryList(HistoryLocalListQuery query)
@@ -207,7 +219,7 @@ namespace Izi.Travel.Data.Services.Implementation
       string[] languages = query.Languages ?? new string[0];
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        IQueryable<History> source1 = localDataContext.Histories.Where<History>((Expression<Func<History, bool>>) (x => query.Types == default (object) || query.Types.Contains<string>(x.Type))).Where<History>((Expression<Func<History, bool>>) (x => languages.Length == 0 || languages.Contains<string>(x.Language))).Where<History>((Expression<Func<History, bool>>) (x => x.DateTime >= query.From && x.DateTime <= query.To));
+        IQueryable<History> source1 = default;//localDataContext.Histories.Where<History>((Expression<Func<History, bool>>) (x => query.Types == default (object) || query.Types.Contains<string>(x.Type))).Where<History>((Expression<Func<History, bool>>) (x => languages.Length == 0 || languages.Contains<string>(x.Language))).Where<History>((Expression<Func<History, bool>>) (x => x.DateTime >= query.From && x.DateTime <= query.To));
         int? nullable = query.Offset;
         int count;
         if (!nullable.HasValue)
@@ -239,7 +251,7 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        localDataContext.Histories.DeleteAllOnSubmit<History>((IEnumerable<History>) localDataContext.Histories);
+        //localDataContext.Histories.DeleteAllOnSubmit<History>((IEnumerable<History>) localDataContext.Histories);
         localDataContext.SubmitChanges();
       }
     }
@@ -248,20 +260,29 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       if (string.IsNullOrWhiteSpace(tourUid))
         return (TourPlaybackItem[]) null;
+
       using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.TourPlaybackItems.Where<TourPlaybackItem>((Expression<Func<TourPlaybackItem, bool>>) (x => x.TourUid == tourUid)).OrderBy<TourPlaybackItem, DateTime>((Expression<Func<TourPlaybackItem, DateTime>>) (x => x.DateTime)).ToArray<TourPlaybackItem>();
+      {
+        return default;// localDataContext.TourPlaybackItems.Where<TourPlaybackItem>((Expression<Func<TourPlaybackItem, bool>>) (x => x.TourUid == tourUid)).OrderBy<TourPlaybackItem, DateTime>((Expression<Func<TourPlaybackItem, DateTime>>) (x => x.DateTime)).ToArray<TourPlaybackItem>();
+      }
     }
 
     public TourPlaybackItem[] GetLastTourPlaybackItemList()
     {
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        TourPlaybackItem lastItem = localDataContext.TourPlaybackItems.OrderByDescending<TourPlaybackItem, DateTime>((Expression<Func<TourPlaybackItem, DateTime>>) (x => x.DateTime)).FirstOrDefault<TourPlaybackItem>();
+        TourPlaybackItem lastItem = default;//localDataContext.TourPlaybackItems.OrderByDescending<TourPlaybackItem, DateTime>((Expression<Func<TourPlaybackItem, DateTime>>) (x => x.DateTime)).FirstOrDefault<TourPlaybackItem>();
         TourPlaybackItem[] playbackItemList;
+
         if (lastItem == null)
-          playbackItemList = (TourPlaybackItem[]) null;
+        {
+            playbackItemList = (TourPlaybackItem[])null;
+        }
         else
-          playbackItemList = localDataContext.TourPlaybackItems.Where<TourPlaybackItem>((Expression<Func<TourPlaybackItem, bool>>) (x => x.TourUid == lastItem.TourUid)).OrderBy<TourPlaybackItem, DateTime>((Expression<Func<TourPlaybackItem, DateTime>>) (x => x.DateTime)).ToArray<TourPlaybackItem>();
+        {
+            playbackItemList = default;//localDataContext.TourPlaybackItems.Where<TourPlaybackItem>((Expression<Func<TourPlaybackItem, bool>>) (x => x.TourUid == lastItem.TourUid)).OrderBy<TourPlaybackItem, DateTime>((Expression<Func<TourPlaybackItem, DateTime>>) (x => x.DateTime)).ToArray<TourPlaybackItem>();
+        }
+        
         return playbackItemList;
       }
     }
@@ -284,7 +305,7 @@ namespace Izi.Travel.Data.Services.Implementation
         return;
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        IQueryable<TourPlaybackItem> entities = localDataContext.TourPlaybackItems.Where<TourPlaybackItem>((Expression<Func<TourPlaybackItem, bool>>) (x => x.TourUid == tourUid));
+        IQueryable<TourPlaybackItem> entities = default;//localDataContext.TourPlaybackItems.Where<TourPlaybackItem>((Expression<Func<TourPlaybackItem, bool>>) (x => x.TourUid == tourUid));
         localDataContext.TourPlaybackItems.DeleteAllOnSubmit<TourPlaybackItem>((IEnumerable<TourPlaybackItem>) entities);
         localDataContext.SubmitChanges();
       }
@@ -294,14 +315,20 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       if (query == null)
         throw new ArgumentNullException(nameof (query));
+      
       if (query.StateList == null)
         query.StateList = new AudioTrackState[0];
+      
       if (query.IdList == null)
         query.IdList = new int[0];
+      
       if (query.UidList == null)
         query.UidList = new string[0];
+
       using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.Playlist.Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => query.StateList.Length == 0 || query.StateList.Contains<AudioTrackState>(x.State))).Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => query.IdList.Length == 0 || query.IdList.Contains<int>(x.Id))).Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => query.UidList.Length == 0 || query.UidList.Contains<string>(x.Uid))).OrderBy<AudioTrackData, DateTime>((Expression<Func<AudioTrackData, DateTime>>) (x => x.DateTime)).ToArray<AudioTrackData>();
+      {
+        return default; //localDataContext.Playlist.Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>)(x => query.StateList.Length == 0 || query.StateList.Contains<AudioTrackState>(x.State))).Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>)(x => query.IdList.Length == 0 || query.IdList.Contains<int>(x.Id))).Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>)(x => query.UidList.Length == 0 || query.UidList.Contains<string>(x.Uid))).OrderBy<AudioTrackData, DateTime>((Expression<Func<AudioTrackData, DateTime>>)(x => x.DateTime)).ToArray<AudioTrackData>();
+      }
     }
 
     public int CreateAudioTrack(AudioTrackData audioTrackData)
@@ -324,9 +351,11 @@ namespace Izi.Travel.Data.Services.Implementation
         throw new Exception("ID is not defined for object");
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        AudioTrackData audioTrackData1 = localDataContext.Playlist.FirstOrDefault<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => x.Id == audioTrackData.Id));
+        AudioTrackData audioTrackData1 = default;//localDataContext.Playlist.FirstOrDefault<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => x.Id == audioTrackData.Id));
+        
         if (audioTrackData1 == null)
           return;
+        
         audioTrackData1.Uid = audioTrackData.Uid;
         audioTrackData1.Title = audioTrackData.Title;
         audioTrackData1.State = audioTrackData.State;
@@ -344,7 +373,7 @@ namespace Izi.Travel.Data.Services.Implementation
         return;
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        IQueryable<AudioTrackData> entities = localDataContext.Playlist.Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => idList.Contains<int>(x.Id)));
+        IQueryable<AudioTrackData> entities = default;//localDataContext.Playlist.Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => idList.Contains<int>(x.Id)));
         localDataContext.Playlist.DeleteAllOnSubmit<AudioTrackData>((IEnumerable<AudioTrackData>) entities);
         localDataContext.SubmitChanges();
       }
@@ -354,7 +383,7 @@ namespace Izi.Travel.Data.Services.Implementation
     {
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        localDataContext.Playlist.DeleteAllOnSubmit<AudioTrackData>((IEnumerable<AudioTrackData>) localDataContext.Playlist);
+        //localDataContext.Playlist.DeleteAllOnSubmit<AudioTrackData>((IEnumerable<AudioTrackData>) localDataContext.Playlist);
         localDataContext.SubmitChanges();
       }
     }
@@ -367,8 +396,11 @@ namespace Izi.Travel.Data.Services.Implementation
         return (QuizData) null;
       string uid = query.Uid.Trim().ToLower();
       string language = query.Language.Trim().ToLower();
+
       using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.QuizData.FirstOrDefault<QuizData>((Expression<Func<QuizData, bool>>) (x => x.Uid == uid && x.Language == language));
+      {
+        return default;//localDataContext.QuizData.FirstOrDefault<QuizData>((Expression<Func<QuizData, bool>>)(x => x.Uid == uid && x.Language == language));
+      }
     }
 
     public QuizData[] GetQuizDataList(QuizDataListQuery query)
@@ -399,8 +431,11 @@ namespace Izi.Travel.Data.Services.Implementation
       int count2 = maxValue;
       string[] queryUidList = query.UidList == null || query.UidList.Length == 0 ? new string[0] : ((IEnumerable<string>) query.UidList).Where<string>((Func<string, bool>) (x => !string.IsNullOrWhiteSpace(x))).Select<string, string>((Func<string, string>) (x => x.Trim().ToLower())).ToArray<string>();
       string[] queryLanguageList = query.LanguageList == null || query.LanguageList.Length == 0 ? new string[0] : ((IEnumerable<string>) query.LanguageList).Where<string>((Func<string, bool>) (x => !string.IsNullOrWhiteSpace(x))).Select<string, string>((Func<string, string>) (x => x.Trim().ToLower())).ToArray<string>();
+
       using (LocalDataContext localDataContext = new LocalDataContext())
-        return localDataContext.QuizData.Where<QuizData>((Expression<Func<QuizData, bool>>) (quizData => (queryUidList.Length == 0 || queryUidList.Contains<string>(quizData.Uid)) && (queryLanguageList.Length == 0 || queryLanguageList.Contains<string>(quizData.Language)))).OrderByDescending<QuizData, DateTime>((Expression<Func<QuizData, DateTime>>) (x => x.DateTime)).Skip<QuizData>(count1).Take<QuizData>(count2).ToArray<QuizData>();
+      {
+        return default;//localDataContext.QuizData.Where<QuizData>((Expression<Func<QuizData, bool>>)(quizData => (queryUidList.Length == 0 || queryUidList.Contains<string>(quizData.Uid)) && (queryLanguageList.Length == 0 || queryLanguageList.Contains<string>(quizData.Language)))).OrderByDescending<QuizData, DateTime>((Expression<Func<QuizData, DateTime>>)(x => x.DateTime)).Skip<QuizData>(count1).Take<QuizData>(count2).ToArray<QuizData>();
+      }
     }
 
     public QuizDataStatistics GetQuizDataStatistics(QuizDataStatisticsQuery query)
@@ -412,7 +447,7 @@ namespace Izi.Travel.Data.Services.Implementation
       QuizDataStatistics quizDataStatistics = new QuizDataStatistics();
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        IQueryable<QuizData> source = localDataContext.QuizData.Where<QuizData>((Expression<Func<QuizData, bool>>) (x => (queryUidList.Length == 0 || queryUidList.Contains<string>(x.Uid)) && (queryLanguageList.Length == 0 || queryLanguageList.Contains<string>(x.Language)))).AsQueryable<QuizData>();
+        IQueryable<QuizData> source = default;//localDataContext.QuizData.Where<QuizData>((Expression<Func<QuizData, bool>>) (x => (queryUidList.Length == 0 || queryUidList.Contains<string>(x.Uid)) && (queryLanguageList.Length == 0 || queryLanguageList.Contains<string>(x.Language)))).AsQueryable<QuizData>();
         quizDataStatistics.CorrectAnswerCount = source.Count<QuizData>((Expression<Func<QuizData, bool>>) (x => x.AnswerCorrect));
         quizDataStatistics.IncorrectAnswerCount = source.Count<QuizData>((Expression<Func<QuizData, bool>>) (x => !x.AnswerCorrect));
       }
@@ -432,7 +467,7 @@ namespace Izi.Travel.Data.Services.Implementation
       quizData.DateTime = DateTime.Now;
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        QuizData quizData1 = localDataContext.QuizData.FirstOrDefault<QuizData>((Expression<Func<QuizData, bool>>) (x => x.Uid == quizData.Uid && x.Language == quizData.Language));
+                QuizData quizData1 = default;//localDataContext.QuizData.FirstOrDefault<QuizData>((Expression<Func<QuizData, bool>>) (x => x.Uid == quizData.Uid && x.Language == quizData.Language));
         if (quizData1 != null)
         {
           quizData1.Uid = quizData.Uid;
@@ -462,12 +497,12 @@ namespace Izi.Travel.Data.Services.Implementation
       string languageValue = language.Trim().ToLower();
       using (LocalDataContext localDataContext = new LocalDataContext())
       {
-        QuizData entity = localDataContext.QuizData.FirstOrDefault<QuizData>((Expression<Func<QuizData, bool>>) (x => x.Uid == uidValue && x.Language == languageValue));
+        QuizData entity = default;//localDataContext.QuizData.FirstOrDefault<QuizData>((Expression<Func<QuizData, bool>>) (x => x.Uid == uidValue && x.Language == languageValue));
         if (entity == null)
           return;
         if (recursive)
         {
-          IQueryable<QuizData> queryable = localDataContext.QuizData.Where<QuizData>((Expression<Func<QuizData, bool>>) (x => x.ParentUid == uidValue && x.Language == languageValue));
+          IQueryable<QuizData> queryable = default;//localDataContext.QuizData.Where<QuizData>((Expression<Func<QuizData, bool>>) (x => x.ParentUid == uidValue && x.Language == languageValue));
           if (queryable.Any<QuizData>())
             localDataContext.QuizData.DeleteAllOnSubmit<QuizData>((IEnumerable<QuizData>) queryable);
         }

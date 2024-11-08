@@ -4,15 +4,15 @@
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
-using Caliburn.Micro;
+//using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Settings;
 using Izi.Travel.Business.Entities.TourPlayback;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Geofencing.Geotracker;
-using Izi.Travel.Geofencing.Primitives;
+//using Izi.Travel.Geofencing.Primitives;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common; //using System.Device.Location;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -26,7 +26,7 @@ namespace Izi.Travel.Business.Managers
     private static readonly object SyncRoot = new object();
     private IGeotracker _geotracker;
     private Geolocation _position;
-    private ILog _log;
+    //private ILog _log;
 
     public static Izi.Travel.Business.Managers.Geotracker Instance
     {
@@ -37,7 +37,8 @@ namespace Izi.Travel.Business.Managers
           lock (Izi.Travel.Business.Managers.Geotracker.SyncRoot)
           {
             if (Izi.Travel.Business.Managers.Geotracker._instance == null)
-              Izi.Travel.Business.Managers.Geotracker._instance = new Izi.Travel.Business.Managers.Geotracker();
+              Izi.Travel.Business.Managers.Geotracker._instance 
+                                = new Izi.Travel.Business.Managers.Geotracker();
           }
         }
         return Izi.Travel.Business.Managers.Geotracker._instance;
@@ -60,11 +61,13 @@ namespace Izi.Travel.Business.Managers
 
     private Geotracker()
     {
-      this._log = LogManager.GetLog(typeof (Izi.Travel.Business.Managers.Geotracker));
+      //this._log = LogManager.GetLog(typeof (Izi.Travel.Business.Managers.Geotracker));
       this.SetGeotracker((IGeotracker) new GpsGeotracker());
-      // ISSUE: method pointer
-      TourPlaybackManager.Instance.TourPlaybackStateChanged += new TypedEventHandler<TourPlaybackManager, EventArgs>((object) this, __methodptr(TourPlaybackManager_TourPlaybackStateChanged));
-    }
+     
+      TourPlaybackManager.Instance.TourPlaybackStateChanged += 
+                new TypedEventHandler<TourPlaybackManager, EventArgs>(
+                    this.TourPlaybackManager_TourPlaybackStateChanged);
+     }
 
     private void TourPlaybackManager_TourPlaybackStateChanged(
       TourPlaybackManager sender,
@@ -96,30 +99,49 @@ namespace Izi.Travel.Business.Managers
 
     protected override void OnStart()
     {
-      this._log.Info("Start");
-      // ISSUE: method pointer
-      this._geotracker.PositionChanged += new TypedEventHandler<IGeotracker, Geolocation>((object) this, __methodptr(_geotracker_PositionChanged));
+      //this._log.Info("Start");
+  
+      this._geotracker.PositionChanged += new TypedEventHandler<IGeotracker,
+                                     Geolocation>(_geotracker_PositionChanged);
     }
 
     protected override void OnStop()
     {
-      this._log.Info("Stop");
-      // ISSUE: method pointer
-      this._geotracker.PositionChanged -= new TypedEventHandler<IGeotracker, Geolocation>((object) this, __methodptr(_geotracker_PositionChanged));
+      //this._log.Info("Stop");
+ 
+      //this._geotracker.PositionChanged -= new TypedEventHandler<IGeotracker,
+      //                                Geolocation>(this._geotracker_PositionChanged);
     }
 
-    private void SetGeotracker(IGeotracker geotracker)
+        //-------------
+        private TypedEventHandler<IGeotracker, Geolocation> _geotrackerPositionChangedHandler;
+        private void SetGeotracker(IGeotracker geotracker)
     {
-      if (this._geotracker != null && this.IsStarted)
+          
+
+        // ...
+
+        _geotrackerPositionChangedHandler = new TypedEventHandler<IGeotracker, Geolocation>(
+            this._geotracker_PositionChanged);
+         this._geotracker.PositionChanged += _geotrackerPositionChangedHandler;
+
+        // ...
+       
+         this._geotracker.PositionChanged -= _geotrackerPositionChangedHandler;
+            //----------------
+
+            if (this._geotracker != null && this.IsStarted)
       {
         // ISSUE: method pointer
-        this._geotracker.PositionChanged -= new TypedEventHandler<IGeotracker, Geolocation>((object) this, __methodptr(_geotracker_PositionChanged));
+        this._geotracker.PositionChanged -= new TypedEventHandler<IGeotracker, 
+            Geolocation>(this._geotracker_PositionChanged);
       }
       this._geotracker = geotracker;
       if (!this.IsStarted)
         return;
       // ISSUE: method pointer
-      this._geotracker.PositionChanged += new TypedEventHandler<IGeotracker, Geolocation>((object) this, __methodptr(_geotracker_PositionChanged));
+      this._geotracker.PositionChanged += new TypedEventHandler<IGeotracker, 
+          Geolocation>(this._geotracker_PositionChanged);
     }
 
     private void _geotracker_PositionChanged(IGeotracker sender, Geolocation position)

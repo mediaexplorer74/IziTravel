@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.Entities.dll
 
 using System.Collections.Generic;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common;//using System.Device.Location; //RnD
 
 #nullable disable
 namespace Izi.Travel.Business.Entities.TourPlayback

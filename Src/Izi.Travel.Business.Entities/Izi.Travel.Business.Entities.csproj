@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4334CEBC-137C-48C6-9DA2-DF69A4AC1386}</ProjectGuid>
@@ -155,6 +156,7 @@
     <Compile Include="Data\GeoLocation.cs" />
     <Compile Include="Data\GeoRectangle.cs" />
     <Compile Include="Data\Location.cs" />
+    <Compile Include="Data\LocationRectangle.cs" />
     <Compile Include="Data\MapInfo.cs" />
     <Compile Include="Data\Media.cs" />
     <Compile Include="Data\MediaType.cs" />

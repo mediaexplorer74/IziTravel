@@ -6,7 +6,7 @@
 
 using Izi.Travel.Business.Entities.Media;
 using System.Collections.Generic;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common;//using System.Device.Location; //RnD
 
 #nullable disable
 namespace Izi.Travel.Business.Entities.TourPlayback

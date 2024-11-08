@@ -5,8 +5,11 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
 using Izi.Travel.Business.Entities.Data;
-using Microsoft.Phone.Tasks;
-using System.Device.Location;
+
+//RnD
+//using Microsoft.Phone.Tasks;
+
+using Izi.Travel.Data.Entities.Common; //using System.Device.Location;
 
 #nullable disable
 namespace Izi.Travel.Business.Extensions
@@ -17,32 +20,41 @@ namespace Izi.Travel.Business.Extensions
     {
       if (mtgObject == null)
         return false;
-      return mtgObject.Type == MtgObjectType.Museum || mtgObject.Type == MtgObjectType.Collection || mtgObject.Type == MtgObjectType.Tour;
+      return mtgObject.Type == MtgObjectType.Museum 
+                || mtgObject.Type == MtgObjectType.Collection 
+                || mtgObject.Type == MtgObjectType.Tour;
     }
 
     public static bool IsMuseumOrCollection(this MtgObject mtgObject)
     {
       if (mtgObject == null)
         return false;
-      return mtgObject.Type == MtgObjectType.Museum || mtgObject.Type == MtgObjectType.Collection;
+      return mtgObject.Type == MtgObjectType.Museum 
+                || mtgObject.Type == MtgObjectType.Collection;
     }
 
     public static bool IsCollectionOrExhibit(this MtgObject mtgObject)
     {
       if (mtgObject == null)
         return false;
-      return mtgObject.Type == MtgObjectType.Collection || mtgObject.Type == MtgObjectType.Exhibit;
+      return mtgObject.Type == MtgObjectType.Collection 
+                || mtgObject.Type == MtgObjectType.Exhibit;
     }
 
     public static void ShowMapDirectionsTask(this MtgObject mtgObject)
     {
-      if (mtgObject == null || mtgObject.MainContent == null || mtgObject.MainContent.Title == null || mtgObject.Location == null)
+      if (mtgObject == null || mtgObject.MainContent == null
+                || mtgObject.MainContent.Title == null || mtgObject.Location == null)
         return;
       GeoCoordinate geoCoordinate = mtgObject.Location.ToGeoCoordinate();
+      
       if (geoCoordinate == (GeoCoordinate) null)
         return;
+
+      // ?
       if (geoCoordinate.IsUnknown)
         return;
+      
       try
       {
         new MapsDirectionsTask()

@@ -81,7 +81,7 @@ namespace Izi.Travel.Business.Helper
               {
                 string remoteUid = mtgObject.Uid;
                 string remoteLanguage = mtgObject.MainContent.Language;
-                result.Data.Add(((IEnumerable<MtgObject>) localData).FirstOrDefault<MtgObject>((Func<MtgObject, bool>) (x => x.MainContent != null && x.Uid.Equals(remoteUid, StringComparison.InvariantCultureIgnoreCase) && x.MainContent.Language.Equals(remoteLanguage, StringComparison.InvariantCultureIgnoreCase))) ?? mtgObject);
+                result.Data.Add(((IEnumerable<MtgObject>) localData).FirstOrDefault<MtgObject>((Func<MtgObject, bool>) (x => x.MainContent != null && x.Uid.Equals(remoteUid, StringComparison.CurrentCultureIgnoreCase) && x.MainContent.Language.Equals(remoteLanguage, StringComparison.CurrentCultureIgnoreCase))) ?? mtgObject);
               }
             }
           }

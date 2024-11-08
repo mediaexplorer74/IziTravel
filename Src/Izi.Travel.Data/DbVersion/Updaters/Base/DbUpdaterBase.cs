@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.dll
 
 using Izi.Travel.Data.DbVersion.Profiles;
-using Microsoft.Phone.Data.Linq;
+//using Microsoft.Phone.Data.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Linq;
@@ -39,20 +39,20 @@ namespace Izi.Travel.Data.DbVersion.Updaters.Base
         {
           context.CreateDatabase();
           context.SubmitChanges();
-          DatabaseSchemaUpdater databaseSchemaUpdater = context.CreateDatabaseSchemaUpdater();
+                    DatabaseSchemaUpdater databaseSchemaUpdater = default;//context.CreateDatabaseSchemaUpdater();
           databaseSchemaUpdater.DatabaseSchemaVersion = profiles == null || !((IEnumerable<IDbUpdaterProfile>) profiles).Any<IDbUpdaterProfile>() ? 1 : ((IEnumerable<IDbUpdaterProfile>) profiles).Max<IDbUpdaterProfile>((Func<IDbUpdaterProfile, int>) (x => x.DbVersion));
           databaseSchemaUpdater.Execute();
         }
         else
         {
-          int dbVersion = context.CreateDatabaseSchemaUpdater().DatabaseSchemaVersion;
+          int dbVersion = 0;// context.CreateDatabaseSchemaUpdater().DatabaseSchemaVersion;
           IOrderedEnumerable<IDbUpdaterProfile> orderedEnumerable = profiles != null ? ((IEnumerable<IDbUpdaterProfile>) profiles).Where<IDbUpdaterProfile>((Func<IDbUpdaterProfile, bool>) (x => x.DbVersion > dbVersion)).OrderBy<IDbUpdaterProfile, int>((Func<IDbUpdaterProfile, int>) (x => x.DbVersion)) : (IOrderedEnumerable<IDbUpdaterProfile>) null;
           if (orderedEnumerable == null)
             return;
           foreach (IDbUpdaterProfile dbUpdaterProfile in (IEnumerable<IDbUpdaterProfile>) orderedEnumerable)
           {
-            DatabaseSchemaUpdater databaseSchemaUpdater = context.CreateDatabaseSchemaUpdater();
-            dbUpdaterProfile.ApplySchemaUpdate(databaseSchemaUpdater);
+            DatabaseSchemaUpdater databaseSchemaUpdater = default;//context.CreateDatabaseSchemaUpdater();
+            dbUpdaterProfile.ApplySchemaUpdate(/*databaseSchemaUpdater*/default);
             databaseSchemaUpdater.DatabaseSchemaVersion = dbUpdaterProfile.DbVersion;
             databaseSchemaUpdater.Execute();
             dbUpdaterProfile.ApplyDataBaseUpdate(context);

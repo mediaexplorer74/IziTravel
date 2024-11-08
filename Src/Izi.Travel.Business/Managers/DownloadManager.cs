@@ -258,7 +258,7 @@ namespace Izi.Travel.Business.Managers
         DownloadManager.Logger.Error(ex);
         return false;
       }
-      return remoteMtgObject != null && !string.IsNullOrWhiteSpace(remoteMtgObject.Hash) && !remoteMtgObject.Hash.Equals(localMtgObject.Hash, StringComparison.InvariantCultureIgnoreCase);
+      return remoteMtgObject != null && !string.IsNullOrWhiteSpace(remoteMtgObject.Hash) && !remoteMtgObject.Hash.Equals(localMtgObject.Hash, StringComparison.CurrentCultureIgnoreCase);
     }
 
     public DownloadProcess GetDownloadProcess(MtgObject mtgObject)

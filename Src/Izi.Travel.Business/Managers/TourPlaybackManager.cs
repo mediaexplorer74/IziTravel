@@ -4,7 +4,7 @@
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
-using Caliburn.Micro;
+//using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Filters;
@@ -18,13 +18,16 @@ using Izi.Travel.Data.Services.Contract;
 using Izi.Travel.Geofencing;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common; //using System.Device.Location;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Threading;
+//using System.Windows.Threading;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using Windows.UI.Xaml;
+using System.Diagnostics;
+
 
 #nullable disable
 namespace Izi.Travel.Business.Managers
@@ -33,7 +36,7 @@ namespace Izi.Travel.Business.Managers
   {
     private static volatile TourPlaybackManager _instance;
     private static readonly object SyncRoot = new object();
-    private readonly ILog _log;
+    //private readonly ILog _log;
     private readonly ILocalDataService _dataService;
     private readonly TourPlaybackAction[] _tourActions;
     private Task _task;
@@ -98,60 +101,121 @@ namespace Izi.Travel.Business.Managers
       }
     }
 
-    public event TypedEventHandler<TourPlaybackManager, GeoCoordinate> PositionChanged
+    /* public event TypedEventHandler<TourPlaybackManager, GeoCoordinate> PositionChanged
+        {
+        add
+        {
+            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler1 = this.PositionChanged;
+            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler2;
+            do
+            {
+            typedEventHandler2 = typedEventHandler1;
+            typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, GeoCoordinate>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, GeoCoordinate>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
+        }
+        remove
+        {
+            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler1 = this.PositionChanged;
+            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler2;
+            do
+            {
+            typedEventHandler2 = typedEventHandler1;
+            typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, GeoCoordinate>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, GeoCoordinate>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
+        }
+        }
+    */
+    public event TypedEventHandler<TourPlaybackManager, Geolocation> PositionChanged
     {
-      add
-      {
-        TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler1 = this.PositionChanged;
-        TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler2;
-        do
+            /*
+        add
         {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, GeoCoordinate>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, GeoCoordinate>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1 
+                = this.PositionChanged;
+          
+
+            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2;
+            do
+            {
+                typedEventHandler2 = typedEventHandler1;
+                typedEventHandler1 = 
+                    Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, 
+                    Geolocation>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, 
+                    Geolocation>)Delegate.Combine((Delegate)typedEventHandler2, (Delegate)value), 
+                    typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
         }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-      remove
-      {
-        TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler1 = this.PositionChanged;
-        TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler2;
-        do
+        remove
         {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, GeoCoordinate>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, GeoCoordinate>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1 
+                = this.PositionChanged;
+            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2;
+            do
+            {
+                typedEventHandler2 = typedEventHandler1;
+                typedEventHandler1 = 
+                    Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, Geolocation>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, Geolocation>)Delegate.Remove((Delegate)typedEventHandler2, (Delegate)value), typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
         }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
+            */
+
+            add
+            {
+                TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1
+                    += (sender, e) => this.PositionChanged(sender, e);
+            }
+            remove
+            {
+                TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2
+                    -= (sender, e) => this.PositionChanged(sender, e);
+            }
     }
 
-    public event TypedEventHandler<TourPlaybackManager, EventArgs> TourPlaybackStateChanged
+     public event TypedEventHandler<TourPlaybackManager, EventArgs> TourPlaybackStateChanged
     {
-      add
-      {
-        TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1 = this.TourPlaybackStateChanged;
-        TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            /*
+          add
+          {
+            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1 = this.TourPlaybackStateChanged;
+            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler2;
+            do
+            {
+              typedEventHandler2 = typedEventHandler1;
+              typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
+          }
+          remove
+          {
+            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1 = this.TourPlaybackStateChanged;
+            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler2;
+            do
+            {
+              typedEventHandler2 = typedEventHandler1;
+              typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+            }
+            while (typedEventHandler1 != typedEventHandler2);
+          }
+            */
+            add
+            {
+                TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1
+                    += (sender, e) => this.TourPlaybackStateChanged(sender, e);
+            }
+            remove
+            {
+                TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2
+                    -= (sender, e) => this.TourPlaybackStateChanged(sender, e);
+            }
         }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-      remove
-      {
-        TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1 = this.TourPlaybackStateChanged;
-        TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-        }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-    }
 
     public event TypedEventHandler<TourPlaybackAttraction, EventArgs> TourPlaybackAttractionIsPlayingChanged
     {
+            /*
       add
       {
         TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = this.TourPlaybackAttractionIsPlayingChanged;
@@ -174,7 +238,18 @@ namespace Izi.Travel.Business.Managers
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
-    }
+            */
+            add
+            {
+                TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1
+                    += (sender, e) => this.TourPlaybackAttractionIsPlayingChanged(sender, e);
+            }
+            remove
+            {
+                TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2
+                    -= (sender, e) => this.TourPlaybackAttractionIsPlayingChanged(sender, e);
+            }
+        }
 
     public event TypedEventHandler<TourPlaybackAttraction, EventArgs> TourPlaybackAttractionIsVisitedChanged
     {
@@ -217,7 +292,8 @@ namespace Izi.Travel.Business.Managers
       }
       remove
       {
-        TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler1 = this.TourPlaybackTriggerZoneStateChanged;
+        TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler1 
+                    = this.TourPlaybackTriggerZoneStateChanged;
         TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler2;
         do
         {
@@ -230,32 +306,44 @@ namespace Izi.Travel.Business.Managers
 
     private TourPlaybackManager()
     {
-      TourPlaybackManager.NotifyTouristAttractionReached = TourPlaybackManager.NotifyTouristAttractionReached ?? (Action<string>) delegate { };
-      TourPlaybackManager.NotifyTourStopped = TourPlaybackManager.NotifyTourStopped ?? (Action) (() => { });
-      this._dataService = IoC.Get<ILocalDataService>();
-      this._log = LogManager.GetLog(typeof (TourPlaybackManager));
-      this._tourActions = new TourPlaybackAction[3]
+      TourPlaybackManager.NotifyTouristAttractionReached 
+                = TourPlaybackManager.NotifyTouristAttractionReached ?? (Action<string>) delegate { };
+      TourPlaybackManager.NotifyTourStopped = TourPlaybackManager.NotifyTourStopped 
+                ?? (Action) (() => { });
+           
+      //RnD
+      this._dataService = default;//IoC.Get<ILocalDataService>();
+      //this._log = LogManager.GetLog(typeof (TourPlaybackManager));
+      
+            this._tourActions = new TourPlaybackAction[3]
       {
         TourPlaybackAction.TourStarted,
         TourPlaybackAction.TourPaused,
         TourPlaybackAction.TourStopped
       };
       // ISSUE: method pointer
-      GeofenceMonitor.Current.StatusChanged += new TypedEventHandler<GeofenceMonitor, PositionStatus>((object) this, __methodptr(OnGeofenceMonitorStatusChanged));
+      GeofenceMonitor.Current.StatusChanged 
+                += new TypedEventHandler<GeofenceMonitor, PositionStatus>(OnGeofenceMonitorStatusChanged);
       // ISSUE: method pointer
-      GeofenceMonitor.Current.PositionChanged += new TypedEventHandler<GeofenceMonitor, Izi.Travel.Geofencing.Primitives.Geolocation>((object) this, __methodptr(OnGeofenceMonitorPositionChanged));
+      GeofenceMonitor.Current.PositionChanged
+                += new TypedEventHandler<GeofenceMonitor, 
+                Izi.Travel.Geofencing.Primitives.Geolocation>(OnGeofenceMonitorPositionChanged);
       // ISSUE: method pointer
-      GeofenceMonitor.Current.GeofenceStateChanged += new TypedEventHandler<GeofenceMonitor, object>((object) this, __methodptr(OnGeofenceMonitorGeofenceStateChanged));
+      GeofenceMonitor.Current.GeofenceStateChanged 
+                += new TypedEventHandler<GeofenceMonitor, object>(OnGeofenceMonitorGeofenceStateChanged);
       // ISSUE: method pointer
-      ServiceFacade.AudioService.StateChanged += new TypedEventHandler<IAudioService, AudioServiceState>((object) this, __methodptr(OnAudioPlayerStateChanged));
+      ServiceFacade.AudioService.StateChanged 
+                += new TypedEventHandler<IAudioService, AudioServiceState>(OnAudioPlayerStateChanged);
       this.SetTourPlaybackState(TourPlaybackState.Idle);
       DispatcherTimer dispatcherTimer = new DispatcherTimer();
       dispatcherTimer.Interval = TimeSpan.FromMinutes(1.0);
-      dispatcherTimer.Tick += new EventHandler(this.DispatcherTimerTick);
+      
+      //dispatcherTimer.Tick += this.DispatcherTimerTick;
+      dispatcherTimer.Tick += (sender, e) => this.DispatcherTimerTick(sender, e);
       dispatcherTimer.Start();
     }
 
-    private void DispatcherTimerTick(object sender, EventArgs e)
+    public void DispatcherTimerTick(object sender, EventArgs e)
     {
       if (this.TourPlaybackState != TourPlaybackState.Started)
         return;
@@ -290,7 +378,7 @@ namespace Izi.Travel.Business.Managers
       }
       catch (Exception ex)
       {
-        this._log.Error(ex);
+        //this._log.Error(ex);
         this.SetTourPlaybackState(TourPlaybackState.Error);
         return false;
       }
@@ -298,8 +386,11 @@ namespace Izi.Travel.Business.Managers
 
     public void Start()
     {
-      this._log.Info(nameof (Start));
-      if (this.TourPlayback == null || this.TourPlaybackState == TourPlaybackState.Started || this.TourPlaybackState != TourPlaybackState.Initialized && this.TourPlaybackState != TourPlaybackState.Paused)
+      //this._log.Info(nameof (Start));
+      if (this.TourPlayback == null 
+                || this.TourPlaybackState == TourPlaybackState.Started
+                || this.TourPlaybackState != TourPlaybackState.Initialized 
+                && this.TourPlaybackState != TourPlaybackState.Paused)
         return;
       ServiceFacade.AudioService.Stop();
       GeofenceMonitor.Current.Start();
@@ -308,7 +399,7 @@ namespace Izi.Travel.Business.Managers
 
     public void Pause(bool stopTourAudio = true)
     {
-      this._log.Info(nameof (Pause));
+      //this._log.Info(nameof (Pause));
       if (this.TourPlayback == null)
         return;
       if (this.TourPlaybackState != TourPlaybackState.Started)
@@ -322,7 +413,8 @@ namespace Izi.Travel.Business.Managers
       }
       catch (Exception ex)
       {
-        this._log.Error(ex);
+        Debug.WriteLine("[ex] TourPlaybackManager error: " + ex.Message);
+        //this._log.Error(ex);
       }
       finally
       {
@@ -332,7 +424,7 @@ namespace Izi.Travel.Business.Managers
 
     public void Stop()
     {
-      this._log.Info(nameof (Stop));
+      //this._log.Info(nameof (Stop));
       if (this.TourPlayback == null)
         return;
       if (this.TourPlaybackState == TourPlaybackState.Stopped)
@@ -345,7 +437,8 @@ namespace Izi.Travel.Business.Managers
       }
       catch (Exception ex)
       {
-        this._log.Error(ex);
+        Debug.WriteLine("[ex] TourPlaybackManager error: " + ex.Message);
+        //this._log.Error(ex);
       }
       finally
       {
@@ -358,7 +451,12 @@ namespace Izi.Travel.Business.Managers
 
     public static bool IsTourAttached(string tourUid, string tourLanguage)
     {
-      return !string.IsNullOrWhiteSpace(tourUid) && !string.IsNullOrWhiteSpace(TourPlaybackManager.Instance.TourPlaybackUid) && string.Equals(TourPlaybackManager.Instance.TourPlaybackUid, tourUid, StringComparison.InvariantCultureIgnoreCase) && string.Equals(TourPlaybackManager.Instance.TourPlaybackLanguage, tourLanguage, StringComparison.InvariantCultureIgnoreCase);
+      return !string.IsNullOrWhiteSpace(tourUid) 
+                && !string.IsNullOrWhiteSpace(TourPlaybackManager.Instance.TourPlaybackUid)
+                && string.Equals(TourPlaybackManager.Instance.TourPlaybackUid, tourUid,
+                StringComparison.CurrentCultureIgnoreCase) 
+                && string.Equals(TourPlaybackManager.Instance.TourPlaybackLanguage,
+                tourLanguage, StringComparison.CurrentCultureIgnoreCase);
     }
 
     public static TourPlaybackAttraction GetAttraction(
@@ -368,7 +466,7 @@ namespace Izi.Travel.Business.Managers
     {
       if (!TourPlaybackManager.IsTourAttached(tourUid, tourLanguage))
         return (TourPlaybackAttraction) null;
-      return string.IsNullOrWhiteSpace(attractionUid) ? (TourPlaybackAttraction) null : TourPlaybackManager.Instance.TourPlayback.Attractions.FirstOrDefault<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => string.Equals(x.Uid, attractionUid, StringComparison.InvariantCultureIgnoreCase)));
+      return string.IsNullOrWhiteSpace(attractionUid) ? (TourPlaybackAttraction) null : TourPlaybackManager.Instance.TourPlayback.Attractions.FirstOrDefault<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => string.Equals(x.Uid, attractionUid, StringComparison.CurrentCultureIgnoreCase)));
     }
 
     private static Izi.Travel.Business.Entities.TourPlayback.TourPlayback CreateTourPlayback(
@@ -376,11 +474,14 @@ namespace Izi.Travel.Business.Managers
     {
       if (mtgObject == null || mtgObject.Type != MtgObjectType.Tour)
         return (Izi.Travel.Business.Entities.TourPlayback.TourPlayback) null;
-      Izi.Travel.Business.Entities.TourPlayback.TourPlayback tourPlayback = new Izi.Travel.Business.Entities.TourPlayback.TourPlayback()
+
+      Izi.Travel.Business.Entities.TourPlayback.TourPlayback tourPlayback 
+       = new Izi.Travel.Business.Entities.TourPlayback.TourPlayback()
       {
         Uid = mtgObject.Uid,
         ContentProviderUid = mtgObject.ContentProvider.Uid
       };
+
       Content mainContent = mtgObject.MainContent;
       if (mainContent != null)
       {
@@ -388,9 +489,16 @@ namespace Izi.Travel.Business.Managers
         tourPlayback.Language = mainContent.Language;
         if (mainContent.Children != null)
         {
-          List<string> order = mainContent.Playback != null ? ((IEnumerable<string>) mainContent.Playback.Order).ToList<string>() : new List<string>();
-          IEnumerable<MtgObject> source = ((IEnumerable<MtgObject>) mainContent.Children).Where<MtgObject>((Func<MtgObject, bool>) (x => x.Type == MtgObjectType.TouristAttraction));
-          foreach (MtgObject attraction in (IEnumerable<MtgObject>) source.OrderBy<MtgObject, int>((Func<MtgObject, int>) (x => order.IndexOf(x.Uid))))
+          List<string> order = mainContent.Playback != null
+                        ? ((IEnumerable<string>) mainContent.Playback.Order).ToList<string>() 
+                        : new List<string>();
+
+          IEnumerable<MtgObject> source = ((IEnumerable<MtgObject>) mainContent.Children)
+                        .Where<MtgObject>((Func<MtgObject, bool>)
+                        (x => x.Type == MtgObjectType.TouristAttraction));
+
+          foreach (MtgObject attraction in (IEnumerable<MtgObject>) source
+                        .OrderBy<MtgObject, int>((Func<MtgObject, int>) (x => order.IndexOf(x.Uid))))
           {
             TourPlaybackAttraction tourAttraction = new TourPlaybackAttraction(tourPlayback)
             {
@@ -402,7 +510,8 @@ namespace Izi.Travel.Business.Managers
               tourAttraction.Location = attraction.Location.ToGeoCoordinate();
             if (attraction.MainContent != null)
               tourAttraction.Title = attraction.MainContent.Title;
-            tourAttraction.TriggerZones.AddRange(TourPlaybackManager.CreateTourPlaybackTriggerZones(tourAttraction, attraction));
+            tourAttraction.TriggerZones.AddRange(
+                TourPlaybackManager.CreateTourPlaybackTriggerZones(tourAttraction, attraction));
             tourPlayback.Attractions.Add(tourAttraction);
           }
         }
@@ -412,12 +521,16 @@ namespace Izi.Travel.Business.Managers
       return tourPlayback;
     }
 
-    private static void InitializeGeofences(Izi.Travel.Business.Entities.TourPlayback.TourPlayback tourPlayback)
+    private static void InitializeGeofences(
+        Izi.Travel.Business.Entities.TourPlayback.TourPlayback tourPlayback)
     {
       if (tourPlayback == null || tourPlayback.Attractions == null)
         return;
       GeofenceMonitor.Current.Geofences.Clear();
-      foreach (Geofence geofence in tourPlayback.Attractions.SelectMany<TourPlaybackAttraction, Geofence>(new Func<TourPlaybackAttraction, IEnumerable<Geofence>>(TourPlaybackManager.CreateTourPlaybackGeofences)))
+      foreach (Geofence geofence in tourPlayback.Attractions
+                .SelectMany<TourPlaybackAttraction, Geofence>(
+          new Func<TourPlaybackAttraction, IEnumerable<Geofence>>(
+              TourPlaybackManager.CreateTourPlaybackGeofences)))
         GeofenceMonitor.Current.Geofences.Add(geofence);
     }
 
@@ -425,7 +538,10 @@ namespace Izi.Travel.Business.Managers
       TourPlaybackAttraction tourAttraction,
       MtgObject attraction)
     {
-      return attraction == null || attraction.TriggerZones == null || attraction.TriggerZones.Length == 0 ? (IEnumerable<TourPlaybackTriggerZone>) new List<TourPlaybackTriggerZone>() : (IEnumerable<TourPlaybackTriggerZone>) ((IEnumerable<TriggerZone>) attraction.TriggerZones).Where<TriggerZone>((Func<TriggerZone, bool>) (x => x.Geoshape != null)).Select<TriggerZone, TourPlaybackTriggerZone>((Func<TriggerZone, int, TourPlaybackTriggerZone>) ((x, i) => new TourPlaybackTriggerZone(tourAttraction)
+      return attraction == null || attraction.TriggerZones == null 
+                || attraction.TriggerZones.Length == 0 
+                ? (IEnumerable<TourPlaybackTriggerZone>) new List<TourPlaybackTriggerZone>()
+                : (IEnumerable<TourPlaybackTriggerZone>) ((IEnumerable<TriggerZone>) attraction.TriggerZones).Where<TriggerZone>((Func<TriggerZone, bool>) (x => x.Geoshape != null)).Select<TriggerZone, TourPlaybackTriggerZone>((Func<TriggerZone, int, TourPlaybackTriggerZone>) ((x, i) => new TourPlaybackTriggerZone(tourAttraction)
       {
         Uid = string.Format("{0}_{1}", (object) attraction.Uid, (object) (i + 1)),
         Geoshape = x.Geoshape
@@ -435,7 +551,12 @@ namespace Izi.Travel.Business.Managers
     private static IEnumerable<Geofence> CreateTourPlaybackGeofences(
       TourPlaybackAttraction attraction)
     {
-      return attraction == null || attraction.TriggerZones == null || attraction.TriggerZones.Count == 0 ? (IEnumerable<Geofence>) new List<Geofence>() : (IEnumerable<Geofence>) attraction.TriggerZones.Select<TourPlaybackTriggerZone, Geofence>((Func<TourPlaybackTriggerZone, Geofence>) (x => new Geofence(x.Uid, x.Geoshape)
+      return attraction == null 
+                || attraction.TriggerZones == null 
+                || attraction.TriggerZones.Count == 0
+                ? (IEnumerable<Geofence>) new List<Geofence>() 
+                : (IEnumerable<Geofence>) attraction.TriggerZones.Select<TourPlaybackTriggerZone, 
+                Geofence>((Func<TourPlaybackTriggerZone, Geofence>) (x => new Geofence(x.Uid, x.Geoshape)
       {
         Tag = (object) attraction.Uid
       })).ToList<Geofence>();
@@ -501,7 +622,7 @@ namespace Izi.Travel.Business.Managers
       }
       catch (Exception ex)
       {
-        this._log.Error(ex);
+        //this._log.Error(ex);
         this.SetTourPlaybackState(TourPlaybackState.Error);
       }
     }
@@ -519,7 +640,11 @@ namespace Izi.Travel.Business.Managers
       TourPlaybackTriggerZone triggerZone = attraction.TriggerZones.FirstOrDefault<TourPlaybackTriggerZone>((Func<TourPlaybackTriggerZone, bool>) (x => x.Uid == reportItem.Geofence.Id));
       if (triggerZone == null)
         return;
-      this._log.Info("{0} zone state switched to {1}", (object) triggerZone.Uid, (object) reportItem.NewState);
+
+      //this._log.Info("{0} zone state switched to {1}", (object) triggerZone.Uid, (object) reportItem.NewState);
+      Debug.WriteLine("[i] " + "{0} zone state switched to {1}", (object)triggerZone.Uid,
+          (object)reportItem.NewState);
+            
       if (reportItem.NewState == GeofenceState.Entered)
       {
         this.SetTourPlaybackTriggerZoneState(triggerZone, TourPlaybackTriggerZoneState.Entered);
@@ -550,13 +675,19 @@ namespace Izi.Travel.Business.Managers
       try
       {
         AudioTrackInfo trackInfo = ServiceFacade.AudioService.GetCurrentTrackInfo();
-        if (trackInfo == null || this.TourPlayback == null || this.TourPlayback.Attractions == null || !this.TourPlayback.Attractions.Any<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => this.Equals(trackInfo.MtgObjectUid, x.Uid, trackInfo.Language, this.TourPlayback.Language))))
+        if (trackInfo == null || this.TourPlayback == null 
+                    || this.TourPlayback.Attractions == null 
+                    || !this.TourPlayback.Attractions.Any<TourPlaybackAttraction>(
+                        (Func<TourPlaybackAttraction, bool>) 
+                        (x => this.Equals(trackInfo.MtgObjectUid, x.Uid, trackInfo.Language,
+                        this.TourPlayback.Language))))
           return;
+
         ServiceFacade.AudioService.Stop();
       }
       catch (Exception ex)
       {
-        this._log.Error(ex);
+        //this._log.Error(ex);
       }
     }
 
@@ -566,7 +697,9 @@ namespace Izi.Travel.Business.Managers
     {
       if (attraction == null || attraction.TourPlayback == null || attraction.IsVisited)
         return;
-      this._log.Info("Play {0}", (object) attraction.Uid);
+
+      //this._log.Info("Play {0}", (object) attraction.Uid);
+      
       if (attraction.AudioTrackInfo == null)
       {
         MtgObjectFilter filter = new MtgObjectFilter(attraction.Uid, new string[1]
@@ -578,7 +711,8 @@ namespace Izi.Travel.Business.Managers
         MtgObject mtgObjectAsync = await MtgObjectServiceHelper.GetMtgObjectAsync(filter);
         if (mtgObjectAsync == null || mtgObjectAsync.MainAudioMedia == null)
           return;
-        attraction.AudioTrackInfo = AudioTrackInfoHelper.FromMtgObject(mtgObjectAsync, this.TourPlaybackUid, MtgObjectType.Tour, ActivationTypeParameter.Gps);
+        attraction.AudioTrackInfo = AudioTrackInfoHelper.FromMtgObject(mtgObjectAsync, 
+            this.TourPlaybackUid, MtgObjectType.Tour, ActivationTypeParameter.Gps);
       }
       if (!cancelPlayStates.Contains(ServiceFacade.AudioService.State))
       {
@@ -598,9 +732,11 @@ namespace Izi.Travel.Business.Managers
       if (this.TourPlaybackState == state)
         return;
       this.TourPlaybackState = state;
-      this.AddTourPlaybackAction(this.TourPlayback, (TourPlaybackAttraction) null, TourPlaybackManager.GetTourPlaybackAction(this.TourPlaybackState));
-      // ISSUE: reference to a compiler-generated field
-      this.TourPlaybackStateChanged?.Invoke(this, EventArgs.Empty);
+      this.AddTourPlaybackAction(this.TourPlayback, (TourPlaybackAttraction) null, 
+          TourPlaybackManager.GetTourPlaybackAction(this.TourPlaybackState));
+
+      // RnD
+      //this.TourPlaybackStateChanged?.Invoke(this, EventArgs.Empty); 
     }
 
     private void SetTourPlaybackTriggerZoneState(
@@ -612,8 +748,8 @@ namespace Izi.Travel.Business.Managers
       triggerZone.State = state;
       if (triggerZone.TourAttraction != null && triggerZone.TourAttraction.TourPlayback != null)
         this.AddTourPlaybackAction(triggerZone.TourAttraction.TourPlayback, triggerZone.TourAttraction, TourPlaybackManager.GetTourPlaybackTriggerZoneAction(state));
-      // ISSUE: reference to a compiler-generated field
-      this.TourPlaybackTriggerZoneStateChanged?.Invoke(triggerZone, EventArgs.Empty);
+      // RnD
+      //this.TourPlaybackTriggerZoneStateChanged?.Invoke(triggerZone, EventArgs.Empty);
     }
 
     private void SetTourPlaybackAttractionIsPlaying(
@@ -624,9 +760,11 @@ namespace Izi.Travel.Business.Managers
         return;
       attraction.IsPlaying = isPlaying;
       if (attraction.TourPlayback != null & isPlaying)
-        this.AddTourPlaybackAction(attraction.TourPlayback, attraction, TourPlaybackAction.AttractionPlaying);
-      // ISSUE: reference to a compiler-generated field
-      this.TourPlaybackAttractionIsPlayingChanged?.Invoke(attraction, EventArgs.Empty);
+        this.AddTourPlaybackAction(attraction.TourPlayback, attraction, 
+            TourPlaybackAction.AttractionPlaying);
+
+      // RnD
+      //this.TourPlaybackAttractionIsPlayingChanged?.Invoke(attraction, EventArgs.Empty);
     }
 
     private void SetTourPlaybackAttractionIsVisited(
@@ -639,7 +777,7 @@ namespace Izi.Travel.Business.Managers
       if (attraction.TourPlayback != null & isVisited)
         this.AddTourPlaybackAction(attraction.TourPlayback, attraction, TourPlaybackAction.AttractionVisited);
       // ISSUE: reference to a compiler-generated field
-      this.TourPlaybackAttractionIsVisitedChanged?.Invoke(attraction, EventArgs.Empty);
+      //this.TourPlaybackAttractionIsVisitedChanged?.Invoke(attraction, EventArgs.Empty);
     }
 
     private void AddTourPlaybackAction(
@@ -681,29 +819,37 @@ namespace Izi.Travel.Business.Managers
     {
       if (state == TourPlaybackTriggerZoneState.Entered)
         return TourPlaybackAction.AttractionEntered;
-      return state == TourPlaybackTriggerZoneState.Leaved ? TourPlaybackAction.AttractionLeaved : TourPlaybackAction.Unknown;
+      return state == TourPlaybackTriggerZoneState.Leaved 
+                ? TourPlaybackAction.AttractionLeaved
+                : TourPlaybackAction.Unknown;
     }
 
     private bool IsTourTrack(AudioTrackInfo trackInfo)
     {
-      return trackInfo != null && this.TourPlayback != null && this.TourPlayback.Attractions != null && this.TourPlayback.Attractions.Any<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => this.Equals(trackInfo.MtgObjectUid, x.Uid, trackInfo.Language, this.TourPlayback.Language)));
+      return trackInfo != null 
+                && this.TourPlayback != null && this.TourPlayback.Attractions != null 
+                && this.TourPlayback.Attractions.Any<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => this.Equals(trackInfo.MtgObjectUid, x.Uid, trackInfo.Language, this.TourPlayback.Language)));
     }
 
     private bool Equals(string uid1, string uid2, string language1, string language2)
     {
-      return uid1 != null && language1 != null && string.Equals(uid1, uid2, StringComparison.InvariantCultureIgnoreCase) && string.Equals(language1, language2, StringComparison.CurrentCultureIgnoreCase);
+      return uid1 != null && language1 != null && string.Equals(uid1, uid2,
+          StringComparison.CurrentCultureIgnoreCase) && string.Equals(language1, language2, 
+          StringComparison.CurrentCultureIgnoreCase);
     }
 
     private void OnGeofenceMonitorStatusChanged(GeofenceMonitor monitor, PositionStatus status)
     {
-      // ISSUE: reference to a compiler-generated field
-      this.PositionStatusChanged?.Invoke(this, status);
+      // RnD
+      //this.PositionStatusChanged?.Invoke(this, status);
     }
 
-    private void OnGeofenceMonitorPositionChanged(GeofenceMonitor monitor, Izi.Travel.Geofencing.Primitives.Geolocation position)
+    private void OnGeofenceMonitorPositionChanged(GeofenceMonitor monitor,
+        Izi.Travel.Geofencing.Primitives.Geolocation position)
     {
-      // ISSUE: reference to a compiler-generated field
-      this.PositionChanged?.Invoke(this, new GeoCoordinate(position.Latitude, position.Longitude, position.Latitude));
+      // RnD
+      //this.PositionChanged?.Invoke(this, new GeoCoordinate(position.Latitude,
+      //position.Longitude, position.Latitude));
     }
 
     private void OnGeofenceMonitorGeofenceStateChanged(GeofenceMonitor monitor, object args)
@@ -722,7 +868,7 @@ namespace Izi.Travel.Business.Managers
       AudioTrackInfo trackInfo = ServiceFacade.AudioService.GetCurrentTrackInfo();
       if (trackInfo != null && this.IsTourTrack(trackInfo))
       {
-        TourPlaybackAttraction attraction = this.TourPlayback.Attractions.FirstOrDefault<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => string.Equals(x.Uid, trackInfo.MtgObjectUid, StringComparison.InvariantCultureIgnoreCase)));
+        TourPlaybackAttraction attraction = this.TourPlayback.Attractions.FirstOrDefault<TourPlaybackAttraction>((Func<TourPlaybackAttraction, bool>) (x => string.Equals(x.Uid, trackInfo.MtgObjectUid, StringComparison.CurrentCultureIgnoreCase)));
         if (attraction != null)
         {
           if (state == AudioServiceState.Playing)

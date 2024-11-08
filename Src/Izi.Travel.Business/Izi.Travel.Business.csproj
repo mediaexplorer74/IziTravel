@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{01628E84-BB32-4F0A-B131-4841FE0E4B85}</ProjectGuid>
@@ -122,6 +123,8 @@
   <ItemGroup>
     <Compile Include="Components\ExceptionTranslator.cs" />
     <Compile Include="Extensions\DownloadManagerExtensions.cs" />
+    <Compile Include="Extensions\LabeledMapLocation.cs" />
+    <Compile Include="Extensions\MapsDirectionsTask.cs" />
     <Compile Include="Extensions\MtgContentContractResolver.cs" />
     <Compile Include="Extensions\MtgObjectExtensions.cs" />
     <Compile Include="Helper\AnalyticsHelper.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="Managers\Download\DownloadProcessDownloadPackageMediaTask.cs" />
     <Compile Include="Managers\Download\DownloadProcessTaskBase.cs" />
     <Compile Include="Managers\Download\DownloadProcessUpdateDataBaseTask.cs" />
+    <Compile Include="Managers\Geolocation.cs" />
     <Compile Include="Managers\Geotracker.cs" />
     <Compile Include="Managers\PurchaseManager.cs" />
     <Compile Include="Managers\TourPlaybackManager.cs" />
@@ -209,9 +213,6 @@
     <EmbeddedResource Include="Properties\Izi.Travel.Business.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro">
-      <Version>2.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>

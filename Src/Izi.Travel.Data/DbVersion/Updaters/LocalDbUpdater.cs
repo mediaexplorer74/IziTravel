@@ -25,6 +25,9 @@ namespace Izi.Travel.Data.DbVersion.Updaters
       };
     }
 
-    protected override DataContext CreateContext() => (DataContext) new LocalDataContext();
+    protected override DataContext CreateContext()
+    {
+        return (DataContext)new LocalDataContext();
+    }
   }
 }

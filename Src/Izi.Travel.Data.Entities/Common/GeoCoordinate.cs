@@ -12,7 +12,32 @@ namespace Izi.Travel.Data.Entities.Common
 {
   public class GeoCoordinate
   {
-    public double Latitude { get; set; }
+        public static GeoCoordinate Unknown;
+        public double Altitude;
+        public double HorizontalAccuracy;
+        public double VerticalAccuracy;
+        public bool IsUnknown;
+        private double left;
+        private double top;
+
+        public GeoCoordinate()
+        {
+        }
+
+        public GeoCoordinate(double left, double top)
+        {
+            this.left = left;
+            this.top = top;
+        }
+
+        public GeoCoordinate(double latitude, double longitude, double altitude)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+            Altitude = altitude;
+        }
+
+        public double Latitude { get; set; }
 
     public double Longitude { get; set; }
 

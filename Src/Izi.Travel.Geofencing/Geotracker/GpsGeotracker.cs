@@ -4,9 +4,10 @@
 // MVID: 67B57F63-A085-4500-9D6D-5D3E58E5548F
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Geofencing.dll
 
-using Caliburn.Micro;
+//using Caliburn.Micro;
 using Izi.Travel.Geofencing.Helpers;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
@@ -17,7 +18,7 @@ namespace Izi.Travel.Geofencing.Geotracker
 {
   public sealed class GpsGeotracker : BaseGeotracker
   {
-    private static readonly ILog Log = LogManager.GetLog(typeof (GpsGeotracker));
+    //private static readonly ILog Log = LogManager.GetLog(typeof (GpsGeotracker));
     private Geolocator _geolocator;
     private Geolocator _locationStatusGeolocator;
     private Izi.Travel.Geofencing.Primitives.Geolocation _actualPosition;
@@ -45,7 +46,8 @@ namespace Izi.Travel.Geofencing.Geotracker
       }
       catch (Exception ex)
       {
-        GpsGeotracker.Log.Error(ex);
+        //GpsGeotracker.Log.Error(ex);
+        Debug.WriteLine("[ex] GpsGeotracker eeror: " + ex.Message);
         return (Izi.Travel.Geofencing.Primitives.Geolocation) null;
       }
       finally
@@ -87,7 +89,8 @@ namespace Izi.Travel.Geofencing.Geotracker
 
     private void Geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
     {
-      GpsGeotracker.Log.Info("Status changed to {0}", (object) args.Status);
+        //GpsGeotracker.Log.Info("Status changed to {0}", (object) args.Status);
+        Debug.WriteLine("[i] Status changed to: " + args.Status);
     }
 
     private void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs e)

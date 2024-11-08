@@ -38,9 +38,9 @@ namespace Izi.Travel.Geofencing.Helpers
       {
         Latitude = geolocation.Latitude,
         Longitude = geolocation.Longitude,
-        //Altitude = geolocation.Altitude.GetValueOrDefault(),
-        //HorizontalAccuracy = geolocation.Accuracy,
-        //VerticalAccuracy = geolocation.Accuracy
+        Altitude = geolocation.Altitude.GetValueOrDefault(),
+        HorizontalAccuracy = geolocation.Accuracy,
+        VerticalAccuracy = geolocation.Accuracy
       };
     }
   }

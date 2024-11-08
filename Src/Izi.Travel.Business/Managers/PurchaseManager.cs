@@ -113,7 +113,7 @@ namespace Izi.Travel.Business.Managers
 
     public bool Contains(string uid)
     {
-      return this._purchaseUids.Any<string>((Func<string, bool>) (x => string.Equals(x, uid, StringComparison.InvariantCultureIgnoreCase)));
+      return this._purchaseUids.Any<string>((Func<string, bool>) (x => string.Equals(x, uid, StringComparison.CurrentCultureIgnoreCase)));
     }
 
     public async Task Purchase(MtgObject mtgObject)
@@ -169,7 +169,7 @@ namespace Izi.Travel.Business.Managers
         filter.ProductIds = CurrentApp.LicenseInformation.ProductLicenses.Where<KeyValuePair<string, ProductLicense>>((Func<KeyValuePair<string, ProductLicense>, bool>) (x => x.Value.IsActive)).Select<KeyValuePair<string, ProductLicense>, string>((Func<KeyValuePair<string, ProductLicense>, string>) (x => x.Value.ProductId)).ToArray<string>();
         filter.Languages = ServiceFacade.CultureService.GetNeutralLanguageCodes();
         CancellationToken ct = new CancellationToken();
-        foreach (MtgObject mtgObject in ((IEnumerable<MtgObject>) await mtgObjectService.GetPaidMtgObjectListAsync(filter, ct)).Where<MtgObject>((Func<MtgObject, bool>) (x => this._purchaseUids.All<string>((Func<string, bool>) (y => !string.Equals(y, x.Uid, StringComparison.InvariantCultureIgnoreCase))))))
+        foreach (MtgObject mtgObject in ((IEnumerable<MtgObject>) await mtgObjectService.GetPaidMtgObjectListAsync(filter, ct)).Where<MtgObject>((Func<MtgObject, bool>) (x => this._purchaseUids.All<string>((Func<string, bool>) (y => !string.Equals(y, x.Uid, StringComparison.CurrentCultureIgnoreCase))))))
           await this.AddPurchase(mtgObject);
       }
       catch (Exception ex)

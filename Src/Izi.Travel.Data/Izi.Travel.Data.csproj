@@ -121,7 +121,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Context\DownloadDataContext.cs" />
     <Compile Include="Context\LocalDataContext.cs" />
     <Compile Include="DbVersion\Profiles\Download\DownloadDbUpdateProfile0001.cs" />
@@ -129,6 +128,7 @@
     <Compile Include="DbVersion\Profiles\Local\LocalDbUpdateProfile0001.cs" />
     <Compile Include="DbVersion\Profiles\Local\LocalDbUpdateProfile0002.cs" />
     <Compile Include="DbVersion\Profiles\Local\LocalDbUpdateProfile0003.cs" />
+    <Compile Include="DbVersion\Updaters\Base\DatabaseSchemaUpdater.cs" />
     <Compile Include="DbVersion\Updaters\Base\DbUpdaterBase.cs" />
     <Compile Include="DbVersion\Updaters\Base\IDbUpdater.cs" />
     <Compile Include="DbVersion\Updaters\DownloadDbUpdater.cs" />
@@ -146,10 +146,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj">
-      <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
-      <Name>Izi.Travel.Business.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
       <Project>{2260b987-9887-4aa1-b726-0d898fb3b44f}</Project>
       <Name>Izi.Travel.Data.Entities</Name>
@@ -158,6 +154,10 @@
       <Project>{cdcecd6c-d5fa-46c2-ba54-b70be30ad919}</Project>
       <Name>Izi.Travel.Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

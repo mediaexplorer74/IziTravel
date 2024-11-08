@@ -4,10 +4,12 @@
 // MVID: DDED5915-8B3A-4C03-AAF5-BE6B16E9CC4A
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.Entities.dll
 
-using Microsoft.Phone.Maps.Controls;
-using System.Device.Location;
+//using Microsoft.Phone.Maps.Controls;
+//using System.Device.Location;
 
 #nullable disable
+using Izi.Travel.Data.Entities.Common;
+
 namespace Izi.Travel.Business.Entities.Data
 {
   public class GeoRectangle
@@ -22,7 +24,9 @@ namespace Izi.Travel.Business.Entities.Data
 
     public LocationRectangle ToLocationRectangle()
     {
-      return LocationRectangle.CreateBoundingRectangle(new GeoCoordinate(this.Left, this.Top), new GeoCoordinate(this.Right, this.Bottom));
+      return LocationRectangle.CreateBoundingRectangle(
+          new GeoCoordinate(this.Left, this.Top), 
+          new GeoCoordinate(this.Right, this.Bottom));
     }
   }
 }

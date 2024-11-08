@@ -9,12 +9,13 @@ using Izi.Travel.Data.Entities.Local;
 using Izi.Travel.Data.Entities.Local.Query;
 using Izi.Travel.Data.Services.Contract;
 using Izi.Travel.Data.Services.Implementation;
-using Microsoft.Phone.BackgroundAudio;
+//using Microsoft.Phone.BackgroundAudio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using Windows.Media.Core;
 
 #nullable disable
 namespace Izi.Travel.Agent.Audio
@@ -26,7 +27,11 @@ namespace Izi.Travel.Agent.Audio
 
     static AudioPlayer()
     {
-      Deployment.Current.Dispatcher.BeginInvoke((Action) (() => Application.Current.UnhandledException += new EventHandler<ApplicationUnhandledExceptionEventArgs>(AudioPlayer.UnhandledException)));
+            //RnD
+      //Deployment.Current.Dispatcher.BeginInvoke((Action) (() 
+      //    => Application.Current.UnhandledException
+      //    += new EventHandler<ApplicationUnhandledExceptionEventArgs>(
+      //        AudioPlayer.UnhandledException)));
     }
 
     protected override void OnUserAction(
@@ -96,10 +101,24 @@ namespace Izi.Travel.Agent.Audio
       Exception error,
       bool isFatal)
     {
-      if (isFatal)
-        this.Abort();
-      else
-        this.NotifyComplete();
+            if (isFatal)
+            {
+                this.Abort();
+            }
+            else
+            {
+                this.NotifyComplete();
+            }
+    }
+
+    private void NotifyComplete()
+    {
+        //
+    }
+
+    private void Abort()
+    {
+        //
     }
 
     protected override void OnCancel()
@@ -129,14 +148,15 @@ namespace Izi.Travel.Agent.Audio
             audioTrackData1 = audioTrackList[num + 1];
         }
       }
-      return new AudioTrack(new Uri(audioTrackData1.Url), audioTrackData1.Title, (string) null, (string) null, (Uri) null, audioTrackData1.Tag, EnabledPlayerControls.Pause);
+      //RnD
+      return default;//new AudioTrack(new Uri(audioTrackData1.Url), audioTrackData1.Title, (string) null, (string) null, (Uri) null, audioTrackData1.Tag, EnabledPlayerControls.Pause);
     }
 
     private static AudioTrackInfo GetAudioTrackInfo(BackgroundAudioPlayer player)
     {
       try
       {
-        return player.Track != null ? AudioTrackInfo.FromTag(player.Track.Tag) : (AudioTrackInfo) null;
+        return (AudioTrackInfo)null;//player.Track != null ? AudioTrackInfo.FromTag(player.Track.Tag) : (AudioTrackInfo) null;
       }
       catch
       {
@@ -144,7 +164,8 @@ namespace Izi.Travel.Agent.Audio
       }
     }
 
-    private static void UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
+    private static void UnhandledException(object sender, 
+        /*ApplicationUnhandledExceptionEventArgs*/ EventArgs e)
     {
       if (!Debugger.IsAttached)
         return;
