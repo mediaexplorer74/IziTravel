@@ -8,5 +8,21 @@ namespace Izi.Travel.Business.Managers
 {
     public class Geolocation
     {
+        public double Latitude;
+        public double Longitude;
+
+        public Geolocation()
+        {
+            this.Latitude = default;
+            this.Longitude = default;
+        }
+
+        public Geolocation(double latitude, double longitude)
+        {
+            this.Latitude = latitude;
+            this.Longitude = longitude;
+        }
+
+       
     }
 }

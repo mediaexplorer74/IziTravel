@@ -59,36 +59,62 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       return new AppSettings()
       {
-        ServerEnvironment = SettingsService.GetIsolatedSettingsValue<ServerEnvironment>("AppSettingsServerEnvironment", ServerEnvironment.Production),
-        LocationEnabled = SettingsService.GetIsolatedSettingsValue<bool>("AppSettingsLocationEnabled", true),
-        Languages = SettingsService.GetIsolatedSettingsValue<string[]>("AppSettingsLanguages", (string[]) null),
-        CodeNames = SettingsService.GetIsolatedSettingsValue<string[]>("AppSettingsCodeNames", (string[]) null),
-        TourEmulationEnabled = SettingsService.GetIsolatedSettingsValue<bool>("AppSettingsTourEmulationEnabled", false),
-        TourEmulationSpeed = SettingsService.GetIsolatedSettingsValue<double>("AppSettingsTourEmulationSpeed", 4.0),
-        TourStartPromptEnabled = SettingsService.GetIsolatedSettingsValue<bool>("AppSettingsTourStartPromptEnabled", true),
-        TourPauseOnVideoPromptEnabled = SettingsService.GetIsolatedSettingsValue<bool>("AppSettingsTourPauseOnVideoPromptEnabled", true),
-        NowPlayingString = SettingsService.GetIsolatedSettingsValue<string>("AppSettingsNowPlayingString", (string) null),
-        ReviewerName = SettingsService.GetIsolatedSettingsValue<string>("AppSettingsReviewerName", (string) null),
-        FirstLaunch = SettingsService.GetIsolatedSettingsValue<bool>("AppSettingsFirstLaunch", true),
-        UserUid = SettingsService.GetIsolatedSettingsValue<string>("AppSettingsUserUid", (string) null)
+        ServerEnvironment = SettingsService.GetIsolatedSettingsValue<ServerEnvironment>(
+            "AppSettingsServerEnvironment", ServerEnvironment.Production),
+        LocationEnabled = SettingsService.GetIsolatedSettingsValue<bool>(
+            "AppSettingsLocationEnabled", true),
+        Languages = SettingsService.GetIsolatedSettingsValue<string[]>(
+            "AppSettingsLanguages", (string[]) null),
+        CodeNames = SettingsService.GetIsolatedSettingsValue<string[]>(
+            "AppSettingsCodeNames", (string[]) null),
+        TourEmulationEnabled = SettingsService.GetIsolatedSettingsValue<bool>(
+            "AppSettingsTourEmulationEnabled", false),
+        TourEmulationSpeed = SettingsService.GetIsolatedSettingsValue<double>(
+            "AppSettingsTourEmulationSpeed", 4.0),
+        TourStartPromptEnabled = SettingsService.GetIsolatedSettingsValue<bool>(
+            "AppSettingsTourStartPromptEnabled", true),
+        TourPauseOnVideoPromptEnabled = SettingsService.GetIsolatedSettingsValue<bool>(
+            "AppSettingsTourPauseOnVideoPromptEnabled", true),
+        NowPlayingString = SettingsService.GetIsolatedSettingsValue<string>(
+            "AppSettingsNowPlayingString", (string) null),
+        ReviewerName = SettingsService.GetIsolatedSettingsValue<string>(
+            "AppSettingsReviewerName", (string) null),
+        FirstLaunch = SettingsService.GetIsolatedSettingsValue<bool>(
+            "AppSettingsFirstLaunch", true),
+        UserUid = SettingsService.GetIsolatedSettingsValue<string>(
+            "AppSettingsUserUid", (string) null)
       };
     }
 
     public void SaveAppSettings(AppSettings appSettings)
     {
-      SettingsService.SetIsolatedSettingsValue("AppSettingsServerEnvironment", (object) appSettings.ServerEnvironment);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsLocationEnabled", (object) appSettings.LocationEnabled);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsLanguages", (object) appSettings.Languages);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsCodeNames", (object) appSettings.CodeNames);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsTourEmulationEnabled", (object) appSettings.TourEmulationEnabled);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsTourEmulationSpeed", (object) appSettings.TourEmulationSpeed);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsTourStartPromptEnabled", (object) appSettings.TourStartPromptEnabled);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsTourPauseOnVideoPromptEnabled", (object) appSettings.TourPauseOnVideoPromptEnabled);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsNowPlayingString", (object) appSettings.NowPlayingString);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsReviewerName", (object) appSettings.ReviewerName);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsFirstLaunch", (object) appSettings.FirstLaunch);
-      SettingsService.SetIsolatedSettingsValue("AppSettingsUserUid", (object) appSettings.UserUid);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsServerEnvironment",
+          (object) appSettings.ServerEnvironment);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsLocationEnabled",
+          (object) appSettings.LocationEnabled);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsLanguages",
+          (object) appSettings.Languages);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsCodeNames",
+          (object) appSettings.CodeNames);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsTourEmulationEnabled", 
+          (object) appSettings.TourEmulationEnabled);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsTourEmulationSpeed",
+          (object) appSettings.TourEmulationSpeed);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsTourStartPromptEnabled", 
+          (object) appSettings.TourStartPromptEnabled);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsTourPauseOnVideoPromptEnabled",
+          (object) appSettings.TourPauseOnVideoPromptEnabled);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsNowPlayingString",
+          (object) appSettings.NowPlayingString);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsReviewerName", 
+          (object) appSettings.ReviewerName);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsFirstLaunch", 
+          (object) appSettings.FirstLaunch);
+      SettingsService.SetIsolatedSettingsValue("AppSettingsUserUid", 
+          (object) appSettings.UserUid);
+
       this.SetIziTravelClientValues(appSettings);
+
       IsolatedStorageSettings.ApplicationSettings.Save();
     }
 
@@ -100,51 +126,70 @@ namespace Izi.Travel.Business.Services.Implementation
       if (appSettings == null)
         return (string[]) null;
       List<string> stringList = new List<string>();
+
       if (appSettings.ServerEnvironment != settings.ServerEnvironment)
         stringList.Add("AppSettingsServerEnvironment");
+
       if (appSettings.LocationEnabled != settings.LocationEnabled)
         stringList.Add("AppSettingsLocationEnabled");
-      if (!((IEnumerable<string>) appSettings.Languages).SequenceEqual<string>((IEnumerable<string>) settings.Languages))
+
+      if (!((IEnumerable<string>) appSettings.Languages)
+                .SequenceEqual<string>((IEnumerable<string>) settings.Languages))
         stringList.Add("AppSettingsLanguages");
+
       if (!string.Equals(appSettings.CodeName, settings.CodeName))
         stringList.Add("AppSettingsCodeNames");
+
       if (appSettings.TourEmulationEnabled != settings.TourEmulationEnabled)
         stringList.Add("AppSettingsTourEmulationEnabled");
+
       if (Math.Abs(appSettings.TourEmulationSpeed - settings.TourEmulationSpeed) > double.Epsilon)
         stringList.Add("AppSettingsTourEmulationSpeed");
+
       if (appSettings.TourStartPromptEnabled != settings.TourStartPromptEnabled)
         stringList.Add("AppSettingsTourStartPromptEnabled");
+
       if (appSettings.TourPauseOnVideoPromptEnabled != settings.TourPauseOnVideoPromptEnabled)
         stringList.Add("AppSettingsTourPauseOnVideoPromptEnabled");
+
       if (appSettings.NowPlayingString != settings.NowPlayingString)
         stringList.Add("AppSettingsNowPlayingString");
+
       if (appSettings.ReviewerName != settings.ReviewerName)
         stringList.Add("AppSettingsReviewerName");
+
       if (appSettings.FirstLaunch != settings.FirstLaunch)
         stringList.Add("AppSettingsFirstLaunch");
+
       if (appSettings.UserUid != settings.UserUid)
         stringList.Add("AppSettingsUserUid");
+
       return stringList.ToArray();
     }
 
     private static T GetIsolatedSettingsValue<T>(string key, T defaultValue)
     {
-      return !IsolatedStorageSettings.ApplicationSettings.Contains(key) ? defaultValue : (T) IsolatedStorageSettings.ApplicationSettings[key];
+        //RnD / TODO
+        return defaultValue;//!IsolatedStorageSettings.ApplicationSettings.Contains(key)
+             //   ? defaultValue 
+             //   : (T) IsolatedStorageSettings.ApplicationSettings[key];
     }
 
     private static void SetIsolatedSettingsValue(string key, object value)
     {
-      if (!IsolatedStorageSettings.ApplicationSettings.Contains(key))
-        IsolatedStorageSettings.ApplicationSettings.Add(key, value);
-      else
-        IsolatedStorageSettings.ApplicationSettings[key] = value;
+      //RnD / TODO
+      //if (!IsolatedStorageSettings.ApplicationSettings.Contains(key))
+      //  IsolatedStorageSettings.ApplicationSettings.Add(key, value);
+      //else
+      //  IsolatedStorageSettings.ApplicationSettings[key] = value;
     }
 
     private void SetIziTravelClientValues(AppSettings settings)
     {
       if (settings == null || this._iziTravelClient == null)
         return;
-      this._iziTravelClient.Environment = SettingsService.GetIziTravelClientEnvironment(settings.ServerEnvironment);
+      this._iziTravelClient.Environment = 
+                SettingsService.GetIziTravelClientEnvironment(settings.ServerEnvironment);
       this._iziTravelClient.Password = settings.CodeName;
     }
 
@@ -159,7 +204,9 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       if (environment == ServerEnvironment.Stage)
         return IziTravelEnvironment.Stage;
-      return environment == ServerEnvironment.Development ? IziTravelEnvironment.Development : IziTravelEnvironment.Production;
+      return environment == ServerEnvironment.Development 
+                ? IziTravelEnvironment.Development 
+                : IziTravelEnvironment.Production;
     }
   }
 }

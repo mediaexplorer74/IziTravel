@@ -6,7 +6,7 @@
 
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Media;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common; //using System.Device.Location;
 
 #nullable disable
 namespace Izi.Travel.Business.Services.Contract

@@ -5,16 +5,18 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
 using Caliburn.Micro;
+using Izi.Travel.Agent.Audio;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
 using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Entities.Settings;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services.Contract;
-using Microsoft.Phone.BackgroundAudio;
-using Microsoft.Phone.Shell;
+//using Microsoft.Phone.BackgroundAudio;
+//using Microsoft.Phone.Shell;
 using System;
 using System.Threading;
 using Windows.Foundation;
+//using Windows.Media.Core;
 
 #nullable disable
 namespace Izi.Travel.Business.Services.Implementation
@@ -30,23 +32,24 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       add
       {
-        TypedEventHandler<IAudioService, AudioTrackInfo> typedEventHandler1 = this.NowPlayingChanged;
+        TypedEventHandler<IAudioService, AudioTrackInfo> typedEventHandler1 = default;//this.NowPlayingChanged;
         TypedEventHandler<IAudioService, AudioTrackInfo> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<IAudioService, AudioTrackInfo>>(ref this.NowPlayingChanged, (TypedEventHandler<IAudioService, AudioTrackInfo>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<IAudioService, AudioTrackInfo>>
+                        //(ref this.NowPlayingChanged, (TypedEventHandler<IAudioService, AudioTrackInfo>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<IAudioService, AudioTrackInfo> typedEventHandler1 = this.NowPlayingChanged;
+                TypedEventHandler<IAudioService, AudioTrackInfo> typedEventHandler1 = default;//this.NowPlayingChanged;
         TypedEventHandler<IAudioService, AudioTrackInfo> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<IAudioService, AudioTrackInfo>>(ref this.NowPlayingChanged, (TypedEventHandler<IAudioService, AudioTrackInfo>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<IAudioService, AudioTrackInfo>>(ref this.NowPlayingChanged, (TypedEventHandler<IAudioService, AudioTrackInfo>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
@@ -54,9 +57,21 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public event TypedEventHandler<IAudioService, AudioServiceState> StateChanged
     {
+       add 
+        {
+            //TypedEventHandler<IAudioService, AudioServiceState> typedEventHandler1
+            //    += (sender, e) => this.StateChanged(sender, e);
+
+        }
+       remove 
+        {
+            //TypedEventHandler<IAudioService, AudioServiceState> typedEventHandler1
+            //    -= (sender, e) => this.StateChanged(sender, e);
+            }
+      /*
       add
       {
-        TypedEventHandler<IAudioService, AudioServiceState> typedEventHandler1 = this.StateChanged;
+        TypedEventHandler<IAudioService, AudioServiceState> typedEventHandler1 = default;//this.StateChanged;
         TypedEventHandler<IAudioService, AudioServiceState> typedEventHandler2;
         do
         {
@@ -75,7 +90,7 @@ namespace Izi.Travel.Business.Services.Implementation
           typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<IAudioService, AudioServiceState>>(ref this.StateChanged, (TypedEventHandler<IAudioService, AudioServiceState>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
-      }
+      }*/
     }
 
     public AudioTrackInfo NowPlaying
@@ -86,9 +101,12 @@ namespace Izi.Travel.Business.Services.Implementation
         if (this._nowPlaying == value)
           return;
         this._nowPlaying = value;
-        if (this.NowPlayingChanged == null)
-          return;
-        this.NowPlayingChanged.Invoke((IAudioService) this, this._nowPlaying);
+        
+        //RnD
+        //if (this.NowPlayingChanged == null)
+        //  return;
+
+        //this.NowPlayingChanged = () => this._nowPlaying;
       }
     }
 
@@ -98,9 +116,11 @@ namespace Izi.Travel.Business.Services.Implementation
       private set
       {
         this._state = value;
-        if (this.StateChanged == null)
-          return;
-        this.StateChanged.Invoke((IAudioService) this, this._state);
+
+        //RnD
+        //if (this.StateChanged == null)
+        //  return;
+        //this.StateChanged = () => this._state;
       }
     }
 
@@ -152,10 +172,17 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public AudioService()
     {
-      this.NowPlaying = this.GetCurrentTrackInfo() ?? ServiceFacade.SettingsService.GetAppSettings().NowPlaying;
+            //RnD
+            this.NowPlaying = this.GetCurrentTrackInfo();
+               // ?? ServiceFacade.SettingsService.GetAppSettings().NowPlaying;
+
       this.State = AudioService.ToAudioServiceState(BackgroundAudioPlayer.Instance.PlayerState);
-      PhoneApplicationService.Current.Closing += (EventHandler<ClosingEventArgs>) ((s, e) => this.Stop());
-      BackgroundAudioPlayer.Instance.PlayStateChanged += (EventHandler) ((s, e) => this.OnBackgroundAudioPlayerPlayStateChanged(s, e as PlayStateChangedEventArgs));
+
+      PhoneApplicationService.Current.Closing += (EventHandler<ClosingEventArgs>)
+                ((s, e) => this.Stop());
+
+      BackgroundAudioPlayer.Instance.PlayStateChanged += (EventHandler) 
+                ((s, e) => this.OnBackgroundAudioPlayerPlayStateChanged(s, e as PlayStateChangedEventArgs));
     }
 
     public void Play(AudioTrackInfo audioTrackInfo)
@@ -163,7 +190,14 @@ namespace Izi.Travel.Business.Services.Implementation
       if (audioTrackInfo == null)
         return;
       if (!this.IsNowPlaying(audioTrackInfo.MtgObjectUid, audioTrackInfo.Language))
-        BackgroundAudioPlayer.Instance.Track = new AudioTrack(new Uri(audioTrackInfo.AudioUrl), audioTrackInfo.Title, (string) null, (string) null, (Uri) null, audioTrackInfo.ToTag(), EnabledPlayerControls.Pause);
+        BackgroundAudioPlayer.Instance.Track = 
+                    new AudioTrack( new Uri(audioTrackInfo.AudioUrl), 
+                    audioTrackInfo.Title, 
+                    (string) null,
+                    (string) null,
+                    (Uri) null, 
+                    audioTrackInfo.ToTag(),
+                    EnabledPlayerControls.Pause);
       this.Play();
     }
 
@@ -210,22 +244,26 @@ namespace Izi.Travel.Business.Services.Implementation
     public void SetNowPlaying(AudioTrackInfo nowPlaying)
     {
       this.NowPlaying = nowPlaying;
-      AppSettings appSettings = ServiceFacade.SettingsService.GetAppSettings();
+            AppSettings appSettings = default;//ServiceFacade.SettingsService.GetAppSettings();
       appSettings.NowPlaying = this.NowPlaying;
-      ServiceFacade.SettingsService.SaveAppSettings(appSettings);
+      //ServiceFacade.SettingsService.SaveAppSettings(appSettings);
     }
 
     public bool IsNowPlaying(string uid, string language)
     {
       AudioTrackInfo currentTrackInfo = this.GetCurrentTrackInfo();
-      return currentTrackInfo != null && currentTrackInfo.MtgObjectUid == uid && currentTrackInfo.Language == language;
+      return currentTrackInfo != null 
+             && currentTrackInfo.MtgObjectUid == uid
+             && currentTrackInfo.Language == language;
     }
 
     public AudioTrackInfo GetCurrentTrackInfo()
     {
       try
       {
-        return BackgroundAudioPlayer.Instance.Track != null ? AudioTrackInfo.FromTag(BackgroundAudioPlayer.Instance.Track.Tag) : (AudioTrackInfo) null;
+        return BackgroundAudioPlayer.Instance.Track != null 
+                    ? AudioTrackInfo.FromTag(BackgroundAudioPlayer.Instance.Track.Tag)
+                    : (AudioTrackInfo) null;
       }
       catch (Exception ex)
       {
@@ -238,11 +276,18 @@ namespace Izi.Travel.Business.Services.Implementation
     private void OnBackgroundAudioPlayerPlayStateChanged(object sender, PlayStateChangedEventArgs e)
     {
       PlayState playState = e.CurrentPlayState;
+
       if (e.CurrentPlayState == PlayState.Unknown && e.IntermediatePlayState == PlayState.TrackReady)
         playState = PlayState.Playing;
+
       this.State = AudioService.ToAudioServiceState(playState);
-      this._logger.Info("State: {0} [{1} -> {2}]", (object) this.State, (object) e.IntermediatePlayState, (object) e.CurrentPlayState);
-      if (this.State == AudioServiceState.Unknown || this.State == AudioServiceState.Error || this.State == AudioServiceState.Stopped)
+
+      this._logger.Info("State: {0} [{1} -> {2}]", 
+          (object) this.State, (object) e.IntermediatePlayState, (object) e.CurrentPlayState);
+
+      if (this.State == AudioServiceState.Unknown 
+                || this.State == AudioServiceState.Error 
+                || this.State == AudioServiceState.Stopped)
       {
         CompletionReasonParameter completionReason;
         switch (this.State)
@@ -260,7 +305,8 @@ namespace Izi.Travel.Business.Services.Implementation
         this.SendPlayEvent(completionReason);
       }
       AudioTrackInfo currentTrackInfo = this.GetCurrentTrackInfo();
-      if (currentTrackInfo == null || this.NowPlaying != null && !(currentTrackInfo.AudioUrl != this.NowPlaying.AudioUrl))
+      if (currentTrackInfo == null || this.NowPlaying != null
+                && !(currentTrackInfo.AudioUrl != this.NowPlaying.AudioUrl))
         return;
       this.SendPlayEvent(CompletionReasonParameter.Interrupted);
       this.SetNowPlaying(currentTrackInfo);
@@ -292,10 +338,18 @@ namespace Izi.Travel.Business.Services.Implementation
 
     private void SendPlayEvent(CompletionReasonParameter completionReason)
     {
-      if (this.NowPlaying != null && this._playEventAudioInfo != null && this.NowPlaying.MtgObjectUid == this._playEventAudioInfo.MtgObjectUid && this.NowPlaying.Language == this._playEventAudioInfo.Language)
+      if (this.NowPlaying != null && this._playEventAudioInfo != null 
+                && this.NowPlaying.MtgObjectUid 
+                == this._playEventAudioInfo.MtgObjectUid && this.NowPlaying.Language
+                == this._playEventAudioInfo.Language)
         return;
       AnalyticsHelper.SendPlayEnd(this.NowPlaying, completionReason);
       this._playEventAudioInfo = this.NowPlaying;
     }
   }
+
+    internal class EnabledPlayerControls
+    {
+        internal static object Pause;
+    }
 }

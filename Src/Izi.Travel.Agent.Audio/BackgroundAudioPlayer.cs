@@ -11,6 +11,7 @@ namespace Izi.Travel.Agent.Audio
 {
     public class BackgroundAudioPlayer
     {
+        public static PlayerInstance Instance;
         public AudioTrack Track;
         public TimeSpan Position;
         public PlayState PlayerState;

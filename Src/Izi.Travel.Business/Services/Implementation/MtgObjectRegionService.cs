@@ -69,7 +69,7 @@ namespace Izi.Travel.Business.Services.Implementation
       }
       if (result != null)
       {
-        await Task.Factory.StartNew((Action) (() =>
+        await Task.Factory.StartNew((System.Action) (() =>
         {
           try
           {
@@ -153,7 +153,7 @@ namespace Izi.Travel.Business.Services.Implementation
       }
       if (result != null)
       {
-        await Task.Factory.StartNew((Action) (() =>
+        await Task.Factory.StartNew((System.Action) (() =>
         {
           try
           {

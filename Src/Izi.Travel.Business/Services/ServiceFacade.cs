@@ -20,7 +20,7 @@ namespace Izi.Travel.Business.Services
     private static IMtgObjectRegionService _mtgObjectRegionService;
     private static IMtgObjectDownloadService _mtgObjectDownloadService;
     private static IQuizService _quizService;
-    private static ISettingsService _settingsService;
+    private static Caliburn.Micro.ISettingsService _settingsService;
 
     public static IAudioService AudioService
     {
@@ -34,7 +34,8 @@ namespace Izi.Travel.Business.Services
     {
       get
       {
-        return ServiceFacade._cultureService ?? (ServiceFacade._cultureService = IoC.Get<ICultureService>());
+        return ServiceFacade._cultureService ?? 
+                    (ServiceFacade._cultureService = IoC.Get<ICultureService>());
       }
     }
 
@@ -42,7 +43,8 @@ namespace Izi.Travel.Business.Services
     {
       get
       {
-        return ServiceFacade._analyticsService ?? (ServiceFacade._analyticsService = IoC.Get<IAnalyticsService>());
+        return ServiceFacade._analyticsService 
+                    ?? (ServiceFacade._analyticsService = IoC.Get<IAnalyticsService>());
       }
     }
 
@@ -58,7 +60,8 @@ namespace Izi.Travel.Business.Services
     {
       get
       {
-        return ServiceFacade._mtgObjectService ?? (ServiceFacade._mtgObjectService = IoC.Get<IMtgObjectService>());
+        return ServiceFacade._mtgObjectService ?? (ServiceFacade._mtgObjectService 
+                    = IoC.Get<IMtgObjectService>());
       }
     }
 
@@ -66,7 +69,8 @@ namespace Izi.Travel.Business.Services
     {
       get
       {
-        return ServiceFacade._mtgObjectRegionService ?? (ServiceFacade._mtgObjectRegionService = IoC.Get<IMtgObjectRegionService>());
+        return ServiceFacade._mtgObjectRegionService ?? 
+                    (ServiceFacade._mtgObjectRegionService = IoC.Get<IMtgObjectRegionService>());
       }
     }
 
@@ -74,7 +78,8 @@ namespace Izi.Travel.Business.Services
     {
       get
       {
-        return ServiceFacade._mtgObjectDownloadService ?? (ServiceFacade._mtgObjectDownloadService = IoC.Get<IMtgObjectDownloadService>());
+        return ServiceFacade._mtgObjectDownloadService ?? 
+                    (ServiceFacade._mtgObjectDownloadService = IoC.Get<IMtgObjectDownloadService>());
       }
     }
 
@@ -83,11 +88,12 @@ namespace Izi.Travel.Business.Services
       get => ServiceFacade._quizService ?? (ServiceFacade._quizService = IoC.Get<IQuizService>());
     }
 
-    public static ISettingsService SettingsService
+    public static Caliburn.Micro.ISettingsService SettingsService
     {
       get
       {
-        return ServiceFacade._settingsService ?? (ServiceFacade._settingsService = IoC.Get<ISettingsService>());
+        return ServiceFacade._settingsService ?? 
+                    (ServiceFacade._settingsService = IoC.Get<Caliburn.Micro.ISettingsService>());
       }
     }
   }

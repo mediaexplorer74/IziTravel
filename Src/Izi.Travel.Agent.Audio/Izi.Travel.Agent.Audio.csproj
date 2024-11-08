@@ -123,6 +123,8 @@
   <ItemGroup>
     <Compile Include="AudioPlayerAgent.cs" />
     <Compile Include="BackgroundAudioPlayer.cs" />
+    <Compile Include="PlayerInstance.cs" />
+    <Compile Include="PlayerTrack.cs" />
     <Compile Include="PlayState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AudioPlayer.cs" />

@@ -1,5 +1,5 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: ZXing.IBarcodeReader
+// Type: ZXing.IMultipleBarcodeReader
 // Assembly: zxing.wp8.0, Version=0.14.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: DD293DF0-BBAA-4BF0-BAC7-F5FAF5AC94ED
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.dll
@@ -7,16 +7,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Media.Imaging;
+using Windows.UI.Xaml.Media.Imaging;
+
+//using System.Windows.Media.Imaging;
 using ZXing.Common;
 
 #nullable disable
 namespace ZXing
 {
   /// <summary>
-  /// Interface for a smart class to decode the barcode inside a bitmap object
+  /// Interface for a smart class to decode multiple barcodes inside a bitmap object
   /// </summary>
-  public interface IBarcodeReader
+  public interface IMultipleBarcodeReader
   {
     /// <summary>event is executed when a result point was found</summary>
     event Action<ResultPoint> ResultPointFound;
@@ -33,7 +35,10 @@ namespace ZXing
     [Obsolete("Please use the Options.TryHarder property instead.")]
     bool TryHarder { get; set; }
 
-    /// <summary>Image is a pure monochrome image of a barcode.</summary>
+    /// <summary>
+    /// Image is a pure monochrome image of a barcode. Doesn't matter what it maps to;
+    /// use {@link Boolean#TRUE}.
+    /// </summary>
     /// <value>
     ///   <c>true</c> if monochrome image of a barcode; otherwise, <c>false</c>.
     /// </value>
@@ -68,10 +73,14 @@ namespace ZXing
     /// <param name="height">The height.</param>
     /// <param name="format">The format.</param>
     /// <returns>the result data or null</returns>
-    Result Decode(byte[] rawRGB, int width, int height, RGBLuminanceSource.BitmapFormat format);
+    Result[] DecodeMultiple(
+      byte[] rawRGB,
+      int width,
+      int height,
+      RGBLuminanceSource.BitmapFormat format);
 
     /// <summary>
-    /// Tries to decode a barcode within an image which is given by a luminance source.
+    /// Tries to decode barcodes within an image which is given by a luminance source.
     /// That method gives a chance to prepare a luminance source completely before calling
     /// the time consuming decoding method. On the other hand there is a chance to create
     /// a luminance source which is independent from external resources (like Bitmap objects)
@@ -79,11 +88,11 @@ namespace ZXing
     /// </summary>
     /// <param name="luminanceSource">The luminance source.</param>
     /// <returns></returns>
-    Result Decode(LuminanceSource luminanceSource);
+    Result[] DecodeMultiple(LuminanceSource luminanceSource);
 
     /// <summary>Decodes the specified barcode bitmap.</summary>
     /// <param name="barcodeBitmap">The barcode bitmap.</param>
     /// <returns>the result data or null</returns>
-    Result Decode(WriteableBitmap barcodeBitmap);
+    Result[] DecodeMultiple(WriteableBitmap barcodeBitmap);
   }
 }

@@ -9,7 +9,7 @@ using Izi.Travel.Business.Entities.Media;
 #nullable disable
 namespace Izi.Travel.Business.Entities.Settings
 {
-  public class AppSettings
+  public partial class AppSettings
   {
     public const string KeyServerEnvironment = "AppSettingsServerEnvironment";
     public const string KeyLocationEnabled = "AppSettingsLocationEnabled";

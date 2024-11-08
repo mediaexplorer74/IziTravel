@@ -61,9 +61,11 @@ namespace Izi.Travel.Business.Managers.Download
           }, token);
           progressDelta /= (double) (childrenCountAsync + 1);
         }
-        DownloadProcessCreatePackageRemoteTask.CreatePackageItemResult createParentItemResult;
-        DownloadProcessCreatePackageRemoteTask.CreatePackageItemResult packageItemResult = createParentItemResult;
-        createParentItemResult = await this.CreatePackageItemRemoteAsync(process, (DownloadPackageItem) null, mtgObjectParent);
+        DownloadProcessCreatePackageRemoteTask.CreatePackageItemResult createParentItemResult = default;
+        DownloadProcessCreatePackageRemoteTask.CreatePackageItemResult packageItemResult
+                    = createParentItemResult;
+        createParentItemResult = await this.CreatePackageItemRemoteAsync(
+            process, (DownloadPackageItem) null, mtgObjectParent);
         if (!createParentItemResult.Success)
           return false;
         DownloadManager.Instance.SetDownloadProgress(process, process.Progress + progressDelta);

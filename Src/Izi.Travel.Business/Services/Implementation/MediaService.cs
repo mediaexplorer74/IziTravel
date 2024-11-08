@@ -11,7 +11,7 @@ using Izi.Travel.Client;
 using Izi.Travel.Utility;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common; //using System.Device.Location;
 using System.Globalization;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -24,8 +24,10 @@ namespace Izi.Travel.Business.Services.Implementation
 {
   internal sealed class MediaService : IMediaService
   {
-    private const string BingMapsApiKey = "AiB2pL5Hz7u1WZZ2sO2QQq-m1vqZH-firsZJ4B0e9Jeg5tbHiwB-u0pyEdiwAumW";
-    private const string BingMapsApiUrl = "http://dev.virtualearth.net/REST/v1/";
+    private const string BingMapsApiKey = 
+            "AiB2pL5Hz7u1WZZ2sO2QQq-m1vqZH-firsZJ4B0e9Jeg5tbHiwB-u0pyEdiwAumW";
+    private const string BingMapsApiUrl =
+            "http://dev.virtualearth.net/REST/v1/";
     private readonly IziTravelClient _iziTravelClient;
     private readonly ImageFormatMapper _imageFormatMapper;
     private readonly ImageExtensionMapper _imageExtensionMapper;
@@ -44,7 +46,8 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public string GetLocalPath(string url)
     {
-      return Path.Combine(this.GetLocalDirectory(), BitConverter.ToString(new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(url))).Replace("-", "").ToLower());
+      return Path.Combine(this.GetLocalDirectory(), BitConverter.ToString(
+          new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(url))).Replace("-", "").ToLower());
     }
 
     public string GetImageOrPlaceholderUrl(MtgObject mtgObject, Izi.Travel.Business.Entities.Media.ImageFormat imageFormat)
@@ -55,7 +58,8 @@ namespace Izi.Travel.Business.Services.Implementation
       {
         Izi.Travel.Business.Entities.Data.Media media = ((IEnumerable<Izi.Travel.Business.Entities.Data.Media>) mtgObject.MainContent.Images).FirstOrDefault<Izi.Travel.Business.Entities.Data.Media>((Func<Izi.Travel.Business.Entities.Data.Media, bool>) (x => x.Type == Izi.Travel.Business.Entities.Data.MediaType.Story));
         if (media != null)
-          return this.GetImageUrl(media.Uid, mtgObject.ContentProvider.Uid, imageFormat, Izi.Travel.Business.Entities.Media.ImageExtension.Jpg, false);
+          return this.GetImageUrl(media.Uid, mtgObject.ContentProvider.Uid, imageFormat, 
+              Izi.Travel.Business.Entities.Media.ImageExtension.Jpg, false);
       }
       return this.GetPlaceholderUrl(mtgObject.Type);
     }

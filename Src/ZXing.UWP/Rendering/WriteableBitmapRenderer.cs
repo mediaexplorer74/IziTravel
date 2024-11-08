@@ -6,8 +6,11 @@
 // XML documentation location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.xml
 
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging
+using Windows.UI;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using ZXing.Common;
 
 #nullable disable
@@ -18,6 +21,7 @@ namespace ZXing.Rendering
   /// </summary>
   public class WriteableBitmapRenderer : IBarcodeRenderer<WriteableBitmap>
   {
+    public int[] Pixels;
     private static readonly FontFamily DefaultFontFamily = new FontFamily("Arial");
 
     /// <summary>Gets or sets the foreground color.</summary>
@@ -38,15 +42,15 @@ namespace ZXing.Rendering
 
     /// <summary>Gets or sets the font stretch.</summary>
     /// <value>The font stretch.</value>
-    public FontStretch FontStretch { get; set; }
+    //public FontStretch FontStretch { get; set; }
 
     /// <summary>Gets or sets the font style.</summary>
     /// <value>The font style.</value>
-    public FontStyle FontStyle { get; set; }
+    //public FontStyle FontStyle { get; set; }
 
     /// <summary>Gets or sets the font weight.</summary>
     /// <value>The font weight.</value>
-    public FontWeight FontWeight { get; set; }
+    //public FontWeight FontWeight { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:ZXing.Rendering.WriteableBitmapRenderer" /> class.
@@ -57,9 +61,9 @@ namespace ZXing.Rendering
       this.Background = Colors.White;
       this.FontFamily = WriteableBitmapRenderer.DefaultFontFamily;
       this.FontSize = 10.0;
-      this.FontStretch = FontStretches.Normal;
-      this.FontStyle = FontStyles.Normal;
-      this.FontWeight = FontWeights.Normal;
+      //this.FontStretch = default;//FontStretches.Normal;
+      //this.FontStyle = default;//FontStyles.Normal;
+      //this.FontWeight = default;//FontWeights.Normal;
     }
 
     /// <summary>Renders the specified matrix.</summary>
@@ -86,7 +90,13 @@ namespace ZXing.Rendering
     {
       int width = matrix.Width;
       int height = matrix.Height;
-      int num1 = (options == null || !options.PureBarcode) && !string.IsNullOrEmpty(content) && (format == BarcodeFormat.CODE_39 || format == BarcodeFormat.CODE_128 || format == BarcodeFormat.EAN_13 || format == BarcodeFormat.EAN_8 || format == BarcodeFormat.CODABAR || format == BarcodeFormat.ITF || format == BarcodeFormat.UPC_A || format == BarcodeFormat.MSI || format == BarcodeFormat.PLESSEY) ? 16 : 0;
+      int num1 = (options == null || !options.PureBarcode) 
+                && !string.IsNullOrEmpty(content) 
+                && (format == BarcodeFormat.CODE_39 || format == BarcodeFormat.CODE_128 
+                || format == BarcodeFormat.EAN_13 || format == BarcodeFormat.EAN_8 
+                || format == BarcodeFormat.CODABAR || format == BarcodeFormat.ITF 
+                || format == BarcodeFormat.UPC_A || format == BarcodeFormat.MSI
+                || format == BarcodeFormat.PLESSEY) ? 16 : 0;
       int num2 = 1;
       if (options != null)
       {
@@ -98,10 +108,16 @@ namespace ZXing.Rendering
         if (num2 > height / matrix.Height)
           num2 = height / matrix.Height;
       }
-      int num3 = (int) this.Foreground.A << 24 | (int) this.Foreground.R << 16 | (int) this.Foreground.G << 8 | (int) this.Foreground.B;
-      int num4 = (int) this.Background.A << 24 | (int) this.Background.R << 16 | (int) this.Background.G << 8 | (int) this.Background.B;
+
+      int num3 = (int) this.Foreground.A << 24 | (int) this.Foreground.R << 16
+                | (int) this.Foreground.G << 8 | (int) this.Foreground.B;
+
+      int num4 = (int) this.Background.A << 24 | (int) this.Background.R << 16 
+                | (int) this.Background.G << 8 | (int) this.Background.B;
+
       WriteableBitmap writeableBitmap = new WriteableBitmap(width, height);
-      int[] pixels = writeableBitmap.Pixels;
+      
+      int[] pixels = Pixels;//writeableBitmap.Pixels;
       int num5 = 0;
       for (int y = 0; y < matrix.Height - num1; ++y)
       {

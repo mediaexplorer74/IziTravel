@@ -7,7 +7,8 @@
 
 using System;
 using System.Text;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media.Imaging;
+using Windows.UI.Xaml.Media.Imaging;
 
 #nullable disable
 namespace ZXing.Common

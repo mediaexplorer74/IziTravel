@@ -5,7 +5,9 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.dll
 // XML documentation location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.xml
 
-using System.Windows.Media.Imaging;
+//using System.Windows.Media.Imaging;
+using Windows.UI.Xaml.Media.Imaging;
+using ZXing.Common;
 using ZXing.Rendering;
 
 #nullable disable
@@ -21,5 +23,12 @@ namespace ZXing
     {
       this.Renderer = (IBarcodeRenderer<WriteableBitmap>) new WriteableBitmapRenderer();
     }
-  }
+
+        BitMatrix IBarcodeWriter.Encode(string contents)
+        {
+            throw new System.NotImplementedException();
+        }
+
+      
+    }
 }

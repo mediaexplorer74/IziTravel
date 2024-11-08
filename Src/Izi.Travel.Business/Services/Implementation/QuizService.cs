@@ -24,7 +24,8 @@ namespace Izi.Travel.Business.Services.Implementation
     private static readonly ILog Logger = LogManager.GetLog(typeof (QuizService));
     private readonly ILocalDataService _dataService;
     private readonly QuizDataMapper _quizDataMapper = IoC.Get<QuizDataMapper>();
-    private readonly QuizDataStatisticsMapper _quizDataStatisticsMapper = IoC.Get<QuizDataStatisticsMapper>();
+    private readonly QuizDataStatisticsMapper _quizDataStatisticsMapper = 
+            IoC.Get<QuizDataStatisticsMapper>();
 
     public QuizService(ILocalDataService dataService) => this._dataService = dataService;
 
@@ -32,7 +33,8 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       if (filter == null)
         throw new ArgumentNullException(nameof (filter));
-      return Task<Izi.Travel.Business.Entities.Quiz.QuizData>.Factory.StartNew((Func<Izi.Travel.Business.Entities.Quiz.QuizData>) (() =>
+      return Task<Izi.Travel.Business.Entities.Quiz.QuizData>.Factory.StartNew(
+          (Func<Izi.Travel.Business.Entities.Quiz.QuizData>) (() =>
       {
         try
         {
@@ -55,17 +57,21 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       if (filter == null)
         throw new ArgumentNullException(nameof (filter));
-      return Task<Izi.Travel.Business.Entities.Quiz.QuizData[]>.Factory.StartNew((Func<Izi.Travel.Business.Entities.Quiz.QuizData[]>) (() =>
+      return Task<Izi.Travel.Business.Entities.Quiz.QuizData[]>.Factory.StartNew(
+          (Func<Izi.Travel.Business.Entities.Quiz.QuizData[]>) (() =>
       {
         try
         {
-          return ((IEnumerable<Izi.Travel.Data.Entities.Local.QuizData>) (this._dataService.GetQuizDataList(new QuizDataListQuery()
+          return ((IEnumerable<Izi.Travel.Data.Entities.Local.QuizData>) 
+              (this._dataService.GetQuizDataList(new QuizDataListQuery()
           {
             UidList = filter.UidList,
             LanguageList = filter.LanguageList,
             Limit = filter.Limit,
             Offset = filter.Offset
-          }) ?? new Izi.Travel.Data.Entities.Local.QuizData[0])).Select<Izi.Travel.Data.Entities.Local.QuizData, Izi.Travel.Business.Entities.Quiz.QuizData>((Func<Izi.Travel.Data.Entities.Local.QuizData, Izi.Travel.Business.Entities.Quiz.QuizData>) (x => this._quizDataMapper.ConvertBack(x))).ToArray<Izi.Travel.Business.Entities.Quiz.QuizData>();
+          }) ?? new Izi.Travel.Data.Entities.Local.QuizData[0]))
+          .Select<Izi.Travel.Data.Entities.Local.QuizData, Izi.Travel.Business.Entities.Quiz.QuizData>(
+              (Func<Izi.Travel.Data.Entities.Local.QuizData, Izi.Travel.Business.Entities.Quiz.QuizData>) (x => this._quizDataMapper.ConvertBack(x))).ToArray<Izi.Travel.Business.Entities.Quiz.QuizData>();
         }
         catch (Exception ex)
         {
@@ -80,11 +86,13 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       if (filter == null)
         throw new ArgumentNullException(nameof (filter));
-      return Task<Izi.Travel.Business.Entities.Quiz.QuizDataStatistics>.Factory.StartNew((Func<Izi.Travel.Business.Entities.Quiz.QuizDataStatistics>) (() =>
+      return Task<Izi.Travel.Business.Entities.Quiz.QuizDataStatistics>
+                .Factory.StartNew((Func<Izi.Travel.Business.Entities.Quiz.QuizDataStatistics>) (() =>
       {
         try
         {
-          return this._quizDataStatisticsMapper.ConvertBack(this._dataService.GetQuizDataStatistics(new QuizDataStatisticsQuery()
+          return this._quizDataStatisticsMapper.ConvertBack(
+              this._dataService.GetQuizDataStatistics(new QuizDataStatisticsQuery()
           {
             UidList = filter.UidList,
             LanguageList = filter.LanguageList
@@ -100,7 +108,7 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public Task CreateOrUpdateQuizDataAsync(Izi.Travel.Business.Entities.Quiz.QuizData quizData)
     {
-      return Task.Factory.StartNew((Action) (() =>
+      return Task.Factory.StartNew((System.Action) (() =>
       {
         try
         {
@@ -116,7 +124,7 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public Task DeleteQuizDataAsync(string uid, string language, bool recursive = false)
     {
-      return Task.Factory.StartNew((Action) (() =>
+      return Task.Factory.StartNew((System.Action) (() =>
       {
         try
         {

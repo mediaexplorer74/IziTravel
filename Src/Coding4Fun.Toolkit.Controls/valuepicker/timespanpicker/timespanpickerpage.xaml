@@ -1,16 +1,9 @@
-﻿<!--
-// (c) Copyright Microsoft Corporation.
-// This source is subject to the Microsoft Public License (Ms-PL).
-// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
-// All other rights reserved.
--->
-
-<Primitives:TimeSpanPickerBasePage
+﻿<Primitives:TimeSpanPickerBasePage
     x:Class="Coding4Fun.Toolkit.Controls.TimeSpanPickerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     
@@ -166,10 +159,10 @@
             </Primitives:LoopingSelector>
 
         </Grid>
-    </Grid>
+   
 
     <Primitives:TimeSpanPickerBasePage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True">
+        <ApplicationBar Content="AppBar" IsVisible="True">
             <!--
             Due to platform restrictions, ApplicationBarIconButton.IconUri content can not come from the
             Microsoft.Phone.Controls.Toolkit assembly, so it is up to the application developer to ensure
@@ -179,13 +172,14 @@
             Note: ApplicationBarIconButton.Text automatically comes from the Microsoft.Phone.Controls.Toolkit
             resources (where it can be localized).
             -->
-            <shell:ApplicationBarIconButton
+            <AppBarButton
                 IconUri="/Toolkit.Content/ApplicationBar.Check.png"
                 Text="DONE"/>
-            <shell:ApplicationBarIconButton
+            <AppBarButton
                 IconUri="/Toolkit.Content/ApplicationBar.Cancel.png"
                 Text="CANCEL"/>
-        </shell:ApplicationBar>
+        </ApplicationBar>
     </Primitives:TimeSpanPickerBasePage.ApplicationBar>
+  </Grid>
 
 </Primitives:TimeSpanPickerBasePage>

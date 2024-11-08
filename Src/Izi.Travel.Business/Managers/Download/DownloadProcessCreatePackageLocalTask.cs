@@ -48,12 +48,16 @@ namespace Izi.Travel.Business.Managers.Download
           };
           progressDelta /= (double) (dataService.GetDownloadObjectChildrenCount(query) + 1);
         }
-        DownloadProcessCreatePackageLocalTask.CreatePackageItemResult createParentItemResult;
-        DownloadProcessCreatePackageLocalTask.CreatePackageItemResult packageItemResult = createParentItemResult;
-        createParentItemResult = await this.CreatePackageItemLocalAsync(process, DownloadObjectInfo.FromDownloadObject(downloadObject), token);
+        DownloadProcessCreatePackageLocalTask.CreatePackageItemResult createParentItemResult = default;
+        DownloadProcessCreatePackageLocalTask.CreatePackageItemResult packageItemResult 
+                    = createParentItemResult;
+        createParentItemResult = await this.CreatePackageItemLocalAsync(process, 
+            DownloadObjectInfo.FromDownloadObject(downloadObject), token);
+
         if (!createParentItemResult.Success)
         {
-          DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, DownloadProcessError.PackageCreateLocal);
+          DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, 
+              DownloadProcessError.PackageCreateLocal);
           return false;
         }
         DownloadManager.Instance.SetDownloadProgress(process, process.Progress + progressDelta);
@@ -61,7 +65,8 @@ namespace Izi.Travel.Business.Managers.Download
           return true;
         createParentItemResult.Item.LocalChidlrenUidList.Clear();
         bool hasChildrenError = false;
-        await DownloadProcessCreatePackageLocalTask.ProcessLocalChildrenAsync(createParentItemResult.Item.LocalObject, new DownloadObjectType[3]
+        await DownloadProcessCreatePackageLocalTask.ProcessLocalChildrenAsync(
+            createParentItemResult.Item.LocalObject, new DownloadObjectType[3]
         {
           DownloadObjectType.Collection,
           DownloadObjectType.Exhibit,
@@ -73,41 +78,49 @@ namespace Izi.Travel.Business.Managers.Download
           try
           {
             createParentItemResult.Item.LocalChidlrenUidList.Add(x.Uid, x.Id);
-            DownloadProcessCreatePackageLocalTask.CreatePackageItemResult packageItemLocalAsync = await this.CreatePackageItemLocalAsync(process, DownloadObjectInfo.FromDownloadObject(x), token);
+            DownloadProcessCreatePackageLocalTask.CreatePackageItemResult 
+                packageItemLocalAsync = await this.CreatePackageItemLocalAsync(
+                    process, DownloadObjectInfo.FromDownloadObject(x), token);
             if (!packageItemLocalAsync.Success)
             {
               hasChildrenError = true;
             }
             else
             {
-              await IsolatedStorageFileHelper.SerializeAsync<DownloadPackageItem>(packageItemLocalAsync.ItemPath, packageItemLocalAsync.Item);
+              await IsolatedStorageFileHelper.SerializeAsync<DownloadPackageItem>(
+                  packageItemLocalAsync.ItemPath, packageItemLocalAsync.Item);
               DownloadManager.Instance.SetDownloadProgress(process, process.Progress + progressDelta);
             }
           }
           catch (Exception ex)
           {
             this.Logger.Error(ex);
-            DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, DownloadProcessError.PackageCreateLocal);
+            DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, 
+                DownloadProcessError.PackageCreateLocal);
             hasChildrenError = true;
           }
         }), token);
         if (token.IsCancellationRequested)
         {
-          DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, DownloadProcessError.ProcessCanceled);
+          DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, 
+              DownloadProcessError.ProcessCanceled);
           return false;
         }
         if (hasChildrenError)
         {
-          DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, DownloadProcessError.PackageCreateLocal);
+          DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, 
+              DownloadProcessError.PackageCreateLocal);
           return false;
         }
-        await IsolatedStorageFileHelper.SerializeAsync<DownloadPackageItem>(createParentItemResult.ItemPath, createParentItemResult.Item);
+        await IsolatedStorageFileHelper.SerializeAsync<DownloadPackageItem>(
+            createParentItemResult.ItemPath, createParentItemResult.Item);
         return true;
       }
       catch (Exception ex)
       {
         this.Logger.Error(ex);
-        DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, DownloadProcessError.PackageCreateLocal);
+        DownloadManager.Instance.SetDownloadState(process, DownloadProcessState.Error, 
+            DownloadProcessError.PackageCreateLocal);
         return false;
       }
     }
@@ -125,11 +138,14 @@ namespace Izi.Travel.Business.Managers.Download
       }
       try
       {
-        result.ItemPath = DownloadManager.Instance.GetDownloadPackageItemPath(downloadProcess, downloadObject.Uid);
-        DownloadPackageItem packageItem;
+        result.ItemPath = DownloadManager.Instance.GetDownloadPackageItemPath(downloadProcess, 
+            downloadObject.Uid);
+        DownloadPackageItem packageItem = default;
         DownloadPackageItem downloadPackageItem = packageItem;
-        packageItem = await IsolatedStorageFileHelper.DeserializeAsync<DownloadPackageItem>(result.ItemPath);
-        if (packageItem != null && packageItem.LocalObject != null && downloadObject.Hash == packageItem.LocalObject.Hash)
+        packageItem = await IsolatedStorageFileHelper.DeserializeAsync<DownloadPackageItem>
+                    (result.ItemPath);
+        if (packageItem != null && packageItem.LocalObject != null 
+                    && downloadObject.Hash == packageItem.LocalObject.Hash)
         {
           result.Item = packageItem;
           result.Success = true;
@@ -142,11 +158,13 @@ namespace Izi.Travel.Business.Managers.Download
         };
         result.Item = packageItem;
         if (downloadObject.Type == DownloadObjectType.Collection)
-          await DownloadProcessCreatePackageLocalTask.ProcessLocalChildrenAsync(downloadObject, new DownloadObjectType[2]
+          await DownloadProcessCreatePackageLocalTask.ProcessLocalChildrenAsync(downloadObject, 
+              new DownloadObjectType[2]
           {
             DownloadObjectType.Exhibit,
             DownloadObjectType.StoryNavigation
-          }, (Func<DownloadObject, Task>) (x => Task.Factory.StartNew((Action) (() => packageItem.LocalChidlrenUidList.Add(x.Uid, x.Id)), token)), token);
+          }, (Func<DownloadObject, Task>) (x => Task.Factory.StartNew((System.Action)
+          (() => packageItem.LocalChidlrenUidList.Add(x.Uid, x.Id)), token)), token);
         result.Success = true;
         return result;
       }

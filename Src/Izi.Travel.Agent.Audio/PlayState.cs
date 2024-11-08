@@ -11,6 +11,14 @@ namespace Izi.Travel.Agent.Audio
         Paused,
         Playing,
         TrackReady,
-        TrackEnded
+        TrackEnded,
+        Unknown,
+        Stopped,
+        Shutdown,
+        BufferingStarted,
+        BufferingStopped,
+        Rewinding,
+        FastForwarding,
+        Error
     }
 }

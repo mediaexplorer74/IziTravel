@@ -39,8 +39,8 @@ namespace Izi.Travel.Business.Mapping.Entity
       if (target == null)
         return (Izi.Travel.Business.Entities.Quiz.QuizData) null;
       MtgObjectType result = MtgObjectType.Unknown;
-      if (!string.IsNullOrWhiteSpace(target.Type))
-        Enum.TryParse<MtgObjectType>(target.Type, true, out result);
+      //if (!string.IsNullOrWhiteSpace(target.Type))
+      //  Enum.TryParse<MtgObjectType>(target.Type, true, out result);
       return new Izi.Travel.Business.Entities.Quiz.QuizData()
       {
         Id = target.Id,

@@ -4,7 +4,7 @@
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
-//using Caliburn.Micro;
+using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Filters;
@@ -57,113 +57,102 @@ namespace Izi.Travel.Business.Managers
       }
     }
 
-    public Izi.Travel.Business.Entities.TourPlayback.TourPlayback TourPlayback { get; private set; }
+    public Izi.Travel.Business.Entities.TourPlayback.TourPlayback 
+            TourPlayback { get; private set; }
 
     public string TourPlaybackUid
     {
-      get => this.TourPlayback == null ? (string) null : this.TourPlayback.Uid;
+       get => (string)null;//this.TourPlayback == null ? (string) null : this.TourPlayback.Uid;
     }
 
     public string TourPlaybackLanguage
     {
-      get => this.TourPlayback == null ? (string) null : this.TourPlayback.Language;
+            get => (string)null;//this.TourPlayback == null ? (string) null : this.TourPlayback.Language;
     }
 
     public TourPlaybackState TourPlaybackState { get; private set; }
 
-    public static Action<string> NotifyTouristAttractionReached { get; set; }
+    public static System.Action<string> NotifyTouristAttractionReached { get; set; }
 
-    public static Action NotifyTourStopped { get; set; }
+    public static System.Action NotifyTourStopped { get; set; }
 
     public event TypedEventHandler<TourPlaybackManager, PositionStatus> PositionStatusChanged
     {
       add
       {
-        TypedEventHandler<TourPlaybackManager, PositionStatus> typedEventHandler1 = this.PositionStatusChanged;
+        TypedEventHandler<TourPlaybackManager, PositionStatus> typedEventHandler1 = default;//this.PositionStatusChanged;
         TypedEventHandler<TourPlaybackManager, PositionStatus> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, PositionStatus>>(ref this.PositionStatusChanged, (TypedEventHandler<TourPlaybackManager, PositionStatus>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;
+                       // Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager,
+                       // PositionStatus>>(ref this.PositionStatusChanged, 
+                       // (TypedEventHandler<TourPlaybackManager, PositionStatus>) 
+                       // Delegate.Combine((Delegate) typedEventHandler2, 
+                       // (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<TourPlaybackManager, PositionStatus> typedEventHandler1 = this.PositionStatusChanged;
+        TypedEventHandler<TourPlaybackManager, PositionStatus> typedEventHandler1 = default;//this.PositionStatusChanged;
         TypedEventHandler<TourPlaybackManager, PositionStatus> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, PositionStatus>>(ref this.PositionStatusChanged, (TypedEventHandler<TourPlaybackManager, PositionStatus>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager,
+              //PositionStatus>>(ref this.PositionStatusChanged, 
+              //(TypedEventHandler<TourPlaybackManager, PositionStatus>) 
+              //Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
     }
 
-    /* public event TypedEventHandler<TourPlaybackManager, GeoCoordinate> PositionChanged
-        {
-        add
-        {
-            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler1 = this.PositionChanged;
-            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler2;
-            do
-            {
-            typedEventHandler2 = typedEventHandler1;
-            typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, GeoCoordinate>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, GeoCoordinate>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-            }
-            while (typedEventHandler1 != typedEventHandler2);
-        }
-        remove
-        {
-            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler1 = this.PositionChanged;
-            TypedEventHandler<TourPlaybackManager, GeoCoordinate> typedEventHandler2;
-            do
-            {
-            typedEventHandler2 = typedEventHandler1;
-            typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, GeoCoordinate>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, GeoCoordinate>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-            }
-            while (typedEventHandler1 != typedEventHandler2);
-        }
-        }
-    */
+  
     public event TypedEventHandler<TourPlaybackManager, Geolocation> PositionChanged
     {
-            /*
+           
         add
         {
-            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1 
-                = this.PositionChanged;
+            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1 = default;
+               // = this.PositionChanged;
           
 
             TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2;
             do
             {
                 typedEventHandler2 = typedEventHandler1;
-                typedEventHandler1 = 
-                    Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, 
-                    Geolocation>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, 
-                    Geolocation>)Delegate.Combine((Delegate)typedEventHandler2, (Delegate)value), 
-                    typedEventHandler2);
+                typedEventHandler1 = default;
+                    //Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, 
+                    //Geolocation>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, 
+                    //Geolocation>)Delegate.Combine((Delegate)typedEventHandler2, (Delegate)value), 
+                    //typedEventHandler2);
             }
             while (typedEventHandler1 != typedEventHandler2);
         }
         remove
         {
-            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1 
-                = this.PositionChanged;
+            TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1 = default;
+                // this.PositionChanged;
+
             TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2;
             do
             {
                 typedEventHandler2 = typedEventHandler1;
-                typedEventHandler1 = 
-                    Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, Geolocation>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, Geolocation>)Delegate.Remove((Delegate)typedEventHandler2, (Delegate)value), typedEventHandler2);
+                typedEventHandler1 = default;
+                    //Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, 
+                    //Geolocation>>(ref this.PositionChanged, (TypedEventHandler<TourPlaybackManager, 
+                    //Geolocation>)Delegate.Remove((Delegate)typedEventHandler2, 
+                    //(Delegate)value), typedEventHandler2);
             }
             while (typedEventHandler1 != typedEventHandler2);
         }
-            */
+            
 
-            add
+            //RnD
+            /*add
             {
                 TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1
                     += (sender, e) => this.PositionChanged(sender, e);
@@ -172,36 +161,44 @@ namespace Izi.Travel.Business.Managers
             {
                 TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2
                     -= (sender, e) => this.PositionChanged(sender, e);
-            }
+            }*/
     }
 
-     public event TypedEventHandler<TourPlaybackManager, EventArgs> TourPlaybackStateChanged
+    public event TypedEventHandler<TourPlaybackManager, EventArgs> TourPlaybackStateChanged
     {
-            /*
+            
           add
           {
-            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1 = this.TourPlaybackStateChanged;
+            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1
+                   = default;//this.TourPlaybackStateChanged;
             TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler2;
             do
             {
               typedEventHandler2 = typedEventHandler1;
-              typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+              typedEventHandler1 = default;
+                        //Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, 
+                        //EventArgs>>(ref this.TourPlaybackStateChanged,
+                        //(TypedEventHandler<TourPlaybackManager, EventArgs>) 
+                        //Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), 
+                        //typedEventHandler2);
             }
             while (typedEventHandler1 != typedEventHandler2);
           }
           remove
           {
-            TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1 = this.TourPlaybackStateChanged;
+                TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler1
+                        = default;//this.TourPlaybackStateChanged;
             TypedEventHandler<TourPlaybackManager, EventArgs> typedEventHandler2;
             do
             {
               typedEventHandler2 = typedEventHandler1;
-              typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager, EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<TourPlaybackManager,
+                  //EventArgs>>(ref this.TourPlaybackStateChanged, (TypedEventHandler<TourPlaybackManager, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
             }
             while (typedEventHandler1 != typedEventHandler2);
           }
-            */
-            add
+            
+            /*add
             {
                 TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1
                     += (sender, e) => this.TourPlaybackStateChanged(sender, e);
@@ -210,35 +207,40 @@ namespace Izi.Travel.Business.Managers
             {
                 TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2
                     -= (sender, e) => this.TourPlaybackStateChanged(sender, e);
-            }
+            }*/
         }
 
-    public event TypedEventHandler<TourPlaybackAttraction, EventArgs> TourPlaybackAttractionIsPlayingChanged
+    public event TypedEventHandler<TourPlaybackAttraction, EventArgs> 
+            TourPlaybackAttractionIsPlayingChanged
     {
-            /*
+            
       add
       {
-        TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = this.TourPlaybackAttractionIsPlayingChanged;
+                TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = default;//this.TourPlaybackAttractionIsPlayingChanged;
         TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, EventArgs>>(ref this.TourPlaybackAttractionIsPlayingChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction,
+              //EventArgs>>(ref this.TourPlaybackAttractionIsPlayingChanged,
+              //(TypedEventHandler<TourPlaybackAttraction, EventArgs>)
+              //Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = this.TourPlaybackAttractionIsPlayingChanged;
+                TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = default;//this.TourPlaybackAttractionIsPlayingChanged;
         TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, EventArgs>>(ref this.TourPlaybackAttractionIsPlayingChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, 
+              //EventArgs>>(ref this.TourPlaybackAttractionIsPlayingChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
-            */
+            /*
             add
             {
                 TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler1
@@ -248,30 +250,32 @@ namespace Izi.Travel.Business.Managers
             {
                 TypedEventHandler<TourPlaybackManager, Geolocation> typedEventHandler2
                     -= (sender, e) => this.TourPlaybackAttractionIsPlayingChanged(sender, e);
-            }
+            }*/
         }
 
     public event TypedEventHandler<TourPlaybackAttraction, EventArgs> TourPlaybackAttractionIsVisitedChanged
     {
       add
       {
-        TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = this.TourPlaybackAttractionIsVisitedChanged;
+        TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = default;//this.TourPlaybackAttractionIsVisitedChanged;
         TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, EventArgs>>(ref this.TourPlaybackAttractionIsVisitedChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;
+                        //Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, EventArgs>>(ref this.TourPlaybackAttractionIsVisitedChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = this.TourPlaybackAttractionIsVisitedChanged;
+        TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler1 = default;//this.TourPlaybackAttractionIsVisitedChanged;
         TypedEventHandler<TourPlaybackAttraction, EventArgs> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, EventArgs>>(ref this.TourPlaybackAttractionIsVisitedChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<TourPlaybackAttraction, EventArgs>>
+                        //(ref this.TourPlaybackAttractionIsVisitedChanged, (TypedEventHandler<TourPlaybackAttraction, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
@@ -281,24 +285,26 @@ namespace Izi.Travel.Business.Managers
     {
       add
       {
-        TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler1 = this.TourPlaybackTriggerZoneStateChanged;
+        TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler1 = default;//this.TourPlaybackTriggerZoneStateChanged;
         TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackTriggerZone, EventArgs>>(ref this.TourPlaybackTriggerZoneStateChanged, (TypedEventHandler<TourPlaybackTriggerZone, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<TourPlaybackTriggerZone, EventArgs>>(
+             // ref this.TourPlaybackTriggerZoneStateChanged, (TypedEventHandler<TourPlaybackTriggerZone, EventArgs>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler1 
-                    = this.TourPlaybackTriggerZoneStateChanged;
+                TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler1 = default;
+                //    = this.TourPlaybackTriggerZoneStateChanged;
         TypedEventHandler<TourPlaybackTriggerZone, EventArgs> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<TourPlaybackTriggerZone, EventArgs>>(ref this.TourPlaybackTriggerZoneStateChanged, (TypedEventHandler<TourPlaybackTriggerZone, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;
+                    //Interlocked.CompareExchange<TypedEventHandler<TourPlaybackTriggerZone, EventArgs>>(ref this.TourPlaybackTriggerZoneStateChanged, (TypedEventHandler<TourPlaybackTriggerZone, EventArgs>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
@@ -308,11 +314,12 @@ namespace Izi.Travel.Business.Managers
     {
       TourPlaybackManager.NotifyTouristAttractionReached 
                 = TourPlaybackManager.NotifyTouristAttractionReached ?? (Action<string>) delegate { };
+
       TourPlaybackManager.NotifyTourStopped = TourPlaybackManager.NotifyTourStopped 
-                ?? (Action) (() => { });
+                ?? (System.Action) (() => { });
            
       //RnD
-      this._dataService = default;//IoC.Get<ILocalDataService>();
+      this._dataService = IoC.Get<ILocalDataService>();
       //this._log = LogManager.GetLog(typeof (TourPlaybackManager));
       
             this._tourActions = new TourPlaybackAction[3]
@@ -339,7 +346,7 @@ namespace Izi.Travel.Business.Managers
       dispatcherTimer.Interval = TimeSpan.FromMinutes(1.0);
       
       //dispatcherTimer.Tick += this.DispatcherTimerTick;
-      dispatcherTimer.Tick += (sender, e) => this.DispatcherTimerTick(sender, e);
+      dispatcherTimer.Tick += (sender, e) => this.DispatcherTimerTick((object) null, (EventArgs) null);
       dispatcherTimer.Start();
     }
 
@@ -379,6 +386,7 @@ namespace Izi.Travel.Business.Managers
       catch (Exception ex)
       {
         //this._log.Error(ex);
+        Debug.WriteLine("[ex] TourPlaybackManager error: " + ex.Message);
         this.SetTourPlaybackState(TourPlaybackState.Error);
         return false;
       }
@@ -622,6 +630,7 @@ namespace Izi.Travel.Business.Managers
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("[ex] TourPlaybackManager - RestoreTourPlaybackAsync error: " + ex.Message);
         //this._log.Error(ex);
         this.SetTourPlaybackState(TourPlaybackState.Error);
       }
@@ -687,6 +696,7 @@ namespace Izi.Travel.Business.Managers
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("[ex] StopTourAudio error: " + ex.Message);
         //this._log.Error(ex);
       }
     }
@@ -884,7 +894,7 @@ namespace Izi.Travel.Business.Managers
       else if (state != AudioServiceState.Unknown)
         this.Pause();
       if (state == AudioServiceState.Stopped)
-        ((Action) (async () =>
+        ((System.Action) (async () =>
         {
           await Task.Delay(1000);
           if (this.TourPlaybackState != TourPlaybackState.Started)

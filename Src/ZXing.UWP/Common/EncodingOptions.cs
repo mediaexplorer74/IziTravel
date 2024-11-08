@@ -16,7 +16,7 @@ namespace ZXing.Common
   public class EncodingOptions
   {
     /// <summary>Gets the data container for all options</summary>
-    [Browsable(false)]
+    //[Browsable(false)]
     public IDictionary<EncodeHintType, object> Hints { get; private set; }
 
     /// <summary>Specifies the height of the barcode image</summary>

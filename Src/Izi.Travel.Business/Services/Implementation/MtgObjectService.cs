@@ -376,7 +376,8 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       try
       {
-        return Task.Factory.StartNew((Action) (() => this._localDataService.CreatePurchase(this._mtgObjectPurchaseMapper.Convert(mtgObject))));
+        return Task.Factory.StartNew((System.Action) (
+            () => this._localDataService.CreatePurchase(this._mtgObjectPurchaseMapper.Convert(mtgObject))));
       }
       catch (Exception ex)
       {
@@ -452,7 +453,7 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public Task CreateBookmarkAsync(MtgObject mtgObject, string parentUid = null)
     {
-      return Task.Factory.StartNew((Action) (() =>
+      return Task.Factory.StartNew((System.Action) (() =>
       {
         try
         {
@@ -478,7 +479,7 @@ namespace Izi.Travel.Business.Services.Implementation
           return;
         string uid = mtgObjectFilter.Uid;
         string language = mtgObjectFilter.Languages[0];
-        await Task.Factory.StartNew((Action) (() => this._localDataService.DeleteBookmark(uid, language)));
+        await Task.Factory.StartNew((System.Action) (() => this._localDataService.DeleteBookmark(uid, language)));
       }
       catch (Exception ex)
       {
@@ -533,7 +534,7 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       try
       {
-        await Task.Factory.StartNew((Action) (() => this._localDataService.ClearBookmarkList()));
+        await Task.Factory.StartNew((System.Action) (() => this._localDataService.ClearBookmarkList()));
       }
       catch (Exception ex)
       {
@@ -550,7 +551,7 @@ namespace Izi.Travel.Business.Services.Implementation
         return;
       try
       {
-        await Task.Factory.StartNew((Action) (() =>
+        await Task.Factory.StartNew((System.Action) (() =>
         {
           History history = this._localDataService.GetHistory(mtgObject.Uid, mtgObject.MainContent != null ? mtgObject.MainContent.Language : string.Empty) ?? this._mtgObjectHistoryMapper.Convert(mtgObject);
           history.DateTime = DateTime.Now;
@@ -599,7 +600,7 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       try
       {
-        await Task.Factory.StartNew((Action) (() => this._localDataService.ClearHistoryList()));
+        await Task.Factory.StartNew((System.Action) (() => this._localDataService.ClearHistoryList()));
       }
       catch (Exception ex)
       {

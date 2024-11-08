@@ -8,29 +8,41 @@ using Caliburn.Micro;
 using Izi.Travel.Shell.Core.Helpers;
 using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.ViewModels;
+using RestSharp.Extensions.MonoHttp;
 using System;
 using System.Linq.Expressions;
 using System.Net;
-using System.Windows.Navigation;
+//using System.Windows.Navigation;
 
 #nullable disable
 namespace Izi.Travel.Shell
 {
+    //RnD
+
   public class UriMapper : UriMapperBase
   {
-    public override Uri MapUri(Uri uri)
+    public /*override*/ Uri MapUri(Uri uri)
     {
       if (uri.IsWellFormedOriginalString())
       {
         string str = HttpUtility.UrlDecode(uri.OriginalString);
         if (str.StartsWith("/Protocol?encodedLaunchUri="))
         {
-          MtgLinkInfo mtgLinkInfo = MtgLinkHelper.Parse(str.Replace("/Protocol?encodedLaunchUri=", string.Empty));
+          MtgLinkInfo mtgLinkInfo = MtgLinkHelper.Parse(
+              str.Replace("/Protocol?encodedLaunchUri=", 
+              string.Empty));
+
           if (mtgLinkInfo == null)
             return ShellServiceFacade.NavigationService.UriFor<MainViewModel>().BuildUri();
-          if (string.Equals(mtgLinkInfo.Language, "any", StringComparison.InvariantCultureIgnoreCase))
+
+          if (string.Equals(mtgLinkInfo.Language, "any", StringComparison.CurrentCultureIgnoreCase))
             mtgLinkInfo.Language = (string) null;
-          return ShellServiceFacade.NavigationService.UriFor<RedirectViewModel>().WithParam<string>((Expression<Func<RedirectViewModel, string>>) (x => x.Uid), mtgLinkInfo.Uid).WithParam<string>((Expression<Func<RedirectViewModel, string>>) (x => x.Language), mtgLinkInfo.Language).BuildUri();
+
+          return ShellServiceFacade.NavigationService.UriFor<RedirectViewModel>()
+                    .WithParam<string>((Expression<Func<RedirectViewModel, string>>)
+                    (x => x.Uid), mtgLinkInfo.Uid).WithParam<string>(
+              (Expression<Func<RedirectViewModel, string>>) (x => x.Language), 
+              mtgLinkInfo.Language).BuildUri();
         }
       }
       return uri;

@@ -189,7 +189,7 @@ label_17:
           {
             using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
             {
-              if (storeForApplication.AvailableFreeSpace < contentLength.Value + 10485760L)
+              if (1 == 0)//(storeForApplication.AvailableFreeSpace < contentLength.Value + 10485760L)
                 return new Tuple<bool, DownloadProcessError>(false, DownloadProcessError.PackageDownloadNotEnoughSpace);
             }
           }

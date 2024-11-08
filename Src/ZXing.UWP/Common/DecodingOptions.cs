@@ -18,7 +18,7 @@ namespace ZXing.Common
   public class DecodingOptions
   {
     /// <summary>Gets the data container for all options</summary>
-    [Browsable(false)]
+    //[Browsable(false)]
     public IDictionary<DecodeHintType, object> Hints { get; private set; }
 
     [field: NonSerialized]

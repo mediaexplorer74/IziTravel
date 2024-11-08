@@ -5,20 +5,26 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.dll
 // XML documentation location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.xml
 
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
 
 #nullable disable
+using Windows.UI;
+using Windows.UI.Xaml.Media.Imaging;
+
 namespace ZXing
 {
   public class BitmapLuminanceSource : BaseLuminanceSource
   {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="T:ZXing.BitmapLuminanceSource" /> class.
-    /// </summary>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    protected BitmapLuminanceSource(int width, int height)
+        //TEMP
+        private int[] Pixels;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ZXing.BitmapLuminanceSource" /> class.
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        protected BitmapLuminanceSource(int width, int height)
       : base(width, height)
     {
     }
@@ -28,7 +34,9 @@ namespace ZXing
     {
       int pixelHeight = writeableBitmap.PixelHeight;
       int pixelWidth = writeableBitmap.PixelWidth;
-      int[] pixels = writeableBitmap.Pixels;
+
+       //RnD
+      int[] pixels = Pixels;//writeableBitmap.Pixels;
       int index1 = 0;
       int num1 = pixelWidth * pixelHeight;
       for (int index2 = 0; index2 < num1; ++index2)

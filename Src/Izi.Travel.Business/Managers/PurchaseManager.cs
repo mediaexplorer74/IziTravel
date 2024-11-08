@@ -55,35 +55,38 @@ namespace Izi.Travel.Business.Managers
     {
       add
       {
-        TypedEventHandler<string, bool> typedEventHandler1 = this.IsPurchasedChanged;
+        TypedEventHandler<string, bool> typedEventHandler1 = default;//this.IsPurchasedChanged;
         TypedEventHandler<string, bool> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<string, bool>>(ref this.IsPurchasedChanged, (TypedEventHandler<string, bool>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<string, bool>>(ref this.IsPurchasedChanged, (TypedEventHandler<string, bool>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<string, bool> typedEventHandler1 = this.IsPurchasedChanged;
+        TypedEventHandler<string, bool> typedEventHandler1 = default;//this.IsPurchasedChanged;
         TypedEventHandler<string, bool> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<string, bool>>(ref this.IsPurchasedChanged, (TypedEventHandler<string, bool>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+          typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<string, bool>>(ref this.IsPurchasedChanged, (TypedEventHandler<string, bool>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
     }
 
-    public static Action NotifyConnectionErrorOccurred { get; set; }
+    public static System.Action NotifyConnectionErrorOccurred { get; set; }
 
     public bool CanRestorePurchases
     {
       get
       {
-        return this._purchaseUids.Count != CurrentApp.LicenseInformation.ProductLicenses.Count<KeyValuePair<string, ProductLicense>>((Func<KeyValuePair<string, ProductLicense>, bool>) (x => x.Value.IsActive));
+        return this._purchaseUids.Count 
+                    != CurrentApp.LicenseInformation.ProductLicenses.Count<KeyValuePair<string, 
+                    ProductLicense>>((Func<KeyValuePair<string, ProductLicense>, bool>)
+                    (x => x.Value.IsActive));
       }
     }
 
@@ -94,7 +97,8 @@ namespace Izi.Travel.Business.Managers
         this._purchaseUids = ImmutableList<string>.Empty;
         try
         {
-          this._purchaseUids = this._purchaseUids.AddRange((IEnumerable<string>) this._localDataService.GetPurchaseUidList());
+          this._purchaseUids = this._purchaseUids.AddRange((IEnumerable<string>)
+              this._localDataService.GetPurchaseUidList());
         }
         catch (Exception ex)
         {
@@ -108,12 +112,15 @@ namespace Izi.Travel.Business.Managers
 
     public bool IsPurchased(MtgObject mtgObject)
     {
-      return mtgObject == null || mtgObject.Uid == null || mtgObject.Purchase == null || mtgObject.Purchase.Price == 0M || this.Contains(mtgObject.Uid);
+      return mtgObject == null || mtgObject.Uid == null 
+                || mtgObject.Purchase == null || mtgObject.Purchase.Price == 0M
+                || this.Contains(mtgObject.Uid);
     }
 
     public bool Contains(string uid)
     {
-      return this._purchaseUids.Any<string>((Func<string, bool>) (x => string.Equals(x, uid, StringComparison.CurrentCultureIgnoreCase)));
+      return this._purchaseUids.Any<string>((Func<string, bool>)
+          (x => string.Equals(x, uid, StringComparison.CurrentCultureIgnoreCase)));
     }
 
     public async Task Purchase(MtgObject mtgObject)
@@ -136,7 +143,8 @@ namespace Izi.Travel.Business.Managers
           throw new BusinessException();
         string receipt = string.Empty;
         ProductLicense productLicense;
-        if (!CurrentApp.LicenseInformation.ProductLicenses.TryGetValue(productId, out productLicense) || !productLicense.IsActive)
+        if (!CurrentApp.LicenseInformation.ProductLicenses.TryGetValue(productId, out productLicense) 
+                    || !productLicense.IsActive)
           receipt = await CurrentApp.RequestProductPurchaseAsync(productId, true);
         await this.AddPurchase(mtgObject);
         AnalyticsHelper.SendTransaction(mtgObject, receipt);
@@ -146,13 +154,15 @@ namespace Izi.Travel.Business.Managers
       catch (BusinessException ex)
       {
         this._log.Error((Exception) ex);
-        Deployment.Current.Dispatcher.BeginInvoke((Action) (() =>
-        {
-          Action connectionErrorOccurred = PurchaseManager.NotifyConnectionErrorOccurred;
-          if (connectionErrorOccurred == null)
-            return;
-          connectionErrorOccurred();
-        }));
+        
+        //RnD
+        //Deployment.Current.Dispatcher.BeginInvoke((System.Action) (() =>
+        //{
+        //  System.Action connectionErrorOccurred = PurchaseManager.NotifyConnectionErrorOccurred;
+        //  if (connectionErrorOccurred == null)
+        //    return;
+        //  connectionErrorOccurred();
+        //}));
       }
       catch (Exception ex)
       {
@@ -166,10 +176,20 @@ namespace Izi.Travel.Business.Managers
       {
         IMtgObjectService mtgObjectService = ServiceFacade.MtgObjectService;
         PaidMtgObjectListFilter filter = new PaidMtgObjectListFilter();
-        filter.ProductIds = CurrentApp.LicenseInformation.ProductLicenses.Where<KeyValuePair<string, ProductLicense>>((Func<KeyValuePair<string, ProductLicense>, bool>) (x => x.Value.IsActive)).Select<KeyValuePair<string, ProductLicense>, string>((Func<KeyValuePair<string, ProductLicense>, string>) (x => x.Value.ProductId)).ToArray<string>();
+        filter.ProductIds = CurrentApp.LicenseInformation
+                    .ProductLicenses.Where<KeyValuePair<string, ProductLicense>>
+                    ((Func<KeyValuePair<string, ProductLicense>, bool>) (x => x.Value.IsActive))
+                    .Select<KeyValuePair<string, ProductLicense>, string>(
+            (Func<KeyValuePair<string, ProductLicense>, string>) (x => x.Value.ProductId))
+                    .ToArray<string>();
+
         filter.Languages = ServiceFacade.CultureService.GetNeutralLanguageCodes();
         CancellationToken ct = new CancellationToken();
-        foreach (MtgObject mtgObject in ((IEnumerable<MtgObject>) await mtgObjectService.GetPaidMtgObjectListAsync(filter, ct)).Where<MtgObject>((Func<MtgObject, bool>) (x => this._purchaseUids.All<string>((Func<string, bool>) (y => !string.Equals(y, x.Uid, StringComparison.CurrentCultureIgnoreCase))))))
+        foreach (MtgObject mtgObject in ((IEnumerable<MtgObject>) 
+                    await mtgObjectService.GetPaidMtgObjectListAsync(filter, ct))
+                    .Where<MtgObject>((Func<MtgObject, bool>) 
+                    (x => this._purchaseUids.All<string>((Func<string, bool>)
+                    (y => !string.Equals(y, x.Uid, StringComparison.CurrentCultureIgnoreCase))))))
           await this.AddPurchase(mtgObject);
       }
       catch (Exception ex)
@@ -190,8 +210,9 @@ namespace Izi.Travel.Business.Managers
 
     private void OnIsPurchasedChanged(string uid, bool isPurchased)
     {
-      // ISSUE: reference to a compiler-generated field
-      Deployment.Current.Dispatcher.BeginInvoke((Action) (() => this.IsPurchasedChanged?.Invoke(uid, isPurchased)));
+      // RnD
+      //Deployment.Current.Dispatcher.BeginInvoke((System.Action) 
+      //    (() => this.IsPurchasedChanged?.Invoke(uid, isPurchased)));
     }
   }
 }

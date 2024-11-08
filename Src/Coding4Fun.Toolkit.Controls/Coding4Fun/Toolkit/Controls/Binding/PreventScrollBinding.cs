@@ -10,7 +10,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+//using System.Windows.Media;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 #nullable disable
 namespace Coding4Fun.Toolkit.Controls.Binding
@@ -38,10 +40,11 @@ namespace Coding4Fun.Toolkit.Controls.Binding
     {
       if (!(dobj is FrameworkElement frameworkElement))
         return;
-      frameworkElement.UseOptimizedManipulationRouting = false;
-      frameworkElement.Unloaded += new RoutedEventHandler(PreventScrollBinding.BlockingElementUnloaded);
-      frameworkElement.MouseLeftButtonDown += new MouseButtonEventHandler(PreventScrollBinding.SuspendScroll);
-      frameworkElement.ManipulationStarted += new EventHandler<ManipulationStartedEventArgs>(PreventScrollBinding.SuspendScroll);
+
+        //frameworkElement.UseOptimizedManipulationRouting = false;
+        //frameworkElement.MouseLeftButtonDown += new MouseButtonEventHandler(PreventScrollBinding.SuspendScroll);
+        //frameworkElement.ManipulationStarted += new EventHandler<ManipulationStartedEventArgs>(PreventScrollBinding.SuspendScroll);
+        frameworkElement.Unloaded += new RoutedEventHandler(PreventScrollBinding.BlockingElementUnloaded);
     }
 
     private static void BlockingElementUnloaded(object sender, RoutedEventArgs e)
@@ -49,8 +52,8 @@ namespace Coding4Fun.Toolkit.Controls.Binding
       if (!(sender is FrameworkElement frameworkElement))
         return;
       frameworkElement.Unloaded -= new RoutedEventHandler(PreventScrollBinding.BlockingElementUnloaded);
-      frameworkElement.MouseLeftButtonDown -= new MouseButtonEventHandler(PreventScrollBinding.SuspendScroll);
-      frameworkElement.ManipulationStarted -= new EventHandler<ManipulationStartedEventArgs>(PreventScrollBinding.SuspendScroll);
+      //frameworkElement.MouseLeftButtonDown -= new MouseButtonEventHandler(PreventScrollBinding.SuspendScroll);
+      //frameworkElement.ManipulationStarted -= new EventHandler<ManipulationStartedEventArgs>(PreventScrollBinding.SuspendScroll);
     }
 
     private static void SuspendScroll(object sender, RoutedEventArgs e)
@@ -62,7 +65,7 @@ namespace Coding4Fun.Toolkit.Controls.Binding
         return;
       if (PreventScrollBinding._internalPanningControl != null)
         PreventScrollBinding._internalPanningControl.SetValue(PreventScrollBinding.IsScrollSuspendedProperty, (object) true);
-      Touch.FrameReported += new TouchFrameEventHandler(PreventScrollBinding.TouchFrameReported);
+      //Touch.FrameReported += new TouchFrameEventHandler(PreventScrollBinding.TouchFrameReported);
       if (blockingElement != null)
         blockingElement.IsHitTestVisible = true;
       if (PreventScrollBinding._internalPanningControl == null)
@@ -70,11 +73,11 @@ namespace Coding4Fun.Toolkit.Controls.Binding
       PreventScrollBinding._internalPanningControl.IsHitTestVisible = false;
     }
 
-    private static void TouchFrameReported(object sender, TouchFrameEventArgs e)
+    private static void TouchFrameReported(object sender, /*TouchFrameEventArgs*/EventArgs e)
     {
       if (PreventScrollBinding._internalPanningControl == null)
         return;
-      TouchPoint touchPoint = PreventScrollBinding._internalPanningControl.GetValue(PreventScrollBinding.LastTouchPointProperty) as TouchPoint;
+      /* TouchPoint touchPoint = PreventScrollBinding._internalPanningControl.GetValue(PreventScrollBinding.LastTouchPointProperty) as TouchPoint;
       bool flag = (bool) PreventScrollBinding._internalPanningControl.GetValue(PreventScrollBinding.IsScrollSuspendedProperty);
       TouchPointCollection touchPoints = e.GetTouchPoints((UIElement) ApplicationSpace.RootFrame);
       if (touchPoint == null || touchPoint != touchPoints.Last<TouchPoint>())
@@ -84,6 +87,7 @@ namespace Coding4Fun.Toolkit.Controls.Binding
       Touch.FrameReported -= new TouchFrameEventHandler(PreventScrollBinding.TouchFrameReported);
       PreventScrollBinding._internalPanningControl.IsHitTestVisible = true;
       PreventScrollBinding._internalPanningControl.SetValue(PreventScrollBinding.IsScrollSuspendedProperty, (object) false);
+      */
     }
 
     public static DependencyObject FindAncestor(
@@ -93,9 +97,15 @@ namespace Coding4Fun.Toolkit.Controls.Binding
       if (predicate(dependencyObject))
         return dependencyObject;
       DependencyObject dependencyObject1 = (DependencyObject) null;
-      if (dependencyObject is FrameworkElement reference)
-        dependencyObject1 = reference.Parent ?? VisualTreeHelper.GetParent((DependencyObject) reference);
-      return dependencyObject1 == null ? (DependencyObject) null : PreventScrollBinding.FindAncestor(dependencyObject1, predicate);
+
+            if (dependencyObject is FrameworkElement reference)
+            {
+                dependencyObject1 = reference.Parent 
+                    ?? VisualTreeHelper.GetParent((DependencyObject)reference);
+            }
+      return dependencyObject1 == null 
+                ? (DependencyObject) null 
+                : PreventScrollBinding.FindAncestor(dependencyObject1, predicate);
     }
   }
 }

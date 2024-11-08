@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -79,7 +80,7 @@ namespace UserVoice
       if (this._apiSecret == null)
         request.AddParameter("client", (object) this._apiKey, ParameterType.GetOrPost);
       IRestResponse restResponse = await this.GetToken().Execute((IRestRequest) request);
-      JToken jtoken;
+      JToken jtoken = default;
       try
       {
         if (restResponse.ContentType.StartsWith("application/json"))
@@ -102,13 +103,19 @@ namespace UserVoice
       }
       catch (JsonReaderException ex)
       {
-        throw new ApplicationError("Invalid JSON received: " + restResponse.Content);
+        Debug.WriteLine("[ex] " + ex.Message + " [Invalid JSON received: " + restResponse.Content + "]");
+        //throw new ApplicationError("Invalid JSON received: " + restResponse.Content);
       }
+
       if (HttpStatusCode.OK.Equals((object) restResponse.StatusCode))
         return jtoken;
+
       string msg = restResponse.Content;
-      if (jtoken != null && jtoken[(object) "errors"] != null && jtoken[(object) "errors"][(object) "message"] != null)
+
+      if (jtoken != null && jtoken[(object) "errors"] != null 
+                && jtoken[(object) "errors"][(object) "message"] != null)
         msg = jtoken[(object) "errors"].Value<string>((object) "message");
+
       switch (restResponse.StatusCode)
       {
         case HttpStatusCode.Unauthorized:
@@ -120,7 +127,7 @@ namespace UserVoice
         default:
           throw new ApiError(msg);
       }
-    }
+    }//
 
     public Client LoginWithAccessToken(string token, string secret)
     {

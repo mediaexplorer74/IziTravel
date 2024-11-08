@@ -20,7 +20,9 @@ namespace Izi.Travel.Utility
       try
       {
         return string.Format("C:/Data/Users/DefApps/AppData/{0}/Local/", 
-            (object) new Guid(XDocument.Load("WMAppManifest.xml").Root.Element((XName) "App").Attributes().FirstOrDefault<XAttribute>((Func<XAttribute, bool>) (x => x.Name.LocalName.ToLower() == "productid")).Value).ToString("B"));
+            (object) new Guid(XDocument.Load("WMAppManifest.xml").Root.Element((XName) "App")
+            .Attributes().FirstOrDefault<XAttribute>((Func<XAttribute, bool>)
+            (x => x.Name.LocalName.ToLower() == "productid")).Value).ToString("B"));
       }
       catch (Exception ex)
       {

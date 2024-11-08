@@ -7,8 +7,8 @@
 using Coding4Fun.Toolkit.Controls;
 using Coding4Fun.Toolkit.Controls.Binding;
 using Coding4Fun.Toolkit.Controls.Common;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+//using Microsoft.Phone.Controls;
+//using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +19,8 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 #nullable disable
 namespace Clarity.Phone.Extensions
@@ -72,15 +74,18 @@ namespace Clarity.Phone.Extensions
 
     public bool HasPopup { get; set; }
 
-    internal PhoneApplicationPage Page
+    internal Page Page
     {
       get
       {
-        return this._page ?? (this._page = this.RootFrame.GetFirstLogicalChildByType<PhoneApplicationPage>(false));
+          return this._page; 
+                    //?? (this._page 
+                    //= this.RootFrame.GetFirstLogicalChildByType<Page>(false));
       }
     }
 
-    internal Frame RootFrame => this._rootFrame ?? (this._rootFrame = ApplicationSpace.RootFrame);
+    internal Frame RootFrame => this._rootFrame 
+            ?? (this._rootFrame = ApplicationSpace.RootFrame);
 
     internal Panel PopupContainer
     {
@@ -88,10 +93,15 @@ namespace Clarity.Phone.Extensions
       {
         if (this._popupContainer == null)
         {
-          IEnumerable<ContentPresenter> logicalChildrenByType1 = this.RootFrame.GetLogicalChildrenByType<ContentPresenter>(false);
+                    IEnumerable<ContentPresenter> logicalChildrenByType1 = default;
+                      //  = this.RootFrame.GetLogicalChildrenByType<ContentPresenter>(false);
+
           for (int index = 0; index < logicalChildrenByType1.Count<ContentPresenter>(); ++index)
           {
-            IEnumerable<Panel> logicalChildrenByType2 = logicalChildrenByType1.ElementAt<ContentPresenter>(index).GetLogicalChildrenByType<Panel>(false);
+            IEnumerable<Panel> logicalChildrenByType2 = default;
+            //logicalChildrenByType1.ElementAt<ContentPresenter>(index)
+                //.GetLogicalChildrenByType<Panel>(false);
+
             if (logicalChildrenByType2.Any<Panel>())
             {
               this._popupContainer = logicalChildrenByType2.First<Panel>();

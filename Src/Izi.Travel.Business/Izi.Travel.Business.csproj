@@ -127,6 +127,7 @@
     <Compile Include="Extensions\MapsDirectionsTask.cs" />
     <Compile Include="Extensions\MtgContentContractResolver.cs" />
     <Compile Include="Extensions\MtgObjectExtensions.cs" />
+    <Compile Include="GoogleAnalytics\Core.cs" />
     <Compile Include="Helper\AnalyticsHelper.cs" />
     <Compile Include="Helper\AudioTrackInfoHelper.cs" />
     <Compile Include="Helper\GeoLocationHelper.cs" />
@@ -197,22 +198,42 @@
     <Compile Include="Services\Contract\IMtgObjectService.cs" />
     <Compile Include="Services\Contract\IQuizService.cs" />
     <Compile Include="Services\Contract\ISettingsService.cs" />
+    <Compile Include="Services\Implementation\Adjust.cs" />
+    <Compile Include="Services\Implementation\AdjustEnvironment.cs" />
     <Compile Include="Services\Implementation\AdjustEvent.cs" />
     <Compile Include="Services\Implementation\AdjustRevenue.cs" />
     <Compile Include="Services\Implementation\AnalyticsService.cs" />
+    <Compile Include="Services\Implementation\ApplicationSettings.cs" />
     <Compile Include="Services\Implementation\AudioService.cs" />
+    <Compile Include="Services\Implementation\AudioTrack.cs" />
+    <Compile Include="Services\Implementation\ClosingEventArgs.cs" />
     <Compile Include="Services\Implementation\CultureService.cs" />
     <Compile Include="Services\Implementation\CultureTables.cs" />
+    <Compile Include="Services\Implementation\CurrentObject.cs" />
+    <Compile Include="Services\Implementation\EasyTracker.cs" />
+    <Compile Include="Services\Implementation\EasyTrackerConfig.cs" />
+    <Compile Include="Services\Implementation\IsolatedStorageSettings.cs" />
+    <Compile Include="Services\Implementation\LogLevel.cs" />
     <Compile Include="Services\Implementation\MediaService.cs" />
     <Compile Include="Services\Implementation\MtgObjectDownloadService.cs" />
     <Compile Include="Services\Implementation\MtgObjectRegionService.cs" />
     <Compile Include="Services\Implementation\MtgObjectService.cs" />
+    <Compile Include="Services\Implementation\PhoneApplicationService.cs" />
+    <Compile Include="Services\Implementation\PlayStateChangedEventArgs.cs" />
     <Compile Include="Services\Implementation\QuizService.cs" />
     <Compile Include="Services\Implementation\SettingsService.cs" />
+    <Compile Include="Services\Implementation\SHA1Managed.cs" />
+    <Compile Include="Services\Implementation\TKey.cs" />
+    <Compile Include="Services\Implementation\Tracker.cs" />
+    <Compile Include="Services\Implementation\TransactionItem.cs" />
+    <Compile Include="Services\Implementation\TValue.cs" />
     <Compile Include="Services\ServiceFacade.cs" />
     <EmbeddedResource Include="Properties\Izi.Travel.Business.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Caliburn.Micro">
+      <Version>2.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>
@@ -221,6 +242,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Izi.Travel.Agent.Audio\Izi.Travel.Agent.Audio.csproj">
+      <Project>{5A109BEE-A35F-4B6F-8075-0F92E2231272}</Project>
+      <Name>Izi.Travel.Agent.Audio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj">
       <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
       <Name>Izi.Travel.Business.Entities</Name>

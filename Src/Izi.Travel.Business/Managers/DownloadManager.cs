@@ -65,23 +65,23 @@ namespace Izi.Travel.Business.Managers
     {
       add
       {
-        TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = this.DownloadProcessStateChanged;
+                TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = default;//this.DownloadProcessStateChanged;
         TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessStateChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessStateChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = this.DownloadProcessStateChanged;
+                TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = default;//this.DownloadProcessStateChanged;
         TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessStateChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessStateChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
@@ -91,23 +91,23 @@ namespace Izi.Travel.Business.Managers
     {
       add
       {
-        TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = this.DownloadProcessProgressChanged;
+                TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = default;//this.DownloadProcessProgressChanged;
         TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessProgressChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessProgressChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
       remove
       {
-        TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = this.DownloadProcessProgressChanged;
+                TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler1 = default;//this.DownloadProcessProgressChanged;
         TypedEventHandler<DownloadManager, DownloadProcess> typedEventHandler2;
         do
         {
           typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessProgressChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
+                    typedEventHandler1 = default;//Interlocked.CompareExchange<TypedEventHandler<DownloadManager, DownloadProcess>>(ref this.DownloadProcessProgressChanged, (TypedEventHandler<DownloadManager, DownloadProcess>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
         }
         while (typedEventHandler1 != typedEventHandler2);
       }
@@ -117,7 +117,8 @@ namespace Izi.Travel.Business.Managers
 
     public void Restore()
     {
-      this._taskRestore = this._taskRestore == null ? this.RestoreInternalAsync() : throw new BusinessException("Restore have already started");
+      this._taskRestore = this._taskRestore == null 
+                ? this.RestoreInternalAsync() : throw new BusinessException("Restore have already started");
     }
 
     public async void DownloadAsync(MtgObject mtgObject, bool isRestored = false)
@@ -126,8 +127,11 @@ namespace Izi.Travel.Business.Managers
       {
         if (this._taskRestore != null)
           await this._taskRestore;
-        if (mtgObject == null || string.IsNullOrWhiteSpace(mtgObject.Uid) || string.IsNullOrWhiteSpace(mtgObject.Language))
+
+        if (mtgObject == null || string.IsNullOrWhiteSpace(mtgObject.Uid)
+                    || string.IsNullOrWhiteSpace(mtgObject.Language))
           return;
+
         DownloadProcess process = this.GetDownloadProcess(mtgObject);
         if (process != null)
         {
@@ -147,11 +151,17 @@ namespace Izi.Travel.Business.Managers
         }
         else
           process.IsRestored = isRestored;
+
         this._processes = this._processes.Add(process);
-        this.SetDownloadState(process, isUpdate ? DownloadProcessState.Updating : DownloadProcessState.Downloading);
+
+        this.SetDownloadState(process, isUpdate
+            ? DownloadProcessState.Updating
+            : DownloadProcessState.Downloading);
+
         this.SetDownloadProgress(process, 0.0);
         process.CancellationTokenSource = new CancellationTokenSource();
-        process.Task = DownloadManager.DownloadInternalAsync(process, process.CancellationTokenSource.Token);
+        process.Task = DownloadManager.DownloadInternalAsync(process, 
+            process.CancellationTokenSource.Token);
         bool flag;
         try
         {
@@ -166,8 +176,12 @@ namespace Izi.Travel.Business.Managers
         {
           if (this._processes.Contains(process))
             this._processes = this._processes.Remove(process);
-          IsolatedStorageFileHelper.DeleteFile(this.GetDownloadProcessPath(mtgObject.Uid, mtgObject.Language));
-          this.SetDownloadState(process, isUpdate ? DownloadProcessState.Updated : DownloadProcessState.Downloaded);
+          IsolatedStorageFileHelper.DeleteFile(
+              this.GetDownloadProcessPath(mtgObject.Uid, mtgObject.Language));
+
+          this.SetDownloadState(process, isUpdate
+              ? DownloadProcessState.Updated 
+              : DownloadProcessState.Downloaded);
         }
         else
           this.SetDownloadState(process, DownloadProcessState.Error);
@@ -192,7 +206,8 @@ namespace Izi.Travel.Business.Managers
         DownloadProcess process = this.GetDownloadProcess(mtgObject);
         if (process != null)
         {
-          if (process.State == DownloadProcessState.Removing || process.State == DownloadProcessState.Removed)
+          if (process.State == DownloadProcessState.Removing 
+                        || process.State == DownloadProcessState.Removed)
             return;
         }
         else
@@ -232,7 +247,8 @@ namespace Izi.Travel.Business.Managers
 
     public async Task<bool> CheckUpdateAsync(MtgObject localMtgObject)
     {
-      if (localMtgObject == null || localMtgObject.MainContent == null || localMtgObject.AccessType != MtgObjectAccessType.Offline || !((IEnumerable<MtgObjectType>) DownloadManager.UpdateMtgObjectTypes).Contains<MtgObjectType>(localMtgObject.Type))
+      if (localMtgObject == null || localMtgObject.MainContent == null 
+                || localMtgObject.AccessType != MtgObjectAccessType.Offline || !((IEnumerable<MtgObjectType>) DownloadManager.UpdateMtgObjectTypes).Contains<MtgObjectType>(localMtgObject.Type))
         return false;
       if (this.GetDownloadProcess(localMtgObject) != null)
         return false;
@@ -258,17 +274,24 @@ namespace Izi.Travel.Business.Managers
         DownloadManager.Logger.Error(ex);
         return false;
       }
-      return remoteMtgObject != null && !string.IsNullOrWhiteSpace(remoteMtgObject.Hash) && !remoteMtgObject.Hash.Equals(localMtgObject.Hash, StringComparison.CurrentCultureIgnoreCase);
+      return remoteMtgObject != null && !string.IsNullOrWhiteSpace(remoteMtgObject.Hash)
+                && !remoteMtgObject.Hash.Equals(localMtgObject.Hash, 
+                StringComparison.CurrentCultureIgnoreCase);
     }
 
     public DownloadProcess GetDownloadProcess(MtgObject mtgObject)
     {
-      return mtgObject == null ? (DownloadProcess) null : this._processes.Where<DownloadProcess>((Func<DownloadProcess, bool>) (x => x.MtgObject != null)).FirstOrDefault<DownloadProcess>((Func<DownloadProcess, bool>) (x => x.Key == mtgObject.Key));
+      return mtgObject == null
+                ? (DownloadProcess) null 
+                : this._processes.Where<DownloadProcess>((Func<DownloadProcess, bool>)
+                (x => x.MtgObject != null)).FirstOrDefault<DownloadProcess>(
+                    (Func<DownloadProcess, bool>) (x => x.Key == mtgObject.Key));
     }
 
     public DownloadProcess[] GetDownloadProcessList()
     {
-      return this._processes.Where<DownloadProcess>((Func<DownloadProcess, bool>) (x => x.MtgObject != null)).ToArray<DownloadProcess>();
+      return this._processes.Where<DownloadProcess>((Func<DownloadProcess, bool>)
+          (x => x.MtgObject != null)).ToArray<DownloadProcess>();
     }
 
     public bool CheckMtgObjectDownloadProcess(MtgObject mtgObject, DownloadProcess downloadProcess)
@@ -278,18 +301,27 @@ namespace Izi.Travel.Business.Managers
 
     public Tuple<DownloadProcessState, double> GetMtgObjectDownloadInfo(MtgObject mtgObject)
     {
-      if (mtgObject == null || string.IsNullOrWhiteSpace(mtgObject.Uid) || string.IsNullOrWhiteSpace(mtgObject.Language))
+      if (mtgObject == null || string.IsNullOrWhiteSpace(mtgObject.Uid)
+                || string.IsNullOrWhiteSpace(mtgObject.Language))
         return new Tuple<DownloadProcessState, double>(DownloadProcessState.Unknown, 0.0);
+
       DownloadProcess downloadProcess = this.GetDownloadProcess(mtgObject);
+
       if (downloadProcess != null)
         return new Tuple<DownloadProcessState, double>(downloadProcess.State, downloadProcess.Progress);
-      DownloadObject downloadObject = DownloadManager.DataService.FindDownloadObject(mtgObject.Uid, mtgObject.Language, new DownloadStatus?());
-      return downloadObject == null ? new Tuple<DownloadProcessState, double>(DownloadProcessState.Unknown, 0.0) : new Tuple<DownloadProcessState, double>(downloadObject.Status == DownloadStatus.Completed ? DownloadProcessState.Downloaded : DownloadProcessState.Downloading, 0.0);
+
+      DownloadObject downloadObject = DownloadManager.DataService.FindDownloadObject(
+          mtgObject.Uid, mtgObject.Language, new DownloadStatus?());
+      return downloadObject == null
+                ? new Tuple<DownloadProcessState, double>(DownloadProcessState.Unknown, 0.0) 
+                : new Tuple<DownloadProcessState, double>(downloadObject.Status == DownloadStatus.Completed
+                ? DownloadProcessState.Downloaded 
+                : DownloadProcessState.Downloading, 0.0);
     }
 
     private Task RestoreInternalAsync()
     {
-      return Task.Factory.StartNew((Action) (() =>
+      return Task.Factory.StartNew((System.Action) (() =>
       {
         string[] fileNames = IsolatedStorageFileHelper.GetFileNames(Path.Combine("Download", "*.download"));
         if (fileNames == null || fileNames.Length == 0)
@@ -307,7 +339,8 @@ namespace Izi.Travel.Business.Managers
       DownloadProcess process,
       CancellationToken token = default (CancellationToken))
     {
-      foreach (DownloadProcessTaskBase downloadProcessTaskBase in (IEnumerable<DownloadProcessTaskBase>) ((IEnumerable<DownloadProcessTaskBase>) new DownloadProcessTaskBase[6]
+      foreach (DownloadProcessTaskBase downloadProcessTaskBase in (IEnumerable<DownloadProcessTaskBase>) 
+                ((IEnumerable<DownloadProcessTaskBase>) new DownloadProcessTaskBase[6]
       {
         (DownloadProcessTaskBase) new DownloadProcessCreatePackageLocalTask(),
         (DownloadProcessTaskBase) new DownloadProcessCreatePackageRemoteTask(),
@@ -329,7 +362,8 @@ namespace Izi.Travel.Business.Managers
       {
         try
         {
-          string[] exclusiveMediaPathList = DownloadManager.DataService.GetDownloadExclusiveMediaPathList(process.Uid, process.Language);
+          string[] exclusiveMediaPathList = 
+              DownloadManager.DataService.GetDownloadExclusiveMediaPathList(process.Uid, process.Language);
           if (exclusiveMediaPathList != null)
           {
             using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
@@ -356,20 +390,22 @@ namespace Izi.Travel.Business.Managers
 
     private void OnDownloadStateChanged(DownloadProcess downloadProcess)
     {
-      // ISSUE: reference to a compiler-generated field
-      this.DownloadProcessStateChanged?.Invoke(this, downloadProcess);
+      // RnD
+      //this.DownloadProcessStateChanged?.Invoke(this, downloadProcess);
     }
 
     private void OnDownloadProgressChanged(DownloadProcess downloadProcess)
     {
-      // ISSUE: reference to a compiler-generated field
-      this.DownloadProcessProgressChanged?.Invoke(this, downloadProcess);
+      // RnD
+      //this.DownloadProcessProgressChanged?.Invoke(this, downloadProcess);
     }
 
     internal DownloadProcess LoadDownloadProcess(string uid, string language)
     {
       string downloadProcessPath = this.GetDownloadProcessPath(uid, language);
-      return string.IsNullOrWhiteSpace(downloadProcessPath) ? (DownloadProcess) null : this.LoadDownloadProcess(downloadProcessPath);
+      return string.IsNullOrWhiteSpace(downloadProcessPath)
+                ? (DownloadProcess) null 
+                : this.LoadDownloadProcess(downloadProcessPath);
     }
 
     internal DownloadProcess LoadDownloadProcess(string path)
@@ -400,14 +436,17 @@ namespace Izi.Travel.Business.Managers
         return;
       try
       {
-        using (IsolatedStorageFile storeForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+        using (IsolatedStorageFile storeForApplication 
+                    = IsolatedStorageFile.GetUserStoreForApplication())
         {
           if (storeForApplication.FileExists(downloadProcessPath))
             storeForApplication.DeleteFile(downloadProcessPath);
           string directoryName = Path.GetDirectoryName(downloadProcessPath);
           if (directoryName != null && !storeForApplication.DirectoryExists(directoryName))
             storeForApplication.CreateDirectory(directoryName);
-          using (IsolatedStorageFileStream storageFileStream = storeForApplication.OpenFile(downloadProcessPath, FileMode.CreateNew, FileAccess.ReadWrite))
+          using (IsolatedStorageFileStream storageFileStream 
+                        = storeForApplication.OpenFile(downloadProcessPath, 
+                        FileMode.CreateNew, FileAccess.ReadWrite))
             new DataContractJsonSerializer(typeof (DownloadProcess)).WriteObject((Stream) storageFileStream, (object) downloadProcess);
         }
       }
@@ -420,7 +459,8 @@ namespace Izi.Travel.Business.Managers
 
     internal string GetDownloadProcessPath(string uid, string language)
     {
-      return string.IsNullOrWhiteSpace(uid) || string.IsNullOrWhiteSpace(language) ? (string) null : Path.Combine("Download", uid + language + ".download");
+      return string.IsNullOrWhiteSpace(uid) || string.IsNullOrWhiteSpace(language) 
+                ? (string) null : Path.Combine("Download", uid + language + ".download");
     }
 
     internal void SetDownloadState(
@@ -431,7 +471,8 @@ namespace Izi.Travel.Business.Managers
       if (downloadProcess == null || downloadProcess.State == state)
         return;
       if (state == DownloadProcessState.Error)
-        downloadProcess.Error = downloadProcess.CancellationTokenSource == null || !downloadProcess.CancellationTokenSource.IsCancellationRequested ? error : DownloadProcessError.ProcessCanceled;
+        downloadProcess.Error = downloadProcess.CancellationTokenSource == null 
+                    || !downloadProcess.CancellationTokenSource.IsCancellationRequested ? error : DownloadProcessError.ProcessCanceled;
       downloadProcess.State = state;
       this.OnDownloadStateChanged(downloadProcess);
     }
@@ -446,7 +487,9 @@ namespace Izi.Travel.Business.Managers
 
     internal string GetDownloadPackagePath(DownloadProcess downloadProcess)
     {
-      return downloadProcess == null ? (string) null : this.GetDownloadPackagePath(downloadProcess.Uid, downloadProcess.Language);
+      return downloadProcess == null
+                ? (string) null 
+                : this.GetDownloadPackagePath(downloadProcess.Uid, downloadProcess.Language);
     }
 
     internal string GetDownloadPackagePath(string uid, string language)

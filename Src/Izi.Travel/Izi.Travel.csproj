@@ -125,6 +125,13 @@
     <Compile Include="MainPage1.xaml.cs">
       <DependentUpon>MainPage1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mtg\Controls\Camera.cs" />
+    <Compile Include="Mtg\Controls\CameraFlashMode.cs" />
+    <Compile Include="Mtg\Controls\CameraOperationCompletedEventArgs.cs" />
+    <Compile Include="Mtg\Controls\CameraResolution.cs" />
+    <Compile Include="Mtg\Controls\CameraVideoBrushExtensions.cs" />
+    <Compile Include="Mtg\Controls\PhotoCamera.cs" />
+    <Compile Include="Mtg\Controls\VideoBrush.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\FeedbackCommand.cs" />
@@ -508,6 +515,7 @@
     <Compile Include="Toolkit\Controls\UpdateSelectionMode.cs" />
     <Compile Include="Toolkit\Controls\VisualTreeExtensions.cs" />
     <Compile Include="UriMapper.cs" />
+    <Compile Include="UriMapperBase.cs" />
     <Compile Include="ViewModels\Explore\ExploreItemStatus.cs" />
     <Compile Include="ViewModels\Explore\ExploreItemViewModel.cs" />
     <Compile Include="ViewModels\Explore\ExploreLocationGroup.cs" />
@@ -1081,6 +1089,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Izi.Travel_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj">
+      <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
+      <Name>Izi.Travel.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Business\Izi.Travel.Business.csproj">
+      <Project>{01628e84-bb32-4f0a-b131-4841fe0e4b85}</Project>
+      <Name>Izi.Travel.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Geofencing\Izi.Travel.Geofencing.csproj">
+      <Project>{91866363-6a66-481e-878c-29878220294f}</Project>
+      <Name>Izi.Travel.Geofencing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Utility\Izi.Travel.Utility.csproj">
+      <Project>{cdcecd6c-d5fa-46c2-ba54-b70be30ad919}</Project>
+      <Name>Izi.Travel.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestSharp.UWP\RestSharp.UWP\RestSharp.UWP.csproj">
+      <Project>{0136D105-745E-44CE-9215-161833B25D84}</Project>
+      <Name>RestSharp.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZXing.UWP\ZXing.UWP.csproj">
+      <Project>{a4f96d26-b214-437a-b138-c3facdaea60b}</Project>
+      <Name>ZXing.UWP</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

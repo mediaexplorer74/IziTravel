@@ -4,10 +4,10 @@
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
-using AdjustSdk;
+//using AdjustSdk;
 using Caliburn.Micro;
-using GoogleAnalytics;
-using GoogleAnalytics.Core;
+//using GoogleAnalytics;
+//using GoogleAnalytics.Core;
 using Izi.Travel.Business.Entities.Analytics;
 using Izi.Travel.Business.Entities.Analytics.Events.Application;
 using Izi.Travel.Business.Entities.Analytics.Events.Content;
@@ -26,14 +26,14 @@ namespace Izi.Travel.Business.Services.Implementation
   internal sealed class AnalyticsService : IAnalyticsService
   {
     private static readonly ILog Logger = LogManager.GetLog(typeof (AnalyticsService));
-    private readonly ISettingsService _settingsService;
+    private readonly Caliburn.Micro.ISettingsService _settingsService;
     private const string TrackingIdDeveloper = "UA-49540358-1";
     private const string TrackingIdBeta = "UA-38462614-1";
     private const string TrackingIdProduction = "UA-38461714-1";
     private const string AdjustApplicationToken = "mtagefwfqmwl";
     private const string AppName = "Izi.travel";
 
-    public AnalyticsService(ISettingsService settingsService)
+    public AnalyticsService(Caliburn.Micro.ISettingsService settingsService)
     {
       this._settingsService = settingsService;
     }
@@ -43,11 +43,11 @@ namespace Izi.Travel.Business.Services.Implementation
       EasyTrackerConfig easyTrackerConfig = new EasyTrackerConfig()
       {
         AppName = "Izi.travel",
-        AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-        UserId = this._settingsService.GetAppSettings().UserUid
+        AppVersion = "v10",//Assembly.GetExecutingAssembly().GetName().Version.ToString(),
+        UserId = default//this._settingsService.GetAppSettings().UserUid
       };
       easyTrackerConfig.TrackingId = "UA-38461714-1";
-      EasyTracker.Current.Config = easyTrackerConfig;
+      //EasyTracker.Current.Config = easyTrackerConfig;
     }
 
     public void SendContentEvent(BaseContentEvent eventInfo)
@@ -71,7 +71,8 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       if (eventInfo == null || string.IsNullOrWhiteSpace(eventInfo.Label))
         return;
-      EasyTracker.GetTracker().SendEvent(EventCategory.Application.Value, eventInfo.Action.Value, eventInfo.Label, 0L);
+      EasyTracker.GetTracker().SendEvent(EventCategory.Application.Value, 
+          eventInfo.Action.Value, eventInfo.Label, 0L);
     }
 
     public void SendView(ViewInfo viewInfo)
@@ -83,7 +84,9 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public void SendTransaction(TransactionInfo transactionInfo)
     {
-      if (transactionInfo == null || transactionInfo.Items.Count == 0 || string.IsNullOrWhiteSpace(transactionInfo.Id))
+      if (transactionInfo == null
+                || transactionInfo.Items.Count == 0
+                || string.IsNullOrWhiteSpace(transactionInfo.Id))
         return;
       GoogleAnalytics.Core.Transaction transaction = new GoogleAnalytics.Core.Transaction()
       {
@@ -94,7 +97,8 @@ namespace Izi.Travel.Business.Services.Implementation
         ShippingCostInMicros = 0,
         CurrencyCode = transactionInfo.CurrencyCode
       };
-      foreach (TransactionItemInfo transactionItemInfo in (IEnumerable<TransactionItemInfo>) transactionInfo.Items)
+      foreach (TransactionItemInfo transactionItemInfo in (IEnumerable<TransactionItemInfo>)
+                transactionInfo.Items)
         transaction.Items.Add(new TransactionItem()
         {
           TransactionId = transactionInfo.Id,
@@ -163,7 +167,10 @@ namespace Izi.Travel.Business.Services.Implementation
         IEnumerable<BaseParameter> parameters = eventInfo.GetParameters();
         if (parameters != null)
         {
-          foreach (BaseParameter baseParameter in (IEnumerable<BaseParameter>) parameters.Where<BaseParameter>((Func<BaseParameter, bool>) (x => x != null)).OrderBy<BaseParameter, int>((Func<BaseParameter, int>) (x => x.Index)))
+          foreach (BaseParameter baseParameter in (IEnumerable<BaseParameter>)
+                        parameters.Where<BaseParameter>((Func<BaseParameter, bool>)
+                        (x => x != null)).OrderBy<BaseParameter, int>((Func<BaseParameter, int>)
+                        (x => x.Index)))
             tracker.SetCustomDimension(baseParameter.Index, baseParameter.Value);
         }
       }

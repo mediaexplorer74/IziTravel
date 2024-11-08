@@ -8,7 +8,9 @@
 using System;
 using System.Globalization;
 using System.Text;
-using System.Windows.Media;
+using Windows.UI;
+
+//using System.Windows.Media;
 using ZXing.Common;
 
 #nullable disable

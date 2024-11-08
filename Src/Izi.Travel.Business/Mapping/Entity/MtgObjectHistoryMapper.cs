@@ -50,8 +50,11 @@ namespace Izi.Travel.Business.Mapping.Entity
         content2.Images = mediaArray;
       }
       MtgObjectType result = MtgObjectType.Unknown;
-      if (!string.IsNullOrWhiteSpace(target.Type))
-        Enum.TryParse<MtgObjectType>(target.Type, true, out result);
+      
+      //RnD
+      //if (!string.IsNullOrWhiteSpace(target.Type))
+        //Enum.TryParse<MtgObjectType>(target.Type, true, out result);
+
       MtgObject mtgObject1 = new MtgObject();
       mtgObject1.Uid = target.Uid;
       mtgObject1.ParentUid = target.ParentUid;

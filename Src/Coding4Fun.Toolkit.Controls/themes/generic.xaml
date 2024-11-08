@@ -24,16 +24,18 @@
                    Color="{Binding Source={StaticResource PhoneChromeBrush}, Converter={StaticResource BrushToBrush}}" />
   <SolidColorBrush x:Key="DefaultSemiTransparentBrush" 
                    Color="{Binding Source={StaticResource PhoneSemitransparentBrush}, Converter={StaticResource BrushToBrush}}" />
-  <sys:Double x:Key="DefaultFontSizeExtraSmall">12</sys:Double>
+ 
+    <!--sys:Double x:Key="DefaultFontSizeExtraSmall">12</sys:Double>
   <sys:Double x:Key="DefaultFontSizeNormal">20</sys:Double>
   <sys:Double x:Key="DefaultFontSizeMedium">22.667</sys:Double>
   <sys:Double x:Key="DefaultFontSizeMediumLarge">25.333</sys:Double>
-  <sys:Double x:Key="DefaultFontSizeLarge">32</sys:Double>
+  <sys:Double x:Key="DefaultFontSizeLarge">32</sys:Double-->
+    
   <FontFamily x:Key="FontFamilySegoeNormal">Segoe WP</FontFamily>
   <FontFamily x:Key="FontFamilySegoeSemiBold">Segoe WP Semibold</FontFamily>
   <FontFamily x:Key="FontFamilySegoeSemiLight">Segoe WP SemiLight</FontFamily>
-  <sys:Double x:Key="DefaultAppButtonSize">70</sys:Double>
-  <sys:Double x:Key="DefaultTileSize">173</sys:Double>
+  <!--sys:Double x:Key="DefaultAppButtonSize">70</sys:Double>
+  <sys:Double x:Key="DefaultTileSize">173</sys:Double-->
   <Thickness x:Key="DefaultTextBoxInnerMargin">1,2</Thickness>
   <Thickness x:Key="DefaultBorderThickness">3</Thickness>
   <SolidColorBrush x:Key="DefaultTextBoxBrush" Color="{Binding Source={StaticResource PhoneTextBoxBrush}, Converter={StaticResource BrushToBrush}}" />
@@ -623,14 +625,23 @@
               <RowDefinition Height="Auto" />
               <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Border x:Name="EnabledBorder" Grid.Row="1" Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+            <Border x:Name="EnabledBorder" Grid.Row="1" Padding="{TemplateBinding Padding}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
               <Grid>
-                <ContentControl x:Name="HintContentElement" BorderThickness="0" Background="Transparent" Margin="{StaticResource DefaultTextBoxInnerMargin}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="{StaticResource DefaultTextBoxReadOnlyBrush}" Content="{TemplateBinding Hint}" />
-                <ContentControl x:Name="ContentElement" BorderThickness="0" Background="Transparent" Margin="{StaticResource DefaultTextBoxInnerMargin}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                <ContentControl x:Name="HintContentElement" BorderThickness="0" 
+                                Background="Transparent" Margin="{StaticResource DefaultTextBoxInnerMargin}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="{StaticResource DefaultTextBoxReadOnlyBrush}" Content="{TemplateBinding Hint}" />
+                <ContentControl x:Name="ContentElement" BorderThickness="0" 
+                                Background="Transparent" Margin="{StaticResource DefaultTextBoxInnerMargin}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
               </Grid>
             </Border>
             <Border x:Name="DisabledOrReadonlyBorder" Grid.Row="1" Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{StaticResource DefaultDisabledBrush}" Visibility="Collapsed">
-              <TextBox x:Name="DisabledOrReadonlyContent" Background="Transparent" Foreground="{StaticResource DefaultDisabledBrush}" IsReadOnly="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectionForeground="{TemplateBinding SelectionForeground}" SelectionBackground="{TemplateBinding SelectionBackground}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" Text="{TemplateBinding Text}" Template="{StaticResource DisabledChatBubbleTextBoxTemplate}" />
+              <TextBox x:Name="DisabledOrReadonlyContent" 
+                       Background="Transparent" Foreground="{StaticResource DefaultDisabledBrush}" IsReadOnly="True" HorizontalContentAlignment="Stretch"
+                       VerticalContentAlignment="Stretch"
+                       TextAlignment="{TemplateBinding TextAlignment}" 
+                       TextWrapping="{TemplateBinding TextWrapping}" 
+                       Text="{TemplateBinding Text}"
+                       Template="{StaticResource DisabledChatBubbleTextBoxTemplate}" />
             </Border>
             <Path Name="LowerRightPath" Data="M0,0 L1,1 L1,0 " Grid.Row="2" Fill="{TemplateBinding BorderBrush}" Stretch="Fill" Margin="12,0" Height="12" Width="18" Visibility="Collapsed" HorizontalAlignment="Right" />
             <Path Name="LowerLeftPath" Data="M0,0 L0,1 L1,0" Grid.Row="2" Fill="{TemplateBinding BorderBrush}" Stretch="Fill" Margin="12,0" Height="12" Width="18" Visibility="Collapsed" HorizontalAlignment="Left" />
@@ -686,8 +697,15 @@
               <RowDefinition Height="Auto" />
               <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Rectangle Margin="0,0,0,12" Height="24" Grid.Row="0" Grid.ColumnSpan="2" Name="SelectedColor" Fill="{TemplateBinding SolidColorBrush}" />
-            <local:ColorSlider Width="24" Margin="0,0,12,0" IsColorVisible="false" Thumb="{TemplateBinding Thumb}" x:Name="ColorSlider" Grid.Row="2" />
+            <Rectangle Margin="0,0,0,12" Height="24" 
+                       Grid.Row="0" Grid.ColumnSpan="2"
+                       Name="SelectedColor" 
+                       Fill="{TemplateBinding SolidColorBrush}" />
+            <local:ColorSlider Width="24" 
+                               Margin="0,0,12,0" 
+                               IsColorVisible="false" 
+                               Thumb="{TemplateBinding Thumb}" 
+                               x:Name="ColorSlider" Grid.Row="2" />
             <Grid Name="Body" Grid.Column="1" Grid.Row="1">
               <Rectangle Name="SelectedHueColor" Fill="Red" />
               <Rectangle>
@@ -781,7 +799,12 @@
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
             <Rectangle Name="SelectedColor" Fill="{TemplateBinding SolidColorBrush}" />
-            <local:SuperSlider x:Name="Slider" Orientation="{TemplateBinding Orientation}" Foreground="Transparent" Minimum="0" Maximum="360" Thumb="{TemplateBinding Thumb}" Style="{StaticResource ColorSliderSuperSlider}"></local:SuperSlider>
+              
+            <local:SuperSlider x:Name="Slider" Orientation="{TemplateBinding Orientation}" 
+                               Foreground="Transparent" 
+                               Minimum="0" Maximum="360" 
+                               Thumb="{TemplateBinding Thumb}"
+                               Style="{StaticResource ColorSliderSuperSlider}"></local:SuperSlider>
           </Grid>
         </ControlTemplate>
       </Setter.Value>
