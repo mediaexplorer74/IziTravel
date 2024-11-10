@@ -11,8 +11,9 @@ using ZXing;
 #nullable disable
 namespace BigIntegerLibrary
 {
+  //RnD
   /// <summary>BigInteger-related exception class.</summary>
-  [Serializable]
+  [System.Serializable]
   public sealed class BigIntegerException : Exception
   {
     /// <summary>BigIntegerException constructor.</summary>

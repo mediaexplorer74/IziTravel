@@ -1,15 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+                    
                     
                     
                     xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:resources="clr-namespace:Izi.Travel.Shell.Core.Resources"
-                    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+
                     xmlns:maps="clr-namespace:Izi.Travel.Shell.Toolkit.Controls.Maps"
                     xmlns:converters="clr-namespace:Izi.Travel.Shell.Core.Converters"
                     xmlns:components="clr-namespace:Izi.Travel.Shell.Core.Components">
+
+<!--    
+    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" -->
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml" />
@@ -19,7 +23,7 @@
 
     <!-- Strings -->
 
-    <resources:LocalizedStrings x:Key="LocalizedStrings" />
+    <!--resources:LocalizedStrings x:Key="LocalizedStrings" /-->
 
     <!-- Converters -->
 
@@ -40,7 +44,7 @@
 
     <!-- STYLES -->
 
-    <Style TargetType="maps:UserLocationMarker">
+    <!--Style TargetType="maps:UserLocationMarker">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="maps:UserLocationMarker">
@@ -58,9 +62,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
 
-    <Style x:Key="CommandButtonStyle" TargetType="controls:ActionImageButton">
+    <!--Style x:Key="CommandButtonStyle" TargetType="controls:ActionImageButton">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Padding" Value="10,5,10,6"/>
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -92,9 +96,11 @@
                                 <Ellipse x:Name="Ellipse"
                                          Stroke="{TemplateBinding Foreground}"
                                          StrokeThickness="3" />
-                                <Rectangle x:Name="Rectangle" 
+
+                                // components:UIElementHelper.OpacityMask="{Binding ImageSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                    <Rectangle x:Name="Rectangle" 
                                            Fill="{TemplateBinding Foreground}"
-                                           components:UIElementHelper.OpacityMask="{Binding ImageSource, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            />
                             </Grid>
                             <TextBlock Margin="8,17,12,0"
                                        Visibility="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToInvisibilityConverter}}"
@@ -107,19 +113,19 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
 
-    <Style x:Key="LightCommandButtonStyle" BasedOn="{StaticResource CommandButtonStyle}" TargetType="controls:ActionImageButton">
+    <!--Style x:Key="LightCommandButtonStyle" BasedOn="{StaticResource CommandButtonStyle}" TargetType="controls:ActionImageButton">
         <Setter Property="Foreground" Value="{StaticResource IziTravelLightBrush}" />
-    </Style>
+    </Style-->
 
-    <Style x:Key="BlueCommandButtonStyle" BasedOn="{StaticResource CommandButtonStyle}" TargetType="controls:ActionImageButton">
+    <!--Style x:Key="BlueCommandButtonStyle" BasedOn="{StaticResource CommandButtonStyle}" TargetType="controls:ActionImageButton">
         <Setter Property="Foreground" Value="{StaticResource IziTravelBlueBrush}" />
-    </Style>
+    </Style-->
 
-    <Style x:Key="DarkBlueCommandButtonStyle" BasedOn="{StaticResource CommandButtonStyle}" TargetType="controls:ActionImageButton">
+    <!--Style x:Key="DarkBlueCommandButtonStyle" BasedOn="{StaticResource CommandButtonStyle}" TargetType="controls:ActionImageButton">
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBlueBrush}" />
-    </Style>
+    </Style-->
 
     <Style TargetType="ScrollViewer">
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
@@ -181,7 +187,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="phone:LongListSelector">
+    <!--Style TargetType="phone:LongListSelector">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="Template">
@@ -209,11 +215,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
 
-    <Style TargetType="toolkit:MenuItem">
+    <!--Style TargetType="toolkit:MenuItem">
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkColor}" />
-    </Style>
+    </Style-->
 
     <Style x:Key="MapButtonStyle" TargetType="Button">
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -405,24 +411,24 @@
     </Style>
 
     <!-- Frame -->
-    <Style TargetType="toolkit:TransitionFrame">
+    <!--Style TargetType="toolkit:TransitionFrame">
         <Setter Property="Background" Value="{StaticResource IziTravelLightGrayBrush}" />
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
-    </Style>
+    </Style-->
 
     <!-- Page style -->
     <Style x:Key="IziTravelPageStyle" TargetType="Page">
-        <Setter Property="shell:SystemTray.IsVisible" Value="True" />
+        <!--Setter Property="shell:SystemTray.IsVisible" Value="True" />
         <Setter Property="shell:SystemTray.Opacity" Value="0.0" />
         <Setter Property="shell:SystemTray.BackgroundColor" Value="Transparent" />
-        <Setter Property="shell:SystemTray.ForegroundColor" Value="{StaticResource IziTravelDarkColor}" />
+        <Setter Property="shell:SystemTray.ForegroundColor" Value="{StaticResource IziTravelDarkColor}" /-->
         <Setter Property="Background" Value="{StaticResource IziTravelLightGrayBrush}" />
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
         <Setter Property="FontFamily" Value="{StaticResource IziTravelFontFamilySegoeNormal}" />
         <Setter Property="FontSize" Value="{StaticResource IziTravelFontSizeNormal}" />
-        <Setter Property="SupportedOrientations" Value="Portrait" />
-        <Setter Property="Orientation" Value="Portrait" />
-        <Setter Property="toolkit:TransitionService.NavigationInTransition">
+        <!--Setter Property="SupportedOrientations" Value="Portrait" /-->
+        <!--Setter Property="Orientation" Value="Portrait" /-->
+        <!--Setter Property="toolkit:TransitionService.NavigationInTransition">
             <Setter.Value>
                 <toolkit:NavigationInTransition>
                     <toolkit:NavigationInTransition.Backward>
@@ -433,8 +439,8 @@
                     </toolkit:NavigationInTransition.Forward>
                 </toolkit:NavigationInTransition>
             </Setter.Value>
-        </Setter>
-        <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+        </Setter -->
+        <!--Setter Property="toolkit:TransitionService.NavigationOutTransition">
             <Setter.Value>
                 <toolkit:NavigationOutTransition>
                     <toolkit:NavigationOutTransition.Backward>
@@ -445,11 +451,11 @@
                     </toolkit:NavigationOutTransition.Forward>
                 </toolkit:NavigationOutTransition>
             </Setter.Value>
-        </Setter>
+        </Setter-->
     </Style>
 
     <!-- Application bar -->
-    <Style TargetType="bar:BindableApplicationBar">
+    <!--Style TargetType="bar:BindableApplicationBar">
         <Setter Property="BackgroundColor" Value="{StaticResource IziTravelDarkColor}" />
         <Setter Property="ForegroundColor" Value="{StaticResource IziTravelLightColor}" />
         <Setter Property="ButtonTemplate">
@@ -466,15 +472,15 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
 
     <system:Double x:Key="IziTravelAppBarOpacity">0.999</system:Double>
 
     <!-- Progress Overlay -->
-    <Style TargetType="controls:ProgressOverlay">
+    <!--Style TargetType="controls:ProgressOverlay">
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
         <Setter Property="ProgressBrush" Value="{StaticResource IziTravelBlueBrush}" />
-    </Style>
+    </Style-->
 
     <!-- Check box -->
     <Style TargetType="CheckBox">
@@ -484,10 +490,10 @@
     </Style>
 
     <!-- Context Menu -->
-    <Style x:Key="ContextMenuStyle" TargetType="toolkit:ContextMenu">
+    <!--Style x:Key="ContextMenuStyle" TargetType="toolkit:ContextMenu">
         <Setter Property="Background" Value="{StaticResource IziTravelLightBrush}" />
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
-    </Style>
+    </Style-->
 
     <Style x:Key="PivotTitleTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
@@ -503,15 +509,15 @@
     </Style>
 
     <!-- Custom message box -->
-    <Style TargetType="toolkit:CustomMessageBox">
+    <!--Style TargetType="toolkit:CustomMessageBox">
         <Setter Property="Foreground" Value="{StaticResource IziTravelLightBrush}" />
         <Setter Property="Background" Value="{StaticResource IziTravelDarkBrush}" />
-    </Style>
+    </Style-->
 
     <!-- List Box -->
-    <Style TargetType="ListBoxItem">
+    <!--Style TargetType="ListBoxItem">
         <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" />
-    </Style>
+    </Style-->
 
     <!-- Hyperlink Button -->
     <Style x:Key="HyperlinkButtonWrapStyle" TargetType="HyperlinkButton">
@@ -575,7 +581,7 @@
     </Style>
 
     <!-- Media -->
-    <Style x:Key="MediaRoundButtonStyle" TargetType="controls:ActionRoundButton">
+    <!--Style x:Key="MediaRoundButtonStyle" TargetType="controls:ActionRoundButton">
         <Setter Property="Height" Value="76" />
         <Setter Property="Background" Value="{StaticResource IziTravelLightGrayBrush}" />
         <Setter Property="PressedBackground" Value="{StaticResource IziTravelBlueBrush}" />
@@ -583,7 +589,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource IziTravelBlueBrush}" />
         <Setter Property="Foreground" Value="{StaticResource IziTravelBlueBrush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-    </Style>
+    </Style-->
 
     <Style x:Key="MediaRoundButtonContentTextBoxStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
@@ -650,7 +656,7 @@
 
     <!-- Izi Selector Button Style -->
     <Style x:Key="IziTravelSelectorButtonStyle" TargetType="Button">
-        <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" />
+        <!--Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" /-->
         <Setter Property="Foreground" Value="{StaticResource IziTravelLightBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -696,7 +702,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="FeedbackPhoneTextBoxStyle" TargetType="toolkit:PhoneTextBox">
+    <!--Style x:Key="FeedbackPhoneTextBoxStyle" TargetType="toolkit:PhoneTextBox">
         <Setter Property="FontFamily" Value="{StaticResource IziTravelFontFamilySegoeNormal}"/>
         <Setter Property="FontSize" Value="{StaticResource IziTravelFontSizeNormal}"/>
         <Setter Property="Background" Value="{StaticResource IziTravelLightBrush}"/>
@@ -829,10 +835,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
 
     <!-- Izi Phone TextBox Style -->
-    <Style x:Key="IziTravelPhoneTextBoxStyle" TargetType="toolkit:PhoneTextBox">
+    <!--Style x:Key="IziTravelPhoneTextBoxStyle" TargetType="toolkit:PhoneTextBox">
         <Setter Property="FontFamily" Value="{StaticResource IziTravelFontFamilySegoeNormal}"/>
         <Setter Property="FontSize" Value="{StaticResource IziTravelFontSizeNormal}"/>
         <Setter Property="Background" Value="{StaticResource IziTravelLightBrush}"/>
@@ -1053,7 +1059,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
 
     <!-- Izi Slider Style -->
     <Style x:Key="IziTravelSliderStyle" TargetType="Slider">

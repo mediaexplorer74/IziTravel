@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{BD41D9C8-F562-45A2-A753-87B30D553415}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Izi.Travel.Shell</RootNamespace>
+    <AssemblyName>Izi.Travel.Shell</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Attributes\ViewAttribute.cs" />
+    <Compile Include="Core\Buffer.cs" />
+    <Compile Include="Core\Command\BaseCommand.cs" />
+    <Compile Include="Core\Command\RelayCommand.cs" />
+    <Compile Include="Core\Command\RelayCommand`1.cs" />
+    <Compile Include="Core\Components\Behaviors\ControlSetFocusBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\LongListSelectorLoadBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\LongListSelectorSelectBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\MapViewBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\PhoneTextBoxBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\ScrollViewerBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\SelectorSelectBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\SliderManipulationBehavior.cs" />
+    <Compile Include="Core\Components\Behaviors\ZoomableImageBehavior.cs" />
+    <Compile Include="Core\Components\DataTemplateSelector.cs" />
+    <Compile Include="Core\Components\Display\ApplicationBarSizeInformation.cs" />
+    <Compile Include="Core\Components\Display\DisplayConstants.cs" />
+    <Compile Include="Core\Components\Display\DisplayInformationEx.cs" />
+    <Compile Include="Core\Components\Display\DisplayInformationSource.cs" />
+    <Compile Include="Core\Components\Display\MathHelpers.cs" />
+    <Compile Include="Core\Components\Display\ScreenInfo.cs" />
+    <Compile Include="Core\Components\Display\ScreenSizeInformation.cs" />
+    <Compile Include="Core\Components\Display\SizeHelpers.cs" />
+    <Compile Include="Core\Components\Display\StandardScreenSize.cs" />
+    <Compile Include="Core\Components\Extensions\AnimationExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\FocusExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\MapBindingExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\MapElementCollectionManager.cs" />
+    <Compile Include="Core\Components\Extensions\TextBlockExtensions.cs" />
+    <Compile Include="Core\Components\Extensions\UIElementExtensions.cs" />
+    <Compile Include="Core\Components\UIElementHelper.cs" />
+    <Compile Include="Core\Constants\PhoneStateKeys.cs" />
+    <Compile Include="Core\Context\FrameNavigationContext.cs" />
+    <Compile Include="Core\Context\IFrameNavigationContext.cs" />
+    <Compile Include="Core\Controls\ActionImageButton.cs" />
+    <Compile Include="Core\Controls\ActionRoundButton.cs" />
+    <Compile Include="Core\Controls\ActionRoundRadioButton.cs" />
+    <Compile Include="Core\Controls\CircleSegment.cs" />
+    <Compile Include="Core\Controls\ExpandablePanel.cs" />
+    <Compile Include="Core\Controls\ExpandableTextBlock.cs" />
+    <Compile Include="Core\Controls\FlipViewer\DragState.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewer.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerDisplayedElementType.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerInitiallyDisplayedElementType.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerItem.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewerItemDisplayedEventArgs.cs" />
+    <Compile Include="Core\Controls\Flyout\Flyout.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutBase.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutBehavior.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutCollection.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutDialog.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutDialogResult.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutOpenAction.cs" />
+    <Compile Include="Core\Controls\LabeledRating.cs" />
+    <Compile Include="Core\Controls\LinkButton.cs" />
+    <Compile Include="Core\Controls\ProgressOverlay.cs" />
+    <Compile Include="Core\Controls\SemanticZoom.cs" />
+    <Compile Include="Core\Controls\SplitPanel.cs" />
+    <Compile Include="Core\Controls\SplitteredContainer.cs" />
+    <Compile Include="Core\Controls\TextButton.cs" />
+    <Compile Include="Core\Controls\Tiles\BaseTileControl.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileControl.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileControlBehavior.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileService.cs" />
+    <Compile Include="Core\Controls\Tiles\FlipTileState.cs" />
+    <Compile Include="Core\Controls\Tiles\ITileService.cs" />
+    <Compile Include="Core\Controls\Tiles\TileServiceBase.cs" />
+    <Compile Include="Core\Controls\ViewboxTextBlock.cs" />
+    <Compile Include="Core\Converters\BoolToAccentBrushConverter.cs" />
+    <Compile Include="Core\Converters\BoolToInvisibilityConverter.cs" />
+    <Compile Include="Core\Converters\BoolToObjectConverter.cs" />
+    <Compile Include="Core\Converters\BoolToOnOffStringConverter.cs" />
+    <Compile Include="Core\Converters\BoolToOppositeConverter.cs" />
+    <Compile Include="Core\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Core\Converters\DateTimeToShortDateStringConverter.cs" />
+    <Compile Include="Core\Converters\DivideConverter.cs" />
+    <Compile Include="Core\Converters\LanguageToFlowDirectionConverter.cs" />
+    <Compile Include="Core\Converters\NullOrEmptyStringToInvisibilityConverter.cs" />
+    <Compile Include="Core\Converters\NullToInvisibilityConverter.cs" />
+    <Compile Include="Core\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Core\Converters\RoundedTimeSpanToStringConverter.cs" />
+    <Compile Include="Core\Converters\RoundToHalfConverter.cs" />
+    <Compile Include="Core\Converters\SecondsToTimeSpanConverter.cs" />
+    <Compile Include="Core\Converters\StringToLowerConverter.cs" />
+    <Compile Include="Core\Converters\StringToUpperConverter.cs" />
+    <Compile Include="Core\Converters\TimeSpanToSecondsConverter.cs" />
+    <Compile Include="Core\Converters\TimeSpanToStringConverter.cs" />
+    <Compile Include="Core\CustomLogger.cs" />
+    <Compile Include="Core\Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="Core\Extensions\PropertyChangedExtensions.cs" />
+    <Compile Include="Core\Extensions\StringExtensions.cs" />
+    <Compile Include="Core\Helpers\FlowDirectionHelper.cs" />
+    <Compile Include="Core\Helpers\ImageHelper.cs" />
+    <Compile Include="Core\Helpers\MtgLinkHelper.cs" />
+    <Compile Include="Core\Helpers\MtgLinkInfo.cs" />
+    <Compile Include="Core\Helpers\MtgLinkType.cs" />
+    <Compile Include="Core\Helpers\PhoneStateHelper.cs" />
+    <Compile Include="Core\Resources\AppResources.cs" />
+    <Compile Include="Core\Resources\LocalizedStrings.cs" />
+    <Compile Include="Core\Resources\ManifestManager.cs" />
+    <Compile Include="Core\Resources\ManifestResources.cs" />
+    <Compile Include="Core\Services\Contract\IDialogService.cs" />
+    <Compile Include="Core\Services\Entities\MessageBoxButtonContent.cs" />
+    <Compile Include="Core\Services\Implementation\DialogService.cs" />
+    <Compile Include="Core\Services\ShellServiceFacade.cs" />
+    <Compile Include="Core\Themes\ThemeHelper.cs" />
+    <Compile Include="Core\Transitions\CustomTransition.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Toolkit\Controls\FlipView.cs" />
+    <Compile Include="Toolkit\Controls\FlipViewItem.cs" />
+    <Compile Include="Toolkit\Controls\InternalUtils.cs" />
+    <Compile Include="Toolkit\Controls\Maps\CollectionChangeListener`1.cs" />
+    <Compile Include="Toolkit\Controls\Maps\DependencyObjectCollection.cs" />
+    <Compile Include="Toolkit\Controls\Maps\GeocodeQuery.cs" />
+    <Compile Include="Toolkit\Controls\Maps\GeocoordinateExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Map.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapChild.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapChildCollection.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapChildControl.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapExtensionsChildrenChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapItemsControl.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapItemsControlChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapItemsSourceChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapLayer.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapLocation.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapOverlay.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapOverlayItem.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapZoomLevelChangedEventArgs.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Pushpin.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Query.cs" />
+    <Compile Include="Toolkit\Controls\Maps\QueryCompletedEventArgs.cs" />
+    <Compile Include="Toolkit\Controls\Maps\QueryExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\ReverseGeocodeQuery.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Route.cs" />
+    <Compile Include="Toolkit\Controls\Maps\RouteQuery.cs" />
+    <Compile Include="Toolkit\Controls\Maps\UserLocationMarker.cs" />
+    <Compile Include="Toolkit\Controls\NumericExtensions.cs" />
+    <Compile Include="Toolkit\Controls\PhoneSlider.cs" />
+    <Compile Include="Toolkit\Controls\TemplatedVisualTreeExtensions.cs" />
+    <Compile Include="Toolkit\Controls\TickBar.cs" />
+    <Compile Include="Toolkit\Controls\UpdateSelectionMode.cs" />
+    <Compile Include="Toolkit\Controls\VisualTreeExtensions.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\MainPageView.xaml.cs">
+      <DependentUpon>MainPageView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Icons\action.delete.dark.png" />
+    <Content Include="Assets\Icons\action.delete.gray.png" />
+    <Content Include="Assets\Icons\action.delete.png" />
+    <Content Include="Assets\Icons\action.search.gray.png" />
+    <Content Include="Assets\Icons\action.search.png" />
+    <Content Include="Assets\Icons\add.png" />
+    <Content Include="Assets\Icons\appbar.accept.png" />
+    <Content Include="Assets\Icons\appbar.add.png" />
+    <Content Include="Assets\Icons\appbar.cancel.png" />
+    <Content Include="Assets\Icons\appbar.car.png" />
+    <Content Include="Assets\Icons\appbar.delete.png" />
+    <Content Include="Assets\Icons\appbar.download.png" />
+    <Content Include="Assets\Icons\appbar.favorite.dark.png" />
+    <Content Include="Assets\Icons\appbar.favorite.png" />
+    <Content Include="Assets\Icons\appbar.featured.png" />
+    <Content Include="Assets\Icons\appbar.feedback.png" />
+    <Content Include="Assets\Icons\appbar.filter.png" />
+    <Content Include="Assets\Icons\appbar.getdirections.png" />
+    <Content Include="Assets\Icons\appbar.info.dark.png" />
+    <Content Include="Assets\Icons\appbar.info.png" />
+    <Content Include="Assets\Icons\appbar.language.png" />
+    <Content Include="Assets\Icons\appbar.list.dark.png" />
+    <Content Include="Assets\Icons\appbar.list.png" />
+    <Content Include="Assets\Icons\appbar.map.png" />
+    <Content Include="Assets\Icons\appbar.next.png" />
+    <Content Include="Assets\Icons\appbar.nowplaying.png" />
+    <Content Include="Assets\Icons\appbar.numpad.dark.png" />
+    <Content Include="Assets\Icons\appbar.numpad.png" />
+    <Content Include="Assets\Icons\appbar.pause.png" />
+    <Content Include="Assets\Icons\appbar.play.png" />
+    <Content Include="Assets\Icons\appbar.qrcode.dark.png" />
+    <Content Include="Assets\Icons\appbar.qrcode.png" />
+    <Content Include="Assets\Icons\appbar.quiz.comment.png" />
+    <Content Include="Assets\Icons\appbar.quiz.png" />
+    <Content Include="Assets\Icons\appbar.quiz.reset.png" />
+    <Content Include="Assets\Icons\appbar.rate.png" />
+    <Content Include="Assets\Icons\appbar.refresh.png" />
+    <Content Include="Assets\Icons\appbar.search.png" />
+    <Content Include="Assets\Icons\appbar.send.png" />
+    <Content Include="Assets\Icons\appbar.settings.png" />
+    <Content Include="Assets\Icons\appbar.share.png" />
+    <Content Include="Assets\Icons\appbar.sort.png" />
+    <Content Include="Assets\Icons\appbar.stop.png" />
+    <Content Include="Assets\Icons\appbar.unfavorite.dark.png" />
+    <Content Include="Assets\Icons\appbar.unfavorite.png" />
+    <Content Include="Assets\Icons\appbar.update.png" />
+    <Content Include="Assets\Icons\appbar.userlocation.png" />
+    <Content Include="Assets\Icons\appbar.video.png" />
+    <Content Include="Assets\Icons\appbar.walk.png" />
+    <Content Include="Assets\Icons\dashboard.bookmarks.png" />
+    <Content Include="Assets\Icons\dashboard.downloads.png" />
+    <Content Include="Assets\Icons\dashboard.history.png" />
+    <Content Include="Assets\Icons\dashboard.purchases.png" />
+    <Content Include="Assets\Icons\dashboard.quizes.png" />
+    <Content Include="Assets\Icons\item.distance.png" />
+    <Content Include="Assets\Icons\item.marker.png" />
+    <Content Include="Assets\Icons\item.speed.png" />
+    <Content Include="Assets\Icons\map.finish.png" />
+    <Content Include="Assets\Icons\map.left.png" />
+    <Content Include="Assets\Icons\map.museum.png" />
+    <Content Include="Assets\Icons\map.pin.museum.png" />
+    <Content Include="Assets\Icons\map.pin.museum.selected.png" />
+    <Content Include="Assets\Icons\map.pin.ta.png" />
+    <Content Include="Assets\Icons\map.pin.ta.selected.png" />
+    <Content Include="Assets\Icons\map.pin.tour.png" />
+    <Content Include="Assets\Icons\map.pin.tour.selected.png" />
+    <Content Include="Assets\Icons\map.right.png" />
+    <Content Include="Assets\Icons\map.roundaround.png" />
+    <Content Include="Assets\Icons\map.start.png" />
+    <Content Include="Assets\Icons\map.straight.png" />
+    <Content Include="Assets\Icons\map.turnaround.png" />
+    <Content Include="Assets\Icons\menu.map.png" />
+    <Content Include="Assets\Icons\menu.museums.png" />
+    <Content Include="Assets\Icons\menu.qrcode.png" />
+    <Content Include="Assets\Icons\minus.png" />
+    <Content Include="Assets\Icons\player.backward.png" />
+    <Content Include="Assets\Icons\player.forward.png" />
+    <Content Include="Assets\Icons\player.info.png" />
+    <Content Include="Assets\Icons\player.pause.png" />
+    <Content Include="Assets\Icons\player.play.png" />
+    <Content Include="Assets\Icons\player.video.png" />
+    <Content Include="Assets\Icons\quiz.contract.png" />
+    <Content Include="Assets\Icons\quiz.correct.png" />
+    <Content Include="Assets\Icons\quiz.correct.small.png" />
+    <Content Include="Assets\Icons\quiz.detail.png" />
+    <Content Include="Assets\Icons\quiz.expand.png" />
+    <Content Include="Assets\Icons\quiz.incorrect.png" />
+    <Content Include="Assets\Icons\quiz.incorrect.small.png" />
+    <Content Include="Assets\Icons\quiz.png" />
+    <Content Include="Assets\Icons\tab.explore.png" />
+    <Content Include="Assets\Icons\tab.explore.selected.png" />
+    <Content Include="Assets\Icons\tab.nowplaying.png" />
+    <Content Include="Assets\Icons\tab.nowplaying.selected.png" />
+    <Content Include="Assets\Icons\tab.profile.png" />
+    <Content Include="Assets\Icons\tab.profile.selected.png" />
+    <Content Include="Assets\Images\image.details.quiz.png" />
+    <Content Include="Assets\Images\image.empty.bookmark.png" />
+    <Content Include="Assets\Images\image.empty.downloads.png" />
+    <Content Include="Assets\Images\image.empty.featured.png" />
+    <Content Include="Assets\Images\image.empty.history.png" />
+    <Content Include="Assets\Images\image.empty.nowplaying.png" />
+    <Content Include="Assets\Images\image.empty.purchases.png" />
+    <Content Include="Assets\Images\image.empty.quiz.png" />
+    <Content Include="Assets\Images\image.empty.search.png" />
+    <Content Include="Assets\Images\image.error.network.png" />
+    <Content Include="Assets\Images\image.featured.background.jpg" />
+    <Content Include="Assets\Images\image.logo.white.png" />
+    <Content Include="Assets\Images\image.map.pin.png" />
+    <Content Include="Assets\Images\image.placeholder.exhibit.png" />
+    <Content Include="Assets\Images\image.placeholder.museum.png" />
+    <Content Include="Assets\Images\image.placeholder.tour.png" />
+    <Content Include="Assets\Images\image.placeholder.touristattraction.png" />
+    <Content Include="Assets\Images\image.publisher.cover.jpg" />
+    <Content Include="Assets\Images\image.publisher.logo.png" />
+    <Content Include="Assets\Images\image.quiz.background.png" />
+    <Content Include="Assets\Images\image.quiz.correct.png" />
+    <Content Include="Assets\Images\image.quiz.wrong.png" />
+    <Content Include="Assets\Images\image.social.facebook.png" />
+    <Content Include="Assets\Images\image.social.googleplus.png" />
+    <Content Include="Assets\Images\image.social.instagram.png" />
+    <Content Include="Assets\Images\image.social.twitter.png" />
+    <Content Include="Assets\Images\image.social.vk.png" />
+    <Content Include="Assets\Images\image.social.website.png" />
+    <Content Include="Assets\Images\image.social.youtube.png" />
+    <Content Include="Assets\Sounds\Alert.wav" />
+    <Content Include="Assets\Tiles\FlipCycleTileMedium.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileSmall.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileWide.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Core\Controls\Flyout\flyoutdialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro">
+      <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.14</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj">
+      <Project>{4334cebc-137c-48c6-9da2-df69a4ac1386}</Project>
+      <Name>Izi.Travel.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Business\Izi.Travel.Business.csproj">
+      <Project>{01628e84-bb32-4f0a-b131-4841fe0e4b85}</Project>
+      <Name>Izi.Travel.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Client.WindowsPhone\Izi.Travel.Client.WindowsPhone.csproj">
+      <Project>{155C86C1-644E-4E0C-902E-B6C892BDB94A}</Project>
+      <Name>Izi.Travel.Client.WindowsPhone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj">
+      <Project>{2260b987-9887-4aa1-b726-0d898fb3b44f}</Project>
+      <Name>Izi.Travel.Data.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Geofencing\Izi.Travel.Geofencing.csproj">
+      <Project>{91866363-6a66-481e-878c-29878220294f}</Project>
+      <Name>Izi.Travel.Geofencing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Izi.Travel.Utility\Izi.Travel.Utility.csproj">
+      <Project>{cdcecd6c-d5fa-46c2-ba54-b70be30ad919}</Project>
+      <Name>Izi.Travel.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestSharp.UWP\RestSharp.UWP\RestSharp.UWP.csproj">
+      <Project>{0136d105-745e-44ce-9215-161833b25d84}</Project>
+      <Name>RestSharp.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZXing.UWP\ZXing.UWP.csproj">
+      <Project>{a4f96d26-b214-437a-b138-c3facdaea60b}</Project>
+      <Name>ZXing.UWP</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

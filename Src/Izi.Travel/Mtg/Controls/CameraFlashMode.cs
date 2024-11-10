@@ -8,6 +8,7 @@ namespace Izi.Travel.Shell.Mtg.Controls
 {
     public enum CameraFlashMode
     {
-        Auto
+        Auto,
+        Manual
     }
 }

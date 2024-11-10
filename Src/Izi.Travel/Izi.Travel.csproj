@@ -13,7 +13,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -125,6 +125,7 @@
     <Compile Include="MainPage1.xaml.cs">
       <DependentUpon>MainPage1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MapsSettings.cs" />
     <Compile Include="Mtg\Controls\Camera.cs" />
     <Compile Include="Mtg\Controls\CameraFlashMode.cs" />
     <Compile Include="Mtg\Controls\CameraOperationCompletedEventArgs.cs" />
@@ -133,7 +134,6 @@
     <Compile Include="Mtg\Controls\PhotoCamera.cs" />
     <Compile Include="Mtg\Controls\VideoBrush.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\FeedbackCommand.cs" />
     <Compile Include="Commands\RateApplicationCommand.cs" />
     <Compile Include="Common\Commands\LaunchUriCommand.cs" />
@@ -495,7 +495,10 @@
     <Compile Include="Toolkit\Controls\FlipViewItem.cs" />
     <Compile Include="Toolkit\Controls\InternalUtils.cs" />
     <Compile Include="Toolkit\Controls\Maps\CollectionChangeListener`1.cs" />
+    <Compile Include="Toolkit\Controls\Maps\DependencyObjectCollection.cs" />
+    <Compile Include="Toolkit\Controls\Maps\GeocodeQuery.cs" />
     <Compile Include="Toolkit\Controls\Maps\GeocoordinateExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Map.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapChild.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapChildCollection.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapChildControl.cs" />
@@ -504,9 +507,18 @@
     <Compile Include="Toolkit\Controls\Maps\MapItemsControl.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapItemsControlChangeManager.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapItemsSourceChangeManager.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapLayer.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapLocation.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapOverlay.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapOverlayItem.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapZoomLevelChangedEventArgs.cs" />
     <Compile Include="Toolkit\Controls\Maps\Pushpin.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Query.cs" />
+    <Compile Include="Toolkit\Controls\Maps\QueryCompletedEventArgs.cs" />
     <Compile Include="Toolkit\Controls\Maps\QueryExtensions.cs" />
+    <Compile Include="Toolkit\Controls\Maps\ReverseGeocodeQuery.cs" />
+    <Compile Include="Toolkit\Controls\Maps\Route.cs" />
+    <Compile Include="Toolkit\Controls\Maps\RouteQuery.cs" />
     <Compile Include="Toolkit\Controls\Maps\UserLocationMarker.cs" />
     <Compile Include="Toolkit\Controls\NumericExtensions.cs" />
     <Compile Include="Toolkit\Controls\PhoneSlider.cs" />
@@ -979,23 +991,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="themes\colors.xaml">
+    <Page Include="Themes\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="themes\converters.xaml">
+    <Page Include="Themes\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="themes\fonts.xaml">
+    <Page Include="Themes\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="themes\generic.xaml">
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="themes\theme.xaml">
+    <Page Include="Themes\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

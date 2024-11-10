@@ -7,15 +7,20 @@
 using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
+using Windows.UI.Xaml;
+//using System.Windows.Data;
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Converters
 {
-  public class BoolToObjectConverter : DependencyObject, IValueConverter
+  public class BoolToObjectConverter : DependencyObject//, IValueConverter
   {
-    public static readonly DependencyProperty PositiveValueProperty = DependencyProperty.Register(nameof (PositiveValue), typeof (object), typeof (BoolToObjectConverter), new PropertyMetadata((object) null));
-    public static readonly DependencyProperty NegativeValueProperty = DependencyProperty.Register(nameof (NegativeValue), typeof (object), typeof (BoolToObjectConverter), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty PositiveValueProperty = 
+            DependencyProperty.Register(nameof (PositiveValue), typeof (object), 
+                typeof (BoolToObjectConverter), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty NegativeValueProperty = 
+            DependencyProperty.Register(nameof (NegativeValue), typeof (object), 
+                typeof (BoolToObjectConverter), new PropertyMetadata((object) null));
 
     public object PositiveValue
     {
