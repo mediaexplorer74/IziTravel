@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- FONTS -->
+    
+    <!-- ReSharper disable Xaml.ConstructorWarning -->
+    <FontFamily x:Key="IziTravelFontFamilySegoeNormal">Segoe WP</FontFamily>
+    <FontFamily x:Key="IziTravelFontFamilySegoeSemilight">Segoe WP SemiLight</FontFamily>
+    <FontFamily x:Key="IziTravelFontFamilySegoeSemibold">Segoe WP Semibold</FontFamily>
+    <FontFamily x:Key="IziTravelFontFamilySegoeLight">Segoe WP Light</FontFamily>
+    <!-- ReSharper restore Xaml.ConstructorWarning -->       
+    
+    <!-- FONT SIZES -->
+    <system:Double x:Key="IziTravelFontSizeSmall">18.0</system:Double>
+    <system:Double x:Key="IziTravelFontSizeNormal">22.0</system:Double>
+    <system:Double x:Key="IziTravelFontSizeMedium">26.0</system:Double>
+    <system:Double x:Key="IziTravelFontSizeExtraMedium">34.0</system:Double>
+    <system:Double x:Key="IziTravelFontSizeLarge">36.0</system:Double>
+    <system:Double x:Key="IziTravelFontSizeExtraLarge">48.0</system:Double>
+    
+</ResourceDictionary>

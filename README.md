@@ -25,4 +25,5 @@ MIT License
 AS IS. No support. RnD only / DIY
 
 ## .
-[m][e] 2024
+[m][e] 2025
+![New logo](Images/shot01.png)

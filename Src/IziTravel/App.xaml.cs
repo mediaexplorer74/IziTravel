@@ -16,99 +16,277 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Caliburn.Micro;
+
 using IziTravel.ViewModels;
-//using IziTravel.Views;
+using Izi.Travel.Shell.Views; //using IziTravel.Views;
+using Izi.Travel.Shell.Core.Themes;
+
+using Izi.Travel.Business;
+using Izi.Travel.Business.Entities.Culture;
+using Izi.Travel.Business.Entities.Data;
+using Izi.Travel.Business.Entities.Download;
+using Izi.Travel.Business.Entities.Media;
+using Izi.Travel.Business.Entities.Settings;
+using Izi.Travel.Business.Managers;
+using Izi.Travel.Business.Services;
+using Izi.Travel.Business.Services.Contract;
+using Izi.Travel.Geofencing;
+using Izi.Travel.Geofencing.Geotracker;
+using Izi.Travel.Shell.Core;
+using Izi.Travel.Shell.Core.Attributes;
+using Izi.Travel.Shell.Core.Context;
+using Izi.Travel.Shell.Core.Helpers;
+using Izi.Travel.Shell.Core.Resources;
+using Izi.Travel.Shell.Core.Services;
+using Izi.Travel.Shell.Core.Services.Contract;
+using Izi.Travel.Shell.Core.Services.Implementation;
+using Izi.Travel.Shell.Media.ViewModels;
+using Izi.Travel.Shell.Media.ViewModels.Image;
+using Izi.Travel.Shell.Media.ViewModels.Video;
+using Izi.Travel.Shell.Mtg.Helpers;
+using Izi.Travel.Shell.Mtg.ViewModels.Collection.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.Collection.List;
+using Izi.Travel.Shell.Mtg.ViewModels.Common;
+using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.Common.List;
+using Izi.Travel.Shell.Mtg.ViewModels.Common.Player;
+using Izi.Travel.Shell.Mtg.ViewModels.Exhibit.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List;
+using Izi.Travel.Shell.Mtg.ViewModels.Museum.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.Museum.Map;
+using Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.Quiz;
+using Izi.Travel.Shell.Mtg.ViewModels.Tour.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
+using Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.Detail;
+using Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List;
+using Izi.Travel.Shell.Settings.ViewModels;
+using Izi.Travel.Shell.Settings.ViewModels.Application;
+using Izi.Travel.Shell.Settings.ViewModels.Internal;
+using Izi.Travel.Shell.ViewModels;
+using Izi.Travel.Shell.ViewModels.Explore;
+using Izi.Travel.Shell.ViewModels.Featured;
+using Izi.Travel.Shell.ViewModels.Profile;
+using Izi.Travel.Shell.ViewModels.Profile.Bookmark;
+using Izi.Travel.Shell.ViewModels.Profile.Download;
+using Izi.Travel.Shell.ViewModels.Profile.History;
+using Izi.Travel.Shell.ViewModels.Profile.Purchase;
+using Izi.Travel.Shell.ViewModels.Profile.Quiz;
+using Izi.Travel.Shell.ViewModels.QuickAccess;
+using Izi.Travel.Utility;
+//using Microsoft.Phone.Controls;
+//using Microsoft.Phone.Maps;
+//using Microsoft.Phone.Shell;
+
+using System.Diagnostics;
+using System.Globalization;
+
+using System.Linq.Expressions;
+using System.Threading;
+using System.Windows;
+//using System.Windows.Controls;
+//using System.Windows.Navigation;
+
+using Caliburn.Micro; //using Caliburn.Micro.Extras;
+
+
 
 namespace IziTravel
 {
     sealed partial class App //: Application
     {
-        private WinRTContainer container;
+        private WinRTContainer _container;
+
+        private bool _reset;
+        private static readonly ILog Logger;
+
+        static App()
+        {
+            LogManager.GetLog = (Func<Type, ILog>)(type => (ILog)new CustomLogger(type));
+            App.Logger = LogManager.GetLog(typeof(App));
+        }
+
 
         public App()
         {
             this.InitializeComponent();
-            //this.Suspending += OnSuspending;
+
+            ThemeHelper.OverrideSystemColors();
+
+            this.Suspending += OnSuspending;
         }
 
         protected override void Configure()
         {
-            container = new WinRTContainer();
+            _container = new WinRTContainer();
 
-            container.RegisterWinRTServices();
+            _container.RegisterWinRTServices();
 
             MessageBinder.SpecialValues.Add("$clickeditem", 
                 c => ((ItemClickEventArgs)c.EventArgs).ClickedItem);
 
-            container.PerRequest<MainPageViewModel>();
+            _container.PerRequest<MainPageViewModel>();
         }
 
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+     
+
+        protected override void PrepareViewFirst(Frame rootFrame)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
-
-            if (e.PrelaunchActivated == false)
-            {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
-            }
+            _container.RegisterNavigationService(rootFrame);
         }
 
-        /// <summary>
-        /// Invoked when Navigation to a certain page fails
-        /// </summary>
-        /// <param name="sender">The Frame which failed navigation</param>
-        /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+
+
+        private static void SetupLanguages()
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            //RnD
+            /*
+            AppSettings appSettings = ServiceFacade.SettingsService.GetAppSettings();
+            if (appSettings.Languages != null && appSettings.Languages.Length != 0)
+                return;
+            System.Collections.Generic.List<string> stringList = new System.Collections.Generic.List<string>();
+            LanguageData languageByIsoCode = ServiceFacade.CultureService.GetLanguageByIsoCode(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+            if (languageByIsoCode != null)
+                stringList.Add(languageByIsoCode.Code.ToLower());
+            if (!stringList.Contains("en"))
+                stringList.Add("en");
+            appSettings.Languages = stringList.ToArray();
+            ServiceFacade.SettingsService.SaveAppSettings(appSettings);
+            */
         }
 
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
+        private void OnRootFrameNavigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (this._reset /*&& e.IsCancelable && e.Uri.OriginalString == "Views/MainView.xaml"*/)
+            {
+                e.Cancel = true;
+                this._reset = false;
+            }
+            else
+            {
+                try
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.Error(ex);
+                }
+            }
+        }
+
+        private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
+        {
+            this._reset = e.NavigationMode == default;//NavigationMode.Reset;
+            //FrameNavigationContext.Instance.SetContext(e.Uri, e.Content, e.NavigationMode);
+        }
+
+
+        private static void OnDownloadProcessStateChanged(
+         DownloadManager manager,
+         DownloadProcess process)
+        {
+            ((System.Action)(() =>
+            {
+                switch (process.State)
+                {
+                    case DownloadProcessState.Downloading:
+                        if (process.IsRestored)
+                            break;
+                        //ShellServiceFacade.DialogService.ShowToast(
+                        //    string.Format(AppResources.ToastDownloadStarted,
+                        //    (object)process.Title), (Uri)null, (System.Action)null, false);
+                        break;
+                    case DownloadProcessState.Downloaded:
+                        //ShellServiceFacade.DialogService.ShowToast(
+                        //    string.Format(AppResources.ToastDownloadCompleted,
+                        //    (object)process.Title), (Uri)null, (System.Action)null, false);
+                        break;
+                    case DownloadProcessState.Removing:
+                        App.StopProcessAudio(process);
+                        break;
+                    case DownloadProcessState.Removed:
+                        //ShellServiceFacade.DialogService.ShowToast(
+                        //    string.Format(AppResources.ToastDownloadRemoved,
+                        //    (object)process.Title), (Uri)null, (System.Action)null, false);
+                        break;
+                    case DownloadProcessState.Updating:
+                        App.StopProcessAudio(process);
+                        if (process.IsRestored)
+                            break;
+                        //ShellServiceFacade.DialogService.ShowToast(
+                        //    string.Format(AppResources.ToastDownloadUpdateStarted,
+                        //    (object)process.Title), (Uri)null, (System.Action)null, false);
+                        break;
+                    case DownloadProcessState.Updated:
+                        if (!string.IsNullOrWhiteSpace(process.Key))
+                        {
+                            //System.Collections.Generic.List<string> stringList
+                            //= PhoneStateHelper.GetParameter<System.Collections.Generic.List<string>>
+                            //("UpdateSuspendList") ?? new System.Collections.Generic.List<string>();
+
+                            //if (stringList.Contains(process.Key))
+                            //    stringList.Remove(process.Key);
+                        }
+                        //ShellServiceFacade.DialogService.ShowToast(
+                        //    string.Format(AppResources.ToastDownloadUpdateCompleted,
+                        //    (object)process.Title), (Uri)null, (System.Action)null, false);
+                        break;
+                    case DownloadProcessState.Error:
+                        if (process.IsRestored || process.Error == DownloadProcessError.ProcessCanceled)
+                            break;
+                        //ShellServiceFacade.DialogService.ShowToast(
+                        //    string.Format(AppResources.ToastDownloadError, (object)process.Title),
+                        //    (Uri)null, (System.Action)null, false, "IziTravelVioletBrush");
+                        break;
+                }
+            })).OnUIThread();
+        }
+
+
+        private static void StopProcessAudio(DownloadProcess process)
+        {
+            AudioTrackInfo nowPlaying = ServiceFacade.AudioService.NowPlaying;
+            if (nowPlaying == null || !(nowPlaying.MtgObjectUid == process.Uid)
+                && !(nowPlaying.MtgParentUid == process.Uid))
+                return;
+            ServiceFacade.AudioService.Stop();
+            ServiceFacade.AudioService.SetNowPlaying((AudioTrackInfo)null);
+        }
+
+
+
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            DisplayRootView<MainPageView>();
+        }
+
+        protected override object GetInstance(Type service, string key)
+        {
+            return _container.GetInstance(service, key);
+        }
+
+        protected override IEnumerable<object> GetAllInstances(Type service)
+        {
+            return _container.GetAllInstances(service);
+        }
+
+        protected override void BuildUp(object instance)
+        {
+            _container.BuildUp(instance);
+        }
+
+
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+
             deferral.Complete();
         }
+
+
     }
 }
 
