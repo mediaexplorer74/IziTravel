@@ -338,10 +338,18 @@
     <Compile Include="Media\ViewModels\MediaPlayerViewModel.cs" />
     <Compile Include="Media\ViewModels\Video\VideoMediaPlayerItemViewModel.cs" />
     <Compile Include="Media\ViewModels\Video\VideoMediaPlayerViewModel.cs" />
-    <Compile Include="Media\Views\Audio\AudioContentView.cs" />
-    <Compile Include="Media\Views\Image\ImageMediaPlayerView.cs" />
-    <Compile Include="Media\Views\MediaPlayerPartView.cs" />
-    <Compile Include="Media\Views\Video\VideoMediaPlayerView.cs" />
+    <Compile Include="Media\Views\Audio\AudioContentView.xaml.cs">
+      <DependentUpon>AudioContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Media\Views\Image\ImageMediaPlayerView.xaml.cs">
+      <DependentUpon>ImageMediaPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Media\Views\MediaPlayerPartView.xaml.cs">
+      <DependentUpon>MediaPlayerPartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Media\Views\Video\VideoMediaPlayerView.xaml.cs">
+      <DependentUpon>VideoMediaPlayerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Explore\ExploreLoadResult.cs" />
     <Compile Include="Model\Explore\ExploreMapClusterType.cs" />
     <Compile Include="Model\Profile\ProfileType.cs" />
@@ -512,30 +520,6 @@
     <Compile Include="Mtg\Views\Quiz\QuizView.cs" />
     <Compile Include="Mtg\Views\Tour\Detail\TourDetailInfoView.cs" />
     <Compile Include="Mtg\Views\Tour\Map\TourMapPartView.cs" />
-    <Compile Include="Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Acknowledgements.xaml.cs">
-      <DependentUpon>Acknowledgements.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Archiver.xaml.cs">
-      <DependentUpon>Archiver.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\CabFetch.xaml.cs">
-      <DependentUpon>CabFetch.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Downloaders.xaml.cs">
-      <DependentUpon>Downloaders.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\FFUSearch.xaml.cs">
-      <DependentUpon>FFUSearch.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\StoreFetch.xaml.cs">
-      <DependentUpon>StoreFetch.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Helpers\UserVoiceHelper.cs" />
     <Compile Include="Settings\Model\Header.cs" />
@@ -567,15 +551,33 @@
     <Compile Include="Settings\ViewModels\Items\SettingsListItemNavigationViewModel`1.cs" />
     <Compile Include="Settings\ViewModels\PasscodeFlyoutViewModel.cs" />
     <Compile Include="Settings\ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppAboutView.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppFeedbackMessageView.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppFeedbackView.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppLanguageSelectorView.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppLanguageView.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppLicenseView.cs" />
-    <Compile Include="Settings\Views\Application\SettingsAppLocationView.cs" />
-    <Compile Include="Settings\Views\Internal\SettingsInternalServerView1.cs" />
-    <Compile Include="Settings\Views\Internal\SettingsInternalTourEmulationView1.cs" />
+    <Compile Include="Settings\Views\Application\SettingsAppAboutView.xaml.cs">
+      <DependentUpon>SettingsAppAboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Application\SettingsAppFeedbackMessageView.xaml.cs">
+      <DependentUpon>SettingsAppFeedbackMessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Application\SettingsAppFeedbackView.xaml.cs">
+      <DependentUpon>SettingsAppFeedbackView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Application\SettingsAppLanguageSelectorView.xaml.cs">
+      <DependentUpon>SettingsAppLanguageSelectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Application\SettingsAppLanguageView.xaml.cs">
+      <DependentUpon>SettingsAppLanguageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Application\SettingsAppLicenseView.xaml.cs">
+      <DependentUpon>SettingsAppLicenseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Application\SettingsAppLocationView.xaml.cs">
+      <DependentUpon>SettingsAppLocationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Internal\SettingsInternalServerView.xaml.cs">
+      <DependentUpon>SettingsInternalServerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\Internal\SettingsInternalTourEmulationView.xaml.cs">
+      <DependentUpon>SettingsInternalTourEmulationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\Views\SettingsListView.xaml.cs">
       <DependentUpon>SettingsListView.xaml</DependentUpon>
     </Compile>
@@ -684,9 +686,6 @@
       <DependentUpon>ForumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LogView.cs" />
-    <Compile Include="Views\MainPageView1.xaml.cs">
-      <DependentUpon>MainPageView1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainPivot\ForumsView.xaml.cs">
       <DependentUpon>ForumsView.xaml</DependentUpon>
     </Compile>
@@ -697,9 +696,6 @@
       <DependentUpon>NewsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.cs" />
-    <Compile Include="Views\NewsDetailsPage1.xaml.cs">
-      <DependentUpon>NewsDetailsPage1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\NowPlaying\NowPlayingView.cs" />
     <Compile Include="Views\Profile\Bookmark\ProfileBookmarkListView.cs" />
     <Compile Include="Views\Profile\Download\ProfileDownloadListView.cs" />
@@ -818,21 +814,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Media\Views\Audio\audiocontentview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Media\Views\Audio\AudioContentView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Media\Views\Image\imagemediaplayerview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Media\Views\Image\ImageMediaPlayerView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Media\Views\mediaplayerpartview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Media\Views\MediaPlayerPartView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Media\Views\Video\videomediaplayerview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Media\Views\Video\VideoMediaPlayerView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Mtg\Controls\imagesflipview.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -942,73 +938,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppAboutView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Acknowledgements.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppFeedbackMessageView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Archiver.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppFeedbackView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CabFetch.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppLanguageSelectorView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Downloaders.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppLanguageView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\FFUSearch.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppLicenseView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\HomePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Application\SettingsAppLocationView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\StoreFetch.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Internal\SettingsInternalServerView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings\Views\Application\settingsappaboutview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Settings\Views\Internal\SettingsInternalTourEmulationView.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Application\settingsappfeedbackmessageview.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Application\settingsappfeedbackview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Application\settingsapplanguageselectorview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Application\settingsapplanguageview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Application\settingsapplicenseview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Application\settingsapplocationview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Internal\SettingsInternalServerView1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Settings\Views\Internal\SettingsInternalTourEmulationView1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Settings\Views\SettingsListView.xaml">
       <SubType>Designer</SubType>
@@ -1074,10 +1038,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainPageView1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\MainPivot\ForumsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1093,10 +1053,6 @@
     <Page Include="Views\mainview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\NewsDetailsPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowPlaying\nowplayingview.xaml">
       <Generator>MSBuild:Compile</Generator>

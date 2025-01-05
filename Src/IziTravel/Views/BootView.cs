@@ -9,17 +9,17 @@ using Izi.Travel.Business.Services;
 using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.ViewModels;
 using Izi.Travel.Shell.ViewModels.Featured;
-using Microsoft.Phone.Controls;
+//using Microsoft.Phone.Controls;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
+//using System.Windows.Navigation;
 
 #nullable disable
 namespace Izi.Travel.Shell.Views
 {
-  public class BootView : PhoneApplicationPage
+  public sealed partial class BootView : //PhoneApplicationPage
   {
     private bool _contentLoaded;
 
