@@ -1,12 +1,11 @@
 # IziTravel  v10.0.0.0-prealpha ("reburn" codename) - reburn branch 
-![New logo](Images/logo.png)
+![Logo](Images/logo.png)
 
 ## About
-Very early bird; draft UWP application to "parse" Izi.Travel web site on some winphone with Windows 10 Mobile os...
-
+Very early bird; draft UWP application to "parse" Izi.Travel web site on some winphone with Windows 10 Mobile os =)
 
 ## What's it? Status
-- My another attempt to remake fully discontinued & obsolete [Izi.Travel for WP8](https://4pda.to/forum/index.php?showtopic=478458#entry23314163) app. 
+- My another attempt to remake fully discontinued & obsolete [Izi.Travel for WP8](https://4pda.to/forum/index.php?showtopic=570692&&ysclid=m6fav0arvh856646369) app. 
 - Draft. Prototype / Pre-Pre-Pre-Alpha version.
 - "Web parsing" not realized yet ... so, no push notifications, etc.
 - IziTravelWP8 decomp. completed but over 100500 bugs there!
@@ -17,13 +16,17 @@ Very early bird; draft UWP application to "parse" Izi.Travel web site on some wi
 - Targets: x64; x64; ARM
 - OSes: Windows 10 (Mobile) ; build: 15063 or above
 
-
 ## Licensing
-MIT License
+- MIT License
+
+## Reference(s)
+- https://www.izi.travel (International)
+- https://dzen.ru/a/ZUC_RwrftGzEtzeu?ysclid=m6fan4may0769472507 (RU)
+- https://4pda.to/2015/09/01/241635/?ysclid=m6fan2mb6x262737541 (RU)
 
 ## ..
 AS IS. No support. RnD only / DIY
 
 ## .
 [m][e] 2025
-![New logo](Images/shot01.png)
+![](Images/background.png)
