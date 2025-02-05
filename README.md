@@ -16,6 +16,18 @@ Very early bird; draft UWP application to "parse" Izi.Travel web site on some wi
 - Targets: x64; x64; ARM
 - OSes: Windows 10 (Mobile) ; build: 15063 or above
 
+## Progress of "reburn"
+- Izi.Travel.Shell - (>>)
+- Izi.Travel.Data.Entities +
+- Izi.Travel.Geofencing +
+- Izi.Travel.Utility +
+- Izi.Travel.Data +
+- Izi.Travel.Client.WindowsPhone + (?)
+- Izi.Travel.Business.Entities +
+- Izi.Travel.Business +
+- Izi.Travel.Agent.Audio + 
+
+
 ## Licensing
 - MIT License
 

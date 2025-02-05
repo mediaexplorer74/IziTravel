@@ -3,30 +3,45 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.34909.67
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IziTravel", "IziTravel\IziTravel.csproj", "{25B8A650-59F8-49A5-ABD3-B88DA96EAADD}"
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Shell", "Izi.Travel.Shell\Izi.Travel.Shell.csproj", "{25B8A650-59F8-49A5-ABD3-B88DA96EAADD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp.UWP", "RestSharp.UWP\RestSharp.UWP\RestSharp.UWP.csproj", "{0136D105-745E-44CE-9215-161833B25D84}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXing.UWP", "ZXing.UWP\ZXing.UWP.csproj", "{A4F96D26-B214-437A-B138-C3FACDAEA60B}"
-EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Data.Entities", "Izi.Travel.Data.Entities\Izi.Travel.Data.Entities.csproj", "{2260B987-9887-4AA1-B726-0D898FB3B44F}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Geofencing", "Izi.Travel.Geofencing\Izi.Travel.Geofencing.csproj", "{91866363-6A66-481E-878C-29878220294F}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Utility", "Izi.Travel.Utility\Izi.Travel.Utility.csproj", "{CDCECD6C-D5FA-46C2-BA54-B70BE30AD919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uservoice", "Uservoice\Uservoice.csproj", "{9F94DBB9-081A-4B31-AC06-D779D1BB7292}"
-EndProject
+
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Data", "Izi.Travel.Data\Izi.Travel.Data.csproj", "{F9F9F68C-045E-48F8-8322-4EAED7CEA3E9}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Client.WindowsPhone", "Izi.Travel.Client.WindowsPhone\Izi.Travel.Client.WindowsPhone.csproj", "{155C86C1-644E-4E0C-902E-B6C892BDB94A}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Business.Entities", "Izi.Travel.Business.Entities\Izi.Travel.Business.Entities.csproj", "{4334CEBC-137C-48C6-9DA2-DF69A4AC1386}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Business", "Izi.Travel.Business\Izi.Travel.Business.csproj", "{01628E84-BB32-4F0A-B131-4841FE0E4B85}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izi.Travel.Agent.Audio", "Izi.Travel.Agent.Audio\Izi.Travel.Agent.Audio.csproj", "{5A109BEE-A35F-4B6F-8075-0F92E2231272}"
 EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp.UWP", "RestSharp.UWP\RestSharp.UWP\RestSharp.UWP.csproj", "{0136D105-745E-44CE-9215-161833B25D84}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXing.UWP", "ZXing.UWP\ZXing.UWP.csproj", "{A4F96D26-B214-437A-B138-C3FACDAEA60B}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uservoice", "Uservoice\Uservoice.csproj", "{9F94DBB9-081A-4B31-AC06-D779D1BB7292}"
+EndProject
+
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
