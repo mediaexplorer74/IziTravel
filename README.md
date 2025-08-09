@@ -32,6 +32,8 @@ Very early bird; draft UWP application to "parse" Izi.Travel web site on some wi
 - In 2025, I decided to automate porting with help: Deepseek, WindSurf IDE & Trae IDE + VSCode&RooCode
 - Work-in-progress (so, 100500 bugs still here/there!)
 
+![RnD](Images/RnD.png)
+
 
 ## Licensing
 - MIT License
