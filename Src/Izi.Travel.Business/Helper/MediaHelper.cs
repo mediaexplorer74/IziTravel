@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Helper.MediaHelper
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -98,7 +98,7 @@ namespace Izi.Travel.Business.Helper
             if (media.Tag is Location tag)
               return new string[1]
               {
-                ServiceFacade.MediaService.GetBingMapImageUrl(tag.ToGeoCoordinate(), 12.0, 480, 125, true)
+                ServiceFacade.MediaService.GetBingMapImageUrl(/*tag.ToGeoCoordinate()*/default, 12.0, 480, 125, true)
               };
             break;
         }

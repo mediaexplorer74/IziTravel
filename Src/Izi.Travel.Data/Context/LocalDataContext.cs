@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.dll
 
 using Izi.Travel.Data.Entities.Local;
-using System.Data.Linq;
+//using System.Data.Linq;
 
 #nullable disable
 namespace Izi.Travel.Data.Context

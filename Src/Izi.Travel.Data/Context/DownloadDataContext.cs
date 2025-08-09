@@ -5,9 +5,11 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.dll
 
 using Izi.Travel.Data.Entities.Download;
-using System.Data.Linq;
+//using System.Data.Linq;
 
 #nullable disable
+
+
 namespace Izi.Travel.Data.Context
 {
   public class DownloadDataContext : DataContext

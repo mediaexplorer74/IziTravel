@@ -6,7 +6,7 @@
 
 using Izi.Travel.Data.DbVersion.Updaters.Base;
 //using Microsoft.Phone.Data.Linq;
-using System.Data.Linq;
+using Izi.Travel.Data.Context;//using System.Data.Linq;
 
 #nullable disable
 namespace Izi.Travel.Data.DbVersion.Profiles

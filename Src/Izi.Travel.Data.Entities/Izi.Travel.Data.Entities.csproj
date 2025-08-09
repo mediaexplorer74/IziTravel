@@ -131,6 +131,8 @@
     <Compile Include="Download\DownloadObjectLink.cs" />
     <Compile Include="Download\DownloadObjectType.cs" />
     <Compile Include="Download\DownloadStatus.cs" />
+    <Compile Include="Download\EntityRef.cs" />
+    <Compile Include="Download\EntitySet.cs" />
     <Compile Include="Download\Query\DownloadMediaListQuery.cs" />
     <Compile Include="Download\Query\DownloadObjectChildrenExtendedQuery.cs" />
     <Compile Include="Download\Query\DownloadObjectChildrenQuery.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Local\AudioTrackData.cs" />
     <Compile Include="Local\AudioTrackState.cs" />
     <Compile Include="Local\BaseEntity.cs" />
+    <Compile Include="Local\Binary.cs" />
     <Compile Include="Local\Bookmark.cs" />
     <Compile Include="Local\History.cs" />
     <Compile Include="Local\Purchase.cs" />
@@ -158,15 +161,20 @@
     <EmbeddedResource Include="Properties\Izi.Travel.Data.Entities.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Data.Linq" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>
-    <!--PackageReference Include="Newtonsoft.Json">
-      <Version>6.0.8</Version>
-    </PackageReference-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <Version>1.1.4</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

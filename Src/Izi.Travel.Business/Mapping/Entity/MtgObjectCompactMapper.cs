@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Mapping.Entity.MtgObjectCompactMapper
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -87,10 +87,11 @@ namespace Izi.Travel.Business.Mapping.Entity
       mtgObject1.Hash = target.Hash;
       mtgObject1.AccessType = MtgObjectAccessType.Online;
       MtgObject mtgObject2 = mtgObject1;
+
       if (!string.IsNullOrWhiteSpace(target.Route))
         mtgObject2.Map = new MapInfo()
         {
-          Route = GeoLocationHelper.Parse(target.Route)
+            Route = default//GeoLocationHelper.Parse(target.Route)
         };
       return mtgObject2;
     }

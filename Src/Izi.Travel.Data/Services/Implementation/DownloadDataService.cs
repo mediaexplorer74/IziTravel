@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Data.Services.Implementation.DownloadDataService
 // Assembly: Izi.Travel.Data, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: 9765AC3B-732C-4703-A0F8-C0EBF29D8E89
@@ -11,7 +11,7 @@ using Izi.Travel.Data.Services.Contract;
 using Izi.Travel.Utility;
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
+//using System.Data.Linq;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -895,5 +895,10 @@ namespace Izi.Travel.Data.Services.Implementation
             internal DownloadStatus[] queryStatuses;
             internal DownloadObjectType[] queryTypes;
         }
+    }
+
+    public enum ConflictMode
+    {
+        FailOnFirstConflict
     }
 }

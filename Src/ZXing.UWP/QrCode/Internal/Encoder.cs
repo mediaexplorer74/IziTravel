@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: ZXing.QrCode.Internal.Encoder
 // Assembly: zxing.wp8.0, Version=0.14.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: DD293DF0-BBAA-4BF0-BAC7-F5FAF5AC94ED
@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using ZXing.Common;
 using ZXing.Common.ReedSolomon;
@@ -123,7 +124,8 @@ namespace ZXing.QrCode.Internal
 
     private static int calculateMaskPenalty(ByteMatrix matrix)
     {
-      return MaskUtil.applyMaskPenaltyRule1(matrix) + MaskUtil.applyMaskPenaltyRule2(matrix) + MaskUtil.applyMaskPenaltyRule3(matrix) + MaskUtil.applyMaskPenaltyRule4(matrix);
+      return MaskUtil.applyMaskPenaltyRule1(matrix) + MaskUtil.applyMaskPenaltyRule2(matrix)
+                + MaskUtil.applyMaskPenaltyRule3(matrix) + MaskUtil.applyMaskPenaltyRule4(matrix);
     }
 
     /// <summary>
@@ -255,6 +257,7 @@ namespace ZXing.QrCode.Internal
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("ZXing.UWP: " + ex.Message);
         return false;
       }
       int length = bytes.Length;

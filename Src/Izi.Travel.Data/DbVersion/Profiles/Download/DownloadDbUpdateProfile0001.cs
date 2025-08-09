@@ -4,26 +4,29 @@
 // MVID: 9765AC3B-732C-4703-A0F8-C0EBF29D8E89
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.dll
 
+
 using Izi.Travel.Data.DbVersion.Updaters.Base;
 using Izi.Travel.Data.Entities.Download;
 //using Microsoft.Phone.Data.Linq;
-using System.Data.Linq;
+using Izi.Travel.Data.Context;//using System.Data.Linq;
 
 #nullable disable
 namespace Izi.Travel.Data.DbVersion.Profiles.Download
 {
-  public class DownloadDbUpdateProfile0001 : IDbUpdaterProfile
-  {
-    public int DbVersion => 2;
-
-    public void ApplySchemaUpdate(DatabaseSchemaUpdater dbUpdater)
+    public class DownloadDbUpdateProfile0001 : IDbUpdaterProfile
     {
-      dbUpdater.AddColumn<DownloadObject>("Number");
-    }
+        public int DbVersion => 2;
 
-    public void ApplyDataBaseUpdate(DataContext dataContext)
-    {
+        int IDbUpdaterProfile.DbVersion => throw new System.NotImplementedException();
+
+        public void ApplySchemaUpdate(DatabaseSchemaUpdater dbUpdater)
+        {
+            dbUpdater.AddColumn<DownloadObject>("Number");
+        }
+
+        public void ApplyDataBaseUpdate(DataContext dataContext)
+        {
+        }
     }
-             
-  }
+ 
 }

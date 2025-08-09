@@ -1,0 +1,38 @@
+<Page
+      x:Class="Izi.Travel.Shell.Mtg.Views.Common.Detail.DetailPartView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:windows="using:Windows.UI.Xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:corecontrols="clr-namespace:Izi.Travel.Shell.Core.Controls"
+      xmlns:micro="using:Caliburn.Micro"
+      Style="{StaticResource IziTravelPageStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <CommandBar Grid.Row="0">
+            <CommandBar.Content>
+                <TextBlock Text="Detail Part View" />
+            </CommandBar.Content>
+            <CommandBar.PrimaryCommands>
+                <!-- Add your buttons here -->
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <!-- Add your menu items here -->
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+
+        <Grid Grid.Row="1">
+            <ProgressRing IsActive="{Binding IsDataLoading}" />
+
+            <ContentControl Content="{Binding ActiveItem}"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch" />
+        </Grid>
+    </Grid>
+</Page>

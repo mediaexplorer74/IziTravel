@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Geofencing.Geotracker.BaseGeotracker
 // Assembly: Izi.Travel.Geofencing, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: 67B57F63-A085-4500-9D6D-5D3E58E5548F
@@ -7,6 +7,7 @@
 //using Caliburn.Micro;
 using Izi.Travel.Geofencing.Primitives;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using Windows.Foundation;
@@ -94,6 +95,7 @@ namespace Izi.Travel.Geofencing.Geotracker
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("BaseGeoTracker: " + ex.Message);
         //this._log.Error(ex);
       }
     }
@@ -114,6 +116,7 @@ namespace Izi.Travel.Geofencing.Geotracker
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("BaseGeoTracker: " + ex.Message);
         //this._log.Error(ex);
       }
     }

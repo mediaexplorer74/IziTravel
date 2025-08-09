@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Utility.IsolatedStorageFileHelper
 // Assembly: Izi.Travel.Utility, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: 6E74EF73-7EB1-46AA-A84C-A1A7E0B11FE0
@@ -117,6 +117,7 @@ namespace Izi.Travel.Utility
       catch (Exception ex)
       {
         //IsolatedStorageFileHelper.Logger.Error(ex);
+        Debug.WriteLine("IsolatedStorageFileHelper error: " + ex.Message);
         return 0.0;
       }
     }
@@ -141,6 +142,7 @@ namespace Izi.Travel.Utility
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("IsolatedStorageFileHelper error: " + ex.Message);
         //IsolatedStorageFileHelper.Logger.Error(ex);
         return 0.0;
       }

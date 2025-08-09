@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Data.Services.Implementation.LocalDataService
 // Assembly: Izi.Travel.Data, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: 9765AC3B-732C-4703-A0F8-C0EBF29D8E89
@@ -12,7 +12,7 @@ using Izi.Travel.Data.Entities.Local.Query;
 using Izi.Travel.Data.Services.Contract;
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
+//using System.Data.Linq;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -365,19 +365,23 @@ namespace Izi.Travel.Data.Services.Implementation
       }
     }
 
-    public void DeleteAudioTrackList(int[] idList)
-    {
-      if (idList == null)
-        throw new ArgumentNullException(nameof (idList));
-      if (idList.Length == 0)
-        return;
-      using (LocalDataContext localDataContext = new LocalDataContext())
-      {
-        IQueryable<AudioTrackData> entities = default;//localDataContext.Playlist.Where<AudioTrackData>((Expression<Func<AudioTrackData, bool>>) (x => idList.Contains<int>(x.Id)));
-        localDataContext.Playlist.DeleteAllOnSubmit<AudioTrackData>((IEnumerable<AudioTrackData>) entities);
-        localDataContext.SubmitChanges();
-      }
-    }
+        public void DeleteAudioTrackList(int[] idList)
+        {
+            if (idList == null)
+                throw new ArgumentNullException(nameof(idList));
+            if (idList.Length == 0)
+                return;
+            using (LocalDataContext localDataContext = new LocalDataContext())
+            {
+                //TODO
+                // Fix: Use LINQ's Where extension method from System.Linq for Table<T>
+                //IEnumerable<AudioTrackData> entities = localDataContext.Playlist
+                //    .Where(x => idList.Contains(x.Id))
+                //    .ToList();
+                //localDataContext.Playlist.DeleteAllOnSubmit(entities);
+                localDataContext.SubmitChanges();
+            }
+        }
 
     public void ClearPlaylist()
     {

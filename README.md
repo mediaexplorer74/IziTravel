@@ -4,12 +4,13 @@
 ## About
 Very early bird; draft UWP application to "parse" Izi.Travel web site on some winphone with Windows 10 Mobile os =)
 
-## What's it? Status
+## What's it? 
 - My another attempt to remake fully discontinued & obsolete [Izi.Travel for WP8](https://4pda.to/forum/index.php?showtopic=570692&&ysclid=m6fav0arvh856646369) app. 
 - Draft. Prototype / Pre-Pre-Pre-Alpha version.
 - "Web parsing" not realized yet ... so, no push notifications, etc.
 - IziTravelWP8 decomp. completed but over 100500 bugs there!
 - I plan to learn some MVVM deals at now ("CaliburnMicro" MVVM pattern)
+ 
 
 ## Tech/dev details
 - Platforms: UWP only
@@ -22,10 +23,14 @@ Very early bird; draft UWP application to "parse" Izi.Travel web site on some wi
 - Izi.Travel.Geofencing +
 - Izi.Travel.Utility +
 - Izi.Travel.Data +
-- Izi.Travel.Client.WindowsPhone + (?)
+- Izi.Travel.Client.WindowsPhone ?
 - Izi.Travel.Business.Entities +
 - Izi.Travel.Business +
 - Izi.Travel.Agent.Audio + 
+
+## Status
+- In 2025, I decided to automate porting with help: Deepseek, WindSurf IDE & Trae IDE + VSCode&RooCode
+- Work-in-progress (so, 100500 bugs still here/there!)
 
 
 ## Licensing
@@ -41,4 +46,5 @@ AS IS. No support. RnD only / DIY
 
 ## .
 [m][e] 2025
-![](Images/background.png)
+
+![](Images/footer.png)

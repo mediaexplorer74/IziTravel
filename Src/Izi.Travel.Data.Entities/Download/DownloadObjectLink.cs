@@ -1,17 +1,19 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Data.Entities.Download.DownloadObjectLink
 // Assembly: Izi.Travel.Data.Entities, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: C2535A39-73A9-477D-A740-0ABDD93ED172
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.Entities.dll
 
 using Izi.Travel.Data.Entities.Local;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+//using System.Data.Linq;
+//using System.Data.Linq.Mapping;
 
 #nullable disable
 namespace Izi.Travel.Data.Entities.Download
 {
-  [Table]
+  [Table(default)]
   public class DownloadObjectLink : BaseEntity
   {
     private int _objectId;
@@ -19,7 +21,7 @@ namespace Izi.Travel.Data.Entities.Download
     private EntityRef<DownloadObject> _object;
     private EntityRef<DownloadObject> _parent;
 
-    [Column(IsPrimaryKey = true, CanBeNull = false)]
+    [Column]//(IsPrimaryKey = true, CanBeNull = false)]
     public int ObjectId
     {
       get => this._objectId;
@@ -33,7 +35,8 @@ namespace Izi.Travel.Data.Entities.Download
       }
     }
 
-    [Association(IsForeignKey = true, ThisKey = "ObjectId", OtherKey = "Id", Storage = "_object")]
+    [ForeignKey("ObjectId")]
+    //[Association(IsForeignKey = true, ThisKey = "ObjectId", OtherKey = "Id", Storage = "_object")]
     public DownloadObject Object
     {
       get => this._object.Entity;
@@ -47,21 +50,25 @@ namespace Izi.Travel.Data.Entities.Download
       }
     }
 
-    [Column(IsPrimaryKey = true, CanBeNull = false)]
+    // [Column(IsPrimaryKey = true, CanBeNull = false)]
+    [Key]
+    [Column]
     public int ParentId
     {
-      get => this._parentId;
-      set
-      {
-        if (this._parentId == value)
-          return;
-        this.NotifyPropertyChanging(nameof (ParentId));
-        this._parentId = value;
-        this.NotifyPropertyChanged(nameof (ParentId));
-      }
+        get => this._parentId;
+        set
+        {
+            if (this._parentId == value)
+                return;
+            this.NotifyPropertyChanging(nameof(ParentId));
+            this._parentId = value;
+            this.NotifyPropertyChanged(nameof(ParentId));
+        }
     }
 
-    [Association(IsForeignKey = true, ThisKey = "ParentId", OtherKey = "Id", Storage = "_parent")]
+
+    //[Association(IsForeignKey = true, ThisKey = "ParentId", OtherKey = "Id", Storage = "_parent")]
+    [ForeignKey("ObjectId")]
     public DownloadObject Parent
     {
       get => this._parent.Entity;

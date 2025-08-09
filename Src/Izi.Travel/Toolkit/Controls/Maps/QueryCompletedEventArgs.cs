@@ -1,0 +1,21 @@
+﻿// ********************************************************************
+// Type: Izi.Travel.Shell.Toolkit.Controls.Maps.QueryExtensions
+// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+
+using System;
+using System.ComponentModel;
+
+namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+{
+    public class QueryCompletedEventArgs<TResult>
+    {
+        public TResult Result;
+
+        public static explicit operator AsyncCompletedEventArgs(QueryCompletedEventArgs<TResult> v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

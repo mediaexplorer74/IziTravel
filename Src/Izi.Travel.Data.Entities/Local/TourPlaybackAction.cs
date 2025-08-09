@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Data.Entities.Local.TourPlaybackAction
 // Assembly: Izi.Travel.Data.Entities, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: C2535A39-73A9-477D-A740-0ABDD93ED172

@@ -1,17 +1,19 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Data.Entities.Local.TourPlaybackItem
 // Assembly: Izi.Travel.Data.Entities, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: C2535A39-73A9-477D-A740-0ABDD93ED172
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.Entities.dll
 
 using System;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+//using System.Data.Linq;
+//using System.Data.Linq.Mapping;
 
 #nullable disable
 namespace Izi.Travel.Data.Entities.Local
 {
-  [Table]
+  [Table(default)]
   public class TourPlaybackItem : BaseEntity
   {
     private int _id;
@@ -20,10 +22,11 @@ namespace Izi.Travel.Data.Entities.Local
     private string _language;
     private DateTime _dateTime;
     private TourPlaybackAction _action;
-    [Column(IsVersion = true)]
+    [Column]//(IsVersion = true)]
     private Binary _version;
-
-    [Column(IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+ 
+    [Key]
+    [Column]//(IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, AutoSync = AutoSync.OnInsert)]
     public int Id
     {
       get => this._id;
@@ -37,7 +40,7 @@ namespace Izi.Travel.Data.Entities.Local
       }
     }
 
-    [Column(CanBeNull = false)]
+    [Column]//(CanBeNull = false)]
     public string TourUid
     {
       get => this._tourUid;
@@ -51,7 +54,7 @@ namespace Izi.Travel.Data.Entities.Local
       }
     }
 
-    [Column(CanBeNull = true)]
+    [Column]//(CanBeNull = true)]
     public string ChildUid
     {
       get => this._childUid;
@@ -65,7 +68,7 @@ namespace Izi.Travel.Data.Entities.Local
       }
     }
 
-    [Column(CanBeNull = false)]
+    [Column]//(CanBeNull = false)]
     public string Language
     {
       get => this._language;
@@ -79,7 +82,7 @@ namespace Izi.Travel.Data.Entities.Local
       }
     }
 
-    [Column(CanBeNull = false)]
+    [Column]//(CanBeNull = false)]
     public DateTime DateTime
     {
       get => this._dateTime;
@@ -93,7 +96,7 @@ namespace Izi.Travel.Data.Entities.Local
       }
     }
 
-    [Column(CanBeNull = false)]
+    [Column]//(CanBeNull = false)]
     public TourPlaybackAction Action
     {
       get => this._action;

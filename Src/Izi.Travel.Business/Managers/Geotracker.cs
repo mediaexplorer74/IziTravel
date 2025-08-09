@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Managers.Geotracker
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Geolocation = Izi.Travel.Geofencing.Primitives.Geolocation;
+using Windows.Devices.Geolocation;
 
 
 #nullable disable
@@ -46,14 +47,14 @@ namespace Izi.Travel.Business.Managers
       }
     }
 
-    public Geolocation DefaultPosition
+    public Geopoint DefaultPosition
     {
       get
       {
-        return new Geolocation()
+        return new Geopoint(default)
         {
-          Latitude = 52.3728528,
-          Longitude = 4.8930825
+          //Latitude = 52.3728528,
+          //Longitude = 4.8930825
         };
       }
     }

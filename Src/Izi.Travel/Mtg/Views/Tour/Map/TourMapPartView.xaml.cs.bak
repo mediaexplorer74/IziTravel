@@ -1,0 +1,87 @@
+using Izi.Travel.Utility;
+using System;
+using System.Diagnostics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
+
+namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
+{
+    public sealed partial class TourMapPartView : Page
+    {
+        internal Style MapButton;
+        private bool _contentLoaded;
+        private Storyboard _tiltStoryboard;
+
+        public TourMapPartView()
+        {
+            Counter.Construct("D:\\TeamCity\\buildAgent\\work\\961976af89b2d6d9\\src\\Izi.Travel.Shell\\Mtg\\Views\\Tour\\Map\\TourMapPartView.xaml.cs");
+            this.InitializeComponent();
+        }
+
+        ~TourMapPartView()
+        {
+            Counter.Destruct("D:\\TeamCity\\buildAgent\\work\\961976af89b2d6d9\\src\\Izi.Travel.Shell\\Mtg\\Views\\Tour\\Map\\TourMapPartView.xaml.cs");
+        }
+
+        private void InitializeComponent()
+        {
+            if (this._contentLoaded)
+                return;
+                
+            this._contentLoaded = true;
+            var resourceLocator = new Uri("ms-appx:///Izi.Travel.Shell/Mtg/Views/Tour/Map/TourMapPartView.xaml");
+            Application.LoadComponent(this, resourceLocator, ComponentResourceLocation.Application);
+            
+            // Get the MapButton style and find the storyboard
+            this.MapButton = (Style)this.Resources["MapButton"];
+            this._tiltStoryboard = (Storyboard)this.MapButton.Resources["TiltStoryboard"];
+        }
+
+        // Button animation handlers
+        private void Button_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            if (sender is FrameworkElement element && _tiltStoryboard != null)
+            {
+                _tiltStoryboard.Stop();
+                _tiltStoryboard.Seek(TimeSpan.Zero);
+                _tiltStoryboard.Begin();
+            }
+        }
+
+        private void Button_PointerReleased(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            if (sender is FrameworkElement element && _tiltStoryboard != null)
+            {
+                _tiltStoryboard.Stop();
+                
+                // Create reverse animation to return to normal
+                var reverseStoryboard = new Storyboard();
+                
+                var scaleXAnimation = new DoubleAnimation
+                {
+                    To = 1.0,
+                    Duration = TimeSpan.FromMilliseconds(150),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+                
+                var scaleYAnimation = new DoubleAnimation
+                {
+                    To = 1.0,
+                    Duration = TimeSpan.FromMilliseconds(150),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+
+                Storyboard.SetTarget(scaleXAnimation, element);
+                Storyboard.SetTarget(scaleYAnimation, element);
+                Storyboard.SetTargetProperty(scaleXAnimation, "(UIElement.RenderTransform).(CompositeTransform.ScaleX)");
+                Storyboard.SetTargetProperty(scaleYAnimation, "(UIElement.RenderTransform).(CompositeTransform.ScaleY)");
+                
+                reverseStoryboard.Children.Add(scaleXAnimation);
+                reverseStoryboard.Children.Add(scaleYAnimation);
+                
+                reverseStoryboard.Begin();
+            }
+        }
+    }
+}

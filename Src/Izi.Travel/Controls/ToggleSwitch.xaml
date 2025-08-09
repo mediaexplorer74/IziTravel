@@ -1,0 +1,45 @@
+<UserControl
+    x:Class="Izi.Travel.Shell.Controls.ToggleSwitch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="40"
+    d:DesignWidth="100">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled" />
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="CheckStates">
+                <VisualState x:Name="Checked" />
+                <VisualState x:Name="Unchecked" />
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ToggleSwitch x:Name="ToggleSwitchControl"
+                     Header="{x:Bind Header, Mode=OneWay}"
+                     IsOn="{x:Bind IsChecked, Mode=TwoWay}"
+                     OnContent=""
+                     OffContent=""
+                     Toggled="ToggleSwitchControl_Toggled"
+                     Style="{StaticResource ToggleSwitchStyle}" />
+                     
+        <ContentPresenter x:Name="HeaderContent"
+                         Grid.Column="1"
+                         Margin="12,0,0,0"
+                         VerticalAlignment="Center"
+                         Content="{x:Bind Header, Mode=OneWay}"
+                         Visibility="{x:Bind ShowHeader, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+    </Grid>
+</UserControl>

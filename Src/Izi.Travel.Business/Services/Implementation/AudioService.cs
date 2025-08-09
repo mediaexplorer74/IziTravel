@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// ********************************************************************
 // Type: Izi.Travel.Business.Services.Implementation.AudioService
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -12,7 +12,7 @@ using Izi.Travel.Business.Entities.Settings;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services.Contract;
 //using Microsoft.Phone.BackgroundAudio;
-//using Microsoft.Phone.Shell;
+
 using System;
 using System.Threading;
 using Windows.Foundation;
@@ -172,17 +172,33 @@ namespace Izi.Travel.Business.Services.Implementation
 
     public AudioService()
     {
-            //RnD
+        try
+        {
+            // Initialize with current track info if available
             this.NowPlaying = this.GetCurrentTrackInfo();
-               // ?? ServiceFacade.SettingsService.GetAppSettings().NowPlaying;
+            
+            // Initialize state from background audio player if available
+            if (BackgroundAudioPlayer.Instance != null)
+            {
+                this.State = AudioService.ToAudioServiceState(BackgroundAudioPlayer.Instance.PlayerState);
+                
+                // Subscribe to background audio player events
+                BackgroundAudioPlayer.Instance.PlayStateChanged += (s, e) => 
+                    this.OnBackgroundAudioPlayerPlayStateChanged(s, e as PlayStateChangedEventArgs);
+            }
 
-      this.State = AudioService.ToAudioServiceState(BackgroundAudioPlayer.Instance.PlayerState);
-
-      PhoneApplicationService.Current.Closing += (EventHandler<ClosingEventArgs>)
-                ((s, e) => this.Stop());
-
-      BackgroundAudioPlayer.Instance.PlayStateChanged += (EventHandler) 
-                ((s, e) => this.OnBackgroundAudioPlayerPlayStateChanged(s, e as PlayStateChangedEventArgs));
+            // Subscribe to application closing event
+            var phoneAppService = PhoneApplicationService.Current;
+            if (phoneAppService != null)
+            {
+                phoneAppService.Closing += (s, e) => this.Stop();
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log the error or handle it appropriately
+            System.Diagnostics.Debug.WriteLine($"Error initializing AudioService: {ex}");
+        }
     }
 
     public void Play(AudioTrackInfo audioTrackInfo)

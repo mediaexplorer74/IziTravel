@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Managers.TourPlaybackManager
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -514,8 +514,9 @@ namespace Izi.Travel.Business.Managers
               Order = order.IndexOf(attraction.Uid),
               IsHidden = attraction.Hidden
             };
-            if (attraction.Location != null)
-              tourAttraction.Location = attraction.Location.ToGeoCoordinate();
+            
+            //if (attraction.Location != null)
+              //tourAttraction.Location = attraction.Location.ToGeoCoordinate();
             if (attraction.MainContent != null)
               tourAttraction.Title = attraction.MainContent.Title;
             tourAttraction.TriggerZones.AddRange(
@@ -524,8 +525,8 @@ namespace Izi.Travel.Business.Managers
           }
         }
       }
-      if (mtgObject.Map != null && mtgObject.Map.Route != null)
-        tourPlayback.Route = ((IEnumerable<GeoLocation>) mtgObject.Map.Route).Select<GeoLocation, GeoCoordinate>((Func<GeoLocation, GeoCoordinate>) (x => x.ToGeoCoordinate())).ToArray<GeoCoordinate>();
+      //if (mtgObject.Map != null && mtgObject.Map.Route != null)
+      //  tourPlayback.Route = ((IEnumerable<GeoLocation>) mtgObject.Map.Route).Select<GeoLocation, GeoCoordinate>((Func<GeoLocation, GeoCoordinate>) (x => x.ToGeoCoordinate())).ToArray<GeoCoordinate>();
       return tourPlayback;
     }
 

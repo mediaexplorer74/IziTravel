@@ -1,15 +1,14 @@
-﻿// Decompiled with JetBrains decompiler
+// ********************************************************************
 // Type: Izi.Travel.Business.Entities.Data.GeoRectangle
 // Assembly: Izi.Travel.Business.Entities, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: DDED5915-8B3A-4C03-AAF5-BE6B16E9CC4A
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.Entities.dll
 
-//using Microsoft.Phone.Maps.Controls;
-//using System.Device.Location;
+
+using Izi.Travel.Data.Entities.Common;
+using Windows.Devices.Geolocation;//using System.Device.Location;
 
 #nullable disable
-using Izi.Travel.Data.Entities.Common;
-
 namespace Izi.Travel.Business.Entities.Data
 {
   public class GeoRectangle
@@ -25,8 +24,9 @@ namespace Izi.Travel.Business.Entities.Data
     public LocationRectangle ToLocationRectangle()
     {
       return LocationRectangle.CreateBoundingRectangle(
-          new GeoCoordinate(this.Left, this.Top), 
-          new GeoCoordinate(this.Right, this.Bottom));
+          new Geopoint(default),//new GeoPosition(this.Left, this.Top)),
+          new Geopoint(default)//new GeoPosition(this.Right, this.Bottom))
+          );
     }
   }
 }

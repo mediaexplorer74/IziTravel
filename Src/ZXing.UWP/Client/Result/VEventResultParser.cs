@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: ZXing.Client.Result.VEventResultParser
 // Assembly: zxing.wp8.0, Version=0.14.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: DD293DF0-BBAA-4BF0-BAC7-F5FAF5AC94ED
@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 
 #nullable disable
@@ -67,6 +68,7 @@ namespace ZXing.Client.Result
       }
       catch (ArgumentException ex)
       {
+        Debug.WriteLine("Zxing.UWP: " + ex.Message);
         return (ParsedResult) null;
       }
     }

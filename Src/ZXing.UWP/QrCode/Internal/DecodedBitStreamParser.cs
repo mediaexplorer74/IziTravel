@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: ZXing.QrCode.Internal.DecodedBitStreamParser
 // Assembly: zxing.wp8.0, Version=0.14.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: DD293DF0-BBAA-4BF0-BAC7-F5FAF5AC94ED
@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using ZXing.Common;
 
@@ -102,7 +103,8 @@ namespace ZXing.QrCode.Internal
             }
             catch (ArgumentException ex)
             {
-              return (DecoderResult) null;
+                Debug.WriteLine("ZXing.UWP: " + ex.Message);
+                return (DecoderResult) null;
             }
           }
           if (mode != Mode.TERMINATOR)
@@ -156,6 +158,7 @@ namespace ZXing.QrCode.Internal
       }
       catch (ArgumentException ex)
       {
+        Debug.WriteLine("ZXing.UWP: " + ex.Message);
         return (DecoderResult) null;
       }
       string text = result.ToString().Replace("\r\n", "\n").Replace("\n", Environment.NewLine);
@@ -188,6 +191,7 @@ namespace ZXing.QrCode.Internal
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("ZXing.UWP: " + ex.Message);
         return false;
       }
       return true;
@@ -214,6 +218,7 @@ namespace ZXing.QrCode.Internal
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("ZXing.UWP: " + ex.Message);
         return false;
       }
       return true;
@@ -239,6 +244,7 @@ namespace ZXing.QrCode.Internal
       }
       catch (Exception ex)
       {
+        Debug.WriteLine("ZXing.UWP: " + ex.Message);
         return false;
       }
       byteSegments.Add(bytes);

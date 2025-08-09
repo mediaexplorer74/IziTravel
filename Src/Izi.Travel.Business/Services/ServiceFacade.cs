@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Services.ServiceFacade
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -20,9 +20,9 @@ namespace Izi.Travel.Business.Services
     private static IMtgObjectRegionService _mtgObjectRegionService;
     private static IMtgObjectDownloadService _mtgObjectDownloadService;
     private static IQuizService _quizService;
-    private static Caliburn.Micro.ISettingsService _settingsService;
+    private static ISettingsService _settingsService;//private static Caliburn.Micro.ISettingsService _settingsService;
 
-    public static IAudioService AudioService
+        public static IAudioService AudioService
     {
       get
       {
@@ -88,13 +88,15 @@ namespace Izi.Travel.Business.Services
       get => ServiceFacade._quizService ?? (ServiceFacade._quizService = IoC.Get<IQuizService>());
     }
 
-    public static Caliburn.Micro.ISettingsService SettingsService
+    public static ISettingsService SettingsService//
     {
       get
       {
-        return ServiceFacade._settingsService ?? 
-                    (ServiceFacade._settingsService = IoC.Get<Caliburn.Micro.ISettingsService>());
-      }
+            //return ServiceFacade._settingsService ?? 
+            //            (ServiceFacade._settingsService = IoC.Get<Caliburn.Micro.ISettingsService>());
+            return ServiceFacade._settingsService ??
+                        (ServiceFacade._settingsService = IoC.Get<ISettingsService>());
+       }
     }
   }
 }

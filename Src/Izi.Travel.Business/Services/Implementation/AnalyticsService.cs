@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Services.Implementation.AnalyticsService
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -26,14 +26,14 @@ namespace Izi.Travel.Business.Services.Implementation
   internal sealed class AnalyticsService : IAnalyticsService
   {
     private static readonly ILog Logger = LogManager.GetLog(typeof (AnalyticsService));
-    private readonly Caliburn.Micro.ISettingsService _settingsService;
+    private readonly ISettingsService _settingsService; //   // private readonly Caliburn.Micro.ISettingsService _settingsService;
     private const string TrackingIdDeveloper = "UA-49540358-1";
     private const string TrackingIdBeta = "UA-38462614-1";
     private const string TrackingIdProduction = "UA-38461714-1";
     private const string AdjustApplicationToken = "mtagefwfqmwl";
     private const string AppName = "Izi.travel";
 
-    public AnalyticsService(Caliburn.Micro.ISettingsService settingsService)
+    public AnalyticsService(ISettingsService settingsService)
     {
       this._settingsService = settingsService;
     }

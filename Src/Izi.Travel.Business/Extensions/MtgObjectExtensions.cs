@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Business.Extensions.MtgObjectExtensions
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -46,7 +46,8 @@ namespace Izi.Travel.Business.Extensions
       if (mtgObject == null || mtgObject.MainContent == null
                 || mtgObject.MainContent.Title == null || mtgObject.Location == null)
         return;
-      GeoCoordinate geoCoordinate = mtgObject.Location.ToGeoCoordinate();
+            
+      GeoCoordinate geoCoordinate = default;//mtgObject.Location.ToGeoCoordinate();
       
       if (geoCoordinate == (GeoCoordinate) null)
         return;

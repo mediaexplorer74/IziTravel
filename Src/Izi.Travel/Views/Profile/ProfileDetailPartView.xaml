@@ -1,0 +1,87 @@
+<Page x:Class="Izi.Travel.Shell.Views.Profile.ProfileDetailPartView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+      xmlns:microcore="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+      xmlns:converters="using:Izi.Travel.Shell.Converters"
+      Style="{StaticResource IziTravelPageStyle}"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- UWP CommandBar -->
+        <CommandBar Grid.Row="0"
+                   Style="{StaticResource IziTravelCommandBarStyle}"
+                   DefaultLabelPosition="Right"
+                   IsOpen="False"
+                   IsSticky="True"
+                   Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+            
+            <!-- Primary Commands (right side) -->
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="NavigateBack"
+                             Icon="Back"
+                             Label="Back"
+                             Visibility="{x:Bind ViewModel.CanGoBack, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </CommandBar.PrimaryCommands>
+            
+            <!-- Secondary Commands (overflow menu) -->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="ShowSettings"
+                             Label="Settings"
+                             Icon="Setting"
+                             Visibility="{x:Bind ViewModel.CanShowSettings, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+
+        <Pivot Grid.Row="1" 
+               ItemsSource="{Binding Items}"
+               Title="{Binding DisplayName}"
+               SelectedItem="{Binding ActiveItem, Mode=TwoWay}"
+               Padding="12,12,-12,0"
+               Margin="0,0,0,0">
+            <Pivot.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}" 
+                                  VerticalContentAlignment="Stretch"
+                                  HorizontalContentAlignment="Stretch">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}" 
+                                              VerticalContentAlignment="Stretch"
+                                              HorizontalContentAlignment="Stretch" />
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"
+                              FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                              FontSize="{StaticResource IziTravelFontSizeMedium}"
+                              Margin="-2,29,0,22" />
+                </DataTemplate>
+            </Pivot.TitleTemplate>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName, Converter={StaticResource StringToLowerConverter}}" 
+                              FontFamily="{StaticResource IziTravelFontFamilySegoeSemilight}" 
+                              FontSize="{StaticResource IziTravelFontSizeExtraLarge}"
+                              Margin="-2,0,0,0"
+                              d:DataContext="{d:DesignInstance microcore:IScreen}" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+        </Pivot>
+    </Grid>
+</Page>

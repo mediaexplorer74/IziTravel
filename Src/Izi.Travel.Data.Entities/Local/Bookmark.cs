@@ -1,16 +1,16 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: Izi.Travel.Data.Entities.Local.Bookmark
 // Assembly: Izi.Travel.Data.Entities, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: C2535A39-73A9-477D-A740-0ABDD93ED172
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Data.Entities.dll
 
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
+//using System.Data.Linq;
+//using System.Data.Linq.Mapping;
 
 #nullable disable
 namespace Izi.Travel.Data.Entities.Local
 {
-  [Table]
+  //[Table]
   public class Bookmark : BaseEntity
   {
     private int _id;
@@ -23,45 +23,45 @@ namespace Izi.Travel.Data.Entities.Local
     private double _latitude;
     private double _longitude;
     private string _parentUid;
-    [Column(IsVersion = true)]
+    //[Column(IsVersion = true)]
     private Binary _version;
 
-    [Column(IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+    //[Column(IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, AutoSync = AutoSync.OnInsert)]
     public int Id
     {
       get => this._id;
       set => this.SetProperty<int>(ref this._id, value, nameof (Id));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public string Uid
     {
       get => this._uid;
       set => this.SetProperty<string>(ref this._uid, value, nameof (Uid));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public string Type
     {
       get => this._type;
       set => this.SetProperty<string>(ref this._type, value, nameof (Type));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public string Language
     {
       get => this._language;
       set => this.SetProperty<string>(ref this._language, value, nameof (Language));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public string Title
     {
       get => this._title;
       set => this.SetProperty<string>(ref this._title, value, nameof (Title));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public string ContentProviderUid
     {
       get => this._contentProviderUid;
@@ -71,28 +71,28 @@ namespace Izi.Travel.Data.Entities.Local
       }
     }
 
-    [Column]
+    //[Column]
     public string ImageUid
     {
       get => this._imageUid;
       set => this.SetProperty<string>(ref this._imageUid, value, nameof (ImageUid));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public double Latitude
     {
       get => this._latitude;
       set => this.SetProperty<double>(ref this._latitude, value, nameof (Latitude));
     }
 
-    [Column(CanBeNull = false)]
+    //[Column(CanBeNull = false)]
     public double Longitude
     {
       get => this._longitude;
       set => this.SetProperty<double>(ref this._longitude, value, nameof (Longitude));
     }
 
-    [Column]
+    //[Column]
     public string ParentUid
     {
       get => this._parentUid;

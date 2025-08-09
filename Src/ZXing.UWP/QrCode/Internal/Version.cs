@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// ********************************************************************
 // Type: ZXing.QrCode.Internal.Version
 // Assembly: zxing.wp8.0, Version=0.14.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: DD293DF0-BBAA-4BF0-BAC7-F5FAF5AC94ED
@@ -6,6 +6,7 @@
 // XML documentation location: C:\Users\Admin\Desktop\RE\Izi.Travel\zxing.wp8.0.xml
 
 using System;
+using System.Diagnostics;
 using ZXing.Common;
 
 #nullable disable
@@ -111,6 +112,7 @@ namespace ZXing.QrCode.Internal
       }
       catch (ArgumentException ex)
       {
+        Debug.WriteLine("ZXing.UWP: " + ex.Message);
         return (Version) null;
       }
     }
