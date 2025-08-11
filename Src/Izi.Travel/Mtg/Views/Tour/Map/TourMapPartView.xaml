@@ -16,6 +16,7 @@
       xmlns:audio="clr-namespace:Izi.Travel.Shell.Media.Views.Audio"
       xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
       xmlns:converters="using:Izi.Travel.Shell.Converters"
+      xmlns:toolkit="using:Izi.Travel.Shell.Toolkit.Controls.Maps"
       mc:Ignorable="d"
       Style="{StaticResource IziTravelPageStyle}">
 
@@ -111,93 +112,68 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
 
-    <Grid>
-        <!--Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions-->
-
-        <!-- Main content Grid -->
-        <Grid x:Name="MainGrid">
-            <corecontrols:ProgressOverlay IsBusy="{Binding IsBusy}">
-               
+    <Grid x:Name="MainGrid">
+        <corecontrols:ProgressOverlay IsBusy="{Binding IsBusy}">
+            <Grid x:Name="MapGrid">
+                <!-- Custom MapControl with UWP integration -->
+                <maps:MapControl x:Name="Map"
+                               ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
+                               Center="{Binding Center, Mode=TwoWay}"
+                               MapElementClick="OnMapElementClick"
+                               MapTapped="OnMapTapped"
+                               Style="{StaticResource IziTravelMapStyle}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:MapViewBehavior View="{Binding LocationRect, Mode=TwoWay}"
+                                               ViewCenter="{Binding ViewCenter, Mode=TwoWay}" 
+                                               ViewZoomLevel="{Binding ViewZoomLevel, Mode=TwoWay}" />
+                    </i:Interaction.Behaviors>
                     
-                    <!-- Map and Controls -->
-                    
-                        <!--maps:MapControl x:Name="MapControl"
-                                  Center="{Binding Center, Mode=TwoWay}"
-                                  ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
-                                  Loaded="MapControl_Loaded"
-                                  Style="{StaticResource MapControlStyle}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:MapViewBehavior ZoomDesiredMargin="0,50,0,150" 
-                                                       View="{Binding LocationRect, Mode=TwoWay}" 
-                                                       ViewCenter="{Binding ViewCenter, Mode=TwoWay}" 
-                                                       ViewZoomLevel="{Binding ViewZoomLevel, Mode=TwoWay}" />
-                            </i:Interaction.Behaviors>
-                        </maps:MapControl-->
-                        
-                        <!--maps:MapItemsControl x:Name="MapItems"
-                                           ItemsSource="{Binding Items}"
-                                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                                           ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
-                                           Center="{Binding Center, Mode=TwoWay}"
-                                           MapStyle="Road"
-                                           MapServiceToken="YOUR_BING_MAPS_API_KEY">
-                            <maps:MapItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <maps:MapItemControl Location="{Binding Location}"
-                                                       Anchor="{Binding Anchor}"
-                                                       IsSelected="{Binding IsSelected, Mode=TwoWay}"
-                                                       IsHitTestVisible="{Binding IsHitTestVisible}"
-                                                       d:DataContext="{d:DesignInstance viewmodels:TourMapItemViewModel}">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-
-                                           
-                                            <Grid Grid.Row="0"
-                                                  Margin="{Binding IsSelected, Converter={StaticResource MapPinIsSelectedToPlayContentMarginConverter}}"
-                                                  Visibility="{Binding IsPlayContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                <Ellipse Width="40" Height="40"
-                                                         Fill="{Binding State, Converter={StaticResource TourMapItemStateToBackgroundConverter}}"
-                                                         Stroke="{Binding State, Converter={StaticResource TourMapItemStateToBorderConverter}}"
-                                                         StrokeThickness="2" />
-                                                <Image Source="/Assets/Icons/appbar.control.play.png"
-                                                       Width="20" Height="20"
-                                                       Margin="2,0,0,0" />
-                                            </Grid>
-
-                                         
-                                            <Grid Grid.Row="1"
-                                                  Margin="{Binding IsSelected, Converter={StaticResource MapPinIsSelectedToTextContentMarginConverter}}"
-                                                  Visibility="{Binding IsTextContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                <Border Background="{Binding State, Converter={StaticResource TourMapItemStateToBackgroundConverter}}"
-                                                        BorderBrush="{Binding State, Converter={StaticResource TourMapItemStateToBorderConverter}}"
-                                                        BorderThickness="2"
-                                                        CornerRadius="2">
-                                                    <TextBlock Text="{Binding Title}"
-                                                               Foreground="{Binding State, Converter={StaticResource TourMapItemStateToForegroundConverter}}"
-                                                               Margin="5,2,5,2"
-                                                               FontSize="{StaticResource IziTravelFontSizeSmall}"
-                                                               FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}" />
-                                                </Border>
-                                            </Grid>
-                                        </Grid>
-                                    </maps:MapItemControl>
-                                </DataTemplate>
-                            </maps:MapItemsControl.ItemTemplate>
-                        </maps:MapItemsControl-->
-
-  
-                   
-                
-            </corecontrols:ProgressOverlay>
-
-        </Grid>
-
-  </Grid>
-
+                    <!-- MapItemsControl for displaying items on the map -->
+                    <maps:MapItemsControl x:Name="MapItems" 
+                                       ItemsSource="{Binding Items}">
+                        <maps:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="Pressed">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="PinScale" 
+                                                                   Storyboard.TargetProperty="ScaleX"
+                                                                   To="1.2" 
+                                                                   Duration="0:0:0.2" 
+                                                                   EnableDependentAnimation="True"/>
+                                                    <DoubleAnimation Storyboard.TargetName="PinScale" 
+                                                                   Storyboard.TargetProperty="ScaleY"
+                                                                   To="1.2" 
+                                                                   Duration="0:0:0.2" 
+                                                                   EnableDependentAnimation="True"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    
+                                    <Grid.RenderTransform>
+                                        <ScaleTransform x:Name="PinScale" ScaleX="1" ScaleY="1"/>
+                                    </Grid.RenderTransform>
+                                    
+                                    <!-- Custom pin design -->
+                                    <Border Width="40" 
+                                            Height="40" 
+                                            Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
+                                            CornerRadius="20">
+                                        <TextBlock Text="{Binding Title}" 
+                                                   Foreground="White" 
+                                                   HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </maps:MapItemsControl.ItemTemplate>
+                    </maps:MapItemsControl>
+                </maps:MapControl>
+            </Grid>
+        </corecontrols:ProgressOverlay>
+    </Grid>
 </Page>

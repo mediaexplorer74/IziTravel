@@ -37,10 +37,13 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
     {
       try
       {
-        Izi.Travel.Shell.Settings.Model.LicenseInfo data = XmlSerializerHelper.Deserialize<Izi.Travel.Shell.Settings.Model.LicenseInfo>(Assembly.GetExecutingAssembly().GetManifestResourceStream("Izi.Travel.Shell.Settings.Model.licenses.xml"));
+         Izi.Travel.Shell.Settings.Model.LicenseInfo data = new LicenseInfo();
+        /*Izi.Travel.Shell.Settings.Model.LicenseInfo data = XmlSerializerHelper.Deserialize<Izi.Travel.Shell.Settings.Model.LicenseInfo>(
+            Assembly.GetExecutingAssembly().GetManifestResourceStream("Izi.Travel.Shell.Settings.Model.licenses.xml"));
         if (data == null || data.Packages == null || data.Licenses == null)
           return;
         data.Packages.ForEach((Action<Package>) (x => x.License = data.Licenses.FirstOrDefault<License>((Func<License, bool>) (y => y.Id == x.LicenseId))));
+        */
         List<object> licenseInfo = new List<object>();
         licenseInfo.Add((object) new Header(AppResources.LabelPackages.ToUpper()));
         licenseInfo.AddRange((IEnumerable<object>) data.Packages);

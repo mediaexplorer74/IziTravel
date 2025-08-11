@@ -6,8 +6,7 @@
 
 using Izi.Travel.Shell.Core.Components;
 using Izi.Travel.Shell.Media.ViewModels.Video;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Media.TemplateSelectors
 {
@@ -23,3 +22,4 @@ namespace Izi.Travel.Shell.Media.TemplateSelectors
     }
   }
 }
+

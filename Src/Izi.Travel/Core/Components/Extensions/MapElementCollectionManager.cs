@@ -15,10 +15,10 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
 {
   public class MapElementCollectionManager
   {
-    private readonly Map _map;
+    private readonly MapControl _map;
     private IEnumerable<MapElement> _elements;
 
-    public MapElementCollectionManager(Map map) => this._map = map;
+    public MapElementCollectionManager(MapControl map) => this._map = map;
 
     public void Attach(IEnumerable<MapElement> elements)
     {

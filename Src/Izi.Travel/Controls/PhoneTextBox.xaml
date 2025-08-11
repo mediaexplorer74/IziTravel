@@ -241,7 +241,7 @@
     
     <TextBox x:Name="TextBox"
              Style="{StaticResource PhoneTextBoxStyle}"
-             Text="{x:Bind Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             Text="{x:Bind Text, Mode=TwoWay}"
              PlaceholderText="{x:Bind PlaceholderText, Mode=OneWay}"
              InputScope="{x:Bind InputScope}"
              IsSpellCheckEnabled="False"

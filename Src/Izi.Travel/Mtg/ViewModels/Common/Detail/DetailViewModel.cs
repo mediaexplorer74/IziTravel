@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.DetailViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -24,9 +24,10 @@ using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Flyouts;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common;
 using System.Linq;
 using System.Linq.Expressions;
+using Windows.UI.Xaml.Input;
 using System.Windows.Input;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -65,7 +66,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
 
     public FlyoutLanguageViewModel FlyoutLanguageViewModel => this._flyoutLanguageViewModel;
 
-    public MtgObject MtgObject { get; private set; }
+    public MtgObject MtgObject { get; protected set; }
 
     public MtgObject MtgObjectParent { get; private set; }
 
@@ -379,3 +380,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
     }
   }
 }
+

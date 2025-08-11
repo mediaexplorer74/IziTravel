@@ -1,13 +1,14 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Components.Extensions.AnimationExtensions
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Windows;
-using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
+using System.Windows.Input;
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Extensions
@@ -16,7 +17,7 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
   {
     public static readonly DependencyProperty StoryboardProperty = DependencyProperty.RegisterAttached("Storyboard", typeof (Storyboard), typeof (AnimationExtensions), new PropertyMetadata((object) null, new PropertyChangedCallback(AnimationExtensions.OnStoryboardPropertyChanged)));
     public static readonly DependencyProperty IsPlayingProperty = DependencyProperty.RegisterAttached("IsPlaying", typeof (bool), typeof (AnimationExtensions), new PropertyMetadata((object) false, new PropertyChangedCallback(AnimationExtensions.OnIsPlayingPropertyChanged)));
-    public static readonly DependencyProperty CompletedCommandProperty = DependencyProperty.RegisterAttached("CompletedCommand", typeof (ICommand), typeof (AnimationExtensions), new PropertyMetadata((object) null, new PropertyChangedCallback(AnimationExtensions.OnCompletedCommandPropertyChanged)));
+    public static readonly DependencyProperty CompletedCommandProperty = DependencyProperty.RegisterAttached("CompletedCommand", typeof (System.Windows.Input.ICommand), typeof (AnimationExtensions), new PropertyMetadata((object) null, new PropertyChangedCallback(AnimationExtensions.OnCompletedCommandPropertyChanged)));
     public static readonly DependencyProperty CompletedCommandParameterProperty = DependencyProperty.RegisterAttached("CompletedCommandParameter", typeof (object), typeof (AnimationExtensions), new PropertyMetadata((object) null));
 
     public static void SetStoryboard(DependencyObject element, Storyboard value)
@@ -66,14 +67,14 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
       storyboard.Begin();
     }
 
-    public static void SetCompletedCommand(Storyboard element, ICommand value)
+    public static void SetCompletedCommand(Storyboard element, System.Windows.Input.ICommand value)
     {
       element.SetValue(AnimationExtensions.CompletedCommandProperty, (object) value);
     }
 
-    public static ICommand GetCompletedCommand(Storyboard element)
+    public static System.Windows.Input.ICommand GetCompletedCommand(Storyboard element)
     {
-      return (ICommand) element.GetValue(AnimationExtensions.CompletedCommandProperty);
+      return (System.Windows.Input.ICommand) element.GetValue(AnimationExtensions.CompletedCommandProperty);
     }
 
     private static void OnCompletedCommandPropertyChanged(
@@ -82,20 +83,20 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
     {
       if (!(d is Storyboard storyboard))
         return;
-      ICommand oldValue = (ICommand) e.OldValue;
-      ICommand command = (ICommand) d.GetValue(AnimationExtensions.CompletedCommandProperty);
+      System.Windows.Input.ICommand oldValue = (System.Windows.Input.ICommand) e.OldValue;
+      System.Windows.Input.ICommand command = (System.Windows.Input.ICommand) d.GetValue(AnimationExtensions.CompletedCommandProperty);
       if (oldValue != null)
-        storyboard.Completed -= new EventHandler(AnimationExtensions.OnStoryboardCompleted);
+        storyboard.Completed -= new EventHandler<object>(AnimationExtensions.OnStoryboardCompleted);
       if (command == null)
         return;
-      storyboard.Completed += new EventHandler(AnimationExtensions.OnStoryboardCompleted);
+      storyboard.Completed += new EventHandler<object>(AnimationExtensions.OnStoryboardCompleted);
     }
 
-    private static void OnStoryboardCompleted(object sender, EventArgs eventArgs)
+    private static void OnStoryboardCompleted(object sender, object eventArgs)
     {
       if (!(sender is Storyboard storyboard))
         return;
-      ICommand command = (ICommand) storyboard.GetValue(AnimationExtensions.CompletedCommandProperty);
+      System.Windows.Input.ICommand command = (System.Windows.Input.ICommand) storyboard.GetValue(AnimationExtensions.CompletedCommandProperty);
       if (command == null)
         return;
       object parameter = storyboard.GetValue(AnimationExtensions.CompletedCommandParameterProperty);
@@ -115,3 +116,4 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
     }
   }
 }
+

@@ -19,9 +19,8 @@ using Izi.Travel.Shell.Mtg.Messages;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Navigation;
-
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common
 {
@@ -204,3 +203,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common
     }
   }
 }
+

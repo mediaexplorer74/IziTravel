@@ -138,6 +138,12 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Map
 
     public ObservableCollection<BaseMapItemViewModel> Items => this._items;
 
+    public Geopoint Center
+    {
+        get => _center;
+        protected set => _center = value;
+    }
+
     protected BaseMapViewModel()
     {
       this.Logger = LogManager.GetLog(this.GetType());

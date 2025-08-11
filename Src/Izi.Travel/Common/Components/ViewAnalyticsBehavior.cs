@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Common.Components.ViewAnalyticsBehavior
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -7,13 +7,9 @@
 using Caliburn.Micro;
 using Izi.Travel.Business.Helper;
 using System;
-using System.Windows;
-
 using Windows.UI.Xaml;
-using Windows.UI.Interactivity;
 using Windows.UI.Xaml.Controls;
-//using Windows.UI.Xaml.Controls;
-//using Microsoft.Xaml.Interactivity;
+using Microsoft.Xaml.Interactivity;
 
 #nullable disable
 namespace Izi.Travel.Shell.Common.Components
@@ -65,3 +61,4 @@ namespace Izi.Travel.Shell.Common.Components
     }
   }
 }
+

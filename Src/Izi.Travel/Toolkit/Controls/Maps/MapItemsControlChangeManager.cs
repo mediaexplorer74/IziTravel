@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapItemsControlChangeManager
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -9,8 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Toolkit.Controls.Maps
 {
@@ -21,9 +20,9 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
       if (sourceCollection == null)
         throw new ArgumentNullException(nameof (sourceCollection));
       this.ObjectToMapOverlayMapping = new Dictionary<object, MapOverlay>();
-      sourceCollection.CollectionChanged += 
-                new NotifyCollectionChangedEventHandler(((CollectionChangeListener<object>) this)
-                .CollectionChanged);
+      //sourceCollection.CollectionChanged += 
+      //          new NotifyCollectionChangedEventHandler(((CollectionChangeListener<object>) this)
+      //          .CollectionChanged);
     }
 
     public DataTemplate ItemTemplate { get; set; }
@@ -35,7 +34,7 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     protected override void InsertItemInternal(int index, object obj)
     {
       MapOverlay mapOverlay = !this.ObjectToMapOverlayMapping.ContainsKey(obj) ? MapChild.CreateMapOverlay(obj, this.ItemTemplate) : throw new InvalidOperationException("Attempted to insert the same object twice");
-      this.MapLayer.Insert(index, mapOverlay);
+      //this.MapLayer.Insert(index, mapOverlay);
       this.ObjectToMapOverlayMapping.Add(obj, mapOverlay);
     }
 
@@ -45,14 +44,14 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
         return;
       MapOverlay mapOverlay = this.ObjectToMapOverlayMapping[obj];
       this.ObjectToMapOverlayMapping.Remove(obj);
-      this.MapLayer.Remove(mapOverlay);
+      //this.MapLayer.Remove(mapOverlay);
       MapChild.ClearMapOverlayBindings(mapOverlay);
     }
 
     protected override void ResetInternal()
     {
-      foreach (MapOverlay mapOverlay in (Collection<MapOverlay>) this.MapLayer)
-        MapChild.ClearMapOverlayBindings(mapOverlay);
+      //foreach (MapOverlay mapOverlay in (Collection<MapOverlay>) this.MapLayer)
+      //  MapChild.ClearMapOverlayBindings(mapOverlay);
       this.MapLayer.Clear();
       this.ObjectToMapOverlayMapping.Clear();
     }
@@ -68,7 +67,7 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     {
       if (!this.ObjectToMapOverlayMapping.ContainsKey(obj))
         return;
-      this.MapLayer.Move(this.MapLayer.IndexOf(this.ObjectToMapOverlayMapping[obj]), newIndex);
+      //this.MapLayer.Move(this.MapLayer.IndexOf(this.ObjectToMapOverlayMapping[obj]), newIndex);
     }
 
     public void MoveToTop(object obj)
@@ -76,8 +75,9 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
       if (!this.ObjectToMapOverlayMapping.ContainsKey(obj))
         return;
       MapOverlay mapOverlay = this.ObjectToMapOverlayMapping[obj];
-      this.MapLayer.Remove(mapOverlay);
-      this.MapLayer.Add(mapOverlay);
+      //this.MapLayer.Remove(mapOverlay);
+      //this.MapLayer.Add(mapOverlay);
     }
   }
 }
+

@@ -14,24 +14,21 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     public MapItemsSourceChangeManager(INotifyCollectionChanged sourceCollection)
     {
       this.SourceCollection = sourceCollection;
-      this.SourceCollection.CollectionChanged += 
-                new NotifyCollectionChangedEventHandler(((CollectionChangeListener<object>) this)
-                .CollectionChanged);
+      this.SourceCollection.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
     }
 
     public MapChildCollection Items { get; set; }
 
     private INotifyCollectionChanged SourceCollection { get; set; }
 
-    public void Disconnect()
-    {
-      this.SourceCollection.CollectionChanged -= 
-                new NotifyCollectionChangedEventHandler(((CollectionChangeListener<object>) this)
-                .CollectionChanged);
-      this.SourceCollection = (INotifyCollectionChanged) null;
-    }
+        public void Disconnect()
+        {
+            this.SourceCollection.CollectionChanged -=
+                      new NotifyCollectionChangedEventHandler(this.CollectionChanged);
+            this.SourceCollection = (INotifyCollectionChanged)null;
+        }
 
-    protected override void InsertItemInternal(int index, object obj)
+        protected override void InsertItemInternal(int index, object obj)
     {
       this.Items.InsertInternal(index, obj);
     }

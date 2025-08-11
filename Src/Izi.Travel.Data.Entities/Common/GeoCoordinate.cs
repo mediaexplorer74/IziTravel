@@ -17,6 +17,8 @@ namespace Izi.Travel.Data.Entities.Common
         public double HorizontalAccuracy;
         public double VerticalAccuracy;
         public bool IsUnknown;
+        public double Course;
+        public double Speed;
         private double left;
         private double top;
 

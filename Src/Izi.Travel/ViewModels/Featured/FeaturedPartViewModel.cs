@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.ViewModels.Featured.FeaturedPartViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -14,8 +14,7 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Featured
 {
@@ -66,7 +65,12 @@ namespace Izi.Travel.Shell.ViewModels.Featured
         appSettings.FirstLaunch = false;
         ServiceFacade.SettingsService.SaveAppSettings(appSettings);
         ShellServiceFacade.NavigationService.UriFor<MainViewModel>().Navigate();
-        await Task.Factory.StartNew((System.Action) (() => Deployment.Current.Dispatcher.BeginInvoke((System.Action) (() => ShellServiceFacade.NavigationService.RemoveBackEntry()))));
+        
+        // In UWP, we don't need to explicitly remove the back entry
+        // as the navigation will handle the back stack automatically
+        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+          Windows.UI.Core.CoreDispatcherPriority.Normal,
+          () => { /* No need to remove back entry in UWP */ });
       }
     }
 
@@ -92,3 +96,4 @@ namespace Izi.Travel.Shell.ViewModels.Featured
     }
   }
 }
+

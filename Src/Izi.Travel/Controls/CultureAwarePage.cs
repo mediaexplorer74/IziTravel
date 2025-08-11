@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using System.Windows.Markup;
@@ -14,3 +14,4 @@ namespace Izi.Travel.Shell.Controls
         }
     }
 }
+

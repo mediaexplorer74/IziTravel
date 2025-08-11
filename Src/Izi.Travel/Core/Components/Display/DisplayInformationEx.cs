@@ -1,14 +1,15 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Components.Display.DisplayInformationEx
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
-using Microsoft.Phone.Info;
 using System;
-using System.ComponentModel;
-using System.Windows;
-
+using Windows.Foundation;
+using Windows.UI.Xaml;
+using Windows.Graphics.Display;
+using Windows.UI.ViewManagement;
+using Windows.ApplicationModel;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Display
 {
@@ -47,6 +48,7 @@ namespace Izi.Travel.Shell.Core.Components.Display
 
     public DisplayInformationEx()
     {
+      // Copy from Default instance
       this.PhysicalDiagonal = DisplayInformationEx.Default.PhysicalDiagonal;
       this.PhysicalSize = DisplayInformationEx.Default.PhysicalSize;
       this.PhysicalResolution = DisplayInformationEx.Default.PhysicalResolution;
@@ -66,68 +68,65 @@ namespace Izi.Travel.Shell.Core.Components.Display
     {
     }
 
-    private DisplayInformationEx(
-      Size physicalSize,
-      Size physicalResolution,
-      DisplayInformationSource informationSource)
+    private DisplayInformationEx(Size physicalSize, Size physicalResolution, DisplayInformationSource informationSource)
     {
       this.PhysicalSize = physicalSize;
       this.PhysicalDiagonal = this.PhysicalSize.GetHypotenuse();
       this.PhysicalResolution = physicalResolution;
       this.AspectRatio = physicalSize.Height / physicalSize.Width;
-      if (!this.AspectRatio.IsCloseEnoughTo(physicalResolution.Height / physicalResolution.Width))
-        throw new ArgumentOutOfRangeException(nameof (physicalResolution), "only square pixels supported");
       this.RawDpi = physicalResolution.Width / physicalSize.Width;
       this.AbsoluteScaleFactorBeforeNormalizing = this.PhysicalSize.Width / DisplayConstants.BaselineWidthInInches;
-      this.RawPixelsPerViewPixel = this.GenerateRawPixelsPerViewPixel();
-      double width = this.PhysicalResolution.Width / this.RawPixelsPerViewPixel;
-      Size size = this.PhysicalResolution;
-      double height = size.Height / this.RawPixelsPerViewPixel;
-      this.ViewResolution = new Size(width, height);
+      // In UWP, view pixels are Effective Pixels
+      double rawPpv = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+      this.RawPixelsPerViewPixel = rawPpv;
+      this.ViewResolution = new Size(physicalResolution.Width / rawPpv, physicalResolution.Height / rawPpv);
       this.ViewPixelsPerInch = this.RawDpi / this.RawPixelsPerViewPixel;
-      size = this.ViewResolution;
-      double val1 = size.Width / Application.Current.Host.Content.ActualWidth;
-      size = this.ViewResolution;
-      double val2 = size.Height / Application.Current.Host.Content.ActualHeight;
-      this.ViewPixelsPerHostPixel = Math.Min(val1, val2);
-      this.HostPixelsPerViewPixel = 1.0 / this.ViewPixelsPerHostPixel;
+      this.ViewPixelsPerHostPixel = 1.0;
+      this.HostPixelsPerViewPixel = 1.0;
       this.InformationSource = informationSource;
     }
 
     static DisplayInformationEx()
     {
-      if (!DesignerProperties.IsInDesignTool)
-        DisplayInformationEx.Default = DisplayInformationEx.CreateForHardwareOrLegacyFallback();
+      if (!DesignMode.DesignModeEnabled)
+        DisplayInformationEx.Default = DisplayInformationEx.CreateForCurrentView();
       else
         DisplayInformationEx.Default = new DisplayInformationEx(SizeHelpers.MakeSizeFromDiagonal(4.5, 5.0 / 3.0), SizeHelpers.MakeSize(SizeHelpers.WxgaPhysicalResolution.Width, 5.0 / 3.0), DisplayInformationSource.DesignTimeFallback);
     }
 
-    private static DisplayInformationEx CreateForHardwareOrLegacyFallback()
+    private static DisplayInformationEx CreateForCurrentView()
     {
-      object propertyValue;
-      if (!DeviceExtendedProperties.TryGetValue(DisplayInformationEx.PhysicalScreenResolutionName, out propertyValue))
-        return DisplayInformationEx.CreateForLegacyHardware();
-      Size physicalResolution = (Size) propertyValue;
-      if (!DeviceExtendedProperties.TryGetValue(DisplayInformationEx.RawDpiValueName, out propertyValue) || (double) propertyValue == 0.0)
-        return DisplayInformationEx.CreateForLegacyHardware();
-      double num = (double) propertyValue;
-      return new DisplayInformationEx(new Size(physicalResolution.Width / num, physicalResolution.Height / num), physicalResolution, DisplayInformationSource.Hardware);
+      var di = DisplayInformation.GetForCurrentView();
+      double rawPpv = di.RawPixelsPerViewPixel;
+      var bounds = Window.Current.Bounds;
+      // Effective (view) resolution in EP
+      var viewResolution = new Size(bounds.Width, bounds.Height);
+      // Physical resolution in raw pixels
+      var physicalResolution = new Size(viewResolution.Width * rawPpv, viewResolution.Height * rawPpv);
+      double rawDpi = di.RawDpiX;
+      if (rawDpi <= 0)
+      {
+        // Fallback: approximate DPI from scale
+        rawDpi = 96.0 * rawPpv;
+      }
+      var physicalSize = new Size(physicalResolution.Width / rawDpi, physicalResolution.Height / rawDpi);
+      return new DisplayInformationEx(physicalSize, physicalResolution, DisplayInformationSource.Hardware);
     }
 
     private static DisplayInformationEx CreateForLegacyHardware()
     {
-      double num = (double) Application.Current.Host.Content.ScaleFactor / 100.0;
-      double width1 = Application.Current.Host.Content.ActualWidth * num;
-      double height = Application.Current.Host.Content.ActualHeight * num;
-      double d1 = height / width1;
-      Size physicalResolution = new Size(width1, height);
-      double width2 = !d1.IsCloseEnoughTo(5.0 / 3.0) ? 4.3 * DisplayConstants.DiagonalToWidthRatio16To9 : (num <= 1.0 ? 4.0 * DisplayConstants.DiagonalToWidthRatio15To9 : 4.5 * DisplayConstants.DiagonalToWidthRatio15To9);
-      return new DisplayInformationEx(new Size(width2, width2 * d1), physicalResolution, DisplayInformationSource.LegacyDefault);
+      // UWP fallback: assume 5" 16:9 device if data is unavailable
+      var di = DisplayInformation.GetForCurrentView();
+      double rawPpv = di.RawPixelsPerViewPixel;
+      var bounds = Window.Current.Bounds;
+      var viewResolution = new Size(bounds.Width, bounds.Height);
+      var physicalResolution = new Size(viewResolution.Width * rawPpv, viewResolution.Height * rawPpv);
+      double widthInches = 5.0 * DisplayConstants.DiagonalToWidthRatio16To9;
+      var physicalSize = new Size(widthInches, widthInches * (physicalResolution.Height / physicalResolution.Width));
+      return new DisplayInformationEx(physicalSize, physicalResolution, DisplayInformationSource.LegacyDefault);
     }
 
-    private double GenerateRawPixelsPerViewPixel()
-    {
-      return (this.PhysicalResolution.Width / Math.Min(480.0 * Math.Max(1.0, this.PhysicalSize.Width / DisplayConstants.BaselineWidthInInches), this.PhysicalResolution.Width)).NudgeToClosestPoint(1);
-    }
+    private double GenerateRawPixelsPerViewPixel() => DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
   }
 }
+

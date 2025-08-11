@@ -1,6 +1,6 @@
-﻿// IziTravel.Communication.NewsDataService
+// IziTravel.Communication.NewsDataService
 
-using IziTravel.Communication.Html;
+using Izi.Travel.Shell.Communication.Html;
 using System;
 using System.IO;
 using System.Net.Http;

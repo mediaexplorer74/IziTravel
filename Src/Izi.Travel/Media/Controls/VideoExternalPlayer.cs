@@ -6,17 +6,17 @@
 
 
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
 namespace Izi.Travel.Shell.Media.Controls
 {
-  [TemplatePart(Name = "PartWebBrowser", Type = typeof (WebBrowser))]
+  [TemplatePart(Name = "PartWebBrowser", Type = typeof (WebView))]
   public class VideoExternalPlayer : Control
   {
     private const string PartWebBrowser = "PartWebBrowser";
-    private WebBrowser _webBrowser;
+    private WebView _webBrowser;
     public static readonly DependencyProperty UrlProperty = DependencyProperty.Register(nameof (Url), typeof (string), typeof (VideoExternalPlayer), new PropertyMetadata((object) null, new PropertyChangedCallback(VideoExternalPlayer.OnUrlPropertyChanged)));
 
     public string Url
@@ -27,11 +27,11 @@ namespace Izi.Travel.Shell.Media.Controls
 
     public VideoExternalPlayer() => this.DefaultStyleKey = (object) typeof (VideoExternalPlayer);
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this.Unloaded += new RoutedEventHandler(this.OnUnloaded);
-      this._webBrowser = this.GetTemplateChild("PartWebBrowser") as WebBrowser;
+      this._webBrowser = this.GetTemplateChild("PartWebBrowser") as WebView;
       this.Play(this.Url);
     }
 
@@ -46,7 +46,7 @@ namespace Izi.Travel.Shell.Media.Controls
     {
       if (this._webBrowser == null || string.IsNullOrWhiteSpace(url))
         return;
-      this._webBrowser.IsScriptEnabled = true;
+      this._webBrowser.Settings.IsJavaScriptEnabled = true;
       this._webBrowser.NavigateToString(VideoExternalPlayer.GetNavigateHtml(this.Url));
     }
 
@@ -71,3 +71,4 @@ namespace Izi.Travel.Shell.Media.Controls
     }
   }
 }
+

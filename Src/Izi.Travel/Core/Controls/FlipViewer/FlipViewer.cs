@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -8,9 +8,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Windows;
+using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -205,7 +206,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       return this._footerOnMediaStrip != null ? this._footerOnMediaStrip.FindName(name) : (object) null;
     }
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this._contentStrip = (Canvas) this.GetTemplateChild("ContentStrip");
@@ -480,7 +481,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       this._dragState.MaxDraggingBoundary = -1.0 * (this._contentStrip.Width - this._size.Value.Width + 150.0);
     }
 
-    protected override void OnManipulationStarted(ManipulationStartedEventArgs e)
+    protected override void OnManipulationStarted(ManipulationStartedRoutedEventArgs e)
     {
       base.OnManipulationStarted(e);
       if (this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating)
@@ -488,11 +489,9 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       this.CompleteDragInertiaAnimation();
     }
 
-    protected override void OnManipulationDelta(ManipulationDeltaEventArgs e)
+    protected override void OnManipulationDelta(ManipulationDeltaRoutedEventArgs e)
     {
       base.OnManipulationDelta(e);
-      if (e.PinchManipulation != null)
-        return;
       if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized && this.DragEnabled && this.GetElementCount() > 0)
       {
         this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging;
@@ -500,20 +499,20 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       }
       if (this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging && this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing)
         return;
-      Point translation = e.DeltaManipulation.Translation;
+      Point translation = e.Delta.Translation;
       double x = translation.X;
-      translation = e.DeltaManipulation.Translation;
+      translation = e.Delta.Translation;
       double y = translation.Y;
       this.DragDeltaEventHandler(x, y);
     }
 
-    protected override void OnManipulationCompleted(ManipulationCompletedEventArgs e)
+    protected override void OnManipulationCompleted(ManipulationCompletedRoutedEventArgs e)
     {
       base.OnManipulationCompleted(e);
       if (this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging && this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing)
         return;
       if (!this._dragState.GotDragDelta)
-        this.ProcessDragDelta(e.TotalManipulation.Translation.X, e.TotalManipulation.Translation.Y);
+        this.ProcessDragDelta(e.Cumulative.Translation.X, e.Cumulative.Translation.Y);
       this.DragCompletedEventHandler();
     }
 
@@ -578,18 +577,39 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     {
       this._dragInertiaAnimation = new Storyboard();
       this._dragInertiaAnimationTranslation = new DoubleAnimation();
-      Storyboard.SetTarget((Timeline) this._dragInertiaAnimationTranslation, (DependencyObject) this._compositeTransform);
-      Storyboard.SetTargetProperty((Timeline) this._dragInertiaAnimationTranslation, new PropertyPath((object) CompositeTransform.TranslateXProperty));
-      QuadraticEase quadraticEase1 = new QuadraticEase();
-      quadraticEase1.EasingMode = EasingMode.EaseOut;
-      QuadraticEase quadraticEase2 = quadraticEase1;
-      this._dragInertiaAnimationTranslation.From = new double?(this.ScrollOffset);
-      this._dragInertiaAnimationTranslation.To = new double?(animationEndingValue);
-      this._dragInertiaAnimationTranslation.Duration = (Duration) animationDuration;
-      this._dragInertiaAnimationTranslation.EasingFunction = (IEasingFunction) quadraticEase2;
-      this._dragInertiaAnimation.Children.Add((Timeline) this._dragInertiaAnimationTranslation);
-      this._dragInertiaAnimation.Completed += new EventHandler(this.DragInertiaAnimationComplete);
+      Storyboard.SetTarget(this._dragInertiaAnimationTranslation, (DependencyObject) this._compositeTransform);
+      Storyboard.SetTargetProperty(this._dragInertiaAnimationTranslation, "TranslateX");
+      
+      // Create easing function for smooth animation
+      var ease = new QuadraticEase { EasingMode = EasingMode.EaseOut };
+      
+      this._dragInertiaAnimationTranslation.From = this.ScrollOffset;
+      this._dragInertiaAnimationTranslation.To = animationEndingValue;
+      this._dragInertiaAnimationTranslation.Duration = animationDuration;
+      this._dragInertiaAnimationTranslation.EasingFunction = ease;
+      
+      this._dragInertiaAnimation.Children.Add(this._dragInertiaAnimationTranslation);
+      //this._dragInertiaAnimation.Completed += this.DragInertiaAnimationComplete;
       this._dragInertiaAnimation.FillBehavior = FillBehavior.HoldEnd;
+    }
+
+    private void ConstructUnsquishAnimation()
+    {
+      this._unsquishAnimation = new Storyboard();
+      this._unsquishAnimationTranslation = new DoubleAnimation();
+      Storyboard.SetTarget(this._unsquishAnimationTranslation, (DependencyObject) this._compositeTransform);
+      Storyboard.SetTargetProperty(this._unsquishAnimationTranslation, "ScaleX");
+      
+      // Create easing function for smooth animation
+      var ease = new QuadraticEase { EasingMode = EasingMode.EaseOut };
+      
+      this._unsquishAnimationTranslation.From = this._compositeTransform.ScaleX;
+      this._unsquishAnimationTranslation.To = 1.0;
+      this._unsquishAnimationTranslation.Duration = TimeSpan.FromMilliseconds(100.0);
+      this._unsquishAnimationTranslation.EasingFunction = ease;
+      
+      this._unsquishAnimation.Children.Add(this._unsquishAnimationTranslation);
+      this._unsquishAnimation.FillBehavior = FillBehavior.HoldEnd;
     }
 
     private int CalculateDragInertiaAnimationEndingValue()
@@ -684,8 +704,8 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       this._unsquishAnimationTranslation = new DoubleAnimation();
       Storyboard.SetTarget((Timeline) element, (DependencyObject) this._compositeTransform);
       Storyboard.SetTarget((Timeline) this._unsquishAnimationTranslation, (DependencyObject) this._compositeTransform);
-      Storyboard.SetTargetProperty((Timeline) element, new PropertyPath((object) CompositeTransform.ScaleXProperty));
-      Storyboard.SetTargetProperty((Timeline) this._unsquishAnimationTranslation, new PropertyPath((object) CompositeTransform.TranslateXProperty));
+      Storyboard.SetTargetProperty((Timeline) element, "ScaleX");
+      Storyboard.SetTargetProperty((Timeline) this._unsquishAnimationTranslation, "TranslateX");
       element.From = new double?(this._compositeTransform.ScaleX);
       this._unsquishAnimationTranslation.From = new double?(this._compositeTransform.TranslateX);
       element.To = new double?(1.0);
@@ -695,14 +715,14 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       this._unsquishAnimation.Children.Add((Timeline) element);
       this._unsquishAnimation.Children.Add((Timeline) this._unsquishAnimationTranslation);
       this._unsquishAnimation.FillBehavior = FillBehavior.Stop;
-      this._unsquishAnimation.Completed += new EventHandler(this.UnsquishAnimationComplete);
+      this._unsquishAnimation.Completed += new EventHandler<object>(this.UnsquishAnimationComplete);
       this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.UnsquishAnimating;
       this._unsquishAnimation.Begin();
       this._compositeTransform.ScaleX = element.To.Value;
       this._compositeTransform.TranslateX = this._unsquishAnimationTranslation.To.Value;
     }
 
-    private void UnsquishAnimationComplete(object sender, EventArgs e)
+    private void UnsquishAnimationComplete(object sender, object e)
     {
       if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.UnsquishAnimating)
         this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
@@ -1022,3 +1042,4 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     }
   }
 }
+

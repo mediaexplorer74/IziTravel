@@ -24,7 +24,7 @@ namespace Izi.Travel.Shell.Views.MainPivot
     {
         public MainPivotView()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
     }
 }

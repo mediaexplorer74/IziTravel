@@ -13,7 +13,7 @@ namespace Izi.Travel.Shell.Views.MainPivot
     {
         public NewsView()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
     }
 }

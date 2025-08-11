@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.ExpandableTextBlock
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -9,10 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Documents;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Text;
+using Windows.UI.Xaml.Markup;
+using Izi.Travel.Shell.Core.Extensions; //?
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Controls
@@ -80,7 +83,7 @@ namespace Izi.Travel.Shell.Core.Controls
 
     public ExpandableTextBlock() => this.DefaultStyleKey = (object) typeof (ExpandableTextBlock);
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this._stackPanel = this.GetTemplateChild("PartStackPanel") as StackPanel;
@@ -94,51 +97,74 @@ namespace Izi.Travel.Shell.Core.Controls
     {
       if (this._stackPanel == null)
         return;
-      foreach (FrameworkElement frameworkElement in this._stackPanel.Children.OfType<RichTextBox>())
-        frameworkElement.SizeChanged -= new SizeChangedEventHandler(this.OnRichTextBoxSizeChanged);
-      this._stackPanel.Children.Clear();
-      if (string.IsNullOrWhiteSpace(this.Text))
-        return;
-      HtmlDocument htmlDocument = new HtmlDocument();
-      htmlDocument.LoadHtml(HtmlEntity.DeEntitize(this.Text));
-      this.ProcessHyperlinks(htmlDocument);
-      RichTextBox richTextBox1 = (RichTextBox) null;
-      Paragraph paragraph = (Paragraph) null;
-      foreach (HtmlNode htmlNode1 in htmlDocument.DocumentNode.Descendants("#text").ToList<HtmlNode>())
+        
+      // Clear existing content and event handlers
+      foreach (var element in this._stackPanel.Children.OfType<FrameworkElement>())
       {
-        List<HtmlNode> list = htmlNode1.Ancestors().ToList<HtmlNode>();
-        HtmlNode htmlNode2 = list.FirstOrDefault<HtmlNode>((Func<HtmlNode, bool>) (x => x.Name == "a"));
-        bool flag1 = htmlNode2 != null;
-        string attributeValue = htmlNode2?.GetAttributeValue("href", (string) null);
-        bool flag2 = list.Any<HtmlNode>((Func<HtmlNode, bool>) (x => x.Name == "b" || x.Name == "strong"));
-        bool flag3 = list.Any<HtmlNode>((Func<HtmlNode, bool>) (x => x.Name == "i" || x.Name == "em"));
-        bool flag4 = list.Any<HtmlNode>((Func<HtmlNode, bool>) (x => x.Name == "u"));
-        List<string> textParts = this.GetTextParts(htmlNode1.InnerText);
-        for (int index = 0; index < textParts.Count; ++index)
+        if (element is RichTextBlock rtb)
         {
-          string text = textParts[index];
-          Inline inline = flag1 ? this.GetHyperlinkInline(text, attributeValue) : this.GetTextInline(text);
-          if (inline != null)
-          {
-            if (flag2)
-              inline.FontWeight = FontWeights.Bold;
-            if (flag3)
-              inline.FontStyle = FontStyles.Italic;
-            if (flag4)
-              inline.TextDecorations = TextDecorations.Underline;
-            if (richTextBox1 == null || index > 0)
-            {
-              RichTextBox richTextBox2 = new RichTextBox();
-              richTextBox2.Margin = new Thickness(-12.0, 0.0, -12.0, 0.0);
-              richTextBox1 = richTextBox2;
-              richTextBox1.SizeChanged += new SizeChangedEventHandler(this.OnRichTextBoxSizeChanged);
-              richTextBox1.Blocks.Add((Block) (paragraph = new Paragraph()));
-              this._stackPanel.Children.Add((UIElement) richTextBox1);
-            }
-            paragraph.Inlines.Add(inline);
-          }
+          rtb.SizeChanged -= OnRichTextBlockSizeChanged;
         }
       }
+      this._stackPanel.Children.Clear();
+      
+      if (string.IsNullOrWhiteSpace(this.Text))
+        return;
+        
+      // Process HTML content
+      var htmlDocument = new HtmlDocument();
+      htmlDocument.LoadHtml(HtmlEntity.DeEntitize(this.Text));
+      this.ProcessHyperlinks(htmlDocument);
+      
+      // Create a single RichTextBlock for all content
+      var richTextBlock = new RichTextBlock 
+      { 
+        TextWrapping = TextWrapping.Wrap,
+        IsTextSelectionEnabled = true,
+        Margin = new Thickness(-12, 0, -12, 0)
+      };
+      
+      richTextBlock.SizeChanged += OnRichTextBlockSizeChanged;
+      
+      var paragraph = new Paragraph();
+      
+      foreach (var textNode in htmlDocument.DocumentNode.Descendants("#text").ToList())
+      {
+        var ancestors = textNode.Ancestors().ToList();
+        var linkNode = ancestors.FirstOrDefault(x => x.Name == "a");
+        bool isLink = linkNode != null;
+        string href = linkNode?.GetAttributeValue("href", string.Empty);
+        
+        bool isBold = ancestors.Any(x => x.Name == "b" || x.Name == "strong");
+        bool isItalic = ancestors.Any(x => x.Name == "i" || x.Name == "em");
+        bool isUnderline = ancestors.Any(x => x.Name == "u");
+        
+        var textParts = this.GetTextParts(textNode.InnerText);
+        
+        foreach (var text in textParts.Where(t => !string.IsNullOrEmpty(t)))
+        {
+          Inline inline;
+          
+          if (isLink && !string.IsNullOrEmpty(href))
+          {
+            inline = this.GetHyperlinkInline(text, href);
+          }
+          else
+          {
+            inline = this.GetTextInline(text);
+          }
+          
+          // Apply formatting
+          if (isBold) inline.FontWeight = FontWeights.Bold;
+          if (isItalic) inline.FontStyle = FontStyle.Italic;
+          if (isUnderline) inline.TextDecorations = Windows.UI.Text.TextDecorations.Underline;
+          
+          paragraph.Inlines.Add(inline);
+        }
+      }
+      
+      richTextBlock.Blocks.Add(paragraph);
+      this._stackPanel.Children.Add(richTextBlock);
     }
 
     private void ProcessHyperlinks(HtmlDocument htmlDocument)
@@ -199,36 +225,27 @@ namespace Izi.Travel.Shell.Core.Controls
       return Math.Ceiling(textBlock.ActualHeight);
     }
 
-    private Inline GetTextInline(string text)
+    private Inline GetTextInline(string text) => (Inline) new Run()
     {
-      Run textInline = new Run();
-      textInline.Text = text;
-      textInline.Foreground = this.Foreground;
-      textInline.FontFamily = this.FontFamily;
-      textInline.FontSize = this.FontSize;
-      textInline.FontWeight = this.FontWeight;
-      return (Inline) textInline;
-    }
+      Text = text ?? string.Empty
+    };
 
-    private Inline GetHyperlinkInline(string text, string uriString)
+    private Inline GetHyperlinkInline(string text, string url)
     {
-      if (uriString.StartsWith("www.", StringComparison.InvariantCultureIgnoreCase))
-        uriString = "http://" + uriString;
-      Uri result = (Uri) null;
-      Uri.TryCreate(uriString, UriKind.Absolute, out result);
-      Hyperlink hyperlinkInline = new Hyperlink();
-      hyperlinkInline.TargetName = "_blank";
-      hyperlinkInline.NavigateUri = result;
-      hyperlinkInline.MouseOverForeground = this.LinkPressedForeground;
-      hyperlinkInline.Foreground = this.LinkForeground;
-      hyperlinkInline.FontFamily = this.FontFamily;
-      hyperlinkInline.FontSize = this.FontSize;
-      hyperlinkInline.FontWeight = this.FontWeight;
-      hyperlinkInline.Inlines.Add((Inline) new Run()
+      if (string.IsNullOrEmpty(url))
+        return GetTextInline(text);
+        
+      try
       {
-        Text = text
-      });
-      return (Inline) hyperlinkInline;
+        var hyperlink = new Hyperlink();
+        hyperlink.Inlines.Add(new Run { Text = text ?? string.Empty });
+        hyperlink.NavigateUri = new Uri(url, UriKind.RelativeOrAbsolute);
+        return hyperlink;
+      }
+      catch (UriFormatException)
+      {
+        return GetTextInline(text);
+      }
     }
 
     private void OnLinkButtonClick(object sender, RoutedEventArgs e)
@@ -236,10 +253,20 @@ namespace Izi.Travel.Shell.Core.Controls
       this.IsExpanded = !this.IsExpanded;
     }
 
-    private void OnRichTextBoxSizeChanged(object sender, SizeChangedEventArgs e)
+    private void OnRichTextBlockSizeChanged(object sender, SizeChangedEventArgs e)
     {
-      this._expandedHeight = this._stackPanel.Children.OfType<RichTextBox>().Sum<RichTextBox>((Func<RichTextBox, double>) (x => x.ActualHeight));
-      this.ApplyExpandedState();
+      if (!(sender is RichTextBlock richTextBlock))
+        return;
+        
+      if (this.IsExpanded)
+      {
+        this._expandedHeight = richTextBlock.ActualHeight;
+      }
+      else
+      {
+        this._collapsedHeight = this.GetCollapsedHeight();
+        this.ApplyExpandedState();
+      }
     }
 
     private static void OnTextPropertyChanged(
@@ -271,3 +298,4 @@ namespace Izi.Travel.Shell.Core.Controls
     }
   }
 }
+

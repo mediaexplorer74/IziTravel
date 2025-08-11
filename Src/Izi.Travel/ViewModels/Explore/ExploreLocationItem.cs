@@ -32,7 +32,7 @@ namespace Izi.Travel.Shell.ViewModels.Explore
     private string _cityName;
     private string _countryCode;
     private string _countryName;
-    private Geopoint _location = default;//GeoCoordinate.Unknown;
+    private Windows.Devices.Geolocation.Geopoint _location = null;
     private LocationRectangle _locationRectangle;
 
     public string Uid
@@ -65,12 +65,12 @@ namespace Izi.Travel.Shell.ViewModels.Explore
       }
     }
 
-    public Geopoint Location
+    public Windows.Devices.Geolocation.Geopoint Location
     {
       get => this._location;
       private set
       {
-        this.SetProperty<Geopoint>(ref this._location, value, propertyName: nameof (Location));
+        this.SetProperty<Windows.Devices.Geolocation.Geopoint>(ref this._location, value, propertyName: nameof (Location));
       }
     }
 
@@ -83,9 +83,9 @@ namespace Izi.Travel.Shell.ViewModels.Explore
       }
     }
 
-    public void TrySetLocation(Geopoint location, LocationRectangle locationRectangle = null)
+    public void TrySetLocation(Windows.Devices.Geolocation.Geopoint location, LocationRectangle locationRectangle = null)
     {
-      if (location != (Geopoint) null /*&& !location.IsUnknown*/)
+      if (location != null)
       {
         this.Location = location;
         this.LocationRectangle = locationRectangle ?? new LocationRectangle(location, 0.25, 0.25);

@@ -28,6 +28,7 @@ using Izi.Travel.Business.Entities.Settings;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
+using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Geofencing;
 using Izi.Travel.Geofencing.Geotracker;
 using Izi.Travel.Shell.Core;
@@ -35,7 +36,6 @@ using Izi.Travel.Shell.Core.Attributes;
 using Izi.Travel.Shell.Core.Context;
 using Izi.Travel.Shell.Core.Helpers;
 using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.Core.Services.Contract;
 using Izi.Travel.Shell.Core.Services.Implementation;
 using Izi.Travel.Shell.Media.ViewModels;
@@ -82,10 +82,15 @@ using System.Threading.Tasks;
 
 using Caliburn.Micro;
 using Newtonsoft.Json;
+using Izi.Travel.Shell.Mtg.Interfaces;
+using Windows.Services.Maps;
 
 namespace Izi.Travel.Shell
 {
-    sealed partial class App : Application
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
+    public sealed partial class App : CaliburnApplication
     {
         private WinRTContainer container;
         private bool _reset;
@@ -111,18 +116,36 @@ namespace Izi.Travel.Shell
             container.RegisterWinRTServices();
             container.PerRequest<MainPageViewModel>();
             
+            // Register the UWP phone service
+            container.Singleton<IPhoneService, UwpPhoneService>();
+            
+            // Register map services
+            //container.Singleton<IMapService, MapService>();
+            
+            // Register view models
+            container.PerRequest<DetailPartViewModel>();
+            container.PerRequest<TourMapPartViewModel>();
+            
             // Configure Caliburn.Micro for UWP
             MessageBinder.SpecialValues.Add("$clickeditem", 
                 context => ((ItemClickEventArgs)context.EventArgs).ClickedItem);
             
-            // Register frame navigation service with suspension handling
-            var navigationService = new FrameAdapter(container.GetNavigationService());
-            container.Instance<INavigationService>(navigationService);
+            // RegisterNavigationService is called in PrepareViewFirst; no manual adapter needed
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)
         {
+            // Register the navigation service with Caliburn.Micro's container
             container.RegisterNavigationService(rootFrame);
+            
+            // Initialize our ShellServiceFacade with the root frame
+            ShellServiceFacade.Initialize(rootFrame);
+            
+            // Set up navigation events if needed
+            rootFrame.Navigating += OnRootFrameNavigating;
+            rootFrame.Navigated += OnRootFrameNavigated;
+            
+            // Display the root view
             DisplayRootView<MainPageView>();
         }
 
@@ -208,22 +231,14 @@ namespace Izi.Travel.Shell
             var appSettings = ServiceFacade.SettingsService.GetAppSettings();
             localSettings.Values["AppSettings"] = JsonConvert.SerializeObject(appSettings);
             
-            // Save navigation state
-            var navigationService = (FrameAdapter)container.GetInstance<INavigationService>();
-            localSettings.Values["NavigationState"] = JsonConvert.SerializeObject(
-                navigationService.GetNavigationState());
+            // Navigation state saving skipped in UWP port for now
         }
 
         private void RestoreAppStateAsync()
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             
-            // Restore navigation state
-            if (localSettings.Values.TryGetValue("NavigationState", out object navigationState))
-            {
-                var navigationService = (FrameAdapter)container.GetInstance<INavigationService>();
-                navigationService.RestoreNavigationState((string)navigationState);
-            }
+            // Navigation state restore skipped in UWP port for now
         }
 
         private static void SetupLanguages()
@@ -269,7 +284,7 @@ namespace Izi.Travel.Shell
 
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
-            _reset = e.NavigationMode == NavigationMode.Reset;
+            //_reset = e.NavigationMode == NavigationMode.Reset;
         }
 
         private static void OnDownloadProcessStateChanged(
@@ -322,62 +337,5 @@ namespace Izi.Travel.Shell
         }
     }
 
-    /// <summary>
-    /// Custom navigation service adapter for UWP suspension management
-    /// </summary>
-    public class FrameAdapter : INavigationService
-    {
-        private readonly Frame _frame;
-        private readonly Stack<string> _backStack = new Stack<string>();
-        private string _currentViewKey;
-
-        public string CurrentSource { get; private set; }
-
-        public FrameAdapter(Frame frame)
-        {
-            _frame = frame;
-            _frame.Navigated += OnFrameNavigated;
-        }
-
-        private void OnFrameNavigated(object sender, NavigationEventArgs e)
-        {
-            var viewModel = e.Content?.GetType().Name.Replace("View", "ViewModel");
-            if (!string.IsNullOrEmpty(viewModel))
-            {
-                _backStack.Push(_currentViewKey);
-                _currentViewKey = viewModel;
-            }
-        }
-
-        public void GoBack()
-        {
-            if (_frame.CanGoBack)
-                _frame.GoBack();
-        }
-
-        public string GetNavigationState() => JsonConvert.SerializeObject(
-            new { Current = _currentViewKey, Stack = _backStack.ToList() });
-
-        public void RestoreNavigationState(string state)
-        {
-            var navState = JsonConvert.DeserializeObject<dynamic>(state);
-            _currentViewKey = navState.Current;
-            
-            foreach (var item in navState.Stack)
-                _backStack.Push(item);
-        }
-
-        // Other INavigationService members...
-        public void NavigateToViewModel<T>(object parameter = null) where T : class
-        {
-            var viewName = typeof(T).Name.Replace("Model", "");
-            var viewType = Type.GetType($"Izi.Travel.Shell.Views.{viewName}, Izi.Travel.Shell");
-            if (viewType != null)
-                _frame.Navigate(viewType, parameter);
-        }
-
-        public bool CanGoBack => _frame.CanGoBack;
-        public void GoForward() => _frame.GoForward();
-        public void Refresh() => _frame.Navigate(_frame.SourcePageType, _frame.Tag);
-    }
+    // Removed custom FrameAdapter; using Caliburn.Micro's built-in navigation service instead
 }

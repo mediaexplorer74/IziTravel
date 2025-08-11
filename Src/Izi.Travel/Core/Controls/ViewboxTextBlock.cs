@@ -1,11 +1,11 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.ViewboxTextBlock
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
@@ -20,14 +20,14 @@ namespace Izi.Travel.Shell.Core.Controls
     private double _parentActualHeight;
     private string _text;
     private double _owerflowedHeight;
-    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof (Text), typeof (string), typeof (ViewboxTextBlock), new PropertyMetadata((object) null, new System.Windows.PropertyChangedCallback(ViewboxTextBlock.PropertyChangedCallback)));
-    public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register(nameof (TextAlignment), typeof (TextAlignment), typeof (ViewboxTextBlock), new PropertyMetadata((object) TextAlignment.Center));
-    public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(nameof (TextWrapping), typeof (TextWrapping), typeof (ViewboxTextBlock), new PropertyMetadata((object) (TextWrapping) 0));
-    public static readonly DependencyProperty TextTrimmingProperty = DependencyProperty.Register("TextTrimming", typeof (TextTrimming), typeof (ViewboxTextBlock), new PropertyMetadata((object) TextTrimming.None));
-    public static readonly DependencyProperty MinFontSizeProperty = DependencyProperty.Register(nameof (MinFontSize), typeof (double), typeof (ViewboxTextBlock), new PropertyMetadata((object) 0.0));
-    public static readonly DependencyProperty MaxFontSizeProperty = DependencyProperty.Register(nameof (MaxFontSize), typeof (double), typeof (ViewboxTextBlock), new PropertyMetadata((object) 0.0));
-    public static readonly DependencyProperty IsOverflowedProperty = DependencyProperty.Register(nameof (IsOverflowed), typeof (bool), typeof (ViewboxTextBlock), new PropertyMetadata((object) false));
-    public static readonly DependencyProperty TrimProperty = DependencyProperty.Register(nameof (Trim), typeof (bool), typeof (ViewboxTextBlock), new PropertyMetadata((object) false));
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(ViewboxTextBlock), new PropertyMetadata(null, new PropertyChangedCallback(ViewboxTextBlock.PropertyChangedCallback)));
+    public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register(nameof(TextAlignment), typeof(TextAlignment), typeof(ViewboxTextBlock), new PropertyMetadata(TextAlignment.Center));
+    public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(nameof(TextWrapping), typeof(TextWrapping), typeof(ViewboxTextBlock), new PropertyMetadata((TextWrapping)0));
+    public static readonly DependencyProperty TextTrimmingProperty = DependencyProperty.Register("TextTrimming", typeof(TextTrimming), typeof(ViewboxTextBlock), new PropertyMetadata(TextTrimming.None));
+    public static readonly DependencyProperty MinFontSizeProperty = DependencyProperty.Register(nameof(MinFontSize), typeof(double), typeof(ViewboxTextBlock), new PropertyMetadata(0.0));
+    public static readonly DependencyProperty MaxFontSizeProperty = DependencyProperty.Register(nameof(MaxFontSize), typeof(double), typeof(ViewboxTextBlock), new PropertyMetadata(0.0));
+    public static readonly DependencyProperty IsOverflowedProperty = DependencyProperty.Register(nameof(IsOverflowed), typeof(bool), typeof(ViewboxTextBlock), new PropertyMetadata(false));
+    public static readonly DependencyProperty TrimProperty = DependencyProperty.Register(nameof(Trim), typeof(bool), typeof(ViewboxTextBlock), new PropertyMetadata(false));
 
     public string Text
     {
@@ -76,10 +76,11 @@ namespace Izi.Travel.Shell.Core.Controls
     public ViewboxTextBlock()
     {
       this.DefaultStyleKey = (object) typeof (ViewboxTextBlock);
-      this.LayoutUpdated += (EventHandler) ((s, e) => this.Update());
+      //this.LayoutUpdated += (EventHandler) ((s, e) => this.Update());
+        this.LayoutUpdated += (sender, e) => this.Update();
     }
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this._textBlock = this.GetTemplateChild("TextBlock") as TextBlock;

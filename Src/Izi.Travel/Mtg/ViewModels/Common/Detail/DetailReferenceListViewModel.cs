@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.DetailReferenceListViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -11,6 +11,7 @@ using Izi.Travel.Shell.Core.Resources;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.List;
 using Izi.Travel.Shell.Mtg.Views.Common.Detail;
 using System;
+using Izi.Travel.Utility.Extensions;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
@@ -34,7 +35,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
     {
       System.Collections.Generic.List<string> list = new System.Collections.Generic.List<string>();
       list.Add("NowPlaying");
-      list.Add<string>("QrCode", this.MtgObject.IsMuseumOrCollection());
+      list.Add("QrCode", this.MtgObject.IsMuseumOrCollection());
       return list.ToArray();
     }
 

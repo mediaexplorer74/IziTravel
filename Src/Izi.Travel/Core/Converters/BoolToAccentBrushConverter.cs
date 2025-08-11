@@ -1,31 +1,51 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Converters.BoolToAccentBrushConverter
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
-#nullable disable
 namespace Izi.Travel.Shell.Core.Converters
 {
-  public sealed class BoolToAccentBrushConverter : IValueConverter
-  {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    /// <summary>
+    /// Converts a boolean value to an accent brush based on the application resources.
+    /// </summary>
+    public sealed class BoolToAccentBrushConverter : IValueConverter
     {
-      return !(value is bool flag) || !flag ? Application.Current.Resources[(object) "IziTravelDarkBrush"] : Application.Current.Resources[(object) "IziTravelBlueBrush"];
-    }
+        private const string DarkBrushKey = "IziTravelDarkBrush";
+        private const string BlueBrushKey = "IziTravelBlueBrush";
+        private const string DefaultBrushKey = "SystemControlBackgroundBaseMediumBrush";
 
-    public object ConvertBack(
-      object value,
-      Type targetType,
-      object parameter,
-      CultureInfo culture)
-    {
-      throw new NotImplementedException();
+        /// <inheritdoc/>
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            // If parameter is "Inverse", invert the boolean value
+            if (parameter is string param && param.Equals("Inverse", StringComparison.OrdinalIgnoreCase) && value is bool boolValue)
+                value = !boolValue;
+
+            // Get the appropriate brush resource based on the boolean value
+            var resourceKey = value is bool flag && flag ? BlueBrushKey : DarkBrushKey;
+
+            // Try to get the brush from application resources, fall back to a default if not found
+            if (Application.Current.Resources.TryGetValue(resourceKey, out var resource) && resource is SolidColorBrush brush)
+                return brush;
+
+            // Fallback to a default brush if the requested one is not found
+            return Application.Current.Resources[DefaultBrushKey] as SolidColorBrush ?? new SolidColorBrush(Colors.Gray);
+        }
+
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            string language)
+        {
+            throw new NotImplementedException();
+        }
     }
-  }
 }

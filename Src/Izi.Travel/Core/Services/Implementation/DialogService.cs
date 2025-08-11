@@ -16,10 +16,10 @@ using Izi.Travel.Utility;
 //using Microsoft.Xna.Framework.Audio;
 using System;
 using System.IO;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using System.Windows.Controls.Primitives;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.Foundation;
@@ -81,9 +81,8 @@ namespace Izi.Travel.Shell.Core.Services.Implementation
           cDisplayClass10.dialog.IsRightButtonEnabled = true;
         }
       }
-      // ISSUE: reference to a compiler-generated field
-      // ISSUE: method pointer
-      cDisplayClass10.dialog.Closed += new TypedEventHandler<FlyoutDialog, FlyoutDialogResult>((object) cDisplayClass10, __methodptr(\u003CShow\u003Eb__0));
+      // Use method group syntax for event handler
+      cDisplayClass10.dialog.Closed += cDisplayClass10.OnDialogClosed;
       if (prepare != null)
       {
         // ISSUE: reference to a compiler-generated field
@@ -209,3 +208,4 @@ namespace Izi.Travel.Shell.Core.Services.Implementation
     }*/
   }//class
 }
+

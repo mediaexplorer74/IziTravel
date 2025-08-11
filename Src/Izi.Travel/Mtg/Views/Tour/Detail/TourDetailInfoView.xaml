@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="using:Izi.Travel.Controls"
+             xmlns:controls="using:Izi.Travel.Shell.Controls"
+             xmlns:corecontrols="using:Izi.Travel.Core.Controls"
              xmlns:audio="using:Izi.Travel.Shell.Media.Views.Audio"
              xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
              xmlns:common="using:Izi.Travel.Shell.Media.ViewModels.Common"
@@ -55,21 +56,21 @@
                     </controls:FlipView.ItemTemplate>
                 </controls:FlipView>
 
-                <controls:LabeledRating Margin="0,0,0,35"
-                                        Padding="15,5,4,4"
-                                        Value="{Binding Rating}"
-                                        Label="{Binding RatingLabel}"
-                                        Visibility="{Binding IsRated, Converter={StaticResource BoolToVisibilityConverter}}"
-                                        FilledItemBackground="{StaticResource IziTravelLightBrush}"
-                                        UnfilledItemBackground="{StaticResource IziTravelDarkGrayBrush}"
-                                        Foreground="{StaticResource IziTravelLightBrush}"
-                                        IsHitTestVisible="False"
-                                        VerticalAlignment="Bottom"
-                                        HorizontalAlignment="Left">
-                    <controls:LabeledRating.Background>
+                <corecontrols:LabeledRating Margin="0,0,0,35"
+                                          Padding="{StaticResource IziTravelPaddingSmall}"
+                                          Value="{Binding Rating}"
+                                          Label="{Binding RatingLabel}"
+                                          Visibility="{Binding IsRated, Converter={StaticResource BoolToVisibilityConverter}}"
+                                          FilledItemBackground="{StaticResource IziTravelLightBrush}"
+                                          UnfilledItemBackground="{StaticResource IziTravelDarkGrayBrush}"
+                                          Foreground="{StaticResource IziTravelLightBrush}"
+                                          IsHitTestVisible="False"
+                                          VerticalAlignment="Bottom"
+                                          HorizontalAlignment="Left">
+                    <corecontrols:LabeledRating.Background>
                         <SolidColorBrush Color="{StaticResource IziTravelDarkColor}" Opacity="0.9" />
-                    </controls:LabeledRating.Background>
-                </controls:LabeledRating>
+                    </corecontrols:LabeledRating.Background>
+                </corecontrols:LabeledRating>
             </Grid>
             
             

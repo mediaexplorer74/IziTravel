@@ -5,6 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Business.dll
 
 using Caliburn.Micro;
+using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services.Contract;
 
 #nullable disable
@@ -12,6 +13,7 @@ namespace Izi.Travel.Business.Services
 {
   public class ServiceFacade
   {
+    public static DownloadManager DownloadManager;
     private static IAudioService _audioService;
     private static ICultureService _cultureService;
     private static IAnalyticsService _analyticsService;

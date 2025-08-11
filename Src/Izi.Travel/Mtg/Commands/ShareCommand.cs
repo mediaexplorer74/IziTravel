@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Commands.ShareCommand
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -8,7 +8,7 @@ using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Shell.Core.Command;
 using Izi.Travel.Shell.Core.Helpers;
-using Microsoft.Phone.Tasks;
+using Windows.System;
 using System;
 using System.Collections.Generic;
 
@@ -47,11 +47,8 @@ namespace Izi.Travel.Shell.Mtg.Commands
       if (this._mtgObjectRoot != null)
         values.Add(this._mtgObjectRoot.Title);
       values.Add(this._mtgObject.Title);
-      new ShareLinkTask()
-      {
-        Title = string.Join(" - ", (IEnumerable<string>) values),
-        LinkUri = uri
-      }.Show();
+      // UWP does not have ShareLinkTask; as a minimal fallback, open the URI
+      var _ = Launcher.LaunchUriAsync(uri);
     }
   }
 }

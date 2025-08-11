@@ -1,10 +1,9 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Components.Behaviors.ControlSetFocusBehavior
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Microsoft.Xaml.Interactivity;
 
@@ -27,10 +26,11 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
 
     private void OnAssociatedObjectLoaded(object sender, RoutedEventArgs routedEventArgs)
     {
-      this.AssociatedObject.Focus();
+      this.AssociatedObject.Focus(FocusState.Programmatic);
       if (!(this.AssociatedObject is TextBox associatedObject))
         return;
       associatedObject.SelectAll();
     }
   }
 }
+

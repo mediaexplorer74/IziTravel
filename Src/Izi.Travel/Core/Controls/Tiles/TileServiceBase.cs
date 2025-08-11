@@ -7,8 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Threading;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Controls.Tiles
 {
@@ -21,9 +20,13 @@ namespace Izi.Travel.Shell.Core.Controls.Tiles
     private static readonly List<WeakReference> FrozenPool = new List<WeakReference>();
     private static readonly List<WeakReference> StalledPipiline = new List<WeakReference>();
 
-    protected TileServiceBase() => TileServiceBase.Timer.Tick += new EventHandler(this.OnTimerTick);
+        protected TileServiceBase()
+        {
+            //TileServiceBase.Timer.Tick += new EventHandler(this.OnTimerTick);
+            TileServiceBase.Timer.Tick += (sender, eventArgs) => this.OnTimerTick(sender, default);
+        }
 
-    public void Initialize(BaseTileControl control)
+        public void Initialize(BaseTileControl control)
     {
       WeakReference tile = new WeakReference((object) control, false);
       if (control.IsFrozen)
@@ -158,3 +161,4 @@ namespace Izi.Travel.Shell.Core.Controls.Tiles
     }
   }
 }
+

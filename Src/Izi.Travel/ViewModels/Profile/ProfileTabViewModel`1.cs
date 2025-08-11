@@ -13,7 +13,7 @@ using Izi.Travel.Shell.Model.Profile;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-
+using Windows.UI.Xaml.Input;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Profile
 {
@@ -108,3 +108,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile
     }
   }
 }
+

@@ -7,7 +7,7 @@
 using Izi.Travel.Shell.Core.Controls;
 using System;
 using System.Diagnostics;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -34,3 +34,4 @@ namespace Izi.Travel.Shell.Mtg.Views.Quiz
    
   }
 }
+

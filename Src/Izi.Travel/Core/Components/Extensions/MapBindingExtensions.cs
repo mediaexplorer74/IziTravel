@@ -4,13 +4,12 @@
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
-using Izi.Travel.Shell.Toolkit.Controls.Maps;
 using Windows.UI.Xaml.Controls.Maps;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Windows;
-
+using Windows.UI.Xaml;
+using Windows.Services.Maps;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Extensions
 {
@@ -21,12 +20,12 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
     public static readonly DependencyProperty BindableRouteProperty = DependencyProperty.RegisterAttached("BindableRoute", typeof (MapRoute), typeof (MapBindingExtensions), new PropertyMetadata((object) null, new PropertyChangedCallback(MapBindingExtensions.OnBindableRoutePropertyChanged)));
     public static readonly DependencyProperty BindableItemsSourceProperty = DependencyProperty.RegisterAttached("BindableItemsSource", typeof (IEnumerable), typeof (MapBindingExtensions), new PropertyMetadata((object) null, new PropertyChangedCallback(MapBindingExtensions.OnBindableItemsSourcePropertyChanged)));
 
-    public static IEnumerable<MapElement> GetBindableElements(Map map)
+    public static IEnumerable<MapElement> GetBindableElements(MapControl map)
     {
       return (IEnumerable<MapElement>) map.GetValue(MapBindingExtensions.BindableElementsProperty);
     }
 
-    public static void SetBindableElements(Map map, IEnumerable<MapElement> elements)
+    public static void SetBindableElements(MapControl map, IEnumerable<MapElement> elements)
     {
       map.SetValue(MapBindingExtensions.BindableElementsProperty, (object) elements);
     }
@@ -35,7 +34,7 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Map map) || !(e.NewValue is IEnumerable<MapElement> newValue))
+      if (!(d is MapControl map) || !(e.NewValue is IEnumerable<MapElement> newValue))
         return;
       if (!(map.GetValue(MapBindingExtensions.BindableElementsManagerProperty) is MapElementCollectionManager collectionManager))
       {
@@ -45,12 +44,12 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
       collectionManager.Attach(newValue);
     }
 
-    public static MapRoute GetBindableRoute(Map map)
+    public static MapRoute GetBindableRoute(MapControl map)
     {
       return map != null ? (MapRoute) map.GetValue(MapBindingExtensions.BindableRouteProperty) : throw new ArgumentNullException(nameof (map));
     }
 
-    public static void SetBindableRoute(Map map, MapRoute route)
+    public static void SetBindableRoute(MapControl map, MapRoute route)
     {
       if (map == null)
         throw new ArgumentNullException(nameof (map));
@@ -61,21 +60,23 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Map map))
+      if (!(d is MapControl map))
         return;
-      if (e.OldValue is MapRoute oldValue)
-        map.RemoveRoute(oldValue);
-      if (!(e.NewValue is MapRoute newValue))
-        return;
-      map.AddRoute(newValue);
+      // Replace any existing routes with the new one
+      map.Routes.Clear();
+      if (e.NewValue is MapRoute newValue)
+      {
+        var routeView = new MapRouteView(newValue);
+        map.Routes.Add(routeView);
+      }
     }
 
-    public static IEnumerable GetBindableItemsSource(MapItemsControl mapItemsControl)
+    public static IEnumerable GetBindableItemsSource(Windows.UI.Xaml.Controls.Maps.MapItemsControl mapItemsControl)
     {
       return (IEnumerable) mapItemsControl.GetValue(MapBindingExtensions.BindableItemsSourceProperty);
     }
 
-    public static void SetBindableItemsSource(MapItemsControl mapItemsControl, IEnumerable value)
+    public static void SetBindableItemsSource(Windows.UI.Xaml.Controls.Maps.MapItemsControl mapItemsControl, IEnumerable value)
     {
       mapItemsControl.SetValue(MapBindingExtensions.BindableItemsSourceProperty, (object) value);
     }
@@ -84,9 +85,10 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
       DependencyObject d,
       DependencyPropertyChangedEventArgs args)
     {
-      if (!(d is MapItemsControl mapItemsControl))
+      if (!(d is Windows.UI.Xaml.Controls.Maps.MapItemsControl mapItemsControl))
         return;
       mapItemsControl.ItemsSource = (IEnumerable) args.NewValue;
     }
   }
 }
+

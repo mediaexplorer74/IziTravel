@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List.ExhibitListViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -30,8 +30,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List
   {
     protected override async Task<IEnumerable<ExhibitListItemViewModel>> GetDataAsync()
     {
-      int num;
-      if (num != 0 && (this.MtgObject == null || this.MtgObject.MainContent == null))
+      if (this.MtgObject == null || this.MtgObject.MainContent == null)
         return (IEnumerable<ExhibitListItemViewModel>) null;
       try
       {

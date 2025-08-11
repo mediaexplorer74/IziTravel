@@ -152,8 +152,10 @@ namespace Izi.Travel.Shell.ViewModels.Explore.Flyouts
                 if (mtgObject2 != null && mtgObject2.MainContent != null)
                   exploreLocationItem.CountryName = mtgObject2.MainContent.Title;
               }
-              exploreLocationItem.TrySetLocation(city.Location != null ? city.Location.ToGeoCoordinate() : (GeoCoordinate) null, city.Map == null || city.Map.Bounds == null ? (LocationRectangle) null : city.Map.Bounds.ToLocationRectangle());
-              exploreLocationGroup.Add(exploreLocationItem);
+               
+              //exploreLocationItem.TrySetLocation(city.Location != null ? city.Location.ToGeoCoordinate() : (GeoCoordinate) null, city.Map == null || city.Map.Bounds == null ? (LocationRectangle) null : city.Map.Bounds.ToLocationRectangle());
+                           
+               exploreLocationGroup.Add(exploreLocationItem);
             }
             this._locationGroups.Add(exploreLocationGroup);
           }

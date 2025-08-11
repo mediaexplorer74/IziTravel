@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.ViewModels.Profile.Download.ProfileDownloadTabViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -11,8 +11,8 @@ using Izi.Travel.Shell.Model.Profile;
 using Izi.Travel.Shell.Views.Profile;
 using System;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Input;
 using System.Windows.Input;
-
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Profile.Download
 {
@@ -49,3 +49,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Download
     }
   }
 }
+

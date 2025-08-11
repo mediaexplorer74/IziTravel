@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Player.PlayerPartViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -9,8 +9,8 @@ using Izi.Travel.Shell.Common.Model;
 using Izi.Travel.Shell.Core.Extensions;
 using Izi.Travel.Shell.Core.Resources;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Input;
 using System.Windows.Input;
-
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Player
 {
@@ -68,3 +68,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Player
     }
   }
 }
+

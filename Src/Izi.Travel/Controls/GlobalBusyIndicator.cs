@@ -1,11 +1,10 @@
 // IziTravel.Controls.GlobalBusyIndicator
 
 
-using IziTravel.AppServices;
-using IziTravel.Core;
+using Izi.Travel.Shell.AppServices;
+using Izi.Travel.Shell.Core;
 
 using System;
-using System.Windows;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -59,3 +58,4 @@ namespace Izi.Travel.Shell.Controls
     }
   }
 }
+

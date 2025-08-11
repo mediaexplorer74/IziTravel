@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Quiz.QuizViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
@@ -221,7 +221,6 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Quiz
     {
       ShellServiceFacade.DialogService.Show(AppResources.PromptQuizResetTitle, AppResources.PromptQuizResetInfo, MessageBoxButtonContent.OkCancel, (Action<FlyoutDialog>) (x =>
       {
-        x.PartFlyout.OverlayBrush = (Brush) new SolidColorBrush(Colors.Transparent);
         x.LeftButtonContent = (object) AppResources.CommandReset;
       }), (Action<FlyoutDialog, MessageBoxResult>) (async (x, e) =>
       {
@@ -372,3 +371,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Quiz
     }
   }
 }
+

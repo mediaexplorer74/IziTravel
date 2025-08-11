@@ -10,9 +10,6 @@
     <micro:CaliburnApplication.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- WinUI 2.x resources -->
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                
                 <!-- Application-specific resources -->
                 <ResourceDictionary Source="ms-appx:///Common/Themes/AppBarStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>

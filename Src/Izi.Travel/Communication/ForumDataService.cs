@@ -1,6 +1,6 @@
-﻿// IziTravel.Communication.ForumDataService
+// IziTravel.Communication.ForumDataService
 
-using IziTravel.Communication.Model;
+using Izi.Travel.Shell.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

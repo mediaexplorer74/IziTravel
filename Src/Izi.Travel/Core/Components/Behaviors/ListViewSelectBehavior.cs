@@ -1,17 +1,18 @@
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System.Windows.Input;
 
 namespace Izi.Travel.Shell.Core.Components.Behaviors
 {
     public class ListViewSelectBehavior : Behavior<ListView>
     {
-        public static readonly DependencyProperty SelectCommandProperty = DependencyProperty.Register(nameof(SelectCommand), typeof(ICommand), typeof(ListViewSelectBehavior), new PropertyMetadata(null));
+        public static readonly DependencyProperty SelectCommandProperty = DependencyProperty.Register(nameof(SelectCommand), typeof(System.Windows.Input.ICommand), typeof(ListViewSelectBehavior), new PropertyMetadata(null));
 
-        public ICommand SelectCommand
+        public System.Windows.Input.ICommand SelectCommand
         {
-            get => (ICommand)GetValue(SelectCommandProperty);
+            get => (System.Windows.Input.ICommand)GetValue(SelectCommandProperty);
             set => SetValue(SelectCommandProperty, value);
         }
 

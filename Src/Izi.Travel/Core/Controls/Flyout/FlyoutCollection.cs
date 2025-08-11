@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.Flyout.FlyoutCollection
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,12 +6,11 @@
 
 using System.Collections.Specialized;
 using System.Linq;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Controls.Flyout
 {
-  public class FlyoutCollection : DependencyObjectCollection<FlyoutBase>
+  public class FlyoutCollection : DependencyObjectCollection
   {
     private readonly FrameworkElement _owner;
 
@@ -21,12 +20,19 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
       this.CollectionChanged += new NotifyCollectionChangedEventHandler(this.OnCollectionChanged);
     }
 
-    private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public NotifyCollectionChangedEventHandler CollectionChanged { get; private set; }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
       if (e.NewItems == null)
         return;
-      foreach (FlyoutBase flyoutBase in e.NewItems.OfType<FlyoutBase>())
-        flyoutBase.SetOwner(this._owner);
+      foreach (var item in e.NewItems)
+      {
+        var flyoutBase = item as FlyoutBase;
+        if (flyoutBase != null)
+          flyoutBase.SetOwner(this._owner);
+      }
     }
   }
 }
+

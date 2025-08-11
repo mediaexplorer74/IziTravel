@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Business.Entities.Data.GeoLocation
 // Assembly: Izi.Travel.Business.Entities, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: DDED5915-8B3A-4C03-AAF5-BE6B16E9CC4A
@@ -7,7 +7,6 @@
 
 using System;
 using Izi.Travel.Data.Entities.Common;
-using Windows.Devices.Geolocation;//using System.Device.Location; //RnD
 
 #nullable disable
 namespace Izi.Travel.Business.Entities.Data
@@ -20,12 +19,15 @@ namespace Izi.Travel.Business.Entities.Data
 
     public double Altitude { get; set; }
 
-    public Geopoint ToGeoCoordinate()
+    public GeoCoordinate ToGeoCoordinate()
     {
-            return default;//Math.Abs(this.Latitude) > double.Epsilon
-             //   || Math.Abs(this.Longitude) > double.Epsilon || Math.Abs(this.Altitude) > double.Epsilon
-             //   ? new GeoCoordinate(this.Latitude, this.Longitude, this.Altitude)
-             //   : GeoCoordinate.Unknown;
+      if (Math.Abs(this.Latitude) > double.Epsilon ||
+          Math.Abs(this.Longitude) > double.Epsilon ||
+          Math.Abs(this.Altitude) > double.Epsilon)
+      {
+        return new GeoCoordinate(this.Latitude, this.Longitude, this.Altitude);
+      }
+      return GeoCoordinate.Unknown;
     }
 
     public static GeoLocation FromGeoCoordinate(GeoCoordinate coordinate)

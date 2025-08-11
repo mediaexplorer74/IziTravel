@@ -1,8 +1,7 @@
-﻿// IziTravel.Interaction.ForumDataTemplateSelector
+// IziTravel.Interaction.ForumDataTemplateSelector
 
-using IziTravel.AppServices.DataModels;
+using Izi.Travel.Shell.AppServices.DataModels;
 using System;
-using System.Windows;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,7 +14,7 @@ namespace Izi.Travel.Shell.Interaction
 
     public DataTemplate ForumTemplate { get; set; }
 
-    public /*override*/ DataTemplate SelectTemplate(object item, DependencyObject container)
+    protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
     {
       switch (item)
       {
@@ -29,3 +28,4 @@ namespace Izi.Travel.Shell.Interaction
     }
   }
 }
+

@@ -62,8 +62,12 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Tour.Detail
       if (this._distance == 0 && this.MtgObject.Map != null && this.MtgObject.Map.Route != null)
       {
         double num = 0.0;
-        List<GeoCoordinate> list = ((IEnumerable<GeoLocation>) this.MtgObject.Map.Route).Select<GeoLocation, GeoCoordinate>((Func<GeoLocation, GeoCoordinate>) (x => x.ToGeoCoordinate())).ToList<GeoCoordinate>();
-        for (int index = 0; index < list.Count - 1; ++index)
+                List<GeoCoordinate> list = default;//((IEnumerable<GeoLocation>) this.MtgObject.Map.Route).Select<GeoLocation, GeoCoordinate>((Func<GeoLocation, GeoCoordinate>) (x => x.ToGeoCoordinate())).ToList<GeoCoordinate>();
+        
+                
+                
+                
+       for (int index = 0; index < list.Count - 1; ++index)
           num += list[index].GetDistanceTo(list[index + 1]);
         this._distance = (int) num;
       }

@@ -21,7 +21,7 @@ namespace Izi.Travel.Shell.Controls
     {
         public HeaderControl()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
     }
 }

@@ -4,6 +4,7 @@
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
+using Caliburn.Micro;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Shell.Core.Controls.Flyout;
 using Izi.Travel.Shell.Core.Resources;
@@ -11,8 +12,8 @@ using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.Core.Services.Entities;
 using System;
 using System.Threading.Tasks;
-using System.Windows;
 using Windows.System;
+using Windows.UI.Xaml;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Helpers
@@ -25,16 +26,17 @@ namespace Izi.Travel.Shell.Mtg.Helpers
       if (Geotracker.Instance.IsEnabled)
         taskCompletionSource.TrySetResult(true);
       else
-        ShellServiceFacade.DialogService.Show(AppResources.DialogLocationServicesDisabledTitle, AppResources.DialogLocationServicesDisabledMessage, MessageBoxButtonContent.Ok, (Action<FlyoutDialog>) (x =>
+        ShellServiceFacade.DialogService.Show(AppResources.DialogLocationServicesDisabledTitle, 
+            AppResources.DialogLocationServicesDisabledMessage, MessageBoxButtonContent.Ok, (Action<FlyoutDialog>) (x =>
         {
           x.IsHyperlinkVisible = true;
           x.HyperlinkContent = (object) AppResources.DialogLocationServicesDisabledLink;
-          x.HyperlinkAction = (Action) (async () =>
+          x.HyperlinkAction = (System.Action) (async () =>
           {
             if (!Geotracker.Instance.IsEnabledInternal)
-            {
-              ShellServiceFacade.NavigationService.Navigate(new Uri("/Views/Application/SettingsAppLocationView.xaml", UriKind.Relative));
-            }
+            {              
+                  //ShellServiceFacade.NavigationService.Navigate(new Uri("/Views/Application/SettingsAppLocationView.xaml", UriKind.Relative));
+              }
             else
             {
               int num = await Launcher.LaunchUriAsync(new Uri("ms-settings-location:")) ? 1 : 0;
@@ -45,3 +47,4 @@ namespace Izi.Travel.Shell.Mtg.Helpers
     }
   }
 }
+

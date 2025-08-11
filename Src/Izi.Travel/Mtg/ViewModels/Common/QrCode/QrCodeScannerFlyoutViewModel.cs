@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.QrCode.QrCodeScannerFlyoutViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -18,19 +18,24 @@ using Izi.Travel.Shell.Core.Resources;
 using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.Core.Services.Entities;
 using Izi.Travel.Shell.Mtg.Model;
-using Microsoft.Phone.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-
+using Windows.UI.Xaml;
+using Windows.System;
+using Izi.Travel.Utility.Extensions;
+using Windows.UI.Core;
+using Windows.ApplicationModel.Core;
+using System.Diagnostics;
+using System.ComponentModel;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.QrCode
 {
-  public class QrCodeScannerFlyoutViewModel : BaseSearchFlyoutViewModel
+  public class QrCodeScannerFlyoutViewModel : BaseSearchFlyoutViewModel, INotifyPropertyChanged
   {
     private bool _isEmpty;
+    private readonly CoreDispatcher _dispatcher;
 
     public bool IsEmpty
     {
@@ -41,104 +46,186 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.QrCode
     public QrCodeScannerFlyoutViewModel(IScreen parentScreen)
       : base(parentScreen)
     {
+        _dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
     }
 
     protected override async Task<SearchFlyoutResult> SearchTask(object parameter)
     {
-      this.IsEmpty = false;
-      string data = parameter as string;
-      if (string.IsNullOrWhiteSpace(data))
-      {
-        this.IsEmpty = true;
-        return SearchFlyoutResult.Empty;
-      }
-      SearchFlyoutResult result = new SearchFlyoutResult();
-      MtgLinkInfo mtgLinkInfo = MtgLinkHelper.Parse(data);
-      if (mtgLinkInfo != null && mtgLinkInfo.Type != MtgLinkType.Unknown)
-      {
-        string lower = !string.IsNullOrWhiteSpace(mtgLinkInfo.Uid) ? mtgLinkInfo.Uid.ToLower() : (string) null;
-        string parentUid = mtgLinkInfo.ParentUid ?? this.ParentUid;
-        AppSettings appSettings = ServiceFacade.SettingsService.GetAppSettings();
-        List<string> languages = new List<string>();
-        if (!string.IsNullOrWhiteSpace(mtgLinkInfo.Language))
-          languages.Add(mtgLinkInfo.Language);
-        if (!string.IsNullOrWhiteSpace(this.ParentLanguage))
-          languages.Add(this.ParentLanguage);
-        languages.AddRange(((IList<string>) ServiceFacade.CultureService.GetNeutralLanguageCodes()).OrderAs((IList<string>) ServiceFacade.SettingsService.GetAppSettings().Languages).Where<string>((Func<string, bool>) (x => !languages.Contains<string>(x, (IEqualityComparer<string>) StringComparer.InvariantCultureIgnoreCase))));
-        if (!string.IsNullOrWhiteSpace(mtgLinkInfo.Passcode))
+        var result = new SearchFlyoutResult();
+        var data = parameter as string;
+        
+        if (string.IsNullOrEmpty(data))
         {
-          appSettings.CodeName = mtgLinkInfo.Passcode;
-          ServiceFacade.SettingsService.SaveAppSettings(appSettings);
-        }
-        MtgObject mtgObject = (MtgObject) null;
-        try
-        {
-          MtgObjectFilter filter = new MtgObjectFilter();
-          filter.Uid = lower;
-          filter.Languages = languages.ToArray();
-          filter.Includes = ContentSection.None;
-          filter.Excludes = ContentSection.All;
-          filter.Form = MtgObjectForm.Full;
-          mtgObject = await MtgObjectServiceHelper.GetMtgObjectAsync(filter);
-          if (parentUid != null)
-          {
-            if (mtgObject.ParentUid != parentUid)
-              mtgObject = (MtgObject) null;
-          }
-        }
-        catch (Exception ex)
-        {
-          this.Logger.Error(ex);
-          this.IsEmpty = true;
-          return SearchFlyoutResult.Empty;
-        }
-        if (mtgObject == null)
-        {
-          this.IsEmpty = true;
-          return SearchFlyoutResult.Empty;
-        }
-        result.Success = true;
-        result.MtgObject = mtgObject;
-        if (string.IsNullOrWhiteSpace(parentUid))
-          parentUid = mtgObject.ParentUid;
-        MtgObject mtgObject1 = new MtgObject();
-        mtgObject1.Uid = parentUid;
-        mtgObject1.Type = this.ParentType;
-        MtgObject mtgObjectParent = mtgObject1;
-        result.MtgObjectParent = mtgObjectParent;
-        this.ActivateInternal(mtgObjectParent, mtgObject, ActivationTypeParameter.QrCode);
-        this.IsBusy = false;
-        this.NavigateInternal(mtgObject, parentUid);
-        parentUid = (string) null;
-        mtgObject = (MtgObject) null;
-      }
-      else
-      {
-        Uri result1;
-        if (Uri.TryCreate(data, UriKind.RelativeOrAbsolute, out result1))
-        {
-          try
-          {
-            if (!result1.OriginalString.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
-              result1 = new Uri("http://" + result1.OriginalString, UriKind.Absolute);
-            new WebBrowserTask() { Uri = result1 }.Show();
-          }
-          catch (Exception ex)
-          {
-            this.Logger.Error(ex);
-            ShellServiceFacade.DialogService.Show(AppResources.ErrorInvalidExternalLinkTitle, AppResources.ErrorInvalidExternalLinkInfo, MessageBoxButtonContent.Ok, (Action<FlyoutDialog, MessageBoxResult>) null);
-            this.IsEmpty = true;
+            await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                IsEmpty = true;
+            });
             return SearchFlyoutResult.Empty;
-          }
         }
-        else
+
+        // Try to parse as MTG link first
+        var mtgLinkInfo = MtgLinkInfo.Parse(data);
+        if (mtgLinkInfo != null)
         {
-          ShellServiceFacade.DialogService.Show(AppResources.LabelQrScanner, string.Format(AppResources.ErrorBarcodeIncorrectData, (object) data), MessageBoxButtonContent.Ok, (Action<FlyoutDialog>) (x => this.IsBusy = true), (Action<FlyoutDialog, MessageBoxResult>) ((d, x) => this.IsBusy = false));
-          this.IsEmpty = true;
-          return SearchFlyoutResult.Empty;
+            try
+            {
+                await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    IsBusy = true;
+                    IsEmpty = false;
+                });
+
+                var appSettings = ServiceFacade.SettingsService.GetAppSettings();
+                var languages = new List<string>();
+                
+                if (!string.IsNullOrWhiteSpace(mtgLinkInfo.Language))
+                    languages.Add(mtgLinkInfo.Language);
+                if (!string.IsNullOrWhiteSpace(this.ParentLanguage))
+                    languages.Add(this.ParentLanguage);
+                    
+                languages.AddRange(ServiceFacade.CultureService
+                    .GetNeutralLanguageCodes()
+                    .OrderAs(ServiceFacade.SettingsService.GetAppSettings().Languages)
+                    .Where(x => !languages.Contains(x, StringComparer.OrdinalIgnoreCase)));
+
+                if (!string.IsNullOrWhiteSpace(mtgLinkInfo.Passcode))
+                {
+                    appSettings.CodeName = mtgLinkInfo.Passcode;
+                    ServiceFacade.SettingsService.SaveAppSettings(appSettings);
+                }
+
+                MtgObject mtgObject = null;
+                try
+                {
+                    var filter = new MtgObjectFilter
+                    {
+                        Uid = mtgLinkInfo.ObjectId,
+                        Languages = languages.ToArray(),
+                        Includes = ContentSection.None,
+                        Excludes = ContentSection.All,
+                        Form = MtgObjectForm.Full
+                    };
+                    
+                    mtgObject = await MtgObjectServiceHelper.GetMtgObjectAsync(filter);
+                    
+                    if (mtgObject == null)
+                    {
+                        await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            IsEmpty = true;
+                        });
+                        return SearchFlyoutResult.Empty;
+                    }
+
+                    string parentUid = mtgLinkInfo.ParentId ?? mtgObject.ParentUid;
+                    
+                    result.Success = true;
+                    result.MtgObject = mtgObject;
+                    
+                    var mtgObjectParent = new MtgObject
+                    {
+                        Uid = parentUid,
+                        Type = this.ParentType
+                    };
+                    
+                    result.MtgObjectParent = mtgObjectParent;
+                    
+                    await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        this.ActivateInternal(mtgObjectParent, mtgObject, ActivationTypeParameter.QrCode);
+                        this.IsBusy = false;
+                        this.NavigateInternal(mtgObject, parentUid);
+                    });
+                    
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        IsEmpty = true;
+                    });
+                    return SearchFlyoutResult.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    IsEmpty = true;
+                });
+                return SearchFlyoutResult.Empty;
+            }
         }
-      }
-      return result;
+        
+        // If not an MTG link, try to handle as URI
+        if (Uri.TryCreate(data, UriKind.RelativeOrAbsolute, out var uri))
+        {
+            try
+            {
+                if (!uri.OriginalString.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && 
+                    !uri.OriginalString.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                {
+                    uri = new Uri("http://" + uri.OriginalString.TrimStart('/'), UriKind.Absolute);
+                }
+
+                await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    try
+                    {
+                        await Launcher.LaunchUriAsync(uri);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Error launching URI: {ex.Message}");
+                    }
+                });
+                
+                return new SearchFlyoutResult { Success = true };
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    try
+                    {
+                        await ShellServiceFacade.DialogService.ShowAsync(
+                            AppResources.ErrorInvalidExternalLinkTitle, 
+                            AppResources.ErrorInvalidExternalLinkInfo, 
+                            MessageBoxButtonContent.Ok);
+                        IsEmpty = true;
+                    }
+                    catch (Exception dialogEx)
+                    {
+                        Debug.WriteLine($"Error showing dialog: {dialogEx.Message}");
+                    }
+                });
+                return SearchFlyoutResult.Empty;
+            }
+        }
+        
+        // If we get here, the data couldn't be processed as either an MTG link or a URI
+        await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+        {
+            try
+            {
+                await ShellServiceFacade.DialogService.ShowAsync(
+                    AppResources.LabelQrScanner, 
+                    string.Format(AppResources.ErrorBarcodeIncorrectData, data), 
+                    MessageBoxButtonContent.Ok);
+                IsEmpty = true;
+            }
+            catch (Exception dialogEx)
+            {
+                Debug.WriteLine($"Error showing dialog: {dialogEx.Message}");
+            }
+        });
+        
+        return SearchFlyoutResult.Empty;
     }
   }
 }
+

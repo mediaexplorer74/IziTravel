@@ -1,7 +1,7 @@
-﻿// IziTravel.AppServices.ViewModels.NewsDetailsPageViewModel
+// IziTravel.AppServices.ViewModels.NewsDetailsPageViewModel
 
 using Caliburn.Micro;
-using IziTravel.Communication;
+using Izi.Travel.Shell.Communication;
 using System;
 using System.ComponentModel;
 

@@ -29,8 +29,10 @@ namespace Izi.Travel.Shell.Core.Helpers
       if (imageData == null || imageData.Length == 0)
         return (BitmapImage) null;
       BitmapImage bitmapImage = new BitmapImage();
-      using (MemoryStream streamSource = new MemoryStream(imageData))
-        bitmapImage.SetSource((Stream) streamSource);
+
+        using (MemoryStream streamSource = new MemoryStream(imageData))
+            bitmapImage.SetSource(streamSource.AsRandomAccessStream());
+          
       return bitmapImage;
     }
   }

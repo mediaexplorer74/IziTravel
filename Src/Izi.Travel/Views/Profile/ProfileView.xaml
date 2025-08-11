@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:tiles="clr-namespace:Izi.Travel.Shell.Core.Controls.Tiles"
+             xmlns:tiles="using:Izi.Travel.Shell.Core.Controls.Tiles"
              
-             xmlns:download="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Download"
+             xmlns:download="using:Izi.Travel.Shell.ViewModels.Profile.Download"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:purchase="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Purchase"
-             xmlns:bookmark="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Bookmark"
-             xmlns:history="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.History"
-             xmlns:quiz="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Quiz"
-             xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
+             xmlns:purchase="using:Izi.Travel.Shell.ViewModels.Profile.Purchase"
+             xmlns:bookmark="using:Izi.Travel.Shell.ViewModels.Profile.Bookmark"
+             xmlns:history="using:Izi.Travel.Shell.ViewModels.Profile.History"
+             xmlns:quiz="using:Izi.Travel.Shell.ViewModels.Profile.Quiz"
+             xmlns:components="using:Izi.Travel.Shell.Common.Components"
              mc:Ignorable="d">
 
     

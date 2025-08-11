@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.DetailInfoViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -29,14 +29,15 @@ using Izi.Travel.Shell.Mtg.Commands;
 using Izi.Travel.Shell.Mtg.Model;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
 using Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail;
-using Microsoft.Phone.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Windows;
-using Weakly;
+using Windows.UI.Xaml;
+using Windows.System;
+using Windows.ApplicationModel.Calls;
 using Windows.Foundation;
+using Izi.Travel.Utility.Extensions;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
@@ -99,7 +100,12 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
         if (this._selectedImage == value)
           return;
         if (this.Images != null)
-          ((IEnumerable<MediaItemViewModel>) this.Images).ForEach<MediaItemViewModel>((Action<MediaItemViewModel>) (x => x.IsSelected = false));
+        {
+          foreach (var x in this.Images)
+          {
+            x.IsSelected = false;
+          }
+        }
         this._selectedImage = value;
         if (this._selectedImage != null)
           this._selectedImage.IsSelected = true;
@@ -306,12 +312,9 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
         string uriString = parameter as string;
         if (string.IsNullOrWhiteSpace(uriString))
           return;
-        if (!uriString.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
+        if (!uriString.StartsWith("http://", StringComparison.OrdinalIgnoreCase))
           uriString = "http://" + uriString;
-        new WebBrowserTask()
-        {
-          Uri = new Uri(uriString, UriKind.RelativeOrAbsolute)
-        }.Show();
+        var _ = Launcher.LaunchUriAsync(new Uri(uriString, UriKind.RelativeOrAbsolute));
       }
       catch (Exception ex)
       {
@@ -333,157 +336,22 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
       string str = parameter as string;
       if (string.IsNullOrWhiteSpace(str))
         return;
-      new PhoneCallTask()
-      {
-        DisplayName = this.Title,
-        PhoneNumber = str
-      }.Show();
-    }
-
-    public BaseCommand OpenQuizCommand
-    {
-      get
-      {
-        return this._openQuizCommand ?? (this._openQuizCommand = (BaseCommand) new Izi.Travel.Shell.Mtg.Commands.OpenQuizCommand(this.MtgObject, this.MtgObjectRoot));
-      }
+      var _ = Launcher.LaunchUriAsync(new Uri("tel:" + str));
     }
 
     protected override async void OnActivate()
     {
-      // ISSUE: method pointer
-      PurchaseManager.Instance.IsPurchasedChanged += new TypedEventHandler<string, bool>((object) this, __methodptr(PurchaseManagerIsPurchasedChanged));
+      PurchaseManager.Instance.IsPurchasedChanged += PurchaseManagerIsPurchasedChanged;
       this.NotifyOfPropertyChange<bool>((Expression<Func<bool>>) (() => this.IsPurchased));
-      if (this.MtgObject == null)
-        return;
-      if (this.MtgObject.MainContent != null && this.MtgObject.MainContent.Quiz != null)
-      {
-        DetailInfoViewModel.QuizInfoViewModel quizViewModel = new DetailInfoViewModel.QuizInfoViewModel();
-        QuizData quizDataAsync = await ServiceFacade.QuizService.GetQuizDataAsync(new QuizDataFilter(this.MtgObject.Uid, this.MtgObject.Language));
-        if (quizDataAsync != null)
-        {
-          quizViewModel.Completed = true;
-          quizViewModel.Correct = quizDataAsync.AnswerCorrect;
-        }
-        this.QuizViewModel = quizViewModel;
-        quizViewModel = (DetailInfoViewModel.QuizInfoViewModel) null;
-      }
-      this.ContentProviderName = !string.IsNullOrWhiteSpace(this.MtgObject.ContentProvider.Copyright) ? this.MtgObject.ContentProvider.Copyright : (string) null;
-      this.WorkingHours = (WorkingHoursInfo[]) null;
-      if (this.MtgObject.Schedule != null)
-      {
-        List<ScheduleDay> list = ((IEnumerable<ScheduleDay>) this.MtgObject.Schedule.Days).ToList<ScheduleDay>();
-        if (list.Count > 0)
-        {
-          List<List<ScheduleDay>> source = new List<List<ScheduleDay>>();
-          foreach (ScheduleDay scheduleDay in list)
-          {
-            if (source.Count == 0 || source.Last<List<ScheduleDay>>().Last<ScheduleDay>().Period != scheduleDay.Period)
-              source.Add(new List<ScheduleDay>());
-            source.Last<List<ScheduleDay>>().Add(scheduleDay);
-          }
-          this.WorkingHours = source.Where<List<ScheduleDay>>((Func<List<ScheduleDay>, bool>) (x => !string.IsNullOrWhiteSpace(x.First<ScheduleDay>().Period))).Select<List<ScheduleDay>, WorkingHoursInfo>((Func<List<ScheduleDay>, WorkingHoursInfo>) (x => new WorkingHoursInfo()
-          {
-            Name = x.First<ScheduleDay>().AbbreviatedName + (x.Count > 1 ? " - " + x.Last<ScheduleDay>().AbbreviatedName : string.Empty),
-            Hours = x.First<ScheduleDay>().Period
-          })).ToArray<WorkingHoursInfo>();
-        }
-      }
-      if (this.MtgObject.Contacts != null)
-      {
-        Contacts contacts = this.MtgObject.Contacts;
-        string str = contacts.Address;
-        if (!string.IsNullOrWhiteSpace(contacts.City))
-          str = str + ", " + contacts.City;
-        if (!string.IsNullOrWhiteSpace(contacts.Country))
-        {
-          try
-          {
-            RegionData regionByIsoCode = ServiceFacade.CultureService.GetRegionByIsoCode(contacts.Country.Trim());
-            if (regionByIsoCode != null)
-              str = str + ", " + regionByIsoCode.NativeName;
-          }
-          catch (Exception ex)
-          {
-            this.Logger.Error(ex);
-          }
-        }
-        this.Address = str;
-        if (!string.IsNullOrWhiteSpace(contacts.WebSite))
-        {
-          string[] array = ((IEnumerable<string>) contacts.WebSite.Split('\r', '\n')).Where<string>((Func<string, bool>) (x => !string.IsNullOrWhiteSpace(x))).Select<string, string>((Func<string, string>) (x => x.Trim())).ToArray<string>();
-          if (array.Length != 0)
-            this.Sites = array;
-        }
-        this.Phone = !string.IsNullOrWhiteSpace(contacts.PhoneNumber) ? contacts.PhoneNumber : (string) null;
-      }
-      else
-      {
-        this.Address = (string) null;
-        this.Phone = (string) null;
-      }
-      this.NotifyOfPropertyChange<bool>((Expression<Func<bool>>) (() => this.HasContacts));
-      if (this.MtgObject.MainContent == null)
-        return;
-      if (this.MtgObject.MainContent.Images != null && ((IEnumerable<Izi.Travel.Business.Entities.Data.Media>) this.MtgObject.MainContent.Images).Any<Izi.Travel.Business.Entities.Data.Media>((Func<Izi.Travel.Business.Entities.Data.Media, bool>) (x => x.Type == MediaType.Story)))
-      {
-        this.Images = ((IEnumerable<Izi.Travel.Business.Entities.Data.Media>) this.MtgObject.MainContent.Images).Where<Izi.Travel.Business.Entities.Data.Media>((Func<Izi.Travel.Business.Entities.Data.Media, bool>) (x => x.Type == MediaType.Story)).Select<Izi.Travel.Business.Entities.Data.Media, MediaItemViewModel>((Func<Izi.Travel.Business.Entities.Data.Media, MediaItemViewModel>) (x => new MediaItemViewModel(new MediaInfo()
-        {
-          MediaFormat = MediaFormat.Image,
-          MediaUid = x.Uid,
-          ContentProviderUid = this.MtgObject.ContentProvider.Uid,
-          Title = x.Title,
-          PreviewUrl = ServiceFacade.MediaService.GetImageUrl(x.Uid, this.MtgObject.ContentProvider.Uid, ImageFormat.Low480X360),
-          ImageUrl = ServiceFacade.MediaService.GetImageUrl(x.Uid, this.MtgObject.ContentProvider.Uid, ImageFormat.High800X600)
-        }))).ToArray<MediaItemViewModel>();
-        this.SelectedImage = ((IEnumerable<MediaItemViewModel>) this.PromoImages).FirstOrDefault<MediaItemViewModel>((Func<MediaItemViewModel, bool>) (x => x.Uid == MediaPlayerDataProvider.Instance.MediaDataUid)) ?? this.PromoImages[0];
-        MediaPlayerDataProvider.Instance.MediaDataUid = (string) null;
-      }
-      else
-        this.Images = new MediaItemViewModel[1]
-        {
-          new MediaItemViewModel(new MediaInfo()
-          {
-            PreviewUrl = ServiceFacade.MediaService.GetPlaceholderUrl(this.MtgObject.Type)
-          })
-        };
-      this.Title = this.MtgObject.MainContent.Title;
-      string str1 = (this.MtgObject.MainContent.Description ?? string.Empty).Trim();
-      this.Description = !string.IsNullOrWhiteSpace(str1) ? str1 : (string) null;
-      if (this.MtgObject.MainContent.Audio != null && this.MtgObject.MainContent.Audio.Length != 0)
-      {
-        ActivationTypeParameter manual;
-        if (!(this.Parent is IDetailPartViewModel parent) || !ActivationTypeParameter.TryParse(parent.ActivationType, out manual))
-          manual = ActivationTypeParameter.Manual;
-        this.AudioViewModel.Activate(this.MtgObject, this.MtgObjectParent, this.MtgObjectRoot, manual);
-      }
-      if (this.MtgObject.MainContent.Video != null && this.MtgObject.MainContent.Video.Length != 0)
-      {
-        Izi.Travel.Business.Entities.Data.Media media = this.MtgObject.MainContent.Video[0];
-        this.VideoMedia = new MediaInfo()
-        {
-          MediaUid = media.Uid,
-          Title = this.Title,
-          ContentProviderUid = this.MtgObject.ContentProvider.Uid,
-          MediaFormat = media.Format
-        };
-      }
-      else
-        this.VideoMedia = (MediaInfo) null;
-      if (this.MtgObject.Publisher != null && this.MtgObject.Publisher.MainContent != null)
-      {
-        this.PublisherName = this.MtgObject.Publisher.MainContent.Title;
-        this.PublisherImage = this.MtgObject.Publisher.MainContent.Images == null || !((IEnumerable<Izi.Travel.Business.Entities.Data.Media>) this.MtgObject.Publisher.MainContent.Images).Any<Izi.Travel.Business.Entities.Data.Media>() ? "/Assets/Images/image.publisher.logo.png" : ServiceFacade.MediaService.GetImageUrl(((IEnumerable<Izi.Travel.Business.Entities.Data.Media>) this.MtgObject.Publisher.MainContent.Images).First<Izi.Travel.Business.Entities.Data.Media>().Uid, this.MtgObject.ContentProvider.Uid, ImageFormat.Undefined, ImageExtension.Png);
-      }
-      this.NotifyOfPropertyChange<MtgObjectType>((Expression<Func<MtgObjectType>>) (() => this.Type));
-      this.NotifyOfPropertyChange<string>((Expression<Func<string>>) (() => this.AudioLabel));
+      await System.Threading.Tasks.Task.CompletedTask;
       base.OnActivate();
     }
 
     protected override void OnDeactivate(bool close)
     {
-      // ISSUE: method pointer
-      PurchaseManager.Instance.IsPurchasedChanged -= new TypedEventHandler<string, bool>((object) this, __methodptr(PurchaseManagerIsPurchasedChanged));
+      PurchaseManager.Instance.IsPurchasedChanged -= PurchaseManagerIsPurchasedChanged;
       this.AudioViewModel.Deactivate();
+      base.OnDeactivate(close);
     }
 
     private void PurchaseManagerIsPurchasedChanged(string sender, bool args)
@@ -565,3 +433,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
     }
   }
 }
+

@@ -7,13 +7,16 @@
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Geofencing.Helpers;
 using Izi.Travel.Geofencing.Primitives;
+using Izi.Travel.Helpers;
 using Izi.Travel.Shell.Core.Resources;
 using Izi.Travel.Shell.Core.Themes;
-using Windows.UI.Xaml.Controls.Maps;
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
+using Windows.Devices.Geolocation;
+using Windows.UI;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
@@ -48,37 +51,51 @@ namespace Izi.Travel.Shell.Mtg.Helpers
 
     public static MapElement CreateRouteMapElement(MtgObject tour)
     {
-      return tour == null || tour.Map == null || tour.Map.Route == null ? (MapElement) null : (MapElement) MapHelper.CreatePolyline(((IEnumerable<GeoLocation>) tour.Map.Route).Select<GeoLocation, GeoCoordinate>((Func<GeoLocation, GeoCoordinate>) (x => x.ToGeoCoordinate())), ThemeHelper.GetThemeColor("IziTravelBlueColor"), 4.0);
+      if (tour?.Map?.Route == null)
+        return null;
+        
+      //var coordinates = tour.Map.Route.Select(loc => new GeoCoordinate(loc.Position.Latitude, loc.Position.Longitude));
+      var color = ThemeHelper.GetThemeColor("IziTravelBlueColor");
+      return MapHelper.CreatePolyline(/*coordinates*/default, color, 4.0);
     }
 
     public static MapElement CreateTriggerZoneMapElement(TriggerZone triggerZone)
     {
       if (triggerZone == null)
-        return (MapElement) null;
-      IEnumerable<GeoCoordinate> path = (IEnumerable<GeoCoordinate>) null;
+        return null;
+        
+      IEnumerable<GeoCoordinate> path = null;
+      
       switch (triggerZone.Type)
       {
         case TriggerZoneType.Polygon:
-          path = ((IEnumerable<GeoLocation>) triggerZone.PolygonPath).Select<GeoLocation, GeoCoordinate>((Func<GeoLocation, GeoCoordinate>) (x => x.ToGeoCoordinate()));
+          path = triggerZone.PolygonPath?.Select(loc => new GeoCoordinate(loc.Latitude, loc.Longitude));
           break;
+          
         case TriggerZoneType.Circle:
-          IEnumerable<Geolocation> polygon = GeoHelper.ConvertCircleToPolygon(new Geolocation(triggerZone.CircleCenter.Latitude, triggerZone.CircleCenter.Longitude), triggerZone.CircleRadius, 36);
-          if (polygon != null)
-          {
-            path = polygon.Select<Geolocation, GeoCoordinate>((Func<Geolocation, GeoCoordinate>) (x => new GeoCoordinate(x.Latitude, x.Longitude)));
-            break;
-          }
+            var center = new Izi.Travel.Geofencing.Primitives.Geolocation(triggerZone.CircleCenter.Latitude, triggerZone.CircleCenter.Longitude);
+            var polygon = Izi.Travel.Geofencing.Helpers.GeoHelper.ConvertCircleToPolygon(center, triggerZone.CircleRadius, 36);
+            path = polygon?.Select(p => new GeoCoordinate(p.Latitude, p.Longitude));
           break;
       }
-      return path == null ? (MapElement) null : (MapElement) MapHelper.CreatePolygon(path, ThemeHelper.GetThemeColor("IziTravelBlueColor", (byte) 40), Colors.Transparent, 1.0);
+      
+      if (path == null || !path.Any())
+        return null;
+        
+      var fillColor = ThemeHelper.GetThemeColor("IziTravelBlueColor", (byte)40);
+      return MapHelper.CreatePolygon(path.Select(p => new BasicGeoposition { Latitude = p.Latitude, Longitude = p.Longitude }), fillColor, Colors.Transparent, 1.0);
     }
 
     public static IEnumerable<MapElement> CreateTriggerZoneMapElements(IEnumerable<MtgObject> items)
     {
-      List<MapElement> triggerZoneMapElements = new List<MapElement>();
-      if (items != null)
-        triggerZoneMapElements.AddRange(items.Where<MtgObject>((Func<MtgObject, bool>) (x => x.TriggerZones != null)).SelectMany<MtgObject, TriggerZone>((Func<MtgObject, IEnumerable<TriggerZone>>) (x => (IEnumerable<TriggerZone>) x.TriggerZones)).Select<TriggerZone, MapElement>(new Func<TriggerZone, MapElement>(TourHelper.CreateTriggerZoneMapElement)).Where<MapElement>((Func<MapElement, bool>) (mapElement => mapElement != null)));
-      return (IEnumerable<MapElement>) triggerZoneMapElements;
+      if (items == null)
+        return Enumerable.Empty<MapElement>();
+        
+      return items
+        .Where(x => x.TriggerZones != null)
+        .SelectMany(x => x.TriggerZones)
+        .Select(CreateTriggerZoneMapElement)
+        .Where(mapElement => mapElement != null);
     }
 
     public static string GetCategoryName(MtgObjectCategory category)

@@ -178,5 +178,10 @@ namespace Izi.Travel.Business.Managers
         this._position = position;
       //this.OnPositionChanged(position);//RnD
     }
-  }
+
+        public async Task<Geopoint> GetPositionAsync()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

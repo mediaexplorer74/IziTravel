@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,8 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 using System;
 using System.Diagnostics;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Settings.Views.Internal
 {
@@ -30,4 +29,5 @@ namespace Izi.Travel.Shell.Settings.Views.Internal
         }
     }
 }
+
 

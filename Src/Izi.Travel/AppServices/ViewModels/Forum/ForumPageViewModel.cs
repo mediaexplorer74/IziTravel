@@ -1,10 +1,10 @@
-﻿// IziTravel.AppServices.ViewModels.Forum.ForumPageViewModel
+// IziTravel.AppServices.ViewModels.Forum.ForumPageViewModel
 
 using Caliburn.Micro;
-using IziTravel.AppServices.Controllers;
-using IziTravel.AppServices.DataModels;
-using IziTravel.Communication;
-using IziTravel.Communication.Model;
+using Izi.Travel.Shell.AppServices.Controllers;
+using Izi.Travel.Shell.AppServices.DataModels;
+using Izi.Travel.Shell.Communication;
+using Izi.Travel.Shell.Communication.Model;
 
 using System;
 using System.Collections.Generic;

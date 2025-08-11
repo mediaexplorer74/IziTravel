@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Helpers.UriHelper
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -15,19 +15,28 @@ namespace Izi.Travel.Shell.Mtg.Helpers
   {
     public static bool EqualsByCommonParameters(Uri uri1, Uri uri2)
     {
-      if (uri1 == (Uri) null || uri2 == (Uri) null)
+      if (uri1 == null || uri2 == null)
         return false;
-      string path1 = (string) null;
-      Dictionary<string, string> parameters = (Dictionary<string, string>) null;
-      UriHelper.TryParse(uri1, out path1, out parameters);
-      string path2 = (string) null;
-      Dictionary<string, string> parameters2 = (Dictionary<string, string>) null;
-      UriHelper.TryParse(uri2, out path2, out parameters2);
-      if (path1 == null || path2 == null || !string.Equals(path1, path2, StringComparison.InvariantCultureIgnoreCase))
+        
+      UriHelper.TryParse(uri1, out var path1, out var parameters1);
+      UriHelper.TryParse(uri2, out var path2, out var parameters2);
+      
+      if (path1 == null || path2 == null || !string.Equals(path1, path2, StringComparison.OrdinalIgnoreCase))
         return false;
-      Dictionary<string, string> dictionary = parameters.ToDictionary<KeyValuePair<string, string>, string, string>((Func<KeyValuePair<string, string>, string>) (x => x.Key.ToLower()), (Func<KeyValuePair<string, string>, string>) (x => x.Value.ToLower()));
-      parameters2 = parameters2.ToDictionary<KeyValuePair<string, string>, string, string>((Func<KeyValuePair<string, string>, string>) (x => x.Key.ToLower()), (Func<KeyValuePair<string, string>, string>) (x => x.Value.ToLower()));
-      return dictionary.Where<KeyValuePair<string, string>>((Func<KeyValuePair<string, string>, bool>) (x => parameters2.ContainsKey(x.Key))).All<KeyValuePair<string, string>>((Func<KeyValuePair<string, string>, bool>) (x => x.Value == parameters2[x.Key]));
+        
+      // Compare case-insensitive parameter keys and values
+      var dict1 = parameters1.ToDictionary(
+        x => x.Key.ToLowerInvariant(), 
+        x => x.Value.ToLowerInvariant());
+        
+      var dict2 = parameters2.ToDictionary(
+        x => x.Key.ToLowerInvariant(), 
+        x => x.Value.ToLowerInvariant());
+      
+      // Check if all keys in dict1 exist in dict2 with the same values
+      return dict1.All(kv => 
+        dict2.TryGetValue(kv.Key, out var value) && 
+        string.Equals(kv.Value, value, StringComparison.Ordinal));
     }
 
     public static void TryParse(
@@ -35,28 +44,44 @@ namespace Izi.Travel.Shell.Mtg.Helpers
       out string path,
       out Dictionary<string, string> parameters)
     {
-      path = (string) null;
+      path = null;
       parameters = new Dictionary<string, string>();
-      if (uri == (Uri) null)
+      
+      if (uri == null)
         return;
-      string source1 = (string) null;
-      uri.OriginalString.Split('?', out path, out source1);
-      if (source1 == null)
-        return;
-      string str1 = (string) null;
-      string str2 = (string) null;
-      source1.Split('#', out str1, out str2);
-      string str3 = str1;
-      char[] chArray = new char[1]{ '&' };
-      foreach (string source2 in str3.Split(chArray))
+        
+      // Split path and query
+      var uriString = uri.OriginalString;
+      var pathEnd = uriString.IndexOf('?');
+      
+      if (pathEnd == -1)
       {
-        string key = (string) null;
-        string str4 = (string) null;
-        ref string local1 = ref key;
-        ref string local2 = ref str4;
-        source2.Split('=', out local1, out local2);
-        if (key != null && str4 != null)
-          parameters.Set<string, string>(key, str4);
+        path = uriString;
+        return;
+      }
+      
+      path = uriString.Substring(0, pathEnd);
+      var queryString = uriString.Substring(pathEnd + 1);
+      
+      // Remove fragment if present
+      var fragmentIndex = queryString.IndexOf('#');
+      if (fragmentIndex != -1)
+      {
+        queryString = queryString.Substring(0, fragmentIndex);
+      }
+      
+      // Parse query parameters
+      var paramPairs = queryString.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+      
+      foreach (var pair in paramPairs)
+      {
+        var keyValue = pair.Split(new[] { '=' }, 2);
+        if (keyValue.Length == 2)
+        {
+          var key = Uri.UnescapeDataString(keyValue[0]);
+          var value = Uri.UnescapeDataString(keyValue[1]);
+          parameters[key] = value;
+        }
       }
     }
   }

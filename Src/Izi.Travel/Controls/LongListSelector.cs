@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -98,3 +98,4 @@ namespace Izi.Travel.Shell.Controls
         }
     }
 }
+

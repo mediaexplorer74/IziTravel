@@ -3,21 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:items="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Common.Player.Items"
-             xmlns:corecontrols="clr-namespace:Izi.Travel.Shell.Core.Controls"
-             xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
-             xmlns:flipView="clr-namespace:Izi.Travel.Shell.Core.Controls"
+             xmlns:items="using:Izi.Travel.Shell.Mtg.ViewModels.Common.Player.Items"
+             xmlns:corecontrols="using:Izi.Travel.Shell.Core.Controls"
+             xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
-             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:templateSelectors="clr-namespace:Izi.Travel.Shell.Mtg.TemplateSelectors"
-             xmlns:transitions="clr-namespace:Izi.Travel.Shell.Core.Transitions"
-             xmlns:extensions="clr-namespace:Izi.Travel.Shell.Core.Components.Extensions"
-             xmlns:mediaConverters="clr-namespace:Izi.Travel.Shell.Media.Converters"
-             xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
-             xmlns:quiz="clr-namespace:Izi.Travel.Shell.Mtg.Views.Quiz"
-             xmlns:ts="clr-namespace:Izi.Travel.Shell.TemplateSelectors"
+             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:templateSelectors="using:Izi.Travel.Shell.Mtg.TemplateSelectors"
+             xmlns:transitions="using:Izi.Travel.Shell.Core.Transitions"
+             xmlns:extensions="using:Izi.Travel.Shell.Core.Components.Extensions"
+             xmlns:mediaConverters="using:Izi.Travel.Shell.Media.Converters"
+             xmlns:flyout="using:Izi.Travel.Shell.Core.Controls.Flyout"
+             xmlns:quiz="using:Izi.Travel.Shell.Mtg.Views.Quiz"
+             xmlns:ts="using:Izi.Travel.Shell.TemplateSelectors"
              mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="PlayerStartItemTemplate">
+            <Grid />
+        </DataTemplate>
+        <DataTemplate x:Key="PlayerRegularItemTemplate">
+            <Grid />
+        </DataTemplate>
+        <DataTemplate x:Key="PlayerEndItemTemplate">
+            <Grid />
+        </DataTemplate>
+    </UserControl.Resources>
 
     <!-- ... -->
 
@@ -25,17 +35,10 @@
         <Grid>
             <!-- ... -->
 
-            <flipView:FlipView ItemsSource="{Binding Items}"
-                              SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                              UpdateSelectionMode="BeforeTransition"
-                              UseTouchAnimationsForAllNavigation="True"
-                              Margin="-1">
-                <flipView:FlipView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </flipView:FlipView.ItemsPanel>
-                <flipView:FlipView.ItemTemplate>
+            <FlipView ItemsSource="{Binding Items}"
+                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                     Margin="-1">
+                <FlipView.ItemTemplate>
                     <DataTemplate>
                         <templateSelectors:PlayerItemTemplateSelector Content="{Binding}"
                                                                       StartItemTemplate="{StaticResource PlayerStartItemTemplate}" 
@@ -45,8 +48,8 @@
                                                                       VerticalContentAlignment="Stretch"
                                                                       d:DataContext="{d:DesignInstance items:PlayerItemViewModel}" />
                     </DataTemplate>
-                </flipView:FlipView.ItemTemplate>
-            </flipView:FlipView>
+                </FlipView.ItemTemplate>
+            </FlipView>
 
             
             <Grid extensions:UIElementExtensions.TransitionInElement="{StaticResource PlayerTransitionInElement}"

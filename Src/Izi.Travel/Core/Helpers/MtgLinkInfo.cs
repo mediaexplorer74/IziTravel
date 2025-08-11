@@ -5,11 +5,16 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 #nullable disable
+using System;
+
 namespace Izi.Travel.Shell.Core.Helpers
 {
   public class MtgLinkInfo
   {
-    public string Uid { get; set; }
+        internal string ObjectId;
+        internal string ParentId;
+
+        public string Uid { get; set; }
 
     public string ParentUid { get; set; }
 
@@ -20,5 +25,10 @@ namespace Izi.Travel.Shell.Core.Helpers
     public string Passcode { get; set; }
 
     public MtgLinkType Type { get; set; }
-  }
+
+        internal static MtgLinkInfo Parse(string data)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

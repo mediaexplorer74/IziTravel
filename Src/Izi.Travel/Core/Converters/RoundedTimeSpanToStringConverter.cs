@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Converters.RoundedTimeSpanToStringConverter
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -7,15 +7,13 @@
 using Izi.Travel.Shell.Core.Resources;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Windows.Data;
-
+using Windows.UI.Xaml.Data;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Converters
 {
   public class RoundedTimeSpanToStringConverter : IValueConverter
   {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
       return value is TimeSpan timeSpan ? (object) RoundedTimeSpanToStringConverter.RoundedTimeSpanToString(timeSpan) : (object) null;
     }
@@ -24,7 +22,7 @@ namespace Izi.Travel.Shell.Core.Converters
       object value,
       Type targetType,
       object parameter,
-      CultureInfo culture)
+      string language)
     {
       throw new NotImplementedException();
     }
@@ -42,3 +40,4 @@ namespace Izi.Travel.Shell.Core.Converters
     }
   }
 }
+

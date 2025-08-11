@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Player.PlayerViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -32,7 +32,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 
 #nullable disable
@@ -402,7 +402,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Player
            AppResources.ErrorTitleDataLoading,
            AppResources.ErrorMessageDataLoading,
            MessageBoxButtonContent.Ok,
-           (d, e) => NavigationHelper.TryGoBack((MessageBoxResult)e));
+           (d, e) => NavigationHelper.TryGoBack());
        }
       finally
       {
@@ -552,3 +552,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Player
     }
   }
 }
+

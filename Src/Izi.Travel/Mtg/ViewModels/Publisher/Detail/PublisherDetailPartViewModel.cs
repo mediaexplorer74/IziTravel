@@ -9,6 +9,7 @@ using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Filters;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
+using Izi.Travel.Core.Extensions;
 using Izi.Travel.Shell.Mtg.ViewModels.Common;
 using System.Collections.Generic;
 using System.Linq;

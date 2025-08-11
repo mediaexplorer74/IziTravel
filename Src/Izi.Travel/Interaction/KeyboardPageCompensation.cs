@@ -3,9 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
@@ -260,3 +260,4 @@ namespace Izi.Travel.Shell.Interaction
   }
         
 }
+

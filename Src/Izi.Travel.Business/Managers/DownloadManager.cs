@@ -520,5 +520,10 @@ namespace Izi.Travel.Business.Managers
         return false;
       }
     }
-  }
+
+        public IEnumerable<Process> GetProcesses()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

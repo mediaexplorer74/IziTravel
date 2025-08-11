@@ -8,15 +8,16 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using System.Windows.Controls.Primitives;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.Foundation;
+using System.Windows.Input;
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Controls
@@ -27,8 +28,8 @@ namespace Izi.Travel.Shell.Core.Controls
   {
     private const string PartGrid = "PartGrid";
     private const double PopupAnimationDuration = 250.0;
-    private static readonly double ScreenWidth = Application.Current.Host.Content.ActualWidth;
-    private static readonly double ScreenHeight = Application.Current.Host.Content.ActualHeight;
+    private static double ScreenWidth => Window.Current.Bounds.Width;
+    private static double ScreenHeight => Window.Current.Bounds.Height;
     private bool _ignoreIsExpandedCallback;
     private bool _popupExpanded;
     private Popup _popup;
@@ -45,11 +46,10 @@ namespace Izi.Travel.Shell.Core.Controls
     private Grid _grid;
     private CompositeTransform _gridTransform;
     private Page _page;
-    private bool _hasApplicationBar;
     public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(nameof (IsExpanded), typeof (bool), typeof (ExpandablePanel), new PropertyMetadata((object) false, new PropertyChangedCallback(ExpandablePanel.OnIsExpandedPropertyChanged)));
     public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof (Content), typeof (UIElement), typeof (ExpandablePanel), new PropertyMetadata((object) null));
     public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register(nameof (ImageSource), typeof (ImageSource), typeof (ExpandablePanel), new PropertyMetadata((object) null));
-    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof (Command), typeof (ICommand), typeof (ExpandablePanel), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof (Command), typeof (System.Windows.Input.ICommand), typeof (ExpandablePanel), new PropertyMetadata((object) null));
 
     public bool IsExpanded
     {
@@ -163,17 +163,16 @@ namespace Izi.Travel.Shell.Core.Controls
       this._storyboardPopup.Children.Add((Timeline) this._animationPopupOpacity);
       Storyboard.SetTarget((Timeline) this._animationPopupOpacity, (DependencyObject) this._popupImage);
       //Storyboard.SetTargetProperty((Timeline) this._animationPopupOpacity, new PropertyPath((object) UIElement.OpacityProperty));
-      this._storyboardPopup.Completed += new EventHandler(this.OnPopupStoryboardCompleted);
+      //this._storyboardPopup.Completed += (s, e) => this.OnPopupStoryboardCompleted(s, e);
     }
 
     private void ShowPopup()
     {
       this._popupExpanded = true;
-      this._popupPosition = this.TransformToVisual(Application.Current.RootVisual).Transform(new Point(0.0, 0.0));
+      UIElement root = Window.Current.Content as UIElement;
+      this._popupPosition = root != null ? this.TransformToVisual(root).TransformPoint(new Point(0.0, 0.0)) : new Point(0.0, 0.0);
       this._popup.IsOpen = true;
       this.Visibility = Visibility.Collapsed;
-      if (this._hasApplicationBar && this._page.ApplicationBar != null)
-        this._page.ApplicationBar.IsVisible = false;
       this.AnimatePopup(true);
     }
 
@@ -224,8 +223,7 @@ namespace Izi.Travel.Shell.Core.Controls
       {
         this._popup.IsOpen = false;
         this.Visibility = Visibility.Visible;
-        if (this._hasApplicationBar && this._page.ApplicationBar != null)
-          this._page.ApplicationBar.IsVisible = true;
+        // In UWP, we don't modify the application bar
       }
       else
       {
@@ -237,16 +235,17 @@ namespace Izi.Travel.Shell.Core.Controls
       this._ignoreIsExpandedCallback = false;
     }
 
-    //private void OnGridTap(object sender, System.Windows.Input.GestureEventArgs e)
-    //{
-    //  if (this.Command != null)
-    //  {
-    //    if (!this.Command.CanExecute((object) null))
-    //      return;
-    //    this.Command.Execute((object) null);
-    //  }
-    //  this.ShowPopup();
-    //}
+    private void OnGridTapped(object sender, TappedRoutedEventArgs e)
+    {
+      if (this.Command != null)
+      {
+        if (!this.Command.CanExecute((object) null))
+          return;
+        this.Command.Execute((object) null);
+      }
+      this.ShowPopup();
+      e.Handled = true;
+    }
 
     private void OnBackKeyPress(object sender, CancelEventArgs e)
     {
@@ -269,3 +268,4 @@ namespace Izi.Travel.Shell.Core.Controls
     }
   }
 }
+

@@ -190,3 +190,4 @@ namespace Izi.Travel.Shell.Controls
         bool IsSelected { get; set; }
     }
 }
+

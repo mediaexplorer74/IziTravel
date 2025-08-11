@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // Type: Izi.Travel.Shell.Views.LogView
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -22,8 +22,7 @@ using Windows.UI.Xaml.Navigation;
 
 
 using System.Diagnostics;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Views
 {
@@ -39,4 +38,5 @@ namespace Izi.Travel.Shell.Views
         
     }
 }
+
 

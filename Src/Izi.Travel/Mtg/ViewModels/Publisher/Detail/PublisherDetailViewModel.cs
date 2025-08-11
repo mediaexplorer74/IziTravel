@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail.PublisherDetailViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -13,8 +13,8 @@ using Izi.Travel.Shell.Mtg.Messages;
 using Izi.Travel.Shell.Mtg.ViewModels.Common;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Input;
 using System.Windows.Input;
-
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
 {
@@ -90,7 +90,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
           Key = "NowPlaying",
           Text = AppResources.CommandNavigateNowPlaying,
           ImageUrl = "/Assets/Icons/appbar.nowplaying.png",
-          Command = (ICommand) this.NowPlayingCommand
+          Command = this.NowPlayingCommand
         }
       };
     }
@@ -109,3 +109,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
     }
   }
 }
+

@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Business.Services.Implementation.CultureService
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -9,6 +9,7 @@ using Izi.Travel.Business.Services.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Izi.Travel.Utility;
 
 #nullable disable
 namespace Izi.Travel.Business.Services.Implementation
@@ -17,12 +18,12 @@ namespace Izi.Travel.Business.Services.Implementation
   {
     public LanguageData GetLanguageByIsoCode(string code)
     {
-      return !string.IsNullOrWhiteSpace(code) ? CultureTables.Languages.FirstOrDefault<LanguageData>((Func<LanguageData, bool>) (x => x.Code.Equals(code, StringComparison.CurrentCultureIgnoreCase))) : (LanguageData) null;
+      return !string.IsNullOrWhiteSpace(code) ? CultureTables.Languages.FirstOrDefault(x => StringHelper.EqualsCurrentCultureIgnoreCase(x.Code, code)) : null;
     }
 
     public LanguageData GetLanguageByName(string name)
     {
-      return !string.IsNullOrWhiteSpace(name) ? CultureTables.Languages.FirstOrDefault<LanguageData>((Func<LanguageData, bool>) (x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) : (LanguageData) null;
+      return !string.IsNullOrWhiteSpace(name) ? CultureTables.Languages.FirstOrDefault(x => StringHelper.EqualsCurrentCultureIgnoreCase(x.Name, name)) : null;
     }
 
     public LanguageData[] GetNeutralLanguages()
@@ -39,9 +40,9 @@ namespace Izi.Travel.Business.Services.Implementation
     {
       if (string.IsNullOrWhiteSpace(code))
         return (RegionData) null;
-      if (code.Equals("ru", StringComparison.CurrentCultureIgnoreCase))
-        return CultureTables.Regions.FirstOrDefault<RegionData>((Func<RegionData, bool>) (x => x.Name.Equals("ru-ru", StringComparison.CurrentCultureIgnoreCase)));
-      return !string.IsNullOrWhiteSpace(code) ? CultureTables.Regions.FirstOrDefault<RegionData>((Func<RegionData, bool>) (x => x.Code.Equals(code, StringComparison.CurrentCultureIgnoreCase))) : (RegionData) null;
+      if (StringHelper.EqualsCurrentCultureIgnoreCase(code, "ru"))
+        return CultureTables.Regions.FirstOrDefault(x => StringHelper.EqualsCurrentCultureIgnoreCase(x.Name, "ru-ru"));
+      return !string.IsNullOrWhiteSpace(code) ? CultureTables.Regions.FirstOrDefault(x => StringHelper.EqualsCurrentCultureIgnoreCase(x.Code, code)) : null;
     }
   }
 }

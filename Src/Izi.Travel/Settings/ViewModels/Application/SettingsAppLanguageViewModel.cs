@@ -11,6 +11,7 @@ using Izi.Travel.Business.Services;
 using Izi.Travel.Shell.Common.ViewModels.List;
 using Izi.Travel.Shell.Core.Command;
 using Izi.Travel.Shell.Core.Services;
+using Izi.Travel.Utility.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,7 +100,7 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
         AppSettings appSettings = ServiceFacade.SettingsService.GetAppSettings();
         return appSettings.Languages == null || appSettings.Languages.Length == 0 ? (IEnumerable<SettingsAppLanguageListItemViewModel>) null : (IEnumerable<SettingsAppLanguageListItemViewModel>) ((IEnumerable<string>) appSettings.Languages).Select<string, LanguageData>((Func<string, LanguageData>) (language => ServiceFacade.CultureService.GetLanguageByIsoCode(language))).Where<LanguageData>((Func<LanguageData, bool>) (languageData => languageData != null)).Select<LanguageData, SettingsAppLanguageListItemViewModel>((Func<LanguageData, SettingsAppLanguageListItemViewModel>) (languageData => new SettingsAppLanguageListItemViewModel(languageData)
         {
-          IsDefault = languageData.Code.Equals(appSettings.Languages[0], StringComparison.InvariantCultureIgnoreCase)
+          IsDefault = languageData.Code.Equals(appSettings.Languages[0], StringComparison.OrdinalIgnoreCase)
         })).OrderByDescending<SettingsAppLanguageListItemViewModel, bool>((Func<SettingsAppLanguageListItemViewModel, bool>) (x => x.IsDefault)).ThenBy<SettingsAppLanguageListItemViewModel, string>((Func<SettingsAppLanguageListItemViewModel, string>) (x => x.NativeName));
       }));
     }

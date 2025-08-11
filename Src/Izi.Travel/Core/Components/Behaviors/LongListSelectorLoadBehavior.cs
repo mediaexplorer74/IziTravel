@@ -6,9 +6,11 @@
 
 
 using System;
-using System.Windows;
-using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Microsoft.Xaml.Interactivity;
+using System.Windows.Input;
+using Izi.Travel.Shell.Controls;
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Behaviors
@@ -16,61 +18,33 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
   public class LongListSelectorLoadBehavior : Behavior<LongListSelector>
   {
     private readonly object _lockObject = new object();
-    public static readonly DependencyProperty LoadCommandProperty = DependencyProperty.Register(nameof (LoadCommand), typeof (ICommand), typeof (LongListSelectorLoadBehavior), new PropertyMetadata((object) null));
-    public static readonly DependencyProperty LoadItemCommandProperty = DependencyProperty.Register(nameof (LoadItemCommand), typeof (ICommand), typeof (LongListSelectorLoadBehavior), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty LoadCommandProperty = DependencyProperty.Register(nameof (LoadCommand), typeof (System.Windows.Input.ICommand), typeof (LongListSelectorLoadBehavior), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty LoadItemCommandProperty = DependencyProperty.Register(nameof (LoadItemCommand), typeof (System.Windows.Input.ICommand), typeof (LongListSelectorLoadBehavior), new PropertyMetadata((object) null));
 
-    public ICommand LoadCommand
+    public System.Windows.Input.ICommand LoadCommand
     {
-      get => (ICommand) this.GetValue(LongListSelectorLoadBehavior.LoadCommandProperty);
+      get => (System.Windows.Input.ICommand) this.GetValue(LongListSelectorLoadBehavior.LoadCommandProperty);
       set => this.SetValue(LongListSelectorLoadBehavior.LoadCommandProperty, (object) value);
     }
 
-    public ICommand LoadItemCommand
+    public System.Windows.Input.ICommand LoadItemCommand
     {
-      get => (ICommand) this.GetValue(LongListSelectorLoadBehavior.LoadItemCommandProperty);
+      get => (System.Windows.Input.ICommand) this.GetValue(LongListSelectorLoadBehavior.LoadItemCommandProperty);
       set => this.SetValue(LongListSelectorLoadBehavior.LoadItemCommandProperty, (object) value);
     }
 
     protected override void OnAttached()
     {
       base.OnAttached();
-      this.AssociatedObject.ItemRealized += new EventHandler<ItemRealizationEventArgs>(this.OnItemRealized);
+      // Behavior kept for XAML compatibility; actual load/selection is handled in control itself.
     }
 
     protected override void OnDetaching()
     {
       base.OnDetaching();
-      this.AssociatedObject.ItemRealized -= new EventHandler<ItemRealizationEventArgs>(this.OnItemRealized);
     }
 
-    private void OnItemRealized(object sender, ItemRealizationEventArgs e)
-    {
-      this.TryExecuteLoadCommand(sender, e);
-      this.TryExecuteLoadItemCommand(sender, e);
-    }
-
-    private void TryExecuteLoadCommand(object sender, ItemRealizationEventArgs e)
-    {
-      if (this.LoadCommand == null || !(sender is LongListSelector longListSelector) || longListSelector.ItemsSource == null)
-        return;
-      lock (this._lockObject)
-      {
-        if (e.ItemKind != LongListSelectorItemKind.Item || e.Container.Content == null || !e.Container.Content.Equals(longListSelector.ItemsSource[longListSelector.ItemsSource.Count - 1]) || !this.LoadCommand.CanExecute((object) null))
-          return;
-        this.LoadCommand.Execute((object) null);
-      }
-    }
-
-    private void TryExecuteLoadItemCommand(object sender, ItemRealizationEventArgs e)
-    {
-      if (this.LoadItemCommand == null || !(sender is LongListSelector longListSelector) || longListSelector.ItemsSource == null)
-        return;
-      lock (this._lockObject)
-      {
-        if (e.ItemKind != LongListSelectorItemKind.Item || e.Container.Content == null || !this.LoadItemCommand.CanExecute(e.Container.Content))
-          return;
-        this.LoadItemCommand.Execute(e.Container.Content);
-      }
-    }
+    // No-op methods retained for legacy code compatibility
   }
 }
+

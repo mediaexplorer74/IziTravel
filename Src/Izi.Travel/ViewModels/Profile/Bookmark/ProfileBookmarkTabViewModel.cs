@@ -12,7 +12,7 @@ using Izi.Travel.Shell.Views.Profile;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-
+using Windows.UI.Xaml.Input;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Profile.Bookmark
 {
@@ -43,3 +43,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Bookmark
     }
   }
 }
+

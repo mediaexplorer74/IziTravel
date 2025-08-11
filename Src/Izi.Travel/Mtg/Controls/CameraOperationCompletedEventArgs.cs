@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Controls.BarcodeScanner
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,8 +6,8 @@
 
 namespace Izi.Travel.Shell.Mtg.Controls
 {
-    internal class CameraOperationCompletedEventArgs
+    public class CameraOperationCompletedEventArgs
     {
-        internal static CameraOperationCompletedEventArgs Empty;
+        public static CameraOperationCompletedEventArgs Empty;
     }
 }

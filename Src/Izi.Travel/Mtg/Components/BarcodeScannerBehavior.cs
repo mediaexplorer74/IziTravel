@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Components.BarcodeScannerBehavior
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,9 +6,9 @@
 
 using Izi.Travel.Shell.Mtg.Controls;
 using System;
-using System.Windows;
-using System.Windows.Input;
+using Windows.UI.Xaml;
 using Microsoft.Xaml.Interactivity;
+using System.Windows.Input;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Components
@@ -43,3 +43,4 @@ namespace Izi.Travel.Shell.Mtg.Components
     }
   }
 }
+

@@ -1,7 +1,7 @@
-﻿// IziTravel.AppServices.Controllers.ForumController
+// IziTravel.AppServices.Controllers.ForumController
 
-using IziTravel.AppServices.DataModels;
-using IziTravel.Communication.Model;
+using Izi.Travel.Shell.AppServices.DataModels;
+using Izi.Travel.Shell.Communication.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;

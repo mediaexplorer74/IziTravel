@@ -8,8 +8,7 @@ using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Shell.Core.Components;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Player.Items;
 using Izi.Travel.Shell.ViewModels.QuickAccess.Items;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.TemplateSelectors
 {
@@ -36,3 +35,4 @@ namespace Izi.Travel.Shell.TemplateSelectors
     }
   }
 }
+

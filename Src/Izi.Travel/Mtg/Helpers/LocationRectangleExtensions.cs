@@ -4,8 +4,9 @@
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
-using Windows.UI.Xaml.Controls.Maps;
-using System.Device.Location;
+using Izi.Travel.Business.Entities.Data;
+using Izi.Travel.Data.Entities.Common;
+using Windows.Devices.Geolocation;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Helpers
@@ -18,7 +19,13 @@ namespace Izi.Travel.Shell.Mtg.Helpers
       GeoCoordinate southeast = rectangle.Southeast;
       double num1 = (northwest.Latitude - southeast.Latitude) * amount;
       double num2 = (southeast.Longitude - northwest.Longitude) * amount;
-      return new LocationRectangle(new GeoCoordinate(northwest.Latitude + num1, northwest.Longitude - num2), new GeoCoordinate(southeast.Latitude - num1, southeast.Longitude + num2));
-    }
+
+      return new LocationRectangle(
+        new Geopoint(new BasicGeoposition 
+        { 
+            Latitude = northwest.Latitude + num1, Longitude = northwest.Longitude - num2 }),
+            0.0f, 
+            0.0f);        
+        }
   }
 }

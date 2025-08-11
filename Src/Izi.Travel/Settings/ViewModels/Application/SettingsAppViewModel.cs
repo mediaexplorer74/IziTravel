@@ -56,7 +56,7 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
         dataAsync.Add((SettingsListItemBaseViewModel) new SettingsListItemNavigationViewModel<SettingsAppFeedbackMessageViewModel>(AppResources.LabelFeedback, AppResources.SettingsInfoFeedback));
         dataAsync.Add((SettingsListItemBaseViewModel) new SettingsListItemCodeNameViewModel(this.Parent as SettingsViewModel, AppResources.LabelCodeName, AppResources.SettingsInfoCodeName));
         dataAsync.Add((SettingsListItemBaseViewModel) new SettingsListItemLicenseViewModel(AppResources.LabelLicenses, AppResources.SettingsInfoLicenses));
-        dataAsync.Add((SettingsListItemBaseViewModel) new SettingsListItemAboutViewModel(AppResources.PageTitleAbout, Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+        //dataAsync.Add((SettingsListItemBaseViewModel) new SettingsListItemAboutViewModel(AppResources.PageTitleAbout, Assembly.GetExecutingAssembly().GetName().Version.ToString()));
         return (IEnumerable<SettingsListItemBaseViewModel>) dataAsync;
       }));
     }

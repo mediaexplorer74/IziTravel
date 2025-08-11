@@ -5,8 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using Izi.Travel.Shell.Core.Components;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Settings.Model
 {
@@ -38,3 +37,4 @@ namespace Izi.Travel.Shell.Settings.Model
     }
   }
 }
+

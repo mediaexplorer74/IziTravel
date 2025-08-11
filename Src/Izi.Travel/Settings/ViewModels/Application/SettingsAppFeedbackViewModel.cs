@@ -15,7 +15,7 @@ using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.Core.Services.Entities;
 using Izi.Travel.Shell.Settings.Helpers;
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
@@ -103,8 +103,10 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
       else
       {
         this.IsBusy = true;
-        if (System.Windows.Application.Current.RootVisual is Control rootVisual)
-          rootVisual.Focus();
+        
+        //if (System.Windows.Application.Current.RootVisual is Control rootVisual)
+          //rootVisual.Focus();
+        
         bool flag = !string.IsNullOrWhiteSpace(this.Email) && !string.IsNullOrWhiteSpace(this.Subject) && !string.IsNullOrWhiteSpace(this.Message);
         if (flag)
           flag = await UserVoiceHelper.Post(this.Email, this.Subject, this.Message);
@@ -113,7 +115,7 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
           AnalyticsHelper.SendShareAndFollowUs(ShareAndFollowUsParameter.Feedback);
           ShellServiceFacade.DialogService.Show(AppResources.SendFeedbackSuccessTitle, AppResources.SendFeedbackSuccessMessage, MessageBoxButtonContent.Ok, (Action<FlyoutDialog>) null, (Action<FlyoutDialog, MessageBoxResult>) ((x, y) =>
           {
-            IoC.Get<INavigationService>().RemoveBackEntry();
+            //IoC.Get<INavigationService>().RemoveBackEntry();
             IoC.Get<INavigationService>().GoBack();
           }));
         }
@@ -136,3 +138,4 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
     }
   }
 }
+

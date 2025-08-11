@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 //using System.Device.Location;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 
@@ -139,3 +139,4 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     }
   }
 }
+

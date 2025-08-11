@@ -1,7 +1,9 @@
+using System.ServiceModel.Channels;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Data;
 
 namespace Izi.Travel.Controls.Map
 {
@@ -22,11 +24,12 @@ namespace Izi.Travel.Controls.Map
         public static readonly DependencyProperty IsHitTestVisibleProperty =
             DependencyProperty.Register("IsHitTestVisible", typeof(bool), typeof(MapItemControl), 
                 new PropertyMetadata(true));
+        //private Binding Bindings;
 
         public MapItemControl()
         {
-            this.InitializeComponent();
-            this.DataContextChanged += (s, e) => { this.Bindings.Update(); };
+            //this.InitializeComponent();
+            //this.DataContextChanged += (s, e) => { this.Bindings.Update(); };
         }
 
         public Geopoint Location

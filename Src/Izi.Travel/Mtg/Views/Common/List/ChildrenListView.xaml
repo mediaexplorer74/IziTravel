@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"             
-             xmlns:i="clr-namespace:Microsoft.Xaml.Interactivity;assembly=Microsoft.Xaml.Interactivity"
-             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:controls="clr-namespace:Izi.Travel.Shell.Mtg.Controls"
-             xmlns:templateSelectors="clr-namespace:Izi.Travel.Shell.Mtg.TemplateSelectors"
-             xmlns:exhibitlist="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List"
-             xmlns:talist="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List"
+             xmlns:i="using:Microsoft.Xaml.Interactivity"
+             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:controls="using:Izi.Travel.Shell.Mtg.Controls"
+             xmlns:templateSelectors="using:Izi.Travel.Shell.Mtg.TemplateSelectors"
+             xmlns:exhibitlist="using:Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List"
+             xmlns:talist="using:Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List"
              mc:Ignorable="d">
     
 

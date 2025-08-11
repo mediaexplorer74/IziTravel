@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.SplitteredContainer
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,9 +6,9 @@
 
 using Izi.Travel.Shell.Core.Extensions;
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -35,9 +35,9 @@ namespace Izi.Travel.Shell.Core.Controls
     private double _bottom;
     private bool _needToScroll;
     private bool _ignoreManipulation;
-    public static readonly DependencyProperty SplitterTemplateProperty = DependencyProperty.Register(nameof (SplitterTemplate), typeof (DataTemplate), typeof (SplitteredContainer), new PropertyMetadata((object) null));
-    public static readonly DependencyProperty MainContentTemplateProperty = DependencyProperty.Register(nameof (MainContentTemplate), typeof (DataTemplate), typeof (SplitteredContainer), new PropertyMetadata((object) null));
-    public static readonly DependencyProperty AdditionalContentTemplateProperty = DependencyProperty.Register(nameof (AdditionalContentTemplate), typeof (DataTemplate), typeof (SplitteredContainer), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty SplitterTemplateProperty = null;
+    public static readonly DependencyProperty MainContentTemplateProperty = null;
+    public static readonly DependencyProperty AdditionalContentTemplateProperty = null;
     public static readonly DependencyProperty IsMainContentSelectedProperty = DependencyProperty.Register(nameof (IsMainContentSelected), typeof (bool), typeof (SplitteredContainer), new PropertyMetadata((object) false, new PropertyChangedCallback(SplitteredContainer.OnIsMainContentSelectedPropertyChanged)));
     public static readonly DependencyProperty MinContentHeightProperty = DependencyProperty.Register(nameof (MinContentHeight), typeof (double), typeof (SplitteredContainer), new PropertyMetadata((object) 0.0, new PropertyChangedCallback(SplitteredContainer.OnMinContentHeightPropertyChanged)));
     public static readonly DependencyProperty IgnoreManipulationProperty = DependencyProperty.RegisterAttached("IgnoreManipulation", typeof (bool), typeof (SplitteredContainer), new PropertyMetadata((object) false));
@@ -89,7 +89,7 @@ namespace Izi.Travel.Shell.Core.Controls
       this.SizeChanged += new SizeChangedEventHandler(this.OnSizeChanged);
     }
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this._stackPanel = this.GetTemplateChild("PartStackPanel") as StackPanel;
@@ -102,19 +102,19 @@ namespace Izi.Travel.Shell.Core.Controls
         this._stackPanel.RenderTransform = (Transform) this._transform;
       }
       DoubleAnimation doubleAnimation = new DoubleAnimation();
-      doubleAnimation.Duration = (Duration) TimeSpan.FromMilliseconds(200.0);
+      TimeSpan.FromMilliseconds(200.0);
       this._animation = doubleAnimation;
       this._storyboard = new Storyboard();
       Storyboard.SetTarget((Timeline) this._animation, (DependencyObject) this._transform);
-      Storyboard.SetTargetProperty((Timeline) this._animation, new PropertyPath((object) TranslateTransform.YProperty));
-      this._storyboard.Children.Add((Timeline) this._animation);
+    Storyboard.SetTargetProperty((Timeline)this._animation, new PropertyPath("Y").ToString());
+    this._storyboard.Children.Add((Timeline) this._animation);
       this._splitterContentControl = this.GetTemplateChild("PartSplitterContentControl") as ContentControl;
       if (this._splitterContentControl != null)
       {
         this._splitterContentControl.SizeChanged += new SizeChangedEventHandler(this.OnSizeChanged);
-        this._splitterContentControl.ManipulationStarted += new EventHandler<ManipulationStartedEventArgs>(this.OnSplitterManipulationStarted);
-        this._splitterContentControl.ManipulationDelta += new EventHandler<ManipulationDeltaEventArgs>(this.OnSplitterManipulationDelta);
-        this._splitterContentControl.ManipulationCompleted += new EventHandler<ManipulationCompletedEventArgs>(this.OnSplitterManipulationCompleted);
+        this._splitterContentControl.ManipulationStarted += this.OnSplitterManipulationStarted;
+        this._splitterContentControl.ManipulationDelta += this.OnSplitterManipulationDelta;
+        this._splitterContentControl.ManipulationCompleted += this.OnSplitterManipulationCompleted;
       }
       this._mainContentControl = this.GetTemplateChild("PartMainContentControl") as ContentControl;
       this._additionalContentControl = this.GetTemplateChild("PartAdditionalContentControl") as ContentControl;
@@ -177,16 +177,16 @@ namespace Izi.Travel.Shell.Core.Controls
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e) => this.SetupContentSize();
 
-    private void OnSplitterManipulationStarted(object sender, ManipulationStartedEventArgs e)
+    private void OnSplitterManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-      this._ignoreManipulation = e.ManipulationContainer.FindParent(new Func<DependencyObject, bool>(SplitteredContainer.GetIgnoreManipulation)) != null;
+      this._ignoreManipulation = e.Container.FindParent(new Func<DependencyObject, bool>(SplitteredContainer.GetIgnoreManipulation)) != null;
     }
 
-    private void OnSplitterManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+    private void OnSplitterManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
       if (this._ignoreManipulation)
         return;
-      this._transform.Y += e.DeltaManipulation.Translation.Y;
+      this._transform.Y += e.Delta.Translation.Y;
       if (this._transform.Y > 0.0)
         this._transform.Y = 0.0;
       if (this._transform.Y < -this._bottom)
@@ -194,11 +194,11 @@ namespace Izi.Travel.Shell.Core.Controls
       e.Handled = true;
     }
 
-    private void OnSplitterManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+    private void OnSplitterManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
     {
       if (this._ignoreManipulation)
         return;
-      double y = e.TotalManipulation.Translation.Y;
+      double y = e.Cumulative.Translation.Y;
       if (Math.Abs(y) > double.Epsilon)
         this.SetIsMainContentSelected(y > 0.0);
       else
@@ -208,3 +208,4 @@ namespace Izi.Travel.Shell.Core.Controls
     }
   }
 }
+

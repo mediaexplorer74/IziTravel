@@ -1,7 +1,7 @@
 ﻿// IziTravel.Interaction.SipHelper
 
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -17,3 +17,4 @@ namespace Izi.Travel.Shell.Interaction
     }
   }
 }
+

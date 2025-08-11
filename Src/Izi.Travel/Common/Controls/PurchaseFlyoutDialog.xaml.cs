@@ -9,7 +9,7 @@ using Izi.Travel.Business.Managers;
 using Izi.Travel.Shell.Core.Resources;
 using System;
 using System.Diagnostics;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -84,3 +84,4 @@ namespace Izi.Travel.Shell.Common.Controls
    
   }
 }
+

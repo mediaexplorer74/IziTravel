@@ -1,46 +1,65 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.Tiles.FlipTileControlBehavior
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
-using System.Windows;
-using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Microsoft.Xaml.Interactivity;
 using Windows.Foundation;
+using System.Windows.Input;
+using System;
 
-#nullable disable
 namespace Izi.Travel.Shell.Core.Controls.Tiles
 {
-  public class FlipTileControlBehavior : Behavior<FlipTileControl>
-  {
-    public static readonly DependencyProperty StateChangeCommandProperty = DependencyProperty.Register(nameof (StateChangeCommand), typeof (ICommand), typeof (FlipTileControlBehavior), new PropertyMetadata((object) null));
-
-    public ICommand StateChangeCommand
+    public class FlipTileControlBehavior : Behavior<FlipTileControl>
     {
-      get => (ICommand) this.GetValue(FlipTileControlBehavior.StateChangeCommandProperty);
-      set => this.SetValue(FlipTileControlBehavior.StateChangeCommandProperty, (object) value);
-    }
+        private TypedEventHandler<FlipTileControl, FlipTileState> _stateChangedHandler;
 
-    protected override void OnAttached()
-    {
-      base.OnAttached();
-      // ISSUE: method pointer
-      this.AssociatedObject.StateChanged += new TypedEventHandler<FlipTileControl, FlipTileState>((object) this, __methodptr(OnStateChanged));
-    }
+        public static readonly DependencyProperty StateChangeCommandProperty = 
+            DependencyProperty.Register(
+                nameof(StateChangeCommand), 
+                typeof(ICommand), 
+                typeof(FlipTileControlBehavior), 
+                new PropertyMetadata(null));
 
-    protected override void OnDetaching()
-    {
-      // ISSUE: method pointer
-      this.AssociatedObject.StateChanged -= new TypedEventHandler<FlipTileControl, FlipTileState>((object) this, __methodptr(OnStateChanged));
-      base.OnDetaching();
-    }
+        
 
-    private void OnStateChanged(FlipTileControl control, FlipTileState state)
-    {
-      if (this.StateChangeCommand == null || !this.StateChangeCommand.CanExecute((object) state))
-        return;
-      this.StateChangeCommand.Execute((object) state);
+        public ICommand StateChangeCommand
+        {
+            get => (ICommand)GetValue(StateChangeCommandProperty);
+            set => SetValue(StateChangeCommandProperty, value);
+        }
+
+        
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            _stateChangedHandler = OnStateChanged;
+            //AssociatedObject.StateChanged += _stateChangedHandler;
+        }
+
+        protected override void OnDetaching()
+        {
+            //if (_stateChangedHandler != null)
+            //    AssociatedObject.StateChanged -= _stateChangedHandler;
+
+            _stateChangedHandler = null;
+            base.OnDetaching();
+        }
+
+        private void OnStateChanged(FlipTileControl control, FlipTileState state)
+        {
+            if (StateChangeCommand?.CanExecute(state) == true)
+                StateChangeCommand.Execute(state);
+        }
+
+
+
+
+
+
+
     }
-  }
 }
+

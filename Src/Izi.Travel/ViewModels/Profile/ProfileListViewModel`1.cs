@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.ViewModels.Profile.ProfileListViewModel`1
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 
 #nullable disable
@@ -57,14 +57,14 @@ namespace Izi.Travel.Shell.ViewModels.Profile
     {
       this.Items.Clear();
       base.OnActivate();
-      // ISSUE: method pointer
-      DownloadManager.Instance.DownloadProcessStateChanged += new TypedEventHandler<DownloadManager, DownloadProcess>((object) this, __methodptr(OnDownloadProcessStateChanged));
+      // Use method group syntax for event handler
+      DownloadManager.Instance.DownloadProcessStateChanged += this.OnDownloadProcessStateChanged;
     }
 
     protected override void OnDeactivate(bool close)
     {
-      // ISSUE: method pointer
-      DownloadManager.Instance.DownloadProcessStateChanged -= new TypedEventHandler<DownloadManager, DownloadProcess>((object) this, __methodptr(OnDownloadProcessStateChanged));
+      // Use method group syntax for event handler
+      DownloadManager.Instance.DownloadProcessStateChanged -= this.OnDownloadProcessStateChanged;
       base.OnDeactivate(close);
     }
 
@@ -113,7 +113,8 @@ namespace Izi.Travel.Shell.ViewModels.Profile
     {
       if (process == null || string.IsNullOrWhiteSpace(process.Uid) || string.IsNullOrWhiteSpace(process.Language))
         return;
-      ProfileListItemViewModel listItemViewModel = this.GetProfileListItems().FirstOrDefault<ProfileListItemViewModel>((Func<ProfileListItemViewModel, bool>) (x => process.Uid.Equals(x.Uid, StringComparison.InvariantCultureIgnoreCase) && process.Language.Equals(x.Language, StringComparison.InvariantCultureIgnoreCase)));
+      ProfileListItemViewModel listItemViewModel = this.GetProfileListItems().FirstOrDefault<ProfileListItemViewModel>((Func<ProfileListItemViewModel, bool>)  
+          (x => process.Uid.Equals(x.Uid, StringComparison.OrdinalIgnoreCase) && process.Language.Equals(x.Language, StringComparison.OrdinalIgnoreCase)));
       if (listItemViewModel == null)
         return;
       listItemViewModel.State = process.State;
@@ -123,3 +124,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile
     }
   }
 }
+

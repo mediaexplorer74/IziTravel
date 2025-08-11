@@ -9,6 +9,7 @@ using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Geofencing.Primitives;
+using Windows.Devices.Geolocation;
 using Izi.Travel.Shell.Common.Helpers;
 using Izi.Travel.Shell.Core.Extensions;
 using Izi.Travel.Shell.Core.Resources;
@@ -19,8 +20,8 @@ using Windows.UI.Xaml.Controls.Maps;
 using System;
 using System.Device.Location;
 using System.Linq.Expressions;
-using System.Windows;
-
+using Windows.UI.Xaml;
+using Windows.Foundation;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Explore
 {
@@ -217,17 +218,74 @@ namespace Izi.Travel.Shell.ViewModels.Explore
       this.RefreshUserLocationDistance();
     }
 
-    public void RefreshMapDistance(GeoCoordinate mapLocation)
+    private double CalculateDistance(Windows.Devices.Geolocation.Geopoint point1, Windows.Devices.Geolocation.Geopoint point2)
     {
-      this.MapCenterDistance = !this.HasLocation || mapLocation == (GeoCoordinate) null || mapLocation == GeoCoordinate.Unknown ? (double) short.MaxValue : mapLocation.GetDistanceTo(this.Location);
+        if (point1 == null || point2 == null)
+            return double.MaxValue;
+            
+        var lat1 = point1.Position.Latitude * (Math.PI / 180.0);
+        var lon1 = point1.Position.Longitude * (Math.PI / 180.0);
+        var lat2 = point2.Position.Latitude * (Math.PI / 180.0);
+        var lon2 = point2.Position.Longitude * (Math.PI / 180.0);
+
+        // Haversine formula
+        var dlon = lon2 - lon1;
+        var dlat = lat2 - lat1;
+        var a = Math.Pow(Math.Sin(dlat / 2), 2) + 
+                Math.Cos(lat1) * Math.Cos(lat2) * 
+                Math.Pow(Math.Sin(dlon / 2), 2);
+                
+        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        var distance = 6371 * c * 1000; // Convert to meters
+        
+        return distance;
+    }
+
+    public void RefreshMapDistance(Windows.Devices.Geolocation.Geopoint mapLocation)
+    {
+        if (!this.HasLocation || mapLocation == null)
+        {
+            this.MapCenterDistance = short.MaxValue;
+            return;
+        }
+        
+        var location = new Windows.Devices.Geolocation.Geopoint(new BasicGeoposition
+        {
+            Latitude = default,//this.Location.Latitude,
+            Longitude = default//this.Location.Longitude
+        });
+        
+        this.MapCenterDistance = CalculateDistance(mapLocation, location);
     }
 
     public void RefreshUserLocationDistance()
     {
-      if (!this.HasLocation)
-        return;
-      Geolocation position = Geotracker.Instance.Position;
-      this.Distance = position != null ? position.ToGeoCoordinate().GetDistanceTo(this.Location) : (double) short.MaxValue;
+        if (!this.HasLocation)
+        {
+            this.Distance = short.MaxValue;
+            return;
+        }
+
+        var position = Izi.Travel.Business.Managers.Geotracker.Instance.Position;
+        if (position == null)
+        {
+            this.Distance = short.MaxValue;
+            return;
+        }
+
+        var userLocation = new Windows.Devices.Geolocation.Geopoint(new BasicGeoposition
+        {
+            Latitude = position.Latitude,
+            Longitude = position.Longitude
+        });
+        
+        var targetLocation = new Windows.Devices.Geolocation.Geopoint(new BasicGeoposition
+        {
+            Latitude = default,//this.Location.Latitude,
+            Longitude = default//this.Location.Longitude
+        });
+        
+        this.Distance = CalculateDistance(userLocation, targetLocation);
     }
 
     public void RefreshStatus()
@@ -237,12 +295,13 @@ namespace Izi.Travel.Shell.ViewModels.Explore
 
     public bool Equals(string uid)
     {
-      return this.Uid != null && this.Uid.Equals(uid, StringComparison.InvariantCultureIgnoreCase);
+      return this.Uid != null && this.Uid.Equals(uid, StringComparison.OrdinalIgnoreCase);
     }
 
     public bool Equals(string uid, string language)
     {
-      return this.Uid != null && this.Language != null && this.Uid.Equals(uid, StringComparison.InvariantCultureIgnoreCase) && this.Language.Equals(language, StringComparison.InvariantCultureIgnoreCase);
+      return this.Uid != null && this.Language != null && this.Uid.Equals(uid, StringComparison.OrdinalIgnoreCase) && this.Language.Equals(language, StringComparison.OrdinalIgnoreCase);
     }
   }
 }
+

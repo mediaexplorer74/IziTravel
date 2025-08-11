@@ -5,8 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Windows.Navigation;
-
+using Windows.UI.Xaml.Navigation;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Context
 {
@@ -49,3 +48,4 @@ namespace Izi.Travel.Shell.Core.Context
     }
   }
 }
+

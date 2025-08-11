@@ -25,5 +25,10 @@ namespace Izi.Travel.Shell.Views.MainPivot
         {
             this.InitializeComponent();
         }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

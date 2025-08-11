@@ -2,7 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 
 #nullable disable
@@ -110,3 +110,4 @@ namespace Izi.Travel.Shell.Interaction
     }
   }
 }
+

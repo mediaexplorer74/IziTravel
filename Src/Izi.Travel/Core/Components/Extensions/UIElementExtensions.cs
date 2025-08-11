@@ -6,8 +6,8 @@
 
 
 using System;
-using System.Windows;
-
+using Windows.UI.Xaml;
+using Izi.Travel.Shell.Core.Transitions;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Extensions
 {
@@ -83,3 +83,4 @@ namespace Izi.Travel.Shell.Core.Components.Extensions
     }
   }
 }
+

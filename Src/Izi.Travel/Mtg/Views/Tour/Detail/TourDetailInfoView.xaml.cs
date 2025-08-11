@@ -8,7 +8,7 @@ using Izi.Travel.Shell.Toolkit.Controls;
 using Izi.Travel.Utility;
 using System;
 using System.Diagnostics;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
@@ -31,3 +31,4 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour.Detail
     
   }
 }
+

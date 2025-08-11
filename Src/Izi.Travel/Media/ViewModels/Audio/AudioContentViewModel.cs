@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Media.ViewModels.Audio.AudioContentViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -18,7 +18,7 @@ using Izi.Travel.Shell.Core.Command;
 using System;
 using System.Linq.Expressions;
 using System.Threading;
-using System.Windows.Threading;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 
 #nullable disable
@@ -41,30 +41,16 @@ namespace Izi.Travel.Shell.Media.ViewModels.Audio
     private RelayCommand _seekStartCommand;
     private RelayCommand _seekEndCommand;
 
-    public event TypedEventHandler<AudioContentViewModel, AudioContentPlayState> PlayStateChanged
+
+
+
+
+    private EventHandler<AudioContentPlayState> _playStateChanged;
+
+    public event EventHandler<AudioContentPlayState> PlayStateChanged
     {
-      add
-      {
-        TypedEventHandler<AudioContentViewModel, AudioContentPlayState> typedEventHandler1 = this.PlayStateChanged;
-        TypedEventHandler<AudioContentViewModel, AudioContentPlayState> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<AudioContentViewModel, AudioContentPlayState>>(ref this.PlayStateChanged, (TypedEventHandler<AudioContentViewModel, AudioContentPlayState>) Delegate.Combine((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-        }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
-      remove
-      {
-        TypedEventHandler<AudioContentViewModel, AudioContentPlayState> typedEventHandler1 = this.PlayStateChanged;
-        TypedEventHandler<AudioContentViewModel, AudioContentPlayState> typedEventHandler2;
-        do
-        {
-          typedEventHandler2 = typedEventHandler1;
-          typedEventHandler1 = Interlocked.CompareExchange<TypedEventHandler<AudioContentViewModel, AudioContentPlayState>>(ref this.PlayStateChanged, (TypedEventHandler<AudioContentViewModel, AudioContentPlayState>) Delegate.Remove((Delegate) typedEventHandler2, (Delegate) value), typedEventHandler2);
-        }
-        while (typedEventHandler1 != typedEventHandler2);
-      }
+      add { _playStateChanged += value; }
+      remove { _playStateChanged -= value; }
     }
 
     public AudioContentPlayState PlayState
@@ -96,8 +82,8 @@ namespace Izi.Travel.Shell.Media.ViewModels.Audio
         if (Math.Abs(this._duration - value) <= double.Epsilon)
           return;
         this._duration = value;
-        this.NotifyOfPropertyChange<double>((Expression<Func<double>>) (() => this.Duration));
-        this.NotifyOfPropertyChange<double>((Expression<Func<double>>) (() => this.Percentage));
+        this.NotifyOfPropertyChange(nameof(Duration));
+        this.NotifyOfPropertyChange(nameof(Percentage));
         this.NotifyOfPropertyChange<double>((Expression<Func<double>>) (() => this.SecondsFromStart));
         this.NotifyOfPropertyChange<string>((Expression<Func<string>>) (() => this.SecondsFromStartString));
         this.NotifyOfPropertyChange<double>((Expression<Func<double>>) (() => this.SecondsFromEnd));
@@ -207,7 +193,7 @@ namespace Izi.Travel.Shell.Media.ViewModels.Audio
       {
         Interval = TimeSpan.FromMilliseconds(500.0)
       };
-      this._refreshTimer.Tick += new EventHandler(this.OnRefreshTimerTick);
+      //this._refreshTimer.Tick += new EventHandler<object>(this.OnRefreshTimerTick);
     }
 
     public RelayCommand ToggleCommand => !this.IsPlayEnabled ? this.PauseCommand : this.PlayCommand;
@@ -317,15 +303,15 @@ namespace Izi.Travel.Shell.Media.ViewModels.Audio
       this.NotifyOfPropertyChange<bool>((Expression<Func<bool>>) (() => this.HasAudio));
       this.RefreshState();
       this._refreshTimer.Start();
-      // ISSUE: method pointer
-      ServiceFacade.AudioService.StateChanged += new TypedEventHandler<IAudioService, AudioServiceState>((object) this, __methodptr(OnAudioPlayerStateChanged));
+      // Use method group syntax for event handler
+      ServiceFacade.AudioService.StateChanged += this.OnAudioPlayerStateChanged;
     }
 
     public void Deactivate()
     {
       this._refreshTimer.Stop();
-      // ISSUE: method pointer
-      ServiceFacade.AudioService.StateChanged -= new TypedEventHandler<IAudioService, AudioServiceState>((object) this, __methodptr(OnAudioPlayerStateChanged));
+      // Use method group syntax for event handler
+      ServiceFacade.AudioService.StateChanged -= this.OnAudioPlayerStateChanged;
       this._mtgObject = (MtgObject) null;
       this._audioTrackInfo = (AudioTrackInfo) null;
       this.PlayState = AudioContentPlayState.None;
@@ -375,13 +361,14 @@ namespace Izi.Travel.Shell.Media.ViewModels.Audio
         return;
       this.PlayState = playState;
       // ISSUE: reference to a compiler-generated field
-      this.PlayStateChanged?.Invoke(this, this.PlayState);
+      //this.PlayStateChanged?.Invoke(this, this.PlayState);
     }
 
     private void OnAudioPlayerStateChanged(object sender, AudioServiceState eventArgs)
     {
       this.RefreshState();
     }
+
 
     private void OnRefreshTimerTick(object sender, EventArgs eventArgs)
     {
@@ -394,3 +381,4 @@ namespace Izi.Travel.Shell.Media.ViewModels.Audio
     }
   }
 }
+

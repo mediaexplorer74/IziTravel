@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Media.Controls.VideoPlayer
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,12 +6,11 @@
 
 using Izi.Travel.Shell.Core.Controls;
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using System.Windows.Threading;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Media.Controls
 {
@@ -61,14 +60,12 @@ namespace Izi.Travel.Shell.Media.Controls
 
     public VideoPlayer() => this.DefaultStyleKey = (object) typeof (VideoPlayer);
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this._mediaElement = this.GetTemplateChild("PartMediaElement") as MediaElement;
       if (this._mediaElement != null)
       {
-        this._mediaElement.Width = Application.Current.Host.Content.ActualHeight;
-        this._mediaElement.Height = Application.Current.Host.Content.ActualWidth;
         this._mediaElement.AutoPlay = false;
         this._mediaElement.MediaOpened += new RoutedEventHandler(this.OnMediaElementMediaOpened);
         this._mediaElement.MediaEnded += new RoutedEventHandler(this.OnMediaElementMediaEnded);
@@ -87,11 +84,11 @@ namespace Izi.Travel.Shell.Media.Controls
         {
           Interval = TimeSpan.FromMilliseconds(500.0)
         };
-        this._positionTimer.Tick += new EventHandler(this.OnPositionTimerTick);
-        this._slider.ManipulationStarted += new EventHandler<ManipulationStartedEventArgs>(this.OnSliderManipulationStarted);
-        this._slider.ManipulationCompleted += new EventHandler<ManipulationCompletedEventArgs>(this.OnSliderManipulationCompleted);
+        this._positionTimer.Tick += (s, e) => OnPositionTimerTick(s, e);
+        this._slider.ManipulationStarted += this.OnSliderManipulationStarted;
+        this._slider.ManipulationCompleted += this.OnSliderManipulationCompleted;
       }
-      this.Tap += new EventHandler<GestureEventArgs>(this.OnTap);
+      this.Tapped += this.OnTapped;
       VisualStateManager.GoToState((Control) this, "Buffering", false);
       VisualStateManager.GoToState((Control) this, "ControlPanelVisible", false);
     }
@@ -144,14 +141,14 @@ namespace Izi.Travel.Shell.Media.Controls
       this._mediaElement.Pause();
     }
 
-    private void OnSliderManipulationStarted(object sender, ManipulationStartedEventArgs e)
+    private void OnSliderManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
     {
       if (!this._mediaElement.CanSeek)
         return;
       this._positionTimer.Stop();
     }
 
-    private void OnSliderManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+    private void OnSliderManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
     {
       if (!this._mediaElement.CanSeek)
         return;
@@ -159,13 +156,14 @@ namespace Izi.Travel.Shell.Media.Controls
       this._positionTimer.Start();
     }
 
-    private void OnTap(object sender, GestureEventArgs e)
+    private void OnTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
     {
     }
 
-    private void OnPositionTimerTick(object sender, EventArgs e)
+    private void OnPositionTimerTick(object sender, object e)
     {
       this._slider.Value = this._mediaElement.Position.TotalSeconds;
     }
   }
 }
+

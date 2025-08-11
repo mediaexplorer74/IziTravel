@@ -3,11 +3,11 @@ using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using System;
-using Izi.Travel.Core.Components.Behaviors;
+using Izi.Travel.Shell.Core.Components.Behaviors;
+using Izi.Travel.Data.Entities.Common;
 
 namespace Izi.Travel.Shell.Mtg.Views.Tour
 {
-    [ViewModel(typeof(TourMapPartViewModel))]
     public partial class TourListView
     {
         private MapViewBehavior _mapViewBehavior;
@@ -16,6 +16,7 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour
         {
             InitializeComponent();
             Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
 
         private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -35,8 +36,8 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour
                     Map.MapControl.ZoomLevel = viewModel.ZoomLevel;
                     Map.MapControl.Center = new Geopoint(new BasicGeoposition
                     {
-                        Latitude = viewModel.Center.Latitude,
-                        Longitude = viewModel.Center.Longitude
+                        Latitude = default,//viewModel.Center.Latitude,
+                        Longitude = default//viewModel.Center.Longitude
                     });
                 }
 
@@ -51,11 +52,11 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour
             if (args.MapElements.Count > 0 && DataContext is TourMapPartViewModel viewModel)
             {
                 // Handle map item click
-                var mapItem = args.MapElements[0] as MapItemsControl;
-                if (mapItem?.DataContext != null)
-                {
-                    viewModel.MapItemClickCommand?.Execute(mapItem.DataContext);
-                }
+                //var mapItem = args.MapElements[0] as MapItemsControl;
+                //if (mapItem?.DataContext != null)
+                //{
+                //    viewModel.MapItemClickCommand?.Execute(mapItem.DataContext);
+                //}
             }
         }
 
@@ -72,12 +73,12 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour
         {
             if (DataContext is TourMapPartViewModel viewModel && sender.Center != null)
             {
-                viewModel.Center = new GeoCoordinate(sender.Center.Position.Latitude, sender.Center.Position.Longitude);
+                viewModel.Center = new Geopoint(/*sender.Center.Position.Latitude*/default, /*sender.Center.Position.Longitude*/0);
                 viewModel.MapCenterChangedCommand?.Execute(viewModel.Center);
             }
         }
 
-        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        private void OnUnloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             // Clean up event handlers
             if (Map?.MapControl != null)
@@ -85,8 +86,6 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour
                 Map.MapControl.ZoomLevelChanged -= OnMapZoomLevelChanged;
                 Map.MapControl.CenterChanged -= OnMapCenterChanged;
             }
-            
-            base.OnNavigatedFrom(e);
         }
     }
 }

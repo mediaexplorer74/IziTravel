@@ -6,8 +6,7 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -77,26 +76,20 @@ namespace Izi.Travel.Shell.Core.Controls
 
     public LabeledRating() => this.DefaultStyleKey = (object) typeof (LabeledRating);
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
-      Rating templateChild = (Rating) this.GetTemplateChild("PartRating");
-      templateChild.FilledItemStyle = this.CreateStyle<RatingItem>(new List<Setter>()
-      {
-        new Setter(Control.BackgroundProperty, (object) this.FilledItemBackground),
-        new Setter(FrameworkElement.MarginProperty, (object) this.ItemMargin)
-      });
-      templateChild.UnfilledItemStyle = this.CreateStyle<RatingItem>(new List<Setter>()
-      {
-        new Setter(Control.BackgroundProperty, (object) this.UnfilledItemBackground),
-        new Setter(FrameworkElement.MarginProperty, (object) this.ItemMargin)
-      });
-    }
-
-    private Style CreateStyle<T>(List<Setter> setters)
-    {
-      Style style = new Style(typeof (T));
-      setters.ForEach((Action<Setter>) (x => style.Setters.Add((SetterBase) x)));
-      return style;
+      base.OnApplyTemplate();
+      
+      // The RatingControl is already configured in XAML with the necessary bindings
+      // No need to set styles programmatically as they are handled by the control
+      
+      // If we need to do any additional setup, we can get the RatingControl like this:
+      // var ratingControl = GetTemplateChild("PartRating") as RatingControl;
+      // if (ratingControl != null)
+      // {
+      //     // Additional setup if needed
+      // }
     }
   }
 }
+

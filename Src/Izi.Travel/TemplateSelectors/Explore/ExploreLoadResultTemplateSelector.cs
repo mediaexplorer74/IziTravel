@@ -6,8 +6,7 @@
 
 using Izi.Travel.Shell.Core.Components;
 using Izi.Travel.Shell.Model.Explore;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.TemplateSelectors.Explore
 {
@@ -49,3 +48,4 @@ namespace Izi.Travel.Shell.TemplateSelectors.Explore
     }
   }
 }
+

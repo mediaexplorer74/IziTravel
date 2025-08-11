@@ -1,14 +1,15 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Components.Behaviors.ZoomableImageBehavior
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Windows;
-using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml.Media;
+using Windows.Foundation;
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Behaviors
@@ -18,9 +19,6 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
     public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof (ScaleProperty), typeof (double), typeof (ZoomableImageBehavior), new PropertyMetadata(new PropertyChangedCallback(ZoomableImageBehavior.OnScaleChanged)));
     private const double MaxImageZoom = 5.0;
     private Point _imagePosition = new Point(0.0, 0.0);
-    private Point _oldFinger1;
-    private Point _oldFinger2;
-    private double _oldScaleFactor;
     private bool _pinch;
 
     private static void OnScaleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -44,26 +42,13 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
 
     public ZoomableImageBehavior() => this.Scale = 1.0;
 
-    private void OnPinchStarted(Point position1, Point position2)
+    private void OnPinchDelta(double scaleDelta, Point translation)
     {
-      this._oldFinger1 = position1;
-      this._oldFinger2 = position2;
-      this._oldScaleFactor = 1.0;
-    }
-
-    private void OnPinchDelta(double distanceRatio, Point position1, Point position2)
-    {
-      double num = Math.Max(distanceRatio / this._oldScaleFactor, 1.0 / this.Scale);
+      double num = Math.Max(scaleDelta, 1.0 / this.Scale);
       if (!this.IsScaleValid(num))
         return;
-      Point currentFinger1 = position1;
-      Point currentFinger2 = position2;
-      Point translationDelta = this.GetTranslationDelta(currentFinger1, currentFinger2, this._oldFinger1, this._oldFinger2, this._imagePosition, num);
-      this._oldFinger1 = currentFinger1;
-      this._oldFinger2 = currentFinger2;
-      this._oldScaleFactor = distanceRatio;
       this.UpdateImageScale(num);
-      this.UpdateImagePosition(translationDelta);
+      this.UpdateImagePosition(translation);
     }
 
     private void OnDragDelta(double horizontalChange, double verticalChange)
@@ -143,34 +128,35 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
     {
       this.AssociatedObject.RenderTransform = (Transform) new CompositeTransform();
       this.AssociatedObject.CacheMode = (CacheMode) new BitmapCache();
-      this.AssociatedObject.DoubleTap += new EventHandler<GestureEventArgs>(this.AssociatedObject_DoubleTap);
-      this.AssociatedObject.ManipulationDelta += new EventHandler<ManipulationDeltaEventArgs>(this.AssociatedObject_ManipulationDelta);
-      this.AssociatedObject.ManipulationCompleted += new EventHandler<ManipulationCompletedEventArgs>(this.AssociatedObject_ManipulationCompleted);
+      this.AssociatedObject.ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY;
+      this.AssociatedObject.DoubleTapped += this.AssociatedObject_DoubleTapped;
+      this.AssociatedObject.ManipulationDelta += this.AssociatedObject_ManipulationDelta;
+      this.AssociatedObject.ManipulationCompleted += this.AssociatedObject_ManipulationCompleted;
       base.OnAttached();
     }
 
-    private void AssociatedObject_DoubleTap(object sender, GestureEventArgs e) => this.Reset();
+    private void AssociatedObject_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e) => this.Reset();
 
-    private void AssociatedObject_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+    private void AssociatedObject_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-      bool flag = e.PinchManipulation != null;
+      bool flag = Math.Abs(e.Delta.Scale - 1.0) > double.Epsilon;
       if (flag)
       {
-        if (!this._pinch)
-          this.OnPinchStarted(e.PinchManipulation.Current.PrimaryContact, e.PinchManipulation.Current.SecondaryContact);
-        else
-          this.OnPinchDelta(e.PinchManipulation.CumulativeScale, e.PinchManipulation.Current.PrimaryContact, e.PinchManipulation.Current.SecondaryContact);
+        this.OnPinchDelta(e.Delta.Scale, e.Delta.Translation);
       }
       else
-        this.OnDragDelta(e.DeltaManipulation.Translation.X, e.DeltaManipulation.Translation.Y);
+      {
+        this.OnDragDelta(e.Delta.Translation.X, e.Delta.Translation.Y);
+      }
       this._pinch = flag;
     }
 
     private void AssociatedObject_ManipulationCompleted(
       object sender,
-      ManipulationCompletedEventArgs e)
+      ManipulationCompletedRoutedEventArgs e)
     {
       this._pinch = false;
     }
   }
 }
+

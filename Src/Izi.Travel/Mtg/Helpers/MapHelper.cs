@@ -5,51 +5,31 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using Windows.UI.Xaml.Controls.Maps;
-using Microsoft.Phone.Maps.Services;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Media;
+using Windows.UI;
+using Windows.Devices.Geolocation;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Helpers
 {
   public static class MapHelper
   {
-    public static Task<QueryCompletedEventArgs<Route>> GetRoute(
-      TravelMode travelMode,
-      GeoCoordinate from,
-      GeoCoordinate to)
-    {
-      TaskCompletionSource<QueryCompletedEventArgs<Route>> taskCompletionSource = new TaskCompletionSource<QueryCompletedEventArgs<Route>>();
-      RouteQuery routeQuery = new RouteQuery();
-      routeQuery.RouteOptimization = RouteOptimization.MinimizeDistance;
-      routeQuery.TravelMode = travelMode;
-      routeQuery.Waypoints = (IEnumerable<GeoCoordinate>) new List<GeoCoordinate>()
-      {
-        from,
-        to
-      };
-      routeQuery.QueryCompleted += (EventHandler<QueryCompletedEventArgs<Route>>) ((s, e) => taskCompletionSource.SetResult(e));
-      routeQuery.QueryAsync();
-      return taskCompletionSource.Task;
-    }
-
     public static MapPolyline CreatePolyline(
-      IEnumerable<GeoCoordinate> path,
+      IEnumerable<BasicGeoposition> path,
       Color color,
       double thickness)
     {
       MapPolyline polyline = new MapPolyline();
       polyline.StrokeColor = color;
       polyline.StrokeThickness = thickness;
-      polyline.Path.AddRange(path);
+      polyline.Path = new Geopath(path);
       return polyline;
     }
 
     public static MapPolygon CreatePolygon(
-      IEnumerable<GeoCoordinate> path,
+      IEnumerable<BasicGeoposition> path,
       Color fillColor,
       Color strokeColor,
       double strokeThickness)
@@ -58,18 +38,18 @@ namespace Izi.Travel.Shell.Mtg.Helpers
       polygon.FillColor = fillColor;
       polygon.StrokeColor = strokeColor;
       polygon.StrokeThickness = strokeThickness;
-      polygon.Path.AddRange(path);
+      polygon.Paths.Add(new Geopath(path));
       return polygon;
     }
 
     public static void AddRange(
-      this GeoCoordinateCollection collection,
-      IEnumerable<GeoCoordinate> path)
+      this IList<BasicGeoposition> collection,
+      IEnumerable<BasicGeoposition> path)
     {
       if (path == null)
         return;
-      foreach (GeoCoordinate geoCoordinate in path)
-        collection.Add(geoCoordinate);
+      foreach (var position in path)
+        collection.Add(position);
     }
   }
 }

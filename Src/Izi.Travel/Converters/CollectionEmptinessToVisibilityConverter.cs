@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
@@ -27,3 +27,4 @@ namespace Izi.Travel.Shell.Converters
     }
   }
 }
+

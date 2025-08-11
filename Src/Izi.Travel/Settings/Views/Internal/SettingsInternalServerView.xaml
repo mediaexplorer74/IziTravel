@@ -4,7 +4,8 @@
                             
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:controls="clr-namespace:Izi.Travel.Shell.Common.Controls"                            
+                            xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"    
+                            xmlns:controls="clr-namespace:Izi.Travel.Shell.Controls"                        
                             mc:Ignorable="d"
                             Style="{StaticResource IziTravelPageStyle}">
     
@@ -14,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <controls:PageTitleControl 
+        <commoncontrols:PageTitleControl 
             Grid.Row="0"
             Title="{Binding LocalizedResources.LabelSettings, Source={StaticResource LocalizedStrings}}" 
             SubTitle="{Binding LocalizedResources.LabelServer, Source={StaticResource LocalizedStrings}}"/>

@@ -37,7 +37,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Numpad
       get => this._number;
       set
       {
-        this.SetProperty<string>(ref this._number, value, new System.Action(((BaseSearchFlyoutViewModel) this).RefreshCommands), nameof (Number));
+        this.SetProperty<string>(ref this._number, value, new System.Action(this.RefreshCommands), nameof (Number));      
       }
     }
 

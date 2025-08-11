@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.DetailPartViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -20,9 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Navigation;
-
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
+using Izi.Travel.Core.Extensions;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
 {
@@ -61,15 +61,20 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
 
     protected override void OnInitialize()
     {
-      if (IoC.Get<IFrameNavigationContext>().NavigationMode == NavigationMode.Back)
-        this.SelectedLanguage = IoC.Get<IPhoneService>().State.Get<string, object>(this.GetLanguagePhoneStateKey()) as string;
-      base.OnInitialize();
+        var navigationContext = IoC.Get<IFrameNavigationContext>();
+        if (navigationContext?.NavigationMode == NavigationMode.Back)
+        {
+            var languageKey = GetLanguagePhoneStateKey();
+            SelectedLanguage = IoC.Get<IPhoneService>()?.State.Get<string, string>(languageKey);
+        }
+        base.OnInitialize();
     }
 
     protected override void OnDeactivate(bool close)
     {
-      IoC.Get<IPhoneService>().State.Set<string, object>(this.GetLanguagePhoneStateKey(), (object) this.SelectedLanguage);
-      base.OnDeactivate(close);
+        var languageKey = GetLanguagePhoneStateKey();
+        IoC.Get<IPhoneService>()?.State.Set(languageKey, SelectedLanguage);
+        base.OnDeactivate(close);
     }
 
     protected override async void OnLoadedFirst()
@@ -82,11 +87,20 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
 
     protected override IScreen CreateScreenItem()
     {
-      DetailViewModel screenItem = IoC.Get<DetailViewModel>(this.MtgObject.Type.ToString());
-      if (screenItem != null)
-        return (IScreen) screenItem;
-      ShellServiceFacade.DialogService.Show(AppResources.ErrorTitleDataLoading, AppResources.ErrorMessageOpenNotSupportedObject, MessageBoxButtonContent.Ok, (Action<FlyoutDialog, MessageBoxResult>) ((d, e) => NavigationHelper.TryGoBack()));
-      return (IScreen) screenItem;
+        var viewModel = IoC.Get<DetailViewModel>(MtgObject.Type.ToString());
+        if (viewModel != null)
+        {
+            //viewModel.MtgObject = MtgObject;
+            return viewModel;
+        }
+        
+        ShellServiceFacade.DialogService.Show(
+            AppResources.ErrorTitleDataLoading, 
+            AppResources.ErrorMessageOpenNotSupportedObject, 
+            MessageBoxButtonContent.Ok, 
+            (d, e) => NavigationHelper.TryGoBack());
+            
+        return null;
     }
 
     private string GetLanguagePhoneStateKey() => "DetailPartViewModel.SelectedLanguage." + this.Uid;

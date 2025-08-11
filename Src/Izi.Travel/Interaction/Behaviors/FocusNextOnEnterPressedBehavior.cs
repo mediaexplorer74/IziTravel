@@ -1,12 +1,12 @@
-// IziTravel.Interaction.Behaviors.FocusNextOnEnterPressedBehavior
+﻿// IziTravel.Interaction.Behaviors.FocusNextOnEnterPressedBehavior
 
 
 
 using System;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml;
 
 #nullable disable
@@ -68,3 +68,4 @@ namespace Izi.Travel.Shell.Interaction.Behaviors
     }
   }
 }
+

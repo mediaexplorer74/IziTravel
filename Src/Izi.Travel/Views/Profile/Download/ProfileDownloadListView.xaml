@@ -4,14 +4,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
-             xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
-             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:components="using:Izi.Travel.Shell.Common.Components"
+             xmlns:controls="using:Izi.Travel.Shell.Core.Controls"
+             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
              
-             xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
-             xmlns:coreconverters="clr-namespace:Izi.Travel.Shell.Core.Converters"
-             xmlns:converters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
-             xmlns:download="clr-namespace:Izi.Travel.Shell.ViewModels.Profile.Download"
+             xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
+             xmlns:coreconverters="using:Izi.Travel.Shell.Core.Converters"
+             xmlns:converters="using:Izi.Travel.Shell.Mtg.Converters"
+             xmlns:download="using:Izi.Travel.Shell.ViewModels.Profile.Download"
              mc:Ignorable="d">
 
     

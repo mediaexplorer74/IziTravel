@@ -63,7 +63,7 @@ namespace Izi.Travel.Shell.Controls
 
         private void InitializeComponent()
         {
-            // This will be replaced by the XAML compiler with the content from the XAML file
+            throw new NotImplementedException();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -104,3 +104,4 @@ namespace Izi.Travel.Shell.Controls
         }
     }
 }
+

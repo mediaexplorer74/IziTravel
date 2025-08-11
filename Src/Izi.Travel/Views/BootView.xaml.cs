@@ -4,19 +4,19 @@
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
-using System;
-using Windows.UI.Xaml.Controls;
-
-using Windows.UI.Xaml.Navigation;
 using Caliburn.Micro;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.ViewModels;
 using Izi.Travel.Shell.ViewModels.Featured;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows;
-
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 #nullable disable
 namespace Izi.Travel.Shell.Views
 {
@@ -37,10 +37,14 @@ namespace Izi.Travel.Shell.Views
             else
               ShellServiceFacade.NavigationService.UriFor<MainViewModel>().Navigate();
 
-            await Task.Factory.StartNew((System.Action) (() 
-                => Deployment.Current.Dispatcher.BeginInvoke((System.Action) (() 
-                => ShellServiceFacade.NavigationService.RemoveBackEntry()))));
-            
+            await Task.Factory.StartNew((System.Action)(()
+    => CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+        new DispatchedHandler(() =>
+        {
+            /*ShellServiceFacade.NavigationService.RemoveBackEntry();*/
+        }))));
+
         }
     }
 }
+

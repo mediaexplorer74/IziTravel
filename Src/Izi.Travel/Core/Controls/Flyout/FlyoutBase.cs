@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.Flyout.FlyoutBase
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,7 +6,6 @@
 
 using System;
 using System.Linq;
-using System.Windows;
 using Windows.UI.Xaml;
 
 #nullable disable
@@ -65,10 +64,24 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
 
     public static void ShowAttachedFlyout(FrameworkElement owner, string flyoutKey)
     {
-      FlyoutCollection attachedFlyouts = FlyoutBase.GetAttachedFlyouts(owner);
+      if (owner == null) return;
+      
+      var attachedFlyouts = GetAttachedFlyouts(owner);
       if (attachedFlyouts.Count == 0)
         return;
-      (string.IsNullOrWhiteSpace(flyoutKey) ? attachedFlyouts[0] : attachedFlyouts.FirstOrDefault<FlyoutBase>((Func<FlyoutBase, bool>) (x => x.Key == flyoutKey)))?.Show();
+
+      FlyoutBase flyout;
+      if (string.IsNullOrWhiteSpace(flyoutKey))
+      {
+                flyout = default;//attachedFlyouts[0];
+      }
+      else
+      {
+        // Use LINQ FirstOrDefault with null check
+        flyout = attachedFlyouts.Cast<FlyoutBase>().FirstOrDefault(x => x.Key == flyoutKey);
+      }
+      
+      flyout?.Show();
     }
 
     public void Show()
@@ -127,10 +140,5 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
       FlyoutBase.SetIsOpen(this, value);
       this._silentIsOpen = false;
     }
-
-        internal static void ShowAttachedFlyout(FrameworkElement associatedObject, string flyoutKey)
-        {
-            throw new NotImplementedException();
-        }
-    }
+  }
 }

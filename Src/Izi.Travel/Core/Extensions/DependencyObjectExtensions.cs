@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
@@ -26,3 +26,4 @@ namespace Izi.Travel.Shell.Core.Extensions
     }
   }
 }
+

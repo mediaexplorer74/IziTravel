@@ -21,8 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Profile.Quiz
 {
@@ -146,3 +145,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Quiz
     }
   }
 }
+

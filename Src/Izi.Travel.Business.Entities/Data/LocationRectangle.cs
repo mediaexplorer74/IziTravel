@@ -7,6 +7,7 @@
 using Izi.Travel.Data.Entities.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 
@@ -17,12 +18,12 @@ namespace Izi.Travel.Business.Entities.Data
     /// </summary>
     public class LocationRectangle
     {
-        private Geopoint location;
+        private Windows.Devices.Geolocation.Geopoint location;
         private double v1;
         private double v2;
-        public Geopoint Center;
+        public Windows.Devices.Geolocation.Geopoint Center;
 
-        public LocationRectangle(Geopoint location, double v1, double v2)
+        public LocationRectangle(Windows.Devices.Geolocation.Geopoint location, double v1, double v2)
         {
             this.location = location;
             this.v1 = v1;
@@ -45,7 +46,7 @@ namespace Izi.Travel.Business.Entities.Data
         /// <param name="point1">The first point to include in the rectangle.</param>
         /// <param name="point2">The second point to include in the rectangle.</param>
         /// <returns>A rectangle that contains both points.</returns>
-        public static LocationRectangle CreateBoundingRectangle(Geopoint point1, Geopoint point2)
+        public static LocationRectangle CreateBoundingRectangle(Windows.Devices.Geolocation.Geopoint point1, Windows.Devices.Geolocation.Geopoint point2)
         {
             if (point1 == null) throw new ArgumentNullException(nameof(point1));
             if (point2 == null) throw new ArgumentNullException(nameof(point2));
@@ -93,14 +94,54 @@ namespace Izi.Travel.Business.Entities.Data
             //    Southeast = new GeoCoordinate(box.SoutheastCorner.Latitude, box.SoutheastCorner.Longitude)
             //};
             return new LocationRectangle(
-                new Geopoint(new BasicGeoposition { Latitude = box.NorthwestCorner.Latitude, Longitude = box.NorthwestCorner.Longitude }),
+                new Windows.Devices.Geolocation.Geopoint(new BasicGeoposition { Latitude = box.NorthwestCorner.Latitude, Longitude = box.NorthwestCorner.Longitude }),
                 /*box.Width*/20,
                 /*box.Heigth*/20);
         }
 
-        public static LocationRectangle CreateBoundingRectangle(IEnumerable<Geopoint> locations)
+        /// <summary>
+        /// Creates a bounding rectangle that contains all the specified points.
+        /// </summary>
+        /// <param name="locations">The collection of points to include in the rectangle.</param>
+        /// <returns>A rectangle that contains all the points, or null if the collection is empty or null.</returns>
+        public static LocationRectangle CreateBoundingRectangle(IEnumerable<Windows.Devices.Geolocation.Geopoint> locations)
         {
-            throw new NotImplementedException();
+            if (locations == null || !locations.Any())
+                return null;
+
+            var first = locations.First();
+            if (first == null)
+                return null;
+
+            double north = first.Position.Latitude;
+            double south = first.Position.Latitude;
+            double east = first.Position.Longitude;
+            double west = first.Position.Longitude;
+
+            foreach (var point in locations.Skip(1).Where(p => p != null))
+            {
+                var pos = point.Position;
+                north = Math.Max(north, pos.Latitude);
+                south = Math.Min(south, pos.Latitude);
+                east = Math.Max(east, pos.Longitude);
+                west = Math.Min(west, pos.Longitude);
+            }
+
+            var center = new BasicGeoposition
+            {
+                Latitude = (north + south) / 2.0,
+                Longitude = (east + west) / 2.0
+            };
+
+            // Calculate width and height in degrees
+            double width = Math.Abs(east - west);
+            double height = Math.Abs(north - south);
+
+            return new LocationRectangle(new Windows.Devices.Geolocation.Geopoint(center), width, height)
+            {
+                Northwest = new GeoCoordinate(north, west),
+                Southeast = new GeoCoordinate(south, east)
+            };
         }
     }
 }

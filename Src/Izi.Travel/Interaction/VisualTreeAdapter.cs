@@ -1,7 +1,7 @@
 ﻿// IziTravel.Interaction.VisualTreeAdapter
 
 using System.Collections.Generic;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
@@ -25,3 +25,4 @@ namespace Izi.Travel.Shell.Interaction
     public DependencyObject Parent => VisualTreeHelper.GetParent(this._item);
   }
 }
+

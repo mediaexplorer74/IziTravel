@@ -7,8 +7,7 @@
 using Izi.Travel.Shell.Core.Components;
 using Izi.Travel.Shell.ViewModels.QuickAccess.Items;
 using System;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.TemplateSelectors.QuickAccess
 {
@@ -34,3 +33,4 @@ namespace Izi.Travel.Shell.TemplateSelectors.QuickAccess
     }
   }
 }
+

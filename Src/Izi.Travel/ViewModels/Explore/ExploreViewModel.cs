@@ -36,8 +36,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 //using System.Windows.Threading;
 using Windows.Foundation;
@@ -45,7 +45,7 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
 using Izi.Travel.Shell.Toolkit.Controls.Maps;
 using Windows.UI;
-
+using System.Windows.Input;
 
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Explore
@@ -80,11 +80,11 @@ namespace Izi.Travel.Shell.ViewModels.Explore
     private ExploreItemViewModel _selectedFlipItem;
     private double _zoomLevel = 10.0;
     private double _viewZoomLevel;
-    private Geopoint _userLocation = default;// GeoCoordinate.Unknown;
-    private Geopoint _center = default;//GeoCoordinate.Unknown;
-    private Geopoint _mapLocationCenter = default; //GeoCoordinate.Unknown;
-    private Geopoint _viewCenter = default;//GeoCoordinate.Unknown;
-private LocationRectangle _viewBounds;
+    private Windows.Devices.Geolocation.Geopoint _userLocation = null;
+    private Windows.Devices.Geolocation.Geopoint _center = null;
+    private Windows.Devices.Geolocation.Geopoint _mapLocationCenter = null;
+    private Windows.Devices.Geolocation.Geopoint _viewCenter = null;
+    private LocationRectangle _viewBounds;
     private readonly DispatcherTimer _clusterTimer;
     private readonly double _clusterDistance;
     private int _clusterItemsCount;
@@ -164,16 +164,16 @@ private LocationRectangle _viewBounds;
       }
     }
 
-    public Geopoint UserLocation
+    public Windows.Devices.Geolocation.Geopoint UserLocation
     {
         get => this._userLocation;
         set
         {
-            this.SetProperty<Geopoint>(ref this._userLocation, value, () =>
+            this.SetProperty<Windows.Devices.Geolocation.Geopoint>(ref this._userLocation, value, () =>
             {
                 this.NotifyOfPropertyChange<bool>(() => this.HasUserLocation);
 
-                if (value == null /*|| value == Geopoint.Unknown*/)
+                if (value == null)
                     return;
                 ExploreLocationItem.AroundMe.TrySetLocation(value);
             }, nameof(UserLocation));
@@ -184,25 +184,25 @@ private LocationRectangle _viewBounds;
     {
         get
         {
-            return this.UserLocation != null/* && this.UserLocation != Geopoint.Unknown*/;
+            return this.UserLocation != null;
         }
     }
 
-    public Geopoint Center
+    public Windows.Devices.Geolocation.Geopoint Center
     {
         get => this._center;
         set
         {
-            this.SetProperty<Geopoint>(ref this._center, value, () => ExploreLocationItem.MapLocation.TrySetLocation(this._center), nameof(Center));
+            this.SetProperty<Windows.Devices.Geolocation.Geopoint>(ref this._center, value, () => ExploreLocationItem.MapLocation.TrySetLocation(this._center), nameof(Center));
         }
     }
 
-    public Geopoint ViewCenter
+    public Windows.Devices.Geolocation.Geopoint ViewCenter
     {
         get => this._viewCenter;
         set
         {
-            this.SetProperty<Geopoint>(ref this._viewCenter, value);
+            this.SetProperty<Windows.Devices.Geolocation.Geopoint>(ref this._viewCenter, value);
         }
     }
 
@@ -337,7 +337,7 @@ private LocationRectangle _viewBounds;
         if (value != null)
         {
           value.IsSelected = true;
-          if (value.Location != (Geopoint) null)
+          if (value.Location != null)
             this.ViewCenter = value.Location;
         }
         this.NotifyOfPropertyChange<ExploreItemViewModel>((Expression<Func<ExploreItemViewModel>>) (() => this.SelectedMapItem));
@@ -565,15 +565,13 @@ private LocationRectangle _viewBounds;
                 if (selectedLocationItem != ExploreLocationItem.MapLocation)
                 {
                     if (this.Center == null || selectedLocationItem.Location == null || selectedLocationItem.LocationRectangle == null 
-                        || selectedLocationItem.LocationRectangle.Center == null /*|| GeopointExtensions.GetDistanceTo(this.Center, selectedLocationItem.LocationRectangle.Center) < 200.0*/)
+                        || selectedLocationItem.LocationRectangle.Center == null)
                         return;
                     this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.MapLocation;
                     this._mapLocationCenter = this.Center;
                 }
                 else if (this._mapLocationCenter != null && selectedLocationItem.Location != null)
                 {
-                    //if (GeopointExtensions.GetDistanceTo(this._mapLocationCenter, selectedLocationItem.Location) < 200.0)
-                    //    return;
                     this._mapLocationCenter = this.Center;
                 }
                 await this.LoadItemsDataAsync();
@@ -769,7 +767,7 @@ private LocationRectangle _viewBounds;
 
     private async Task InitializeLocationAsync()
     {
-       Geopoint geopoint = default;//await Izi.Travel.Business.Managers.Geotracker.Instance.GetPositionAsync() ?? Izi.Travel.Business.Managers.Geotracker.Instance.DefaultPosition;
+       Windows.Devices.Geolocation.Geopoint geopoint = await Izi.Travel.Business.Managers.Geotracker.Instance.GetPositionAsync() ?? Izi.Travel.Business.Managers.Geotracker.Instance.DefaultPosition;
        
        if (geopoint == null)
             return;
@@ -791,7 +789,7 @@ private LocationRectangle _viewBounds;
         objectListFilter.Query = this._currentQuery;
         MtgObjectListFilter filter = objectListFilter;
         ExploreLocationItem location = this.FlyoutLocationViewModel.SelectedLocationItem;
-        Geopoint coordinate = !(location.Location != null) ? Izi.Travel.Business.Managers.Geotracker.Instance.DefaultPosition : location.Location;
+        Windows.Devices.Geolocation.Geopoint coordinate = location.Location != null ? location.Location : Izi.Travel.Business.Managers.Geotracker.Instance.DefaultPosition;
         /*bool hasRegion = location != ExploreLocationItem.AroundMe && location != ExploreLocationItem.MapLocation;
         if (!hasRegion)
         {
@@ -813,11 +811,11 @@ private LocationRectangle _viewBounds;
             })).ToArray<ExploreItemViewModel>();
             if (hasRegion && array.Length != 0 && location.LocationRectangle != null)
             {
-                GeoboundingBox boundingBox = GeoboundingBox.TryCreateFromGeopoints(array.Select<ExploreItemViewModel, Geopoint>((Func<ExploreItemViewModel, Geopoint>)(x => x.Location)));
+                GeoboundingBox boundingBox = GeoboundingBox.TryCreateFromGeopoints(array.Select<ExploreItemViewModel, Windows.Devices.Geolocation.Geopoint>((Func<ExploreItemViewModel, Windows.Devices.Geolocation.Geopoint>)(x => x.Location)));
                 if (!boundingBox.Intersects(location.LocationRectangle))
                 {
                     ExploreLocationItem location1 = new ExploreLocationItem();
-                    location1.TrySetLocation((Geopoint)null, boundingBox);
+                    location1.TrySetLocation((Windows.Devices.Geolocation.Geopoint)null, boundingBox);
                     this.SetMapView(location1);
                 }
             }
@@ -902,7 +900,7 @@ private LocationRectangle _viewBounds;
         if (!exploreItemViewModel1.ClusterIsVisited)
         {
           int num = 1;
-          List<Geopoint> locations = new List<Geopoint>()
+          List<Windows.Devices.Geolocation.Geopoint> locations = new List<Windows.Devices.Geolocation.Geopoint>()
           {
             exploreItemViewModel1.Location
           };
@@ -921,7 +919,7 @@ private LocationRectangle _viewBounds;
             }
           }
           if (num > 1)
-            exploreItemViewModel1.ClusterBounds = LocationRectangle.CreateBoundingRectangle((IEnumerable<Geopoint>) locations);
+            exploreItemViewModel1.ClusterBounds = LocationRectangle.CreateBoundingRectangle((IEnumerable<Windows.Devices.Geolocation.Geopoint>) locations);
 
           exploreItemViewModel1.ClusterCount = num;
           exploreItemViewModel1.ClusterIsHidden = false;
@@ -943,12 +941,19 @@ private LocationRectangle _viewBounds;
                 && point.Y >= (double) -padding && point.Y <= ExploreViewModel.ScreenHeight + (double) padding;
     }
 
-    private void OnGeoTrackerPositionChanged(IGeotracker tracker, Geopoint location)
+    private void OnGeoTrackerPositionChanged(IGeotracker tracker, Windows.Devices.Geolocation.Geopoint location)
     {
       if (location == null)
         return;
             
-      this.UserLocation = new Geopoint(default);//(location.Latitude, location.Longitude);
+      var position = location.Position;
+      this.UserLocation = new Windows.Devices.Geolocation.Geopoint(
+          new Windows.Devices.Geolocation.BasicGeoposition 
+          { 
+              Latitude = position.Latitude, 
+              Longitude = position.Longitude 
+          });
+      
       foreach (ExploreItemViewModel exploreItemViewModel in (Collection<ExploreItemViewModel>) this.Items)
         exploreItemViewModel.RefreshUserLocationDistance();
     }
@@ -976,3 +981,4 @@ private LocationRectangle _viewBounds;
     }
   }
 }
+

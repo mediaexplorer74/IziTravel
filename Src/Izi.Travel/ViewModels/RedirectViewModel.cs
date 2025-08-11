@@ -9,6 +9,7 @@ using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Filters;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services;
+using Izi.Travel.Core.Extensions;
 using Izi.Travel.Shell.Core.Controls.Flyout;
 using Izi.Travel.Shell.Core.Resources;
 using Izi.Travel.Shell.Core.Services;
@@ -17,8 +18,7 @@ using Izi.Travel.Shell.Mtg.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels
 {
@@ -46,17 +46,19 @@ namespace Izi.Travel.Shell.ViewModels
         mtgObjectFilter.Languages = strArray;
         MtgObject mtgObjectAsync = await MtgObjectServiceHelper.GetMtgObjectAsync(filter);
         NavigationHelper.NavigateToDetails(mtgObjectAsync.Type, mtgObjectAsync.Uid, mtgObjectAsync.Language, mtgObjectAsync.ParentUid);
-        navigationService.RemoveBackEntry();
+        //navigationService.RemoveBackEntry();
       }
       catch (Exception ex)
       {
         RedirectViewModel.Logger.Error(ex);
         ShellServiceFacade.DialogService.Show(AppResources.ErrorTitleDataLoading, AppResources.ErrorMessageDataLoading, MessageBoxButtonContent.Ok, (Action<FlyoutDialog, MessageBoxResult>) ((d, e) =>
         {
-          if (navigationService.CanGoBack)
-            navigationService.GoBack();
-          else
-            Application.Current.Terminate();
+            if (navigationService.CanGoBack)
+                navigationService.GoBack();
+            else
+            {
+                //Application.Current.Terminate();
+            }
         }));
       }
     }
@@ -68,3 +70,4 @@ namespace Izi.Travel.Shell.ViewModels
     }
   }
 }
+

@@ -1,13 +1,14 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Controls.SemanticZoom
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Windows;
+using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 
 #nullable disable
@@ -55,16 +56,16 @@ namespace Izi.Travel.Shell.Core.Controls
       this.OpacityAnimationDuration = 350;
     }
 
-    public override void OnApplyTemplate()
+    protected override void OnApplyTemplate()
     {
       base.OnApplyTemplate();
       this._zoomedOutContent = this.GetTemplateChild("PartZoomedOutContent") as ContentControl;
       if (this._zoomedOutContent != null)
-        this._zoomedOutContent.ManipulationDelta += new EventHandler<ManipulationDeltaEventArgs>(this.OnZoomedOutContentManipulationDelta);
+        this._zoomedOutContent.ManipulationDelta += this.OnZoomedOutContentManipulationDelta;
       this._zoomedInContent = this.GetTemplateChild("PartZoomedInContent") as ContentControl;
       if (this._zoomedInContent == null)
         return;
-      this._zoomedInContent.ManipulationDelta += new EventHandler<ManipulationDeltaEventArgs>(this.OnZoomedInContentManipulationDelta);
+      this._zoomedInContent.ManipulationDelta += this.OnZoomedInContentManipulationDelta;
     }
 
     private void ZoomIn()
@@ -104,8 +105,8 @@ namespace Izi.Travel.Shell.Core.Controls
       doubleAnimation.From = new double?(from);
       doubleAnimation.To = new double?(to);
       DoubleAnimation element = doubleAnimation;
-      Storyboard.SetTargetProperty((Timeline) element, new PropertyPath(string.Format("(UIElement.RenderTransform).(ScaleTransform.Scale{0})", (object) axis), new object[0]));
-      Storyboard.SetTarget((Timeline) element, (DependencyObject) target);
+      Storyboard.SetTargetProperty((Timeline)element, $"(UIElement.RenderTransform).(CompositeTransform.Scale{axis})");
+      Storyboard.SetTarget((Timeline)element, (DependencyObject)target);
       return element;
     }
 
@@ -115,37 +116,13 @@ namespace Izi.Travel.Shell.Core.Controls
       element.Duration = (Duration) TimeSpan.FromMilliseconds((double) this.OpacityAnimationDuration);
       element.From = new double?(show ? 0.0 : 1.0);
       element.To = new double?(show ? 1.0 : 0.0);
-      Storyboard.SetTargetProperty((Timeline) element, new PropertyPath((object) UIElement.OpacityProperty));
-      Storyboard.SetTarget((Timeline) element, (DependencyObject) target);
-      element.Completed += (EventHandler) ((sender, args) => target.Visibility = show ? Visibility.Visible : Visibility.Collapsed);
+      Storyboard.SetTargetProperty((Timeline)element, "Opacity");
+      Storyboard.SetTarget((Timeline)element, (DependencyObject)target);
+      element.Completed += (s, args) => target.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
       return element;
     }
 
-    private bool IsZoomInPinch(PinchManipulation pinchManipulation)
-    {
-      Point point1 = pinchManipulation.Original.PrimaryContact;
-      double x1 = point1.X;
-      point1 = pinchManipulation.Original.SecondaryContact;
-      double x2 = point1.X;
-      double num1 = Math.Pow(x1 - x2, 2.0);
-      point1 = pinchManipulation.Original.PrimaryContact;
-      double y1 = point1.Y;
-      point1 = pinchManipulation.Original.SecondaryContact;
-      double y2 = point1.Y;
-      double num2 = Math.Pow(y1 - y2, 2.0);
-      double num3 = Math.Sqrt(num1 + num2);
-      Point point2 = pinchManipulation.Current.PrimaryContact;
-      double x3 = point2.X;
-      point2 = pinchManipulation.Current.SecondaryContact;
-      double x4 = point2.X;
-      double num4 = Math.Pow(x3 - x4, 2.0);
-      point2 = pinchManipulation.Current.PrimaryContact;
-      double y3 = point2.Y;
-      point2 = pinchManipulation.Current.SecondaryContact;
-      double y4 = point2.Y;
-      double num5 = Math.Pow(y3 - y4, 2.0);
-      return Math.Sqrt(num4 + num5) > num3;
-    }
+    private static bool IsZoomIn(double scaleDelta) => scaleDelta > 1.0;
 
     private static void OnIsZoomedOutPropertyChanged(
       DependencyObject d,
@@ -159,18 +136,18 @@ namespace Izi.Travel.Shell.Core.Controls
         semanticZoom.ZoomIn();
     }
 
-    private void OnZoomedOutContentManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+    private void OnZoomedOutContentManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-      if (e.PinchManipulation == null || !this.IsZoomInPinch(e.PinchManipulation))
+      if (!SemanticZoom.IsZoomIn(e.Delta.Scale))
         return;
       this.IsZoomedOut = false;
       e.Handled = true;
       e.Complete();
     }
 
-    private void OnZoomedInContentManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+    private void OnZoomedInContentManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-      if (e.PinchManipulation == null || this.IsZoomInPinch(e.PinchManipulation))
+      if (SemanticZoom.IsZoomIn(e.Delta.Scale))
         return;
       this.IsZoomedOut = true;
       e.Handled = true;
@@ -178,3 +155,4 @@ namespace Izi.Travel.Shell.Core.Controls
     }
   }
 }
+

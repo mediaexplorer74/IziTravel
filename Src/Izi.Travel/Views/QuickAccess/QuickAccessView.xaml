@@ -4,16 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:coreControls="clr-namespace:Izi.Travel.Shell.Core.Controls"
-             xmlns:commmonControls="clr-namespace:Izi.Travel.Shell.Common.Controls"
-             xmlns:templateSelectors="clr-namespace:Izi.Travel.Shell.TemplateSelectors.QuickAccess"
+             xmlns:coreControls="using:Izi.Travel.Shell.Core.Controls"
+             xmlns:commmonControls="using:Izi.Travel.Shell.Common.Controls"
+             xmlns:templateSelectors="using:Izi.Travel.Shell.TemplateSelectors.QuickAccess"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
              xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:mediaConverters="clr-namespace:Izi.Travel.Shell.Media.Converters"
-             xmlns:items="clr-namespace:Izi.Travel.Shell.ViewModels.QuickAccess.Items"
-             xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
-             xmlns:ts="clr-namespace:Izi.Travel.Shell.TemplateSelectors"
+             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:mediaConverters="using:Izi.Travel.Shell.Media.Converters"
+             xmlns:items="using:Izi.Travel.Shell.ViewModels.QuickAccess.Items"
+             xmlns:components="using:Izi.Travel.Shell.Common.Components"
+             xmlns:ts="using:Izi.Travel.Shell.TemplateSelectors"
              mc:Ignorable="d">
 
     
@@ -114,37 +114,11 @@
                                                     HorizontalAlignment="Right"
                                                     Width="44" Height="44" />
 
-                    <ts:PlayerActionSelector Grid.Row="0" 
-                                             Grid.Column="1" 
-                                             Content="{Binding}">
-                        <ts:PlayerActionSelector.Audio>
-                            <DataTemplate>
-                                <coreControls:ActionImageButton Width="64"
-                                                                Height="64"
-                                                                FlowDirection="LeftToRight"
-                                                                ImageSource="{Binding AudioViewModel.PlayState, Converter={StaticResource AudioPlayStateToImageConverter}}"
-                                                                Command="{Binding AudioViewModel.ToggleCommand}" />
-                            </DataTemplate>
-                        </ts:PlayerActionSelector.Audio>
-                        <ts:PlayerActionSelector.Video>
-                            <DataTemplate>
-                                <coreControls:ActionImageButton Width="64"
-                                                                Height="64"
-                                                                FlowDirection="LeftToRight"
-                                                                ImageSource="/Assets/Icons/player.video.png"
-                                                                Command="{Binding OpenVideoCommand}" />
-                            </DataTemplate>
-                        </ts:PlayerActionSelector.Video>
-                        <ts:PlayerActionSelector.Info>
-                            <DataTemplate>
-                                <coreControls:ActionImageButton Width="64"
-                                                                Height="64"
-                                                                FlowDirection="LeftToRight"
-                                                                ImageSource="/Assets/Icons/player.info.png"
-                                                                Command="{Binding ShowInfoCommand}" />
-                            </DataTemplate>
-                        </ts:PlayerActionSelector.Info>
-                    </ts:PlayerActionSelector>
+                    <coreControls:ActionImageButton Grid.Row="0" Grid.Column="1"
+                                                    Width="64" Height="64"
+                                                    FlowDirection="LeftToRight"
+                                                    ImageSource="{Binding AudioViewModel.PlayState, Converter={StaticResource AudioPlayStateToImageConverter}}"
+                                                    Command="{Binding AudioViewModel.ToggleCommand}" />
 
                     
                     <coreControls:ActionImageButton Grid.Row="0" Grid.Column="2"

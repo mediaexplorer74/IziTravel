@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail.PublisherDetailInfoViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -13,12 +13,11 @@ using Izi.Travel.Shell.Core.Services;
 using Izi.Travel.Shell.Core.Services.Entities;
 using Izi.Travel.Shell.Mtg.Model;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
-using Microsoft.Phone.Tasks;
+using Windows.System;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
 {
@@ -77,12 +76,9 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
       try
       {
         string uriString = publisherContactInfo.NavigationUrl;
-        if (!string.IsNullOrWhiteSpace(uriString) && !uriString.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase) && !uriString.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+        if (!string.IsNullOrWhiteSpace(uriString) && !uriString.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !uriString.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
           uriString = "http://" + uriString;
-        new WebBrowserTask()
-        {
-          Uri = new Uri(uriString, UriKind.RelativeOrAbsolute)
-        }.Show();
+        var _ = Launcher.LaunchUriAsync(new Uri(uriString, UriKind.RelativeOrAbsolute));
       }
       catch (Exception ex)
       {
@@ -167,3 +163,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
     }
   }
 }
+

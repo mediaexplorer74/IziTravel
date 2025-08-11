@@ -21,10 +21,11 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
   /// <summary>
   /// Behavior for managing the view state of a MapControl
   /// </summary>
-  public class MapViewBehavior : Behavior<MapControl>
+  public class MapViewBehavior : Behavior<Toolkit.Controls.Maps.MapControl>
   {
     private bool _isRefreshing;
     private bool _isInitialized;
+    private bool _isViewChangingInternal;
 
     #region Dependency Properties
 
@@ -108,12 +109,34 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
         AssociatedObject.CenterChanged += OnMapCenterChanged;
         AssociatedObject.ZoomLevelChanged += OnMapZoomLevelChanged;
         AssociatedObject.ActualCameraChanged += OnMapCameraChanged;
-            
+        AssociatedObject.SizeChanged += OnMapSizeChanged;
+        
+        // Set initial view if center is already set
+        if (ViewCenter != null)
+        {
+            _ = UpdateMapViewAsync(ViewCenter, ViewZoomLevel);
+        }
+        
         // Initial refresh
         RefreshView();
     }
 
-    protected override void OnDetaching()
+        private void OnMapZoomLevelChanged(Toolkit.Controls.Maps.MapControl control, object arg2)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnMapCameraChanged(Toolkit.Controls.Maps.MapControl control, MapActualCameraChangedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnMapCenterChanged(Toolkit.Controls.Maps.MapControl control, object arg2)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnDetaching()
     {
         if (AssociatedObject != null)
         {
@@ -127,12 +150,12 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
         base.OnDetaching();
     }
 
-    private void OnMapCenterChanged(MapControl sender, object args)
+    /*private void OnMapCenterChanged(Toolkit.Controls.Maps.MapControl sender, object args)
     {
         if (!_isInitialized || _isRefreshing) return;
 
         var center = sender.Center;
-        if (center != null)
+        if (center != null && !_isViewChangingInternal)
         {
             ViewCenter = new Geopoint(new BasicGeoposition
             {
@@ -140,70 +163,60 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
                 Longitude = center.Position.Longitude
             });
         }
-    }
+    }*/
 
-    private void OnMapZoomLevelChanged(MapControl sender, object args)
+    /*private void OnMapZoomLevelChanged(Toolkit.Controls.Maps.MapControl sender, object args)
     {
-        if (!_isInitialized || _isRefreshing) return;
-            
+        if (!_isInitialized || _isRefreshing || _isViewChangingInternal) return;
         ViewZoomLevel = sender.ZoomLevel;
-    }
+    }*/
 
-    private void OnMapCameraChanged(MapControl sender, MapActualCameraChangedEventArgs args)
+    /*private void OnMapCameraChanged(Toolkit.Controls.Maps.MapControl sender, MapActualCameraChangedEventArgs args)
     {
-        if (!_isInitialized || _isRefreshing) return;
-            
+        if (!_isInitialized || _isRefreshing || _isViewChangingInternal) return;
         RefreshView();
-    }
+    }*/
 
     private void OnMapSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (!_isInitialized || _isRefreshing) return;
-            
+        if (!_isInitialized || _isRefreshing || _isViewChangingInternal) return;
         RefreshView();
     }
 
     private async void RefreshView()
     {
-        if (!_isInitialized || AssociatedObject == null) return;
+        if (!_isInitialized || AssociatedObject == null || _isRefreshing) return;
 
         _isRefreshing = true;
 
         try
         {
             // Get the current map bounds
-            //var bounds = await AssociatedObject.GetVisibleRegionAsync(MapVisibleRegion.Full);
-            Geopath bounds = AssociatedObject.GetVisibleRegion(/*MapVisibleRegion.Full*/MapVisibleRegionKind.Full);
-            // Get the current map bounds
-            //GeoboundingBox bounds = AssociatedObject.GetVisibleRegion(MapVisibleRegionKind.Full);
-            if (bounds != null)
+            Geopoint bounds = AssociatedObject.GetVisibleRegion(MapVisibleRegionKind.Full);
+            /*if (bounds != null && bounds.Positions.Count >= 2)
             {
-                var nw = new Geopoint(new BasicGeoposition
-                {
-                    Latitude = default,//bounds.NorthwestCorner.Latitude,
-                    Longitude = default//bounds.NorthwestCorner.Longitude
-                });
-                var se = new Geopoint(new BasicGeoposition
-                {
-                    Latitude = default,//bounds.SoutheastCorner.Latitude,
-                    Longitude =default //bounds.SoutheastCorner.Longitude
-                });
-
+                var nw = new Geopoint(bounds.Positions[0]);
+                // Use positions[2] if available, otherwise use positions[1]
+                var sePosition = bounds.Positions.Count > 2 ? bounds.Positions[2] : bounds.Positions[1];
+                var se = new Geopoint(sePosition);
+                
                 View = LocationRectangle.CreateBoundingRectangle(nw, se);
-            }
+            }*/
 
-            // Update center and zoom level
+            // Update center and zoom level from the map control
             var center = AssociatedObject.Center;
-            if (center != null)
+            if (center != null && !_isViewChangingInternal)
             {
-                ViewCenter = new Geopoint(new BasicGeoposition
-                {
-                    Latitude = center.Position.Latitude,
-                    Longitude = center.Position.Longitude
-                });
+                // Only update ViewCenter if it's not already being set programmatically
+                ViewCenter = center;
             }
 
             ViewZoomLevel = AssociatedObject.ZoomLevel;
+        }
+        catch (Exception ex)
+        {
+            // Log error if needed
+            System.Diagnostics.Debug.WriteLine($"Error in RefreshView: {ex.Message}");
         }
         finally
         {
@@ -213,75 +226,93 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
 
     private static async void OnViewPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var behavior = d as MapViewBehavior;
-        if (behavior == null || behavior._isRefreshing || !behavior._isInitialized) return;
+        if (!(d is MapViewBehavior behavior) || behavior._isRefreshing || !behavior._isInitialized) 
+            return;
             
-        var newValue = e.NewValue as LocationRectangle;
-        if (newValue == null) return;
-            
-        // Convert to GeoboundingBox
-        var boundingBox = newValue.ToGeoboundingBox();
-        if (boundingBox == null) return;
-            
-        // Update map view
-        await behavior.AssociatedObject.TrySetViewBoundsAsync(
-            boundingBox, 
-            behavior.ZoomDesiredMargin, 
-            MapAnimationKind.Default);
+        if (e.NewValue is LocationRectangle newValue)
+        {
+            try
+            {
+                behavior._isViewChangingInternal = true;
+                
+                // Convert to GeoboundingBox
+                var boundingBox = newValue.ToGeoboundingBox();
+                if (boundingBox != null)
+                {
+                    // Update map view
+                    await behavior.AssociatedObject.TrySetViewBoundsAsync(
+                        boundingBox, 
+                        behavior.ZoomDesiredMargin, 
+                        MapAnimationKind.Default);
+                }
+            }
+            finally
+            {
+                behavior._isViewChangingInternal = false;
+            }
+        }
     }
 
     private static async void OnViewCenterPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        //var boundingBox = new GeoboundingBox(default, default, default);
-        var behavior = d as MapViewBehavior;
-        if (behavior == null || behavior._isRefreshing || !behavior._isInitialized) return;
-
-        if (e.NewValue is BasicGeoposition newCenter)
-        {
-            var center = new Geopoint(newCenter);
-            await behavior.AssociatedObject.TrySetViewAsync(
-                center,
-                /*boundingBox*/default,
-                /*behavior.ZoomDesiredMargin,*/default,
-                /*MapAnimationKind.Default*/default);
-        }
-        else
-        {
+        if (!(d is MapViewBehavior behavior) || behavior._isRefreshing || !behavior._isInitialized) 
             return;
+
+        if (e.NewValue is Geopoint newCenter)
+        {
+            try
+            {
+                behavior._isViewChangingInternal = true;
+                await behavior.UpdateMapViewAsync(newCenter, behavior.ViewZoomLevel);
+            }
+            finally
+            {
+                behavior._isViewChangingInternal = false;
+            }
         }
     }
        
 
-   private static void OnViewZoomLevelPropertyChanged(
-      DependencyObject d,
-      DependencyPropertyChangedEventArgs e)
+    private static async void OnViewZoomLevelPropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is MapViewBehavior mapViewBehavior) || mapViewBehavior._isRefreshing || !(e.NewValue is double))
-        return;
-      double newValue = (double) e.NewValue;
-      //mapViewBehavior.AssociatedObject.SetView(mapViewBehavior.ViewCenter, newValue.Clamp(1.0, 20.0), MapAnimationKind.Parabolic);
+        if (!(d is MapViewBehavior behavior) || behavior._isRefreshing || !behavior._isInitialized) 
+            return;
+            
+        if (e.NewValue is double newZoomLevel)
+        {
+            try
+            {
+                behavior._isViewChangingInternal = true;
+                await behavior.UpdateMapViewAsync(behavior.ViewCenter, newZoomLevel);
+            }
+            finally
+            {
+                behavior._isViewChangingInternal = false;
+            }
+        }
     }
 
-    private void OnMapCenterChanged(object sender, MapCenterChangedEventArgs args)
+    // Removed duplicate event handlers - using the ones above with additional checks
+    
+    private async Task UpdateMapViewAsync(Geopoint center, double zoomLevel)
     {
-      this.RefreshView();
-    }
-
-    /*private void OnMapSizeChanged(object sender, SizeChangedEventArgs args) => this.RefreshView();*/
-
-    private void OnMapZoomLevelChanged(object sender, MapZoomLevelChangedEventArgs args)
-    {
-      this.RefreshView();
-    }
-
-    private void OnMapViewChanging(object sender, MapViewChangingEventArgs e)
-    {
-      this.IsViewChanging = true;
-    }
-
-    private void OnMapViewChanged(object sender, MapViewChangedEventArgs e)
-    {
-      this.IsViewChanging = false;
+        if (center == null || AssociatedObject == null) return;
+        
+        try
+        {
+            await AssociatedObject.TrySetViewAsync(
+                center,
+                zoomLevel,
+                null, // No heading
+                null, // No pitch
+                MapAnimationKind.Default);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error updating map view: {ex.Message}");
+        }
     }
   }
 }

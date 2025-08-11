@@ -10,7 +10,7 @@
     <AssemblyName>IziTravel</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.15063.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -119,6 +119,12 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MainPageView.cs" />
+    <Compile Include="Mtg\Messages\MapItemSelectedMessage.cs" />
+    <Compile Include="Core\Extensions\CollectionExtensions.cs" />
+    <Compile Include="Core\Extensions\UiExtensions.cs" />
+    <Compile Include="Core\Services\IPhoneService.cs" />
+    <Compile Include="Helpers\GeoHelper.cs" />
     <Compile Include="Controls\HeaderControl.xaml.cs">
       <DependentUpon>HeaderControl.xaml</DependentUpon>
     </Compile>
@@ -127,6 +133,15 @@
     </Compile>
     <Compile Include="Controls\LongListSelector.xaml.cs">
       <DependentUpon>LongListSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProgressOverlay.xaml.cs">
+      <DependentUpon>ProgressOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Map\MapItemsControl.xaml.cs">
+      <DependentUpon>MapItemsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Map\MapItemControl.xaml.cs">
+      <DependentUpon>MapItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Controls\PhoneTextBox.xaml.cs">
       <DependentUpon>PhoneTextBox.xaml</DependentUpon>
@@ -146,6 +161,8 @@
     <Compile Include="Controls\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppServices\Navigation\JournalEntry.cs" />
+    <Compile Include="AppServices\Navigation\UwpNavigationService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -180,6 +197,7 @@
     <Compile Include="Common\Model\KeyValueModel.cs" />
     <Compile Include="Common\Model\MenuItemInfo.cs" />
     <Compile Include="Common\Model\ScreenProperties.cs" />
+    <Compile Include="Common\Model\ApplicationBarMode.cs" />
     <Compile Include="Common\ViewModels\Flyout\FlyoutViewModel.cs" />
     <Compile Include="Common\ViewModels\List\BaseListEmptyViewModel.cs" />
     <Compile Include="Common\ViewModels\List\BaseListViewModel`1.cs" />
@@ -328,10 +346,13 @@
     <Compile Include="Core\Resources\ManifestResources.cs" />
     <Compile Include="Core\Services\Contract\IDialogService.cs" />
     <Compile Include="Core\Services\Entities\MessageBoxButtonContent.cs" />
+    <Compile Include="Core\Services\Entities\MessageBoxResult.cs" />
     <Compile Include="Core\Services\Implementation\DialogService.cs" />
     <Compile Include="Core\Services\ShellServiceFacade.cs" />
     <Compile Include="Core\Themes\ThemeHelper.cs" />
     <Compile Include="Core\Transitions\CustomTransition.cs" />
+    <Compile Include="Core\Transitions\TransitionShims.cs" />
+    <Compile Include="Core\Shims\WpMapShims.cs" />
     <Compile Include="Helpers\Exception.cs" />
     <Compile Include="Helpers\FileSize.cs" />
     <Compile Include="Helpers\NativeMethods.cs" />
@@ -483,6 +504,7 @@
     <Compile Include="Mtg\ViewModels\Common\MtgObjectPartViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Common\Numpad\NumpadFlyoutViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Common\Player\InfoPartViewModel.cs" />
+    <Compile Include="Mtg\Interfaces\IMapService.cs" />
     <Compile Include="Mtg\ViewModels\Common\Player\IPlayerParentViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Common\Player\Items\PlayerEndItemViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Common\Player\Items\PlayerItemViewModel.cs" />
@@ -504,6 +526,7 @@
     <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailInfoViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailNewsViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Museum\Detail\MuseumDetailViewModel.cs" />
+    <Compile Include="Mtg\ViewModels\Museum\Map\MapItem.cs" />
     <Compile Include="Mtg\ViewModels\Museum\Map\MuseumMapItemViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Museum\Map\MuseumMapListItemViewModel.cs" />
     <Compile Include="Mtg\ViewModels\Museum\Map\MuseumMapPartViewModel.cs" />
@@ -582,6 +605,7 @@
     <Compile Include="Mtg\Views\Museum\Detail\MuseumDetailNewsView.xaml.cs">
       <DependentUpon>MuseumDetailNewsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mtg\Views\Museum\Map\IMapItem.cs" />
     <Compile Include="Mtg\Views\Museum\Map\MuseumMapPartView.xaml.cs">
       <DependentUpon>MuseumMapPartView.xaml</DependentUpon>
     </Compile>
@@ -606,6 +630,7 @@
     <Compile Include="Mtg\Views\Tour\Detail\TourDetailInfoView.xaml.cs">
       <DependentUpon>TourDetailInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mtg\Views\Tour\Map\MapControlItem.cs" />
     <Compile Include="Mtg\Views\Tour\Map\TourMapPartView.xaml.cs">
       <DependentUpon>TourMapPartView.xaml</DependentUpon>
     </Compile>
@@ -687,6 +712,11 @@
     <Compile Include="Toolkit\Controls\Maps\MapChild.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapChildCollection.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapChildControl.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapControl.xaml.cs">
+      <DependentUpon>MapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Toolkit\Controls\Maps\MapControlHelper.cs" />
+    <Compile Include="Toolkit\Controls\Maps\MapDataUsagePreference.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapExtensions.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapExtensionsChildrenChangeManager.cs" />
     <Compile Include="Toolkit\Controls\Maps\MapItemsControl.cs" />
@@ -1167,6 +1197,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Toolkit\Controls\Maps\MapControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\BootView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1261,6 +1295,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <!--SDKReference Include="Windows.Foundation.UniversalApiContract, Version=10.0.15063.0">
+      <Name>Windows.Foundation.UniversalApiContract</Name>
+    </SDKReference-->
+    <SDKReference Include="WindowsMobile, Version=10.0.15063.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Caliburn.Micro">
       <Version>3.2.0</Version>
     </PackageReference>
@@ -1268,10 +1310,7 @@
       <Version>1.11.61</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.14</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.1.190405004</Version>
+      <Version>5.2.4</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
@@ -1290,9 +1329,6 @@
     </PackageReference>
     <PackageReference Include="System.Xml.XPath">
       <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="Telerik.UI.for.UniversalWindowsPlatform">
-      <Version>1.0.2.11</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

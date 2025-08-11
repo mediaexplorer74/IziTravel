@@ -1,7 +1,7 @@
-﻿// IziTravel.AppServices.ViewModels.MainPivot.MainPivotViewModel
+// IziTravel.AppServices.ViewModels.MainPivot.MainPivotViewModel
 
 using Caliburn.Micro;
-using IziTravel.AppServices.DataModels;
+using Izi.Travel.Shell.AppServices.DataModels;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;

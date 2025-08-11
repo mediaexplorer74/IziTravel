@@ -1,12 +1,18 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.Maps.UserLocationMarker
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Izi.Travel.Shell.Toolkit.Controls.Maps
 {
-    public class MapZoomLevelChangedEventArgs
+    public class MapZoomLevelChangedEventArgs : EventArgs
     {
+        public double NewZoomLevel { get; }
+
+        public MapZoomLevelChangedEventArgs(double zoomLevel)
+        {
+            NewZoomLevel = zoomLevel;
+        }
     }
 }

@@ -4,12 +4,12 @@
                            
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
+                            xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
                             xmlns:i="using:Microsoft.Xaml.Interactivity"
-                            xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
-                            xmlns:application="clr-namespace:Izi.Travel.Shell.Settings.ViewModels.Application"
-                            xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-                            xmlns:controls="clr-namespace:Izi.Travel.Shell.Toolkit.Controls;assembly=Izi.Travel.Shell.Toolkit"
+                            xmlns:components="using:Izi.Travel.Shell.Common.Components"
+                            xmlns:application="using:Izi.Travel.Shell.Settings.ViewModels.Application"
+                            xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+                            xmlns:controls="using:Izi.Travel.Shell.Toolkit.Controls"
                             mc:Ignorable="d"
                             Style="{StaticResource IziTravelPageStyle}">
     <Page.TopAppBar>

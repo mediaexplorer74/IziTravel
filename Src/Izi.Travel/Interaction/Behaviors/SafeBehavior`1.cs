@@ -5,7 +5,7 @@
 
 //using Microsoft.Xaml.Interactivity;
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -100,3 +100,4 @@ namespace Izi.Travel.Shell.Interaction.Behaviors
    
   }*/
 }
+

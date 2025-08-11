@@ -1,25 +1,25 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Components.Behaviors.SelectorSelectBehavior
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 using Microsoft.Xaml.Interactivity;
+using System.Windows.Input;
 
 #nullable disable
 namespace Izi.Travel.Shell.Core.Components.Behaviors
 {
   public class SelectorSelectBehavior : Behavior<Selector>
   {
-    public static readonly DependencyProperty SelectCommandProperty = DependencyProperty.Register(nameof (SelectCommand), typeof (ICommand), typeof (SelectorSelectBehavior), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty SelectCommandProperty = DependencyProperty.Register(nameof (SelectCommand), typeof (System.Windows.Input.ICommand), typeof (SelectorSelectBehavior), new PropertyMetadata((object) null));
 
-    public ICommand SelectCommand
+    public System.Windows.Input.ICommand SelectCommand
     {
-      get => (ICommand) this.GetValue(SelectorSelectBehavior.SelectCommandProperty);
+      get => (System.Windows.Input.ICommand) this.GetValue(SelectorSelectBehavior.SelectCommandProperty);
       set => this.SetValue(SelectorSelectBehavior.SelectCommandProperty, (object) value);
     }
 
@@ -48,3 +48,4 @@ namespace Izi.Travel.Shell.Core.Components.Behaviors
     }
   }
 }
+

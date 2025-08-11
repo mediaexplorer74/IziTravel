@@ -1,6 +1,5 @@
 ﻿// IziTravel.Interaction.SimpleDataTemplateSelector
-
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -27,3 +26,4 @@ namespace Izi.Travel.Shell.Interaction
     }
   }
 }
+

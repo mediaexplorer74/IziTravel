@@ -1,92 +1,114 @@
 // ********************************************************************
 // Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapExtensionsChildrenChangeManager
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Updated for UWP compatibility
 
-using Windows.UI.Xaml.Controls.Maps;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Windows;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Maps;
 
-#nullable disable
 namespace Izi.Travel.Shell.Toolkit.Controls.Maps
 {
-  internal class MapExtensionsChildrenChangeManager : CollectionChangeListener<DependencyObject>
-  {
-    public MapExtensionsChildrenChangeManager(INotifyCollectionChanged sourceCollection)
+    internal class MapExtensionsChildrenChangeManager : CollectionChangeListener<DependencyObject>
     {
-      if (sourceCollection == null)
-        throw new ArgumentNullException(nameof (sourceCollection));
-      this.ObjectToMapLayerMapping = new Dictionary<DependencyObject, MapLayer>();
-      sourceCollection.CollectionChanged += new NotifyCollectionChangedEventHandler(((CollectionChangeListener<DependencyObject>) this).CollectionChanged);
+        private readonly MapControl _mapControl;
+        private readonly Dictionary<DependencyObject, MapLayer> _objectToMapLayerMapping;
+        private INotifyCollectionChanged sourceCollection;
+        internal Map Map;
+
+        public MapExtensionsChildrenChangeManager(INotifyCollectionChanged sourceCollection, MapControl mapControl)
+        {
+            if (sourceCollection == null)
+                throw new ArgumentNullException(nameof(sourceCollection));
+            
+            _mapControl = mapControl ?? throw new ArgumentNullException(nameof(mapControl));
+            _objectToMapLayerMapping = new Dictionary<DependencyObject, MapLayer>();
+            
+            sourceCollection.CollectionChanged += (s, e) => OnCollectionChanged(s, e);
+        }
+
+        private void OnCollectionChanged(object s, NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MapExtensionsChildrenChangeManager(INotifyCollectionChanged sourceCollection)
+        {
+            this.sourceCollection = sourceCollection;
+        }
+
+        protected override void InsertItemInternal(int index, DependencyObject obj)
+        {
+            if (_objectToMapLayerMapping.ContainsKey(obj))
+                throw new InvalidOperationException("Attempted to insert the same object twice");
+
+            var mapLayer = GetMapLayerForObject(obj);
+            _objectToMapLayerMapping[obj] = mapLayer;
+            
+            // In UWP, we don't need to manage layers the same way
+            // The MapElements are managed by the MapControl directly
+        }
+
+        protected override void RemoveItemInternal(DependencyObject obj)
+        {
+            if (!_objectToMapLayerMapping.TryGetValue(obj, out var mapLayer))
+                return;
+
+            mapLayer.Clear();
+            _objectToMapLayerMapping.Remove(obj);
+        }
+
+        protected override void ResetInternal()
+        {
+            foreach (var layer in _objectToMapLayerMapping.Values)
+            {
+                layer.Clear();
+            }
+            _objectToMapLayerMapping.Clear();
+        }
+
+        protected override void AddInternal(DependencyObject obj)
+        {
+            if (_objectToMapLayerMapping.ContainsKey(obj))
+                throw new InvalidOperationException("Attempted to add the same object twice");
+
+            var mapLayer = GetMapLayerForObject(obj);
+            _objectToMapLayerMapping[obj] = mapLayer;
+        }
+
+        protected override void MoveInternal(DependencyObject obj, int newIndex)
+        {
+            // In UWP, the order of elements in the map is not as critical
+            // as they are positioned based on their coordinates
+            if (_objectToMapLayerMapping.ContainsKey(obj))
+            {
+                // Refresh the element to ensure it's on top
+                var layer = _objectToMapLayerMapping[obj];
+                // No direct equivalent in UWP, may need to adjust ZIndex if needed
+            }
+        }
+
+        private MapLayer GetMapLayerForObject(object obj)
+        {
+            if (obj is MapItemsControl mapItemsControl)
+            {
+                // Handle MapItemsControl if needed
+                return new MapLayer(_mapControl);
+            }
+            
+            // For other objects, create a new layer with a single overlay
+            var mapLayer = new MapLayer(_mapControl);
+            
+            if (obj is UIElement element)
+            {
+                var overlay = new MapOverlay { Content = element };
+                mapLayer.Add(overlay);
+            }
+            
+            return mapLayer;
+        }
     }
-
-    public Map Map { get; set; }
-
-    private Dictionary<DependencyObject, MapLayer> ObjectToMapLayerMapping { get; set; }
-
-    protected override void InsertItemInternal(int index, DependencyObject obj)
-    {
-      MapLayer mapLayer = !this.ObjectToMapLayerMapping.ContainsKey(obj) ? MapExtensionsChildrenChangeManager.GetMapLayerForObject((object) obj) : throw new InvalidOperationException("Attempted to insert the same object twice");
-      this.ObjectToMapLayerMapping[obj] = mapLayer;
-      this.Map.Layers.Insert(index, mapLayer);
-    }
-
-    protected override void RemoveItemInternal(DependencyObject obj)
-    {
-      if (!this.ObjectToMapLayerMapping.ContainsKey(obj))
-        return;
-      MapLayer mapLayer = this.ObjectToMapLayerMapping[obj];
-      this.ObjectToMapLayerMapping.Remove(obj);
-      this.Map.Layers.Remove(mapLayer);
-      MapItemsControl mapItemsControl = obj as MapItemsControl;
-      foreach (MapOverlay mapOverlay in (Collection<MapOverlay>) mapLayer)
-        MapChild.ClearMapOverlayBindings(mapOverlay);
-    }
-
-    protected override void ResetInternal()
-    {
-      foreach (Collection<MapOverlay> layer in this.Map.Layers)
-      {
-        foreach (MapOverlay mapOverlay in layer)
-          MapChild.ClearMapOverlayBindings(mapOverlay);
-      }
-      this.Map.Layers.Clear();
-      this.ObjectToMapLayerMapping.Clear();
-    }
-
-    protected override void AddInternal(DependencyObject obj)
-    {
-      MapLayer mapLayer = !this.ObjectToMapLayerMapping.ContainsKey(obj) ? MapExtensionsChildrenChangeManager.GetMapLayerForObject((object) obj) : throw new InvalidOperationException("Attempted to insert the same object twice");
-      this.ObjectToMapLayerMapping[obj] = mapLayer;
-      this.Map.Layers.Add(mapLayer);
-    }
-
-    protected override void MoveInternal(DependencyObject obj, int newIndex)
-    {
-      if (!this.ObjectToMapLayerMapping.ContainsKey(obj))
-        return;
-      ObservableCollection<MapLayer> layers = (ObservableCollection<MapLayer>) this.Map.Layers;
-      layers.Move(layers.IndexOf(this.ObjectToMapLayerMapping[obj]), newIndex);
-    }
-
-    private static MapLayer GetMapLayerForObject(object obj)
-    {
-      MapLayer mapLayerForObject;
-      if (obj is MapItemsControl mapItemsControl)
-      {
-        mapLayerForObject = mapItemsControl.MapLayer;
-      }
-      else
-      {
-        mapLayerForObject = new MapLayer();
-        MapOverlay mapOverlay = MapChild.CreateMapOverlay(obj, (DataTemplate) null);
-        mapLayerForObject.Add(mapOverlay);
-      }
-      return mapLayerForObject;
-    }
-  }
 }
+

@@ -7,8 +7,7 @@
 using Izi.Travel.Business.Entities.Culture;
 using Izi.Travel.Business.Services;
 using System.Globalization;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Helpers
 {
@@ -28,3 +27,4 @@ namespace Izi.Travel.Shell.Core.Helpers
     }
   }
 }
+

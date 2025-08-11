@@ -1,17 +1,18 @@
-﻿// IziTravel.AppServices.ViewModels.MainPivot.ForumsViewModel
+// IziTravel.AppServices.ViewModels.MainPivot.ForumsViewModel
 
 using Caliburn.Micro;
-using IziTravel.AppServices.Controllers;
-using IziTravel.AppServices.DataModels;
-using IziTravel.AppServices.ViewModels.Forum;
-using IziTravel.Communication;
-using IziTravel.Communication.Model;
+using Izi.Travel.Shell.AppServices.Controllers;
+using Izi.Travel.Shell.AppServices.DataModels;
+using Izi.Travel.Shell.AppServices.ViewModels.Forum;
+using Izi.Travel.Shell.Communication;
+using Izi.Travel.Shell.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using Izi.Travel.Shell.AppServices.Navigation;
 
 #nullable disable
 namespace Izi.Travel.Shell.AppServices.ViewModels.MainPivot
@@ -80,5 +81,59 @@ namespace Izi.Travel.Shell.AppServices.ViewModels.MainPivot
 
     public interface INavigationService
     {
+        /// <summary>
+        /// Gets the key corresponding to the currently displayed page.
+        /// </summary>
+        string CurrentPageKey { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether there is at least one entry in back navigation history.
+        /// </summary>
+        bool CanGoBack { get; }
+
+        /// <summary>
+        /// Gets the navigation stack of journal entries.
+        /// </summary>
+        IEnumerable<JournalEntry> BackStack { get; }
+
+        /// <summary>
+        /// Navigates to the specified page.
+        /// </summary>
+        /// <param name="pageKey">The key of the page to navigate to.</param>
+        /// <returns>True if navigation was successful; otherwise, false.</returns>
+        bool NavigateTo(string pageKey);
+
+        /// <summary>
+        /// Navigates to the specified page with the specified parameter.
+        /// </summary>
+        /// <param name="pageKey">The key of the page to navigate to.</param>
+        /// <param name="parameter">The navigation parameter.</param>
+        /// <returns>True if navigation was successful; otherwise, false.</returns>
+        bool NavigateTo(string pageKey, object parameter);
+
+        /// <summary>
+        /// Navigates to the specified URI.
+        /// </summary>
+        /// <param name="uri">The URI to navigate to.</param>
+        /// <returns>True if navigation was successful; otherwise, false.</returns>
+        bool Navigate(Uri uri);
+
+        /// <summary>
+        /// Navigates to the previous page in the navigation history.
+        /// </summary>
+        void GoBack();
+
+        /// <summary>
+        /// Removes the most recent entry from the back stack.
+        /// </summary>
+        void RemoveBackEntry();
+
+        /// <summary>
+        /// Gets the parameter associated with the specified key.
+        /// </summary>
+        /// <typeparam name="T">The type of the parameter.</typeparam>
+        /// <param name="key">The key of the parameter.</param>
+        /// <returns>The parameter value, or default(T) if not found.</returns>
+        T GetParameter<T>(string key);
     }
 }

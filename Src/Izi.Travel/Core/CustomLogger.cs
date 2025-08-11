@@ -72,7 +72,7 @@ namespace Izi.Travel.Shell.Core
         while (true)
         {
           CustomLogger.Flush();
-          Thread.Sleep(1000);
+          //Thread.Sleep(1000);
         }
       }));
     }

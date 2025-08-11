@@ -34,13 +34,14 @@ namespace Izi.Travel.Controls.Map
 
         public static readonly DependencyProperty MapServiceTokenProperty =
             DependencyProperty.Register("MapServiceToken", typeof(string), typeof(MapItemsControl), 
-                new PropertyMetadata(string.Empty));
+        new PropertyMetadata(string.Empty));
+        public MapControl MapControl;
 
         public event EventHandler<MapElementClickEventArgs> ItemClick;
 
         public MapItemsControl()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
 
         public IEnumerable ItemsSource
@@ -98,19 +99,19 @@ namespace Izi.Travel.Controls.Map
         private static void OnZoomLevelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as MapItemsControl;
-            if (control?.Map != null && e.NewValue is double zoomLevel)
-            {
-                control.Map.ZoomLevel = zoomLevel;
-            }
+            //if (control?.Map != null && e.NewValue is double zoomLevel)
+            //{
+            //    control.Map.ZoomLevel = zoomLevel;
+            //}
         }
 
         private static void OnCenterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as MapItemsControl;
-            if (control?.Map != null && e.NewValue is Geopoint center)
-            {
-                control.Map.Center = center;
-            }
+            //if (control?.Map != null && e.NewValue is Geopoint center)
+            //{
+            //    control.Map.Center = center;
+            //}
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

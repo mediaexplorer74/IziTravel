@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
@@ -62,3 +62,4 @@ namespace Izi.Travel.Shell.Toolkit.Controls
     }
   }
 }
+

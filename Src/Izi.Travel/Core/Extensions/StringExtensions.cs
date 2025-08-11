@@ -1,14 +1,35 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Extensions.StringExtensions
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+using System;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
 
-#nullable disable
 namespace Izi.Travel.Shell.Core.Extensions
 {
-  public static class StringExtensions
-  {
-    public static string SafeToUpper(this string source) => source?.ToUpper();
-  }
+    public static class StringExtensions
+    {
+        public static string SafeToUpper(this string source) => source?.ToUpper();
+
+        public static IEnumerable<string> SplitBy(this string source, int chunkSize)
+        {
+            if (string.IsNullOrEmpty(source) || chunkSize <= 0)
+            {
+                yield break;
+            }
+
+            for (int i = 0; i < source.Length; i += chunkSize)
+            {
+                int length = Math.Min(chunkSize, source.Length - i);
+                yield return source.Substring(i, length);
+            }
+        }
+
+        public static Visibility ToVisibility(this bool? value)
+        {
+            return value == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public static Visibility ToVisibility(this bool value)
+        {
+            return value ? Visibility.Visible : Visibility.Collapsed;
+        }
+    }
 }

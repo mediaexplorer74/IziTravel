@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapItemsControl
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using Windows.UI.Xaml.Controls.Maps;
@@ -134,3 +134,4 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     }
   }
 }
+

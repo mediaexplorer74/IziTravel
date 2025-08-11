@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Commands.NowPlayingCommand
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -30,41 +30,39 @@ namespace Izi.Travel.Shell.Mtg.Commands
       owner.Deactivated += new EventHandler<DeactivationEventArgs>(this.OnOwnerDeactivated);
     }
 
-    private bool CanExecute(out Uri uri)
+    private bool CanExecute(out AudioTrackInfo track)
     {
-      uri = (Uri) null;
+      track = null;
       AudioTrackInfo nowPlaying = ServiceFacade.AudioService.NowPlaying;
       if (nowPlaying == null)
         return false;
-      uri = NavigationHelper.UriToAudio(nowPlaying.MtgObjectType, nowPlaying.MtgObjectUid, nowPlaying.Language, nowPlaying.MtgParentUid);
-      return !UriHelper.EqualsByCommonParameters(uri, ShellServiceFacade.NavigationService.CurrentSource);
+      track = nowPlaying;
+      return true;
     }
 
     public override bool CanExecute(object parameter)
     {
-      Uri uri = (Uri) null;
-      return this.CanExecute(out uri);
+      AudioTrackInfo track;
+      return this.CanExecute(out track);
     }
 
     public override void Execute(object parameter)
     {
-      Uri uri = (Uri) null;
-      if (!this.CanExecute(out uri))
+      AudioTrackInfo track;
+      if (!this.CanExecute(out track))
         return;
-      ShellServiceFacade.NavigationService.Navigate(uri);
+      NavigationHelper.NavigateToAudio(track.MtgObjectType, track.MtgObjectUid, track.Language, track.MtgParentUid);
     }
 
     private void OnOwnerActivated(object sender, ActivationEventArgs activationEventArgs)
     {
       this.RaiseCanExecuteChanged();
-      // ISSUE: method pointer
-      ServiceFacade.AudioService.NowPlayingChanged += new TypedEventHandler<IAudioService, AudioTrackInfo>((object) this, __methodptr(Instance_NowPlayingChanged));
+      ServiceFacade.AudioService.NowPlayingChanged += Instance_NowPlayingChanged;
     }
 
     private void OnOwnerDeactivated(object sender, DeactivationEventArgs deactivationEventArgs)
     {
-      // ISSUE: method pointer
-      ServiceFacade.AudioService.NowPlayingChanged -= new TypedEventHandler<IAudioService, AudioTrackInfo>((object) this, __methodptr(Instance_NowPlayingChanged));
+      ServiceFacade.AudioService.NowPlayingChanged -= Instance_NowPlayingChanged;
     }
 
     private void Instance_NowPlayingChanged(object sender, AudioTrackInfo e)

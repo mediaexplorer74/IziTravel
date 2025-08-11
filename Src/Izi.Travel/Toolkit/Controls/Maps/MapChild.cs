@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapChild
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -10,7 +10,7 @@ using System;
 using System.ComponentModel;
 //using System.Device.Location;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;//using System.Windows.Data;
@@ -92,7 +92,7 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
       {
         Source = (object) mapOverlay,
         Mode = BindingMode.TwoWay,
-        Path = new PropertyPath(mapOverlayDependencyProperty, new object[0])
+        Path = new PropertyPath(mapOverlayDependencyProperty)
       };
       BindingOperations.SetBinding(targetObject, targetDependencyProperty, (BindingBase) binding);
     }
@@ -118,3 +118,4 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     }
   }
 }
+

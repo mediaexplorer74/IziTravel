@@ -1,30 +1,36 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Core.Converters.BoolToOppositeConverter
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using System;
-using System.Globalization;
-using System.Windows.Data;
-
+using Windows.UI.Xaml.Data;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Converters
 {
   public class BoolToOppositeConverter : IValueConverter
   {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
-      return (object) (bool) (!(value is bool flag) ? 0 : (!flag ? 1 : 0));
+      if (value is bool boolValue)
+        return !boolValue;
+      if (value is int intValue)
+        return intValue == 0;
+      return false;
     }
 
     public object ConvertBack(
       object value,
       Type targetType,
       object parameter,
-      CultureInfo culture)
+      string language)
     {
-      return (object) (bool) (!(value is bool flag) ? 0 : (!flag ? 1 : 0));
+      if (value is bool boolValue)
+        return !boolValue;
+      if (value is int intValue)
+        return intValue == 0 ? true : false;
+      return false;
     }
   }
 }

@@ -1,8 +1,8 @@
-﻿// IziTravel.AppServices.ViewModels.MainPivot.NewsViewModel
+// IziTravel.AppServices.ViewModels.MainPivot.NewsViewModel
 
 using Caliburn.Micro;
-using IziTravel.AppServices.DataModels;
-using IziTravel.Communication;
+using Izi.Travel.Shell.AppServices.DataModels;
+using Izi.Travel.Shell.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

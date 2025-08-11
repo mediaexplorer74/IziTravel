@@ -4,10 +4,11 @@
                             
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:Izi.Travel.Shell.Common.Controls"
+        xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
+        xmlns:controls="using:Izi.Travel.Shell.Controls"
                             
         xmlns:i="using:Microsoft.Xaml.Interactivity"
-        xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
+        xmlns:components="using:Izi.Travel.Shell.Common.Components"
                             
         mc:Ignorable="d"
         Style="{StaticResource IziTravelPageStyle}">
@@ -24,7 +25,7 @@
         </Grid.RowDefinitions>
 
         
-        <controls:PageTitleControl 
+        <commoncontrols:PageTitleControl 
             Grid.Row="0"
             Title="{Binding LocalizedResources.LabelSettings, Source={StaticResource LocalizedStrings}}" 
             SubTitle="{Binding LocalizedResources.LabelLocation, Source={StaticResource LocalizedStrings}}" />

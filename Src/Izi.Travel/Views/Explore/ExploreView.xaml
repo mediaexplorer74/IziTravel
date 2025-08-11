@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:maps="clr-namespace:Windows.UI.Xaml.Controls.Maps"
+             xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:explore="clr-namespace:Izi.Travel.Shell.ViewModels.Explore"
-             xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
-             xmlns:mtgconverters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
+             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:explore="using:Izi.Travel.Shell.ViewModels.Explore"
+             xmlns:controls="using:Izi.Travel.Shell.Core.Controls"
+             xmlns:mtgconverters="using:Izi.Travel.Shell.Mtg.Converters"
              xmlns:extensions="using:Izi.Travel.Shell.Core.Components.Extensions"
-             xmlns:transitions="clr-namespace:Izi.Travel.Shell.Core.Transitions"
-             xmlns:maptoolkit="clr-namespace:Izi.Travel.Shell.Toolkit.Controls.Maps"
-             xmlns:coreconverters="clr-namespace:Izi.Travel.Shell.Core.Converters"
-             xmlns:converters="clr-namespace:Izi.Travel.Shell.Converters"
-             xmlns:components="clr-namespace:Izi.Travel.Shell.Common.Components"
-             xmlns:toolkitcontrols="clr-namespace:Izi.Travel.Shell.Toolkit.Controls"
-             xmlns:templateselectors="clr-namespace:Izi.Travel.Shell.TemplateSelectors.Explore"
-             xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
+             xmlns:transitions="using:Izi.Travel.Shell.Core.Transitions"
+             xmlns:maptoolkit="using:Izi.Travel.Shell.Toolkit.Controls.Maps"
+             xmlns:coreconverters="using:Izi.Travel.Shell.Core.Converters"
+             xmlns:converters="using:Izi.Travel.Shell.Converters"
+             xmlns:components="using:Izi.Travel.Shell.Common.Components"
+             xmlns:toolkitcontrols="using:Izi.Travel.Shell.Toolkit.Controls"
+             xmlns:templateselectors="using:Izi.Travel.Shell.TemplateSelectors.Explore"
+             xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
              mc:Ignorable="d"
              x:Name="PartExploreView">
 
@@ -31,17 +31,13 @@
 
         <!-- ... -->
 
-        <maps:Map x:Name="PartExploreMap"
+        <maps:MapControl x:Name="PartExploreMap"
                   Grid.Row="0" Grid.RowSpan="2"
                   ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
-                  LandmarksEnabled="False"
-                  PedestrianFeaturesEnabled="False"
-                  CartographicMode="Road"
-                  ColorMode="Light"
                   Center="{Binding Center, Mode=TwoWay}"
                   extensions:MapBindingExtensions.BindableElements="{Binding SelectedMapItemRouteElements}">
             <!-- ... -->
-        </maps:Map>
+        </maps:MapControl>
 
         <!-- ... -->
 

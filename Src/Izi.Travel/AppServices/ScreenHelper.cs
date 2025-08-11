@@ -1,8 +1,5 @@
-// IziTravel.AppServices.ScreenHelper
-
-
-
-using System.Windows;
+﻿// IziTravel.AppServices.ScreenHelper
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -24,3 +21,4 @@ namespace Izi.Travel.Shell.AppServices
         }
     }
 }
+

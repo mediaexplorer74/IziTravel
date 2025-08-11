@@ -7,8 +7,8 @@
 using Izi.Travel.Shell.Core.Controls.Flyout;
 using Izi.Travel.Shell.Core.Services.Entities;
 using System;
-using System.Windows;
-
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Core.Services.Contract
 {
@@ -26,8 +26,8 @@ namespace Izi.Travel.Shell.Core.Services.Contract
       MessageBoxButtonContent button,
       Action<FlyoutDialog> prepare,
       Action<FlyoutDialog, MessageBoxResult> callback);
-
-    void ShowToast(
+        Task ShowAsync(string errorInvalidExternalLinkTitle, string errorInvalidExternalLinkInfo, MessageBoxButtonContent ok);
+        void ShowToast(
       string message,
       Uri backgroundNavigationUri,
       Action foregroundNavigationAction,
@@ -36,3 +36,4 @@ namespace Izi.Travel.Shell.Core.Services.Contract
       bool vibrateAndSound = false);
   }
 }
+

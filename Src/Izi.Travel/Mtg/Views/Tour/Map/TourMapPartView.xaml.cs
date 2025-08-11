@@ -1,6 +1,8 @@
+using Izi.Travel.Shell.Toolkit.Controls.Maps;
 using Izi.Travel.Utility;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -9,6 +11,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
+using MapControl = Izi.Travel.Shell.Toolkit.Controls.Maps.MapControl;
 
 namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
 {
@@ -16,6 +19,7 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
     {
         private Storyboard _tiltStoryboard;
         private bool _isMapInitialized;
+        private MapControl _mapControl;
 
         public TourMapPartView()
         {
@@ -27,96 +31,70 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
         {
             // Clean up event handlers
             this.Loaded -= OnPageLoaded;
-            if (Map != null)
+            if (_mapControl != null)
             {
-                Map.MapElementClick -= OnMapElementClick;
-                Map.MapTapped -= OnMapTapped;
-            }
-            
-            if (MapControl != null)
-            {
-                MapControl.Loaded -= MapControl_Loaded;
+                _mapControl.MapElementClick -= OnMapElementClick;
+                _mapControl.MapTapped -= OnMapTapped;
+                _mapControl.Loaded -= MapControl_Loaded;
             }
         }
         
-        private async void MapControl_Loaded(object sender, RoutedEventArgs e)
+        private void MapControl_Loaded(object sender, RoutedEventArgs e)
         {
-            // Set the map style using the MapStyleSheet
-            if (MapControl != null)
+            try
             {
-                // Load the light style for the map
-                MapControl.StyleSheet = MapStyleSheet.RoadLight();
-            }
-        }
+                _mapControl = sender as MapControl;
+                if (_mapControl == null) return;
 
-        private void InitializeComponent()
-        {
-            if (this._contentLoaded)
-                return;
-                
-            this._contentLoaded = true;
-            var resourceLocator = new Uri("ms-appx:///Izi.Travel.Shell/Mtg/Views/Tour/Map/TourMapPartView.xaml");
-            Application.LoadComponent(this, resourceLocator, ComponentResourceLocation.Application);
-            
-            // Get the MapButton style and find the storyboard
-            if (this.Resources.ContainsKey("MapButton") && this.Resources["MapButton"] is Style mapButtonStyle)
-            {
-                if (mapButtonStyle.Resources.ContainsKey("TiltStoryboard") && 
-                    mapButtonStyle.Resources["TiltStoryboard"] is Storyboard storyboard)
+                // Initialize map with view model data
+                if (DataContext is TourMapPartViewModel viewModel)
                 {
-                    this._tiltStoryboard = storyboard;
+                    // The Map property should be set by the view model
+                    if (viewModel.Map == null)
+                    {
+                        viewModel.InitializeMap(_mapControl);
+                    }
+                    
+                    _isMapInitialized = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error initializing map: {ex.Message}");
             }
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            if (Map?.MapControl != null && !_isMapInitialized)
-            {
-                // Initialize map with default view if needed
-                if (DataContext is TourMapPartViewModel viewModel)
-                {
-                    // Set initial map position if needed
-                    if (viewModel.Center != null)
-                    {
-                        var center = new Geopoint(new BasicGeoposition
-                        {
-                            Latitude = viewModel.Center.Latitude,
-                            Longitude = viewModel.Center.Longitude
-                        });
-                        
-                        Map.MapControl.ZoomLevel = viewModel.ZoomLevel;
-                        Map.MapControl.Center = center;
-                    }
-
-                    // Subscribe to map events
-                    Map.MapElementClick += OnMapElementClick;
-                    Map.MapTapped += OnMapTapped;
-                    
-                    _isMapInitialized = true;
-                }
-            }
-        }
-
-        private void OnMapItemClick(object sender, MapElementClickEventArgs args)
-        {
-            if (args.MapElements.Count > 0 && DataContext is TourMapPartViewModel viewModel)
-            {
-                // Handle map item click
-                var mapItem = args.MapElements[0] as MapItemsControl;
-                if (mapItem?.DataContext != null)
-                {
-                    viewModel.MapItemClickCommand?.Execute(mapItem.DataContext);
-                }
-            }
+            // Initialization now happens in MapControl_Loaded
         }
 
         private void OnMapElementClick(MapControl sender, MapElementClickEventArgs args)
         {
-            // Handle map element click if needed
-            if (DataContext is TourMapPartViewModel viewModel)
+            try
             {
-                viewModel.MapTappedCommand?.Execute(args.Position);
+                if (DataContext is TourMapPartViewModel viewModel)
+                {
+                    // Check if any map elements were clicked
+                    if (args.MapElements.Any())
+                    {
+                        var mapElement = args.MapElements.First();
+                        
+                        // If it's a map item with data context, execute command
+                        //if (mapElement is MapControlItem mapItem && mapItem.DataContext != null)
+                        //{
+                        //    viewModel.MapItemClickCommand?.Execute(mapItem.DataContext);
+                            return;
+                        //}
+                    }
+                    
+                    // If we get here, it was a click on the map itself
+                    viewModel.MapTappedCommand?.Execute(args.Location);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error handling map element click: {ex.Message}");
             }
         }
 

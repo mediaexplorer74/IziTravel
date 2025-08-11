@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Common.Model.ButtonInfo
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -8,7 +8,6 @@ using Caliburn.Micro;
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
-
 #nullable disable
 namespace Izi.Travel.Shell.Common.Model
 {
@@ -118,3 +117,4 @@ namespace Izi.Travel.Shell.Common.Model
     }
   }
 }
+

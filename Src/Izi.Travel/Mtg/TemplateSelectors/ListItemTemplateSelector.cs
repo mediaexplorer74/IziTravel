@@ -9,8 +9,7 @@ using Izi.Travel.Shell.Mtg.ViewModels.Collection.List;
 using Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List;
 using Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List;
 using System;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.TemplateSelectors
 {
@@ -38,3 +37,4 @@ namespace Izi.Travel.Shell.Mtg.TemplateSelectors
     }
   }
 }
+

@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Business.Services.Implementation.MtgObjectService
 // Assembly: Izi.Travel.Business, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: ABF4D74A-55A9-49E1-BE11-CC83659F98DD
@@ -90,9 +90,17 @@ namespace Izi.Travel.Business.Services.Implementation
         objectSearchQuery.RegionUid = filter.Region;
         MtgObjectSearchQuery query = objectSearchQuery;
         if (filter.Location != null)
-          query.Location = new Geopoint(filter.Location.Latitude, filter.Location.Longitude);
+          query.Location = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() 
+          { 
+              Latitude = filter.Location.Latitude, 
+              Longitude = filter.Location.Longitude 
+          });
         if (filter.ExclusionLocation != null)
-          query.ExclusionLocation = new Geopoint(filter.ExclusionLocation.Latitude, filter.ExclusionLocation.Longitude);
+          query.ExclusionLocation = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() 
+          { 
+              Latitude = filter.ExclusionLocation.Latitude, 
+              Longitude = filter.ExclusionLocation.Longitude 
+          });
         if (filter.Types != null)
           query.Types = ((IEnumerable<Izi.Travel.Business.Entities.Data.MtgObjectType>) filter.Types).Select<Izi.Travel.Business.Entities.Data.MtgObjectType, Izi.Travel.Client.Entities.MtgObjectType>((Func<Izi.Travel.Business.Entities.Data.MtgObjectType, Izi.Travel.Client.Entities.MtgObjectType>) (x => this._mtgObjectTypeMapper.Convert(x))).ToArray<Izi.Travel.Client.Entities.MtgObjectType>();
         if (filter.Form == MtgObjectForm.Full)

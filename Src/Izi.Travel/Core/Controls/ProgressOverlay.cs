@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using Izi.Travel.Shell.Core.Resources;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -65,3 +65,4 @@ namespace Izi.Travel.Shell.Core.Controls
     }
   }
 }
+

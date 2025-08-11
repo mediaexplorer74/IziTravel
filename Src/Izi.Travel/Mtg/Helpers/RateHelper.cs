@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Helpers.RateHelper
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -6,8 +6,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using System.Linq;
+using Windows.Storage;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Helpers
@@ -19,26 +19,37 @@ namespace Izi.Travel.Shell.Mtg.Helpers
 
     public static void Clear()
     {
-      IsolatedStorageSettings.ApplicationSettings.Where<KeyValuePair<string, object>>((Func<KeyValuePair<string, object>, bool>) (x => x.Key.StartsWith("Rate.") && RateHelper.IsExpired(x.Value))).Select<KeyValuePair<string, object>, string>((Func<KeyValuePair<string, object>, string>) (x => x.Key)).ToList<string>().ForEach((Action<string>) (x => IsolatedStorageSettings.ApplicationSettings.Remove(x)));
-      IsolatedStorageSettings.ApplicationSettings.Save();
+      var settings = ApplicationData.Current.LocalSettings;
+      var keysToRemove = settings.Values.Where(kvp => kvp.Key.StartsWith(Prefix) && IsExpired(kvp.Value)).Select(kvp => kvp.Key).ToList();
+      foreach (var key in keysToRemove)
+      {
+        settings.Values.Remove(key);
+      }
     }
 
     public static void Rate(string uid, string hash)
     {
-      IsolatedStorageSettings.ApplicationSettings.Set<string, object>(RateHelper.GetKey(uid, hash), (object) DateTime.Now);
-      IsolatedStorageSettings.ApplicationSettings.Save();
+      var settings = ApplicationData.Current.LocalSettings;
+      settings.Values[GetKey(uid, hash)] = DateTime.Now.ToString("o");
     }
 
     public static bool CanRate(string uid, string hash)
     {
-      return RateHelper.IsExpired(IsolatedStorageSettings.ApplicationSettings.Get<string, object>(RateHelper.GetKey(uid, hash)));
+      var settings = ApplicationData.Current.LocalSettings;
+      object value;
+      settings.Values.TryGetValue(GetKey(uid, hash), out value);
+      return IsExpired(value);
     }
 
     private static string GetKey(string uid, string hash) => "Rate." + uid + "." + hash;
 
     private static bool IsExpired(object value)
     {
-      return !(value is DateTime dateTime) || DateTime.Now - dateTime > TimeSpan.FromHours(2.0);
+      if (value is DateTime dt)
+        return DateTime.Now - dt > TimeSpan.FromHours(HoursToExpired);
+      if (value is string s && DateTime.TryParse(s, out var parsed))
+        return DateTime.Now - parsed > TimeSpan.FromHours(HoursToExpired);
+      return true;
     }
   }
 }

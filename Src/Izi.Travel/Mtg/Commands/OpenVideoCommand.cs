@@ -22,8 +22,7 @@ using Izi.Travel.Shell.Media.Provider;
 using Izi.Travel.Shell.Media.ViewModels;
 using System;
 using System.Linq.Expressions;
-using System.Windows;
-
+using Windows.UI.Xaml;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Commands
 {
@@ -91,3 +90,4 @@ namespace Izi.Travel.Shell.Mtg.Commands
     }
   }
 }
+

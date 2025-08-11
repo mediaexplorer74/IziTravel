@@ -1,11 +1,11 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.List.SponsorListViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using Izi.Travel.Business.Entities.Data;
-using Microsoft.Phone.Tasks;
+using Windows.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +27,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.List
         return;
       try
       {
-        new WebBrowserTask()
-        {
-          Uri = new Uri(listItemViewModel.Url, UriKind.Absolute)
-        }.Show();
+        var _ = Launcher.LaunchUriAsync(new Uri(listItemViewModel.Url, UriKind.Absolute));
       }
       catch (Exception ex)
       {

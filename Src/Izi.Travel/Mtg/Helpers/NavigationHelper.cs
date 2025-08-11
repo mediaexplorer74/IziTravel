@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.Helpers.NavigationHelper
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -15,6 +15,7 @@ using Izi.Travel.Shell.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using Windows.System;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.Helpers
@@ -30,7 +31,6 @@ namespace Izi.Travel.Shell.Mtg.Helpers
         ShellServiceFacade.NavigationService.UriFor<DetailPartViewModel>().WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Uid), uid).WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Language), language).Navigate();
       else
         ShellServiceFacade.NavigationService.UriFor<MainViewModel>().Navigate();
-      ShellServiceFacade.NavigationService.RemoveBackEntry();
     }
 
     public static void TryGoBack()
@@ -42,7 +42,6 @@ namespace Izi.Travel.Shell.Mtg.Helpers
       else
       {
         ShellServiceFacade.NavigationService.UriFor<MainViewModel>().Navigate();
-        ShellServiceFacade.NavigationService.RemoveBackEntry();
       }
     }
 
@@ -50,7 +49,10 @@ namespace Izi.Travel.Shell.Mtg.Helpers
     {
       if (string.IsNullOrWhiteSpace(url))
         return;
-      ShellServiceFacade.NavigationService.Navigate(new Uri(url, UriKind.RelativeOrAbsolute));
+      if (url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+      {
+        var _ = Launcher.LaunchUriAsync(new Uri(url));
+      }
     }
 
     public static void NavigateToDetails(
@@ -85,7 +87,47 @@ namespace Izi.Travel.Shell.Mtg.Helpers
       string parentUid,
       bool autoPlay = false)
     {
-      ShellServiceFacade.NavigationService.Navigate(NavigationHelper.UriToAudio(type, uid, language, parentUid, autoPlay));
+      switch (type)
+      {
+        case MtgObjectType.Museum:
+        case MtgObjectType.Collection:
+          ShellServiceFacade.NavigationService.UriFor<PlayerPartViewModel>()
+            .WithParam<string>((Expression<Func<PlayerPartViewModel, string>>) (x => x.ParentUid), uid)
+            .WithParam<string>((Expression<Func<PlayerPartViewModel, string>>) (x => x.Language), language)
+            .WithParam<string>((Expression<Func<PlayerPartViewModel, string>>) (x => x.Uid), uid)
+            .WithParam<bool>((Expression<Func<PlayerPartViewModel, bool>>) (x => x.AutoPlay), autoPlay)
+            .Navigate();
+          break;
+        case MtgObjectType.Exhibit:
+        case MtgObjectType.StoryNavigation:
+          ShellServiceFacade.NavigationService.UriFor<PlayerPartViewModel>()
+            .WithParam<string>((Expression<Func<PlayerPartViewModel, string>>) (x => x.ParentUid), parentUid)
+            .WithParam<string>((Expression<Func<PlayerPartViewModel, string>>) (x => x.Language), language)
+            .WithParam<string>((Expression<Func<PlayerPartViewModel, string>>) (x => x.Uid), uid)
+            .WithParam<bool>((Expression<Func<PlayerPartViewModel, bool>>) (x => x.AutoPlay), autoPlay)
+            .Navigate();
+          break;
+        case MtgObjectType.Tour:
+        case MtgObjectType.TouristAttraction:
+          if (type == MtgObjectType.TouristAttraction && TourPlaybackManager.IsTourAttached(parentUid, language))
+          {
+            ShellServiceFacade.NavigationService.UriFor<TourMapPartViewModel>()
+              .WithParam<string>((Expression<Func<TourMapPartViewModel, string>>) (x => x.Uid), parentUid)
+              .WithParam<string>((Expression<Func<TourMapPartViewModel, string>>) (x => x.Language), language)
+              .Navigate();
+          }
+          else
+          {
+            ShellServiceFacade.NavigationService.UriFor<DetailPartViewModel>()
+              .WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Uid), uid)
+              .WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Language), language)
+              .WithParam<bool>((Expression<Func<DetailPartViewModel, bool>>) (x => x.AutoPlay), autoPlay)
+              .Navigate();
+          }
+          break;
+        default:
+          throw new NotSupportedException();
+      }
     }
 
     public static Uri UriToAudio(

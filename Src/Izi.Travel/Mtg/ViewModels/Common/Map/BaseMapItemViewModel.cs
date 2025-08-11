@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Map.BaseMapItemViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -7,8 +7,9 @@
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
 using System;
-using System.Device.Location;
+using Izi.Travel.Data.Entities.Common;
 using System.Linq.Expressions;
+using Windows.Devices.Geolocation;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Map
@@ -19,7 +20,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Map
     private bool _isSelected;
     private string _uid;
     private string _title;
-    private GeoCoordinate _location = GeoCoordinate.Unknown;
+    private Geopoint _location;
     private double _distance;
 
     public MtgObject MtgObject => this._mtgObject;
@@ -73,15 +74,15 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Map
       }
     }
 
-    public virtual GeoCoordinate Location
+    public virtual Geopoint Location
     {
       get => this._location;
       set
       {
-        if (!(this._location != value))
+        if (this._location == value)
           return;
         this._location = value;
-        this.NotifyOfPropertyChange<GeoCoordinate>((Expression<Func<GeoCoordinate>>) (() => this.Location));
+        this.NotifyOfPropertyChange<Geopoint>((Expression<Func<Geopoint>>) (() => this.Location));
         this.NotifyOfPropertyChange<bool>((Expression<Func<bool>>) (() => this.HasLocation));
       }
     }
@@ -100,7 +101,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Map
 
     public bool HasLocation
     {
-      get => this.Location != (GeoCoordinate) null && this.Location != GeoCoordinate.Unknown;
+      get => this.Location != null && this.Location.Position.Latitude != 0 && this.Location.Position.Longitude != 0;
     }
 
     protected BaseMapItemViewModel(MtgObject mtgObject)
@@ -118,13 +119,16 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Map
         this.Title = this.MtgObject.MainContent.Title;
       if (this.MtgObject.Map != null && this.MtgObject.Map.Route != null && this.MtgObject.Map.Route.Length != 0)
       {
-        this.Location = this.MtgObject.Map.Route[0].ToGeoCoordinate();
+        var pos = this.MtgObject.Map.Route[0];
+        this.Location = new Geopoint(new BasicGeoposition { Latitude = /*pos.Latitude*/default, Longitude = /*pos.Longitude*/default });
       }
-      else
+      else if (this.MtgObject.Location != null)
       {
-        if (this.MtgObject.Location == null)
-          return;
-        this.Location = this.MtgObject.Location.ToGeoCoordinate();
+        this.Location = new Geopoint(new BasicGeoposition 
+        { 
+          Latitude = this.MtgObject.Location.Latitude, 
+          Longitude = this.MtgObject.Location.Longitude 
+        });
       }
     }
   }

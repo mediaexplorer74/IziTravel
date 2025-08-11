@@ -39,7 +39,7 @@ namespace Izi.Travel.Shell.Core.Helpers
       Uri result1;
       if (!Uri.TryCreate(url, UriKind.Absolute, out result1))
         return (MtgLinkInfo) null;
-      string lower = result1.Host.ToLower(CultureInfo.InvariantCulture);
+      string lower = result1.Host.ToLower();
       if (string.IsNullOrWhiteSpace(lower) || !((IEnumerable<string>) MtgLinkHelper.MtgLinkHosts).Contains<string>(lower))
         return (MtgLinkInfo) null;
       MtgLinkInfo linkInfo = new MtgLinkInfo()

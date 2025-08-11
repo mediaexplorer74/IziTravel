@@ -6,8 +6,7 @@
 
 using Izi.Travel.Shell.Core.Context;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
-using System.Windows.Navigation;
-
+using Windows.UI.Xaml.Navigation;
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
 {
@@ -31,3 +30,4 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
     }
   }
 }
+

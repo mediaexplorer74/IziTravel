@@ -15,9 +15,10 @@ namespace Izi.Travel.Shell.Toolkit.Controls
         return true;
       if (o1 == null || o2 == null)
         return false;
-      return o1.GetType().IsValueType || o1.GetType() == typeof (string) 
-                ? object.Equals(o1, o2)
-                : o1 == o2;
+            
+      return false;//o1.GetType().IsValueType || o1.GetType() == typeof (string) 
+             //   ? object.Equals(o1, o2)
+             //   : o1 == o2;
     }
   }
 }

@@ -1,7 +1,7 @@
 ﻿// IziTravel.Interaction.AnimationHelper
 
 using System;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using Telerik.Windows.Controls;
@@ -58,3 +58,4 @@ namespace Izi.Travel.Shell.Interaction
     }
   }
 }
+

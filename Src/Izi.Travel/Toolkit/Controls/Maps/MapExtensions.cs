@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapExtensions
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -9,7 +9,7 @@ using Izi.Travel.Data.Entities.Common;
 using System;
 using System.Collections.Specialized;
 //using System.Device.Location;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 
@@ -79,3 +79,4 @@ namespace Izi.Travel.Shell.Toolkit.Controls.Maps
     }
   }
 }
+

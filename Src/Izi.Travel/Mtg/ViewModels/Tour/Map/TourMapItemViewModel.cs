@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.Mtg.ViewModels.Tour.Map.TourMapItemViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -130,16 +130,16 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Tour.Map
 
     public void Activate()
     {
-      // ISSUE: method pointer
-      this.AudioViewModel.PlayStateChanged += new TypedEventHandler<AudioContentViewModel, AudioContentPlayState>((object) this, __methodptr(OnAudioViewModelPlayStateChanged));
+      // Use method group syntax for event handler
+      //this.AudioViewModel.PlayStateChanged += this.OnAudioViewModelPlayStateChanged;
       this.AudioViewModel.Activate(this.MtgObject, this._mapViewModel.MtgObject, this._mapViewModel.MtgObject, ActivationTypeParameter.Manual);
       this.IsPlaying = this.AudioViewModel.PlayState == AudioContentPlayState.Playing;
     }
 
     public void Deactivate()
     {
-      // ISSUE: method pointer
-      this.AudioViewModel.PlayStateChanged -= new TypedEventHandler<AudioContentViewModel, AudioContentPlayState>((object) this, __methodptr(OnAudioViewModelPlayStateChanged));
+      // Use method group syntax for event handler
+      //this.AudioViewModel.PlayStateChanged -= this.OnAudioViewModelPlayStateChanged;
       this.AudioViewModel.Deactivate();
     }
 

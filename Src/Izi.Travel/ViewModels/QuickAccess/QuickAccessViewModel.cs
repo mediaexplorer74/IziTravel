@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.ViewModels.QuickAccess.QuickAccessViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -28,8 +28,9 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.Foundation;
+using System.Windows.Input;
 
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.QuickAccess
@@ -243,14 +244,14 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess
     {
       base.OnActivate();
       this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromTrackInfoCurrent(new bool?(), false));
-      // ISSUE: method pointer
-      ServiceFacade.AudioService.StateChanged += new TypedEventHandler<IAudioService, AudioServiceState>((object) this, __methodptr(OnAudioStateChanged));
+      // Use method group syntax for event handler
+      ServiceFacade.AudioService.StateChanged += this.OnAudioStateChanged;
     }
 
     protected override void OnDeactivate(bool close)
     {
-      // ISSUE: method pointer
-      ServiceFacade.AudioService.StateChanged -= new TypedEventHandler<IAudioService, AudioServiceState>((object) this, __methodptr(OnAudioStateChanged));
+      // Use method group syntax for event handler
+      ServiceFacade.AudioService.StateChanged -= this.OnAudioStateChanged;
       this.Item = (QuickAccessBaseItemViewModel) null;
       base.OnDeactivate(close);
     }
@@ -277,13 +278,12 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess
         {
           this._tokenSource = new CancellationTokenSource();
           this._task = this.LoadDataTask(query, this._tokenSource.Token);
-          QuickAccessBaseItemViewModel item;
-          QuickAccessBaseItemViewModel baseItemViewModel = item;
-          item = await this._task;
+         
+          QuickAccessBaseItemViewModel baseItemViewModel =  await this._task;
           this._task = (Task<QuickAccessBaseItemViewModel>) null;
           this._tokenSource = (CancellationTokenSource) null;
-          if (item != null)
-            ((System.Action) (() => this.Item = item)).OnUIThread();
+          if (baseItemViewModel != null)
+            ((System.Action) (() => this.Item = baseItemViewModel)).OnUIThread();
           else
             this.Item = (QuickAccessBaseItemViewModel) this.ItemInfo;
         }
@@ -519,3 +519,4 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess
     }
   }
 }
+

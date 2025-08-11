@@ -15,7 +15,9 @@ using Izi.Travel.Shell.Core.Extensions;
 using Izi.Travel.Shell.Mtg.Commands;
 using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
 #nullable disable
 namespace Izi.Travel.Shell.Mtg.ViewModels.Museum.Map
@@ -25,8 +27,11 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Museum.Map
     private MuseumMapItemViewModel _targetItem;
     private NowPlayingCommand _nowPlayingCommand;
     private RelayCommand _getDirectionsCommand;
+        internal List<MapItem> MapItems;
+        public BaseCommand MapItemClickCommand;
+        public BaseCommand MapTappedCommand;
 
-    public string TargetUid { get; set; }
+        public string TargetUid { get; set; }
 
     public MuseumMapItemViewModel TargetItem
     {
@@ -37,7 +42,10 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Museum.Map
       }
     }
 
-    public NowPlayingCommand NowPlayingCommand
+        public Geopoint Center;
+        internal double ZoomLevel;
+
+        public NowPlayingCommand NowPlayingCommand
     {
       get
       {

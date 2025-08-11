@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // Type: Izi.Travel.Shell.ViewModels.Profile.ProfileViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -19,7 +19,7 @@ using Izi.Travel.Shell.ViewModels.Profile.Settings;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-
+using Windows.UI.Xaml.Input;
 #nullable disable
 namespace Izi.Travel.Shell.ViewModels.Profile
 {
@@ -162,3 +162,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile
     }
   }
 }
+

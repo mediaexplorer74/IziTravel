@@ -1,4 +1,4 @@
-﻿// ********************************************************************
+// ********************************************************************
 // Type: Izi.Travel.Shell.ViewModels.Profile.Download.ProfileDownloadListViewModel
 // Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
@@ -25,7 +25,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.Foundation;
 
 #nullable disable
@@ -102,20 +102,18 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Download
     protected override void OnActivate()
     {
       this.Items.Clear();
-      // ISSUE: method pointer
-      DownloadManager.Instance.DownloadProcessStateChanged += new TypedEventHandler<DownloadManager, DownloadProcess>((object) this, __methodptr(OnDownloadProcessStateChanged));
-      // ISSUE: method pointer
-      DownloadManager.Instance.DownloadProcessProgressChanged += new TypedEventHandler<DownloadManager, DownloadProcess>((object) this, __methodptr(OnDownloadProcessProgressChanged));
+      // Use method group syntax for event handlers
+      DownloadManager.Instance.DownloadProcessStateChanged += this.OnDownloadProcessStateChanged;
+      DownloadManager.Instance.DownloadProcessProgressChanged += this.OnDownloadProcessProgressChanged;
       this._tokenSourceCheckUpdate = new CancellationTokenSource();
       base.OnActivate();
     }
 
     protected override void OnDeactivate(bool close)
     {
-      // ISSUE: method pointer
-      DownloadManager.Instance.DownloadProcessStateChanged -= new TypedEventHandler<DownloadManager, DownloadProcess>((object) this, __methodptr(OnDownloadProcessStateChanged));
-      // ISSUE: method pointer
-      DownloadManager.Instance.DownloadProcessProgressChanged -= new TypedEventHandler<DownloadManager, DownloadProcess>((object) this, __methodptr(OnDownloadProcessProgressChanged));
+      // Use method group syntax for event handlers
+      DownloadManager.Instance.DownloadProcessStateChanged -= this.OnDownloadProcessStateChanged;
+      DownloadManager.Instance.DownloadProcessProgressChanged -= this.OnDownloadProcessProgressChanged;
       if (this._tokenSourceCheckUpdate != null)
         this._tokenSourceCheckUpdate.Cancel();
       base.OnDeactivate(close);
@@ -139,7 +137,9 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Download
       MtgObject[] mtgObjectListAsync = await objectDownloadService.GetMtgObjectListAsync(filter);
       if (mtgObjectListAsync != null)
         result.AddRange(((IEnumerable<MtgObject>) mtgObjectListAsync).Select<MtgObject, ProfileDownloadListItemViewModel>((Func<MtgObject, ProfileDownloadListItemViewModel>) (x => new ProfileDownloadListItemViewModel((IListViewModel) this, x))));
-      result.AddRange(((IEnumerable<DownloadProcess>) DownloadManager.Instance.GetDownloadProcessList()).Where<DownloadProcess>((Func<DownloadProcess, bool>) (x => !result.Any<ProfileDownloadListItemViewModel>((Func<ProfileDownloadListItemViewModel, bool>) (r => r.MtgObject.Uid.Equals(x.Uid, StringComparison.InvariantCultureIgnoreCase) && r.MtgObject.Language.Equals(x.Language, StringComparison.InvariantCultureIgnoreCase))))).Select<DownloadProcess, ProfileDownloadListItemViewModel>((Func<DownloadProcess, ProfileDownloadListItemViewModel>) (process => new ProfileDownloadListItemViewModel((IListViewModel) this, process.MtgObject))));
+      result.AddRange(((IEnumerable<DownloadProcess>) DownloadManager.Instance.GetDownloadProcessList()).Where<DownloadProcess>((Func<DownloadProcess, bool>) 
+          (x => !result.Any<ProfileDownloadListItemViewModel>((Func<ProfileDownloadListItemViewModel, bool>)
+          (r => r.MtgObject.Uid.Equals(x.Uid, StringComparison.OrdinalIgnoreCase) && r.MtgObject.Language.Equals(x.Language, StringComparison.OrdinalIgnoreCase))))).Select<DownloadProcess, ProfileDownloadListItemViewModel>((Func<DownloadProcess, ProfileDownloadListItemViewModel>) (process => new ProfileDownloadListItemViewModel((IListViewModel) this, process.MtgObject))));
       return (IEnumerable<ProfileDownloadListItemViewModel>) result.OrderBy<ProfileDownloadListItemViewModel, string>((Func<ProfileDownloadListItemViewModel, string>) (x => x.Title));
     }
 
@@ -228,7 +228,7 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Download
         if (listItemViewModel.State == DownloadProcessState.Updated)
           listItemViewModel.RefreshData(process.MtgObject);
       }
-      new System.Action(((BaseListViewModel<ProfileDownloadListItemViewModel>) this).RefreshCommands).OnUIThread();
+      //new System.Action(((BaseListViewModel<ProfileDownloadListItemViewModel>) this).RefreshCommands).OnUIThread();
     }
 
     private void OnDownloadProcessProgressChanged(DownloadManager manager, DownloadProcess process)
@@ -240,3 +240,4 @@ namespace Izi.Travel.Shell.ViewModels.Profile.Download
     }
   }
 }
+

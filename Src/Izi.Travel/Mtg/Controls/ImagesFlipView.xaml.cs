@@ -18,9 +18,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml;
 using Izi.Travel.Utility.Extensions;
 
@@ -94,3 +94,4 @@ namespace Izi.Travel.Shell.Mtg.Controls
   
   }
 }
+

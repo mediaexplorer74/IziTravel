@@ -6,7 +6,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using Windows.UI.Xaml.Media;
@@ -64,3 +64,4 @@ namespace Izi.Travel.Shell.Views.Featured
     
   }
 }
+

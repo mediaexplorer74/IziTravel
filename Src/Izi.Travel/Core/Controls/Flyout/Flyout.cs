@@ -5,15 +5,17 @@
 // Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
 
 using Izi.Travel.Shell.Core.Helpers;
+using Windows.UI;
+using Windows.Foundation;
 using Windows.UI.ViewManagement;
+using Windows.Foundation.Metadata;
 using System;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Controls.Primitives;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
-using System.Windows.Navigation;
+using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
 #nullable disable
@@ -21,40 +23,31 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
 {
   public class Flyout : FlyoutBase
   {
-    private static readonly double ScreenWidth = Application.Current.Host.Content.ActualWidth;
-    private static readonly double ScreenHeight = Application.Current.Host.Content.ActualHeight;
+    private static Size CurrentBounds => new Size(Window.Current.Bounds.Width, Window.Current.Bounds.Height);
     private Frame _frame;
-    private Page _page;
     private bool _isPopupReady;
     private Popup _popup;
     private Grid _container;
     private Border _border;
     private ContentControl _contentControl;
     private Rectangle _rectangle;
-    private bool _hasApplicationBar;
     private Color _systemTrayColor;
-    private Uri _frameUri;
-    public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof (Content), typeof (UIElement), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null));
+        internal FlyoutPlacementMode Placement;
+        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof (Content), typeof (UIElement), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null));
     public static readonly DependencyProperty OverlayBrushProperty = DependencyProperty.Register(nameof (OverlayBrush), typeof (Brush), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.OnOverlayBrushPropertyChanged)));
     public static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register(nameof (Background), typeof (Brush), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.OnBackgroundPropertyChanged)));
     public static readonly DependencyProperty IsFullScreenProperty = DependencyProperty.Register(nameof (IsFullScreen), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) false));
     public static readonly DependencyProperty CloseOnNavigationProperty = DependencyProperty.Register(nameof (CloseOnNavigation), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) true));
     public static readonly DependencyProperty HideApplicationBarProperty = DependencyProperty.Register(nameof (HideApplicationBar), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) true));
 
-    private PageOrientation PageOrientation
+    private bool IsSystemTrayVisible
     {
-      get => this._page == null ? PageOrientation.None : this._page.Orientation;
+        get
+        {
+            // In UWP, we'll always return false as there's no StatusBar in the same way as Windows Phone 8.x
+            return false;
+        }
     }
-
-    private bool IsPageOrientationLandscape
-    {
-      get
-      {
-        return this.PageOrientation == PageOrientation.Landscape || this.PageOrientation == PageOrientation.LandscapeLeft || this.PageOrientation == PageOrientation.LandscapeRight;
-      }
-    }
-
-    private bool IsSystemTrayVisible => StatusBar.GetForCurrentView().IsVisible;
 
     public UIElement Content
     {
@@ -102,33 +95,22 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
     protected override void HideImpl()
     {
       this.OnClosing();
-      ITransition transition = new SlideTransition()
-      {
-        Mode = SlideTransitionMode.SlideUpFadeOut
-      }.GetTransition((UIElement) this._container);
-      transition.Completed += (EventHandler) ((s, e) =>
-      {
-        transition.Stop();
-        this.ClosePopup();
-        this.OnClosed();
-      });
-      transition.Begin();
+      // WP8 SlideTransition removed for UWP; close immediately
+      this.ClosePopup();
+      this.OnClosed();
     }
 
     private void ShowPopup()
     {
-      if (this._popup != null && this._popup.IsOpen || VisualTreeHelper.GetOpenPopups().Any<Popup>((Func<Popup, bool>) (x => x.Tag is FlyoutBase)))
+      if (this._isPopupReady)
+        return;
+            
+      // In UWP, we don't modify the status bar
+      this._systemTrayColor = Colors.Transparent;
+      if (this._popup != null && this._popup.IsOpen || VisualTreeHelper.GetOpenPopups(Window.Current).Any<Popup>((Func<Popup, bool>) (x => x.Tag is FlyoutBase)))
         return;
       this._isPopupReady = false;
       this._frame = Window.Current.Content as Frame;
-      this._page = this._frame != null ? this._frame.Content as Page : (Page) null;
-      if (this.IsSystemTrayVisible)
-      {
-        StatusBar statusBar = StatusBar.GetForCurrentView();
-        this._systemTrayColor = statusBar.BackgroundColor.GetValueOrDefault();
-        if (this.Background is SolidColorBrush background)
-          statusBar.BackgroundColor = background.Color;
-      }
       if (this._popup == null)
       {
         Rectangle rectangle = new Rectangle();
@@ -156,108 +138,57 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
         this._popup = popup;
       }
       if (this._container != null)
-        this._container.LayoutUpdated += new EventHandler(this.OnContainerLayoutUpdated);
+        this._container.LayoutUpdated += this.OnContainerLayoutUpdated;
       this.ArrangePopupSize();
       this._popup.IsOpen = true;
       if (this._frame != null)
       {
-        this._frameUri = this._frame.CurrentSource;
-        this._frame.Navigating += new NavigatingCancelEventHandler(this.OnFrameNavigating);
+        this._frame.Navigating += this.OnFrameNavigating;
       }
-      if (this._page == null)
-        return;
-      this._page.BackKeyPress += new EventHandler<CancelEventArgs>(this.OnPageBackKeyPress);
-      this._page.OrientationChanged += new EventHandler<OrientationChangedEventArgs>(this.OnPageOrientationChanged);
     }
 
     private void ClosePopup()
     {
-      if (this.IsSystemTrayVisible)
-      {
-        StatusBar statusBar = StatusBar.GetForCurrentView();
-        statusBar.BackgroundColor = this._systemTrayColor;
-      }
+      // No-op in UWP
       if (this._popup != null)
         this._popup.IsOpen = false;
       if (this._frame != null)
-        this._frame.Navigating -= new NavigatingCancelEventHandler(this.OnFrameNavigating);
-      if (this._page != null)
-      {
-        this._page.BackKeyPress -= new EventHandler<CancelEventArgs>(this.OnPageBackKeyPress);
-        this._page.OrientationChanged -= new EventHandler<OrientationChangedEventArgs>(this.OnPageOrientationChanged);
-      }
+        this._frame.Navigating -= this.OnFrameNavigating;
       this._frame = (Frame) null;
-      this._page = (Page) null;
+    }
+
+    private void ShowStatusBar()
+    {
+        // No-op in UWP
+    }
+
+    private void HideStatusBar()
+    {
+        // No-op in UWP
     }
 
     private void ArrangePopupSize()
     {
       if (this._popup == null)
         return;
-      Rect rect = new Rect(0.0, 0.0, this.IsPageOrientationLandscape ? Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ScreenHeight : Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ScreenWidth, this.IsPageOrientationLandscape ? Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ScreenWidth : Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ScreenHeight);
+      var bounds = CurrentBounds;
+      Rect rect = new Rect(0.0, 0.0, bounds.Width, bounds.Height);
       if (this._container != null)
       {
-        this._container.RenderTransform = this.GetTransform();
+        this._container.RenderTransform = null;
         this._container.Width = rect.Width;
         this._container.Height = rect.Height;
       }
-      if (!this.IsSystemTrayVisible || this._popup == null)
-        return;
-      switch (this.PageOrientation)
-      {
-        case PageOrientation.PortraitUp:
-          this._popup.HorizontalOffset = 0.0;
-          this._popup.VerticalOffset = 32.0;
-          if (this._container == null)
-            break;
-          this._container.Height -= 32.0;
-          break;
-        case PageOrientation.LandscapeLeft:
-          this._popup.HorizontalOffset = 0.0;
-          this._popup.VerticalOffset = 72.0;
-          break;
-        case PageOrientation.LandscapeRight:
-          this._popup.HorizontalOffset = 0.0;
-          this._popup.VerticalOffset = 0.0;
-          break;
-      }
+      // No orientation-based offsetting in UWP; StatusBar overlays content on Mobile.
     }
 
-    private Transform GetTransform()
-    {
-      switch (this.PageOrientation)
-      {
-        case PageOrientation.Landscape:
-        case PageOrientation.LandscapeLeft:
-          return (Transform) new CompositeTransform()
-          {
-            Rotation = 90.0,
-            TranslateX = Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ScreenWidth
-          };
-        case PageOrientation.LandscapeRight:
-          return (Transform) new CompositeTransform()
-          {
-            Rotation = -90.0,
-            TranslateY = Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ScreenHeight
-          };
-        default:
-          return (Transform) null;
-      }
-    }
+    // Orientation transforms are not applied in UWP; content is laid out using current window bounds.
 
-    private void OnContainerLayoutUpdated(object sender, EventArgs eventArgs)
+    private void OnContainerLayoutUpdated(object sender, object eventArgs)
     {
-      ITransition transition = new SlideTransition()
-      {
-        Mode = SlideTransitionMode.SlideDownFadeIn
-      }.GetTransition((UIElement) this._container);
-      transition.Completed += (EventHandler) ((obj, e) =>
-      {
-        transition.Stop();
-        this._isPopupReady = true;
-      });
-      transition.Begin();
-      this._container.LayoutUpdated -= new EventHandler(this.OnContainerLayoutUpdated);
+      // WP8 transition removed; mark popup as ready
+      this._isPopupReady = true;
+      this._container.LayoutUpdated -= this.OnContainerLayoutUpdated;
     }
 
     private static void OnBackgroundPropertyChanged(
@@ -296,25 +227,11 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
       flyout1._rectangle.Fill = e.NewValue as Brush;
     }
 
-    private void OnPageOrientationChanged(object sender, OrientationChangedEventArgs e)
-    {
-      this.ArrangePopupSize();
-    }
-
-    private void OnPageBackKeyPress(object sender, CancelEventArgs e)
-    {
-      e.Cancel = true;
-      if (!this._isPopupReady)
-        return;
-      this.Hide();
-    }
-
     private void OnFrameNavigating(object sender, NavigatingCancelEventArgs e)
     {
-      if (!this.CloseOnNavigation)
-        this._popup.IsOpen = e.NavigationMode == NavigationMode.Back && this._frameUri == e.Uri;
-      else
+      if (this.CloseOnNavigation)
         this.Hide();
     }
   }
 }
+

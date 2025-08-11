@@ -26,9 +26,10 @@ namespace Izi.Travel.Shell.Views.Featured
             
             // Set the items source
             PartFlipView.ItemsSource = _flipViewItems;
-            
+
             // Set the initial selected index if needed
-            if (DataContext != null && DataContext is dynamic viewModel && viewModel.SelectedIndex >= 0)
+            dynamic viewModel = DataContext;
+            if (viewModel != null && viewModel.SelectedIndex >= 0)
             {
                 PartFlipView.SelectedIndex = viewModel.SelectedIndex;
             }
@@ -55,8 +56,11 @@ namespace Izi.Travel.Shell.Views.Featured
         
         protected override Windows.UI.Xaml.DataTemplate SelectTemplateCore(object item, Windows.UI.Xaml.DependencyObject container)
         {
-            if (item is dynamic dataItem)
-            return _resources[dataItem.TemplateKey] as Windows.UI.Xaml.DataTemplate;
+            dynamic dataItem = item;
+            if (dataItem != null)
+            {
+                return _resources[dataItem.TemplateKey] as Windows.UI.Xaml.DataTemplate;
+            }
             
             return base.SelectTemplateCore(item, container);
         }
