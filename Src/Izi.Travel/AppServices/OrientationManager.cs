@@ -1,4 +1,4 @@
-// IziTravel.AppServices.OrientationManager
+﻿// IziTravel.AppServices.OrientationManager
 
 
 using System;
@@ -6,7 +6,7 @@ using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices
+namespace Izi.Travel.AppServices
 {
   public class OrientationManager : INotifyPropertyChanged
   {

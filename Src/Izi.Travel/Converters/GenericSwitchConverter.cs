@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Markup;
 
 
 #nullable disable
-namespace Izi.Travel.Shell.Converters
+namespace Izi.Travel.Converters
 {
   [ContentProperty] // ("Cases")
     public class GenericSwitchConverter : DependencyObject, IValueConverter

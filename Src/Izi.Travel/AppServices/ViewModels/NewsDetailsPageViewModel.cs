@@ -1,12 +1,12 @@
-// IziTravel.AppServices.ViewModels.NewsDetailsPageViewModel
+﻿// IziTravel.AppServices.ViewModels.NewsDetailsPageViewModel
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Communication;
+using Izi.Travel.Communication;
 using System;
 using System.ComponentModel;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.ViewModels
+namespace Izi.Travel.AppServices.ViewModels
 {
   public class NewsDetailsPageViewModel : Screen
   {

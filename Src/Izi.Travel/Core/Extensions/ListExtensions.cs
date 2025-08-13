@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Izi.Travel.Shell.Core.Extensions
+namespace Izi.Travel.Core.Extensions
 {
     public static class ListExtensions
     {

@@ -1,19 +1,19 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Common.List.ChildrenListViewModel`1
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Mtg.ViewModels.Common.List.ChildrenListViewModel`1
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Common.ViewModels.List;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.Common.ViewModels.List;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Mtg.ViewModels.Common.Detail;
 using System;
 using System.Linq.Expressions;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Common.List
+namespace Izi.Travel.Mtg.ViewModels.Common.List
 {
   public abstract class ChildrenListViewModel<TListItem> : BaseListWithSearchViewModel<TListItem> where TListItem : class
   {

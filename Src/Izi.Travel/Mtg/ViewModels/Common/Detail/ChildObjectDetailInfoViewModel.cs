@@ -1,14 +1,15 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.ChildObjectDetailInfoViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// ********************************************************************
+// Type: Izi.Travel.Mtg.ViewModels.Common.Detail.ChildObjectDetailInfoViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Context;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
+using Izi.Travel.Core.Context;
+using Izi.Travel.Mtg.ViewModels.Common.Detail.Interfaces;
 using Windows.UI.Xaml.Navigation;
+using System.Windows.Input;
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
+namespace Izi.Travel.Mtg.ViewModels.Common.Detail
 {
   public class ChildObjectDetailInfoViewModel : DetailInfoViewModel
   {
@@ -26,7 +27,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
       NavigationMode navigationMode = FrameNavigationContext.Instance.NavigationMode;
       if (this.DetailPartViewModel == null || !this.DetailPartViewModel.AutoPlay || navigationMode != NavigationMode.New || !this.AudioViewModel.PlayCommand.CanExecute((object) null))
         return;
-      this.AudioViewModel.PlayCommand.Execute((object) null);
+      ((ICommand)this.AudioViewModel.PlayCommand).Execute((object) null);
     }
   }
 }

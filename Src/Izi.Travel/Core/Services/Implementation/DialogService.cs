@@ -1,14 +1,14 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Services.Implementation.DialogService
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Core.Services.Implementation.DialogService
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core.Controls.Flyout;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services.Contract;
-using Izi.Travel.Shell.Core.Services.Entities;
+using Izi.Travel.Core.Controls.Flyout;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services.Contract;
+using Izi.Travel.Core.Services.Entities;
 using Izi.Travel.Utility;
 //using Microsoft.Devices;
 
@@ -25,7 +25,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.Foundation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Services.Implementation
+namespace Izi.Travel.Core.Services.Implementation
 {
   public class DialogService //: IDialogService
   {

@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Navigation;
 //using System.Windows.Navigation;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices
+namespace Izi.Travel.AppServices
 {
   public interface IBrowserView
   {

@@ -1,4 +1,4 @@
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 
-namespace Izi.Travel.Shell.Core.Components
+namespace Izi.Travel.Core.Components
 {
     public class UIElementHelper : DependencyObject
     {

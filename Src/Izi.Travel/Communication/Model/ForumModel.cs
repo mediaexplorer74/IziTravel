@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication.Model
+namespace Izi.Travel.Communication.Model
 {
   public class ForumModel
   {

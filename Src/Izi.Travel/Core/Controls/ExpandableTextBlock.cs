@@ -1,8 +1,8 @@
 // ********************************************************************
-// Type: Izi.Travel.Shell.Core.Controls.ExpandableTextBlock
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Core.Controls.ExpandableTextBlock
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using HtmlAgilityPack;
 using System;
@@ -15,10 +15,10 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Markup;
-using Izi.Travel.Shell.Core.Extensions; //?
+using Izi.Travel.Core.Extensions; //?
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Controls
+namespace Izi.Travel.Core.Controls
 {
   [TemplatePart(Name = "PartStackPanel", Type = typeof (StackPanel))]
   [TemplatePart(Name = "PartButton", Type = typeof (LinkButton))]
@@ -205,7 +205,9 @@ namespace Izi.Travel.Shell.Core.Controls
       this._collapsedHeight = this.GetCollapsedHeight();
       this._stackPanel.MaxHeight = this.IsExpanded ? this._expandedHeight : this._collapsedHeight;
       this._linkButton.Content = this.IsExpanded ? (object) this.LinkTextExpanded : (object) this.LinkTextCollapsed;
-      this._linkButton.Visibility = this._linkButton.Content != null ? (this._collapsedHeight < this._expandedHeight).ToVisibility() : Visibility.Collapsed;
+      this._linkButton.Visibility = this._linkButton.Content != null ? 
+          Izi.Travel.Core.Extensions.UiExtensions.ToVisibility(this._collapsedHeight < this._expandedHeight) : 
+          Visibility.Collapsed;
     }
 
     private double GetCollapsedHeight()

@@ -18,7 +18,7 @@ using Windows.UI.Xaml;
 //using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.Views
+namespace Izi.Travel.Settings.Views
 {
     public sealed partial class SettingsListView : UserControl
     {

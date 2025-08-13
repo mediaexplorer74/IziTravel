@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Media.Imaging;
 //using Windows.UI.Xaml.Media.Imaging;
 
 #nullable disable
-namespace Izi.Travel.Shell.Converters
+namespace Izi.Travel.Converters
 {
   public class BackgroundCreationImageConverter : IValueConverter
   {

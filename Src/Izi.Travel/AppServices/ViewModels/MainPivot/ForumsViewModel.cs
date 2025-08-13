@@ -1,21 +1,21 @@
-// IziTravel.AppServices.ViewModels.MainPivot.ForumsViewModel
+﻿// IziTravel.AppServices.ViewModels.MainPivot.ForumsViewModel
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.AppServices.Controllers;
-using Izi.Travel.Shell.AppServices.DataModels;
-using Izi.Travel.Shell.AppServices.ViewModels.Forum;
-using Izi.Travel.Shell.Communication;
-using Izi.Travel.Shell.Communication.Model;
+using Izi.Travel.AppServices.Controllers;
+using Izi.Travel.AppServices.DataModels;
+using Izi.Travel.AppServices.ViewModels.Forum;
+using Izi.Travel.Communication;
+using Izi.Travel.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using Izi.Travel.Shell.AppServices.Navigation;
+using Izi.Travel.AppServices.Navigation;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.ViewModels.MainPivot
+namespace Izi.Travel.AppServices.ViewModels.MainPivot
 {
   public class ForumsViewModel : Screen
   {

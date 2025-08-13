@@ -1,10 +1,10 @@
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Izi.Travel.Utility;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Izi.Travel.Shell.ViewModels.Base
+namespace Izi.Travel.ViewModels.Base
 {
     /// <summary>
     /// Base class for all ViewModels that includes common functionality and string handling.

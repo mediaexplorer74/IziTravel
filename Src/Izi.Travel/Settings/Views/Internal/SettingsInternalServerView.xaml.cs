@@ -18,7 +18,7 @@ using System;
 using System.Diagnostics;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.Settings.Views.Internal
+namespace Izi.Travel.Settings.Views.Internal
 {
     public sealed partial class SettingsInternalServerView : Page //PhoneApplicationPage
     {

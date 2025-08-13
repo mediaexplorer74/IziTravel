@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.DetailInfoViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.ViewModels.Common.Detail.DetailInfoViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
@@ -14,21 +14,21 @@ using Izi.Travel.Business.Entities.Quiz;
 using Izi.Travel.Business.Extensions;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Common.Controls;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Controls.Flyout;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Core.Services.Entities;
-using Izi.Travel.Shell.Media.Provider;
-using Izi.Travel.Shell.Media.ViewModels;
-using Izi.Travel.Shell.Media.ViewModels.Audio;
-using Izi.Travel.Shell.Media.ViewModels.Common;
-using Izi.Travel.Shell.Mtg.Commands;
-using Izi.Travel.Shell.Mtg.Model;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
-using Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail;
+using Izi.Travel.Common.Controls;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Controls.Flyout;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Core.Services.Entities;
+using Izi.Travel.Media.Provider;
+using Izi.Travel.Media.ViewModels;
+using Izi.Travel.Media.ViewModels.Audio;
+using Izi.Travel.Media.ViewModels.Common;
+using Izi.Travel.Mtg.Commands;
+using Izi.Travel.Mtg.Model;
+using Izi.Travel.Mtg.ViewModels.Common.Detail.Interfaces;
+using Izi.Travel.Mtg.ViewModels.Publisher.Detail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +40,7 @@ using Windows.Foundation;
 using Izi.Travel.Utility.Extensions;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Detail
+namespace Izi.Travel.Mtg.ViewModels.Common.Detail
 {
   public abstract class DetailInfoViewModel : DetailTabViewModel
   {

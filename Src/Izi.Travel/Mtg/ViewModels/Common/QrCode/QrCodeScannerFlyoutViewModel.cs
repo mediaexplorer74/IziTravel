@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Common.QrCode.QrCodeScannerFlyoutViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.ViewModels.Common.QrCode.QrCodeScannerFlyoutViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
@@ -11,13 +11,13 @@ using Izi.Travel.Business.Entities.Filters;
 using Izi.Travel.Business.Entities.Settings;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core.Controls.Flyout;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Helpers;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Core.Services.Entities;
-using Izi.Travel.Shell.Mtg.Model;
+using Izi.Travel.Core.Controls.Flyout;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Helpers;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Core.Services.Entities;
+using Izi.Travel.Mtg.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ using Windows.ApplicationModel.Core;
 using System.Diagnostics;
 using System.ComponentModel;
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Common.QrCode
+namespace Izi.Travel.Mtg.ViewModels.Common.QrCode
 {
   public class QrCodeScannerFlyoutViewModel : BaseSearchFlyoutViewModel, INotifyPropertyChanged
   {

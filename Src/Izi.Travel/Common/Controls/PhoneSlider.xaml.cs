@@ -1,10 +1,10 @@
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-namespace Izi.Travel.Shell.Common.Controls
+namespace Izi.Travel.Common.Controls
 {
     public class PhoneSlider : Slider
     {

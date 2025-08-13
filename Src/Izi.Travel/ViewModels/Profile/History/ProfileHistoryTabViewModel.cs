@@ -1,20 +1,20 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.History.ProfileHistoryTabViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Profile.History.ProfileHistoryTabViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Common.Model;
-using Izi.Travel.Shell.Core.Attributes;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Model.Profile;
-using Izi.Travel.Shell.Views.Profile;
+using Izi.Travel.Common.Model;
+using Izi.Travel.Core.Attributes;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Model.Profile;
+using Izi.Travel.Views.Profile;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Windows.UI.Xaml.Input;
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile.History
+namespace Izi.Travel.ViewModels.Profile.History
 {
   [View(typeof (ProfileTabView))]
   public class ProfileHistoryTabViewModel : ProfileTabViewModel<ProfileHistoryListViewModel>

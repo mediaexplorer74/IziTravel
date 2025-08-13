@@ -3,7 +3,7 @@
 using System;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices
+namespace Izi.Travel.AppServices
 {
   public interface IBusyIndicator
   {

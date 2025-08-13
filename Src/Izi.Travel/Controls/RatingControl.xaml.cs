@@ -1,8 +1,8 @@
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     public sealed partial class RatingControl : UserControl
     {

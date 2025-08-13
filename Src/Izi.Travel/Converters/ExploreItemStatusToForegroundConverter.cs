@@ -1,16 +1,16 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Converters.ExploreItemStatusToForegroundConverter
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Converters.ExploreItemStatusToForegroundConverter
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.ViewModels.Explore;
+using Izi.Travel.ViewModels.Explore;
 using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
-namespace Izi.Travel.Shell.Converters
+namespace Izi.Travel.Converters
 {
   public class ExploreItemStatusToForegroundConverter : IValueConverter
   {

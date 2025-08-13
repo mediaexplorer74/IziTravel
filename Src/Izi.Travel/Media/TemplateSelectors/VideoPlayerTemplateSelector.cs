@@ -1,14 +1,14 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Media.TemplateSelectors.VideoPlayerTemplateSelector
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Media.TemplateSelectors.VideoPlayerTemplateSelector
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Components;
-using Izi.Travel.Shell.Media.ViewModels.Video;
+using Izi.Travel.Core.Components;
+using Izi.Travel.Media.ViewModels.Video;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.Media.TemplateSelectors
+namespace Izi.Travel.Media.TemplateSelectors
 {
   public class VideoPlayerTemplateSelector : DataTemplateSelector
   {

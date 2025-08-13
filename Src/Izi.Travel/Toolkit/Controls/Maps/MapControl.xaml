@@ -1,8 +1,8 @@
 <UserControl
-    x:Class="Izi.Travel.Shell.Toolkit.Controls.Maps.MapControl"
+    x:Class="Izi.Travel.Toolkit.Controls.Maps.MapControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Izi.Travel.Shell.Toolkit.Controls.Maps"
+    xmlns:local="using:Izi.Travel.Toolkit.Controls.Maps"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -10,13 +10,15 @@
     d:DesignWidth="600">
 
     <Grid x:Name="RootGrid">
-        <!--Maps:MapControl x:Name="Map" 
+        <!-- Commented out MapControl for now to resolve XAML parsing issues
+        <Maps:MapControl x:Name="Map" 
                          ZoomLevel="{x:Bind ViewModel.ZoomLevel, Mode=TwoWay}"
                          Center="{x:Bind ViewModel.Center, Mode=TwoWay}"
                          MapServiceToken="{x:Bind ViewModel.MapServiceToken, Mode=OneWay}"
                          ZoomInteractionMode="GestureAndControl"
                          TiltInteractionMode="GestureAndControl"
                          RotateInteractionMode="GestureAndControl"
-                         Style="{StaticResource MapControlStyle}" /-->
+                         Style="{StaticResource MapControlStyle}" />
+        -->
     </Grid>
 </UserControl>

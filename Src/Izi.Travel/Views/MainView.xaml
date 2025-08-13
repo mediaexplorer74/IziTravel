@@ -1,24 +1,15 @@
-<Page x:Class="Izi.Travel.Shell.Views.MainView"
-                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            
-                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:controls="using:Izi.Travel.Shell.Core.Controls"
-                             xmlns:coreconverters="using:Izi.Travel.Shell.Core.Converters"
-                             xmlns:viewModels="using:Izi.Travel.Shell.ViewModels"
-                             xmlns:micro="using:Caliburn.Micro"
-                            mc:Ignorable="d"                            
-                            Style="{StaticResource IziTravelPageStyle}">
+<Page x:Class="Izi.Travel.Views.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Izi.Travel.Core.Controls"
+      xmlns:coreconverters="using:Izi.Travel.Core.Converters"
+      xmlns:micro="using:Caliburn.Micro"
+      
+      mc:Ignorable="d"
+      Style="{StaticResource IziTravelPageStyle}">
 
-    <!--bar:Bindable.ApplicationBar>
-    BindableOpacity="{StaticResource IziTravelAppBarOpacity}"
-                                    ButtonsSource="{Binding ActiveItem.Properties.AppBarButtons}"
-                                    MenuItemsSource="{Binding ActiveItem.Properties.AppBarMenuItems}"
-                                    Mode="{Binding ActiveItem.Properties.AppBarMode}" />
-    </bar:Bindable.ApplicationBar-->
-  
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -26,10 +17,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        
+        <!-- Top panel -->
         <Border Grid.Row="0" Height="32" Background="{StaticResource IziTravelVioletBrush}" />
 
-        
+        <!-- Pivot Content -->
         <Pivot x:Name="PartPivot"
                ItemsSource="{Binding Items}"
                Grid.Row="2"
@@ -37,65 +28,45 @@
                Padding="-12,-28,-12,0">
             <Pivot.ItemTemplate>
                 <DataTemplate>
-                    <!-- FIX: Remove caliburn:View.Model, use Content="{Binding}" instead -->
-                    <ContentControl Content="{Binding}"                           
-                                    VerticalContentAlignment="Stretch"
-                                    HorizontalContentAlignment="Stretch"
-                                    Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}}"
-                                    d:DataContext="{d:DesignInstance micro:IScreen}" />
+                    <ContentControl micro:View.Model="{Binding}"                           
+                                  VerticalContentAlignment="Stretch"
+                                  HorizontalContentAlignment="Stretch"
+                                  Visibility="{Binding IsActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                                  d:DataContext="{d:DesignInstance micro:IScreen}" />
                 </DataTemplate>
             </Pivot.ItemTemplate>
             <Pivot.HeaderTemplate>
                 <DataTemplate />
             </Pivot.HeaderTemplate>
-            <Pivot.Template>
-                <ControlTemplate TargetType="Pivot">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Border Background="{TemplateBinding Background}" Grid.RowSpan="2" />
-                        <!-- Replace primitives:PivotHeadersControl with the correct type or custom control in your project -->
-                        <ItemsControl x:Name="HeadersListElement" Grid.Row="0" />
-                        <ItemsPresenter x:Name="PivotItemPresenter" Grid.Row="1" Margin="{TemplateBinding Padding}" />
-                    </Grid>
-                </ControlTemplate>
-            </Pivot.Template>
         </Pivot>
 
-        
+        <!-- Pivot Header Shadow -->
         <Border Grid.Row="1" VerticalAlignment="Bottom" Height="4" Margin="0,0,0,-4">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="0.0,1.0">
-                    <GradientStopCollection>
-                        <GradientStop Color="#20000000" Offset="0.0" />
-                        <GradientStop Color="#00000000" Offset="1.0" />
-                    </GradientStopCollection>
+                    <GradientStop Color="#20000000" Offset="0.0" />
+                    <GradientStop Color="#00000000" Offset="1.0" />
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
 
-        
+        <!-- Navigation Items using UniformGrid from Windows Community Toolkit -->
         <ListBox Grid.Row="1"
                  Background="{StaticResource IziTravelLightBrush}"
                  ItemsSource="{Binding Items}"
                  SelectedItem="{Binding SelectedItem, ElementName=PartPivot, Mode=TwoWay}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                 Margin="0" Height="65">
-            <ListBox.ItemsPanel>
+                 Margin="0" 
+                 Height="65"
+                 BorderThickness="0">
+            <!--ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <!-- FIX: Use a standard panel (e.g., StackPanel) since SplitPanel is not found and not supported here -->
-                    <StackPanel Orientation="Horizontal" />
+                    <toolkit:UniformGrid Rows="1" />
                 </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+            </ListBox.ItemsPanel-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <!--
-                    XDG0008: The name "IMainTabViewModel" does not exist in the namespace "clr-namespace:Izi.Travel.Shell.ViewModels".
-                    FIX: Use a concrete class that exists in the namespace for design-time DataContext, or remove the d:DataContext line if not needed.
-                    -->
                     <Border Width="160" 
                             Height="38"                             
                             BorderBrush="{StaticResource IziTravelGrayBrush}"
@@ -117,8 +88,12 @@
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>

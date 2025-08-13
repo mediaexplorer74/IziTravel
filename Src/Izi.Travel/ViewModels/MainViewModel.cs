@@ -1,16 +1,16 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.MainViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.MainViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.ViewModels.Explore;
-using Izi.Travel.Shell.ViewModels.Profile;
-using Izi.Travel.Shell.ViewModels.QuickAccess;
+using Izi.Travel.ViewModels.Explore;
+using Izi.Travel.ViewModels.Profile;
+using Izi.Travel.ViewModels.QuickAccess;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels
+namespace Izi.Travel.ViewModels
 {
   public sealed class MainViewModel : Conductor<IScreen>.Collection.OneActive
   {

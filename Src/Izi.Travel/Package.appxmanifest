@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   IgnorableNamespaces="uap mp uap3 iot">
 
   <Identity
@@ -53,34 +53,22 @@
   <Capabilities>
     <!-- Basic capabilities -->
     <Capability Name="internetClient" />
-    <uap:Capability Name="privateNetworkClientServer" />
-    
+        
     <!-- Storage capabilities -->
     <uap:Capability Name="documentsLibrary" />
     <uap:Capability Name="picturesLibrary" />
     <uap:Capability Name="videosLibrary" />
+    <uap3:Capability Name="backgroundMediaPlayback"/>
     <uap:Capability Name="musicLibrary" />
     <uap:Capability Name="removableStorage" />
     
     <!-- Device capabilities -->
     <DeviceCapability Name="location" />
     <DeviceCapability Name="microphone" />
-    <DeviceCapability Name="webcam" />
     <DeviceCapability Name="bluetooth" />
     <DeviceCapability Name="pointOfService" />
     
-    <!-- Other capabilities -->
-    <uap3:Capability Name="backgroundMediaPlayback" />
-    <uap3:Capability Name="userNotificationListener" />
     
-    <!-- IoT specific -->
-    <iot:Capability Name="lowLevelDevices" />
-    <iot:Capability Name="systemManagement" />
-    
-    <!-- Maps capability -->
-    <uap:Capability Name="maps" />
-    
-    <!-- Location capability -->
-    <DeviceCapability Name="location" />
+  
   </Capabilities>
 </Package>

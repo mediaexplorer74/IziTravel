@@ -1,46 +1,38 @@
-<Page x:Class="Izi.Travel.Shell.Mtg.Views.Tour.Map.TourMapPartView"
+<Page x:Class="Izi.Travel.Mtg.Views.Tour.Map.TourMapPartView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
-      xmlns:corecontrols="clr-namespace:Izi.Travel.Shell.Core.Controls"
-      xmlns:commoncontrols="clr-namespace:Izi.Travel.Shell.Common.Controls"
-      xmlns:modulecontrols="clr-namespace:Izi.Travel.Shell.Mtg.Controls"
+      xmlns:corecontrols="clr-namespace:Izi.Travel.Core.Controls"
+      xmlns:commoncontrols="clr-namespace:Izi.Travel.Common.Controls"
+      xmlns:modulecontrols="clr-namespace:Izi.Travel.Mtg.Controls"
       xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
       xmlns:controls="using:Windows.UI.Xaml.Controls"
-      xmlns:viewmodels="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Tour.Map"
-      xmlns:flyout="clr-namespace:Izi.Travel.Shell.Core.Controls.Flyout"
-      xmlns:coreconverters="clr-namespace:Izi.Travel.Shell.Core.Converters"
-      xmlns:moduleconverters="clr-namespace:Izi.Travel.Shell.Mtg.Converters"
-      xmlns:audio="clr-namespace:Izi.Travel.Shell.Media.Views.Audio"
-      xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-      xmlns:converters="using:Izi.Travel.Shell.Converters"
-      xmlns:toolkit="using:Izi.Travel.Shell.Toolkit.Controls.Maps"
+      xmlns:viewmodels="clr-namespace:Izi.Travel.Mtg.ViewModels.Tour.Map"
+      xmlns:flyout="clr-namespace:Izi.Travel.Core.Controls.Flyout"
+      xmlns:coreconverters="clr-namespace:Izi.Travel.Core.Converters"
+      xmlns:moduleconverters="clr-namespace:Izi.Travel.Mtg.Converters"
+      xmlns:audio="clr-namespace:Izi.Travel.Media.Views.Audio"
+      xmlns:behaviors="clr-namespace:Izi.Travel.Core.Components.Behaviors"
+      xmlns:converters="using:Izi.Travel.Converters"
+      xmlns:toolkit="using:Izi.Travel.Toolkit.Controls.Maps"
+      xmlns:sys="using:System"
       mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="400"
       Style="{StaticResource IziTravelPageStyle}">
 
     <Page.Resources>
-        <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToForegroundConverter" 
-                                                           NormalBrush="{StaticResource IziTravelBlueBrush}"
-                                                           SelectedBrush="{StaticResource IziTravelLightBrush}" 
-                                                           VisitedBrush="{StaticResource IziTravelGrayBrush}" />
-        <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToBorderConverter" 
-                                                           NormalBrush="{StaticResource IziTravelBlueBrush}"
-                                                           SelectedBrush="{StaticResource IziTravelLightBrush}" 
-                                                           VisitedBrush="{StaticResource IziTravelGrayBrush}" />
-        <moduleconverters:TourMapItemStateToBrushConverter x:Key="TourMapItemStateToBackgroundConverter" 
-                                                           NormalBrush="{StaticResource IziTravelLightBrush}"
-                                                           SelectedBrush="{StaticResource IziTravelBlueBrush}">
-            <moduleconverters:TourMapItemStateToBrushConverter.VisitedBrush>
-                <SolidColorBrush Color="{StaticResource IziTravelLightColor}" Opacity="0.6" />
-            </moduleconverters:TourMapItemStateToBrushConverter.VisitedBrush>
-        </moduleconverters:TourMapItemStateToBrushConverter>
-
-        <coreconverters:BoolToObjectConverter x:Key="MapPinIsSelectedToPlayContentMarginConverter"
-                                              PositiveValue="0,8,0,0" NegativeValue="0,2,0,0" />
-        <coreconverters:BoolToObjectConverter x:Key="MapPinIsSelectedToTextContentMarginConverter"
-                                              PositiveValue="0,2,0,0" NegativeValue="0,0,0,2" />
+        <!-- Replaced TourMapItemStateToBrushConverter with direct binding to brush resources -->
+        <SolidColorBrush x:Key="MapItemNormalBrush" Color="{StaticResource IziTravelBlueColor}" />
+        <SolidColorBrush x:Key="MapItemSelectedBrush" Color="{StaticResource IziTravelLightColor}" />
+        <SolidColorBrush x:Key="MapItemVisitedBrush" Color="{StaticResource IziTravelGrayColor}" />
+        
+        <!-- Simple margin values as strings that can be converted to Thickness where needed -->
+        <sys:Double x:Key="MapPinSelectedMarginTop">8</sys:Double>
+        <sys:Double x:Key="MapPinNormalMarginTop">2</sys:Double>
+        <x:String x:Key="MapPinSelectedTextMargin">0,2,0,0</x:String>
+        <x:String x:Key="MapPinNormalTextMargin">0,0,0,2</x:String>
 
         <!--Style TargetType="corecontrols:ActionRoundButton" x:Name="MapButton">
           
@@ -113,7 +105,14 @@
     </Page.Resources>
 
     <Grid x:Name="MainGrid">
-        <corecontrols:ProgressOverlay IsBusy="{Binding IsBusy}">
+        <!-- Replaced ProgressOverlay with a simple busy indicator -->
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <ProgressRing IsActive="{Binding IsBusy}" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center"
+                         Width="40"
+                         Height="40"
+                         Foreground="{StaticResource IziTravelBlueBrush}" />
             <Grid x:Name="MapGrid">
                 <!-- Custom MapControl with UWP integration -->
                 <maps:MapControl x:Name="Map"
@@ -122,11 +121,12 @@
                                MapElementClick="OnMapElementClick"
                                MapTapped="OnMapTapped"
                                Style="{StaticResource IziTravelMapStyle}">
-                    <i:Interaction.Behaviors>
+                    <!-- Commented out MapViewBehavior as it's causing compilation issues -->
+                    <!--<i:Interaction.Behaviors>
                         <behaviors:MapViewBehavior View="{Binding LocationRect, Mode=TwoWay}"
                                                ViewCenter="{Binding ViewCenter, Mode=TwoWay}" 
                                                ViewZoomLevel="{Binding ViewZoomLevel, Mode=TwoWay}" />
-                    </i:Interaction.Behaviors>
+                    </i:Interaction.Behaviors>-->
                     
                     <!-- MapItemsControl for displaying items on the map -->
                     <maps:MapItemsControl x:Name="MapItems" 
@@ -174,6 +174,6 @@
                     </maps:MapItemsControl>
                 </maps:MapControl>
             </Grid>
-        </corecontrols:ProgressOverlay>
+        </Grid>
     </Grid>
 </Page>

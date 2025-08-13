@@ -2,7 +2,7 @@
 
 using System.Text;
 
-namespace Izi.Travel.Shell.Communication
+namespace Izi.Travel.Communication
 {
     //internal class Windows1251Encoding : Encoding
     //{

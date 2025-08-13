@@ -1,14 +1,14 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Converters.BoolToResultTextConverter
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.Converters.BoolToResultTextConverter
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Resources;
+using Izi.Travel.Core.Resources;
 using System;
 using Windows.UI.Xaml.Data;
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Converters
+namespace Izi.Travel.Mtg.Converters
 {
   public class BoolToResultTextConverter : IValueConverter
   {

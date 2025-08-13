@@ -3,25 +3,22 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:local="using:Izi.Travel.Shell.Styles"
+                    xmlns:local="using:Izi.Travel.Styles"
                     >
    
 
     <SolidColorBrush x:Key="IziTravelLightBrush" Color="#14A5F4"/>
-    <SolidColorBrush x:Key="IziTravelDarkBrush" Color="#4474C4"/>
+    <!-- IziTravelDarkBrush is defined in Generic.xaml -->
     
     <Style x:Key="PageSmallHeaderTextStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="24,46,0,37"/>
         <Setter Property="Foreground" Value="Black"/>        
-        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+     
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
     </Style>
 
     
-
     
-        
-        
     
     <!-- Tilt Button Style for UWP -->
     <Style x:Key="TiltButtonStyle" TargetType="Button">

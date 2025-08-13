@@ -1,7 +1,7 @@
 ﻿// IziTravel.Communication.Model.ForumTopicModel
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication.Model
+namespace Izi.Travel.Communication.Model
 {
   public class ForumTopicModel
   {

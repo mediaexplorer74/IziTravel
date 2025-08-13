@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Tour.Map.TourMapItemViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.ViewModels.Tour.Map.TourMapItemViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
@@ -11,18 +11,18 @@ using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Entities.TourPlayback;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Media.ViewModels.Audio;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Media.ViewModels.Audio;
+using Izi.Travel.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.Mtg.ViewModels.Common.Map;
 using System;
 using System.Linq.Expressions;
 using Windows.Foundation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Tour.Map
+namespace Izi.Travel.Mtg.ViewModels.Tour.Map
 {
   public class TourMapItemViewModel : BaseMapItemViewModel
   {

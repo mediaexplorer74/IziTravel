@@ -1,17 +1,17 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.Quiz.ProfileQuizTabViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Profile.Quiz.ProfileQuizTabViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Attributes;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Model.Profile;
-using Izi.Travel.Shell.Views.Profile;
+using Izi.Travel.Core.Attributes;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Model.Profile;
+using Izi.Travel.Views.Profile;
 using System;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile.Quiz
+namespace Izi.Travel.ViewModels.Profile.Quiz
 {
   [View(typeof (ProfileTabView))]
   public class ProfileQuizTabViewModel : ProfileTabViewModel<ProfileQuizListViewModel>

@@ -1,5 +1,5 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapExtensionsChildrenChangeManager
+﻿// ********************************************************************
+// Type: Izi.Travel.Toolkit.Controls.Maps.MapExtensionsChildrenChangeManager
 // Updated for UWP compatibility
 
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Maps;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
     internal class MapExtensionsChildrenChangeManager : CollectionChangeListener<DependencyObject>
     {

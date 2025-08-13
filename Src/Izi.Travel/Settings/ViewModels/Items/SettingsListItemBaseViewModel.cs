@@ -1,24 +1,26 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Settings.ViewModels.Items.SettingsListItemBaseViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// ********************************************************************
+// Type: Izi.Travel.Settings.ViewModels.Items.SettingsListItemBaseViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
-using Izi.Travel.Shell.Core.Command;
+using Izi.Travel.Core.Command;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Linq.Expressions;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.ViewModels.Items
+namespace Izi.Travel.Settings.ViewModels.Items
 {
   public abstract class SettingsListItemBaseViewModel : PropertyChangedBase
   {
     private string _name;
     private string _info;
-    private RelayCommand _selectCommand;
+    private ICommand _selectCommand;
 
     protected ISettingsService SettingsService => ServiceFacade.SettingsService;
 
@@ -52,18 +54,29 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Items
       this._info = info;
     }
 
-    public RelayCommand SelectCommand
+    public ICommand SelectCommand
     {
       get
       {
-        return this._selectCommand ?? (this._selectCommand = new RelayCommand(new Action<object>(this.ExecuteSelectCommand), new Func<object, bool>(this.CanExecuteSelectCommand)));
+        return _selectCommand ??= new RelayCommand(
+            async param => await ExecuteSelectCommandAsync(param),
+            param => CanExecuteSelectCommand(param));
       }
     }
 
     protected virtual bool CanExecuteSelectCommand(object parameter) => true;
 
+    protected virtual async Task ExecuteSelectCommandAsync(object parameter)
+    {
+        // Default implementation does nothing
+        await Task.CompletedTask;
+    }
+    
+    [Obsolete("Use ExecuteSelectCommandAsync instead")]
     protected virtual void ExecuteSelectCommand(object parameter)
     {
+        // For backward compatibility only
+        ExecuteSelectCommandAsync(parameter).GetAwaiter().GetResult();
     }
   }
 }

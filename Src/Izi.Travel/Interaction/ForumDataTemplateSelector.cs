@@ -1,12 +1,12 @@
-// IziTravel.Interaction.ForumDataTemplateSelector
+﻿// IziTravel.Interaction.ForumDataTemplateSelector
 
-using Izi.Travel.Shell.AppServices.DataModels;
+using Izi.Travel.AppServices.DataModels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   public class ForumDataTemplateSelector : DataTemplateSelector
   {

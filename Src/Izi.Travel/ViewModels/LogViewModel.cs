@@ -1,17 +1,17 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.LogViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.LogViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core;
+using Izi.Travel.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels
+namespace Izi.Travel.ViewModels
 {
   public class LogViewModel : Screen
   {

@@ -1,12 +1,12 @@
-<UserControl x:Class="Izi.Travel.Shell.Settings.Views.SettingsListView"
+<UserControl x:Class="Izi.Travel.Settings.Views.SettingsListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
              xmlns:core="using:Microsoft.Xaml.Interactions.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:items="using:Izi.Travel.Shell.Settings.ViewModels.Items"
-             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:items="using:Izi.Travel.Settings.ViewModels.Items"
+             xmlns:behaviors="using:Izi.Travel.Core.Components.Behaviors"
              mc:Ignorable="d">
 
     

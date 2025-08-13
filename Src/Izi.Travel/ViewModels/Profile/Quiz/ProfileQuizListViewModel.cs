@@ -1,8 +1,8 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.Quiz.ProfileQuizListViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Profile.Quiz.ProfileQuizListViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
@@ -10,12 +10,12 @@ using Izi.Travel.Business.Entities.Filters;
 using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Entities.Quiz;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Common.ViewModels.List;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Helpers;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Mtg.ViewModels.Quiz;
+using Izi.Travel.Common.ViewModels.List;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Helpers;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Mtg.ViewModels.Quiz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile.Quiz
+namespace Izi.Travel.ViewModels.Profile.Quiz
 {
   public class ProfileQuizListViewModel : BaseListViewModel<ProfileQuizListItemViewModel>
   {

@@ -1,7 +1,7 @@
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace Izi.Travel.Shell.Core.Controls.Flyout
+namespace Izi.Travel.Core.Controls.Flyout
 {
     public class Flyout : FlyoutBase
     {

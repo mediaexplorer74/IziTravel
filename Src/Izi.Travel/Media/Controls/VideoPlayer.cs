@@ -1,10 +1,10 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Media.Controls.VideoPlayer
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Media.Controls.VideoPlayer
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Controls;
+using Izi.Travel.Core.Controls;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.Media.Controls
+namespace Izi.Travel.Media.Controls
 {
   [TemplateVisualState(Name = "Buffering", GroupName = "PlayerStates")]
   [TemplateVisualState(Name = "Ready", GroupName = "PlayerStates")]

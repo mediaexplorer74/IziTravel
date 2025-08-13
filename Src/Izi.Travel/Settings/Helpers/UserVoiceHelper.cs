@@ -1,14 +1,14 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Settings.Helpers.UserVoiceHelper
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Settings.Helpers.UserVoiceHelper
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using ICSharpCode.SharpZipLib.Zip;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core;
+using Izi.Travel.Core;
 //using Microsoft.Phone.Info;
 using Newtonsoft.Json.Linq;
 using System;
@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 using UserVoice;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.Helpers
+namespace Izi.Travel.Settings.Helpers
 {
   public class UserVoiceHelper
   {

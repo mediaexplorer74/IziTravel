@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Core.Controls.FlipViewer.FlipViewer
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using System;
 using System.Collections;
@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Controls.FlipViewer
+namespace Izi.Travel.Core.Controls.FlipViewer
 {
   [TemplatePart(Name = "ContentStrip", Type = typeof (Canvas))]
   [TemplatePart(Name = "ContentStripCompositeTransform", Type = typeof (CompositeTransform))]
@@ -37,7 +37,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     private const double FlickMaxOutputMilliseconds = 800.0;
     private Canvas _contentStrip;
     private CompositeTransform _compositeTransform;
-    private Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState _state;
+    private Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState _state;
     private List<FlipViewerItem> _virtualizedItemPool;
     private Size? _size;
     private DragState _dragState = new DragState(150.0);
@@ -51,18 +51,18 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     private FrameworkElement _footerTemplateInstance;
     private FrameworkElement _headerOnMediaStrip;
     private FrameworkElement _footerOnMediaStrip;
-    public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof (ItemTemplate), typeof (DataTemplate), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnItemTemplatePropertyChanged)));
-    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof (Items), typeof (IList), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnItemsPropertyChanged)));
-    public static readonly DependencyProperty DisplayedElementProperty = DependencyProperty.Register(nameof (DisplayedElement), typeof (FlipViewerDisplayedElementType), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) FlipViewerDisplayedElementType.None));
-    public static readonly DependencyProperty DisplayedItemIndexProperty = DependencyProperty.Register(nameof (DisplayedItemIndex), typeof (int), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((PropertyChangedCallback) null));
-    public static readonly DependencyProperty InitiallyDisplayedElementProperty = DependencyProperty.Register(nameof (InitiallyDisplayedElement), typeof (FlipViewerInitiallyDisplayedElementType), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) FlipViewerInitiallyDisplayedElementType.First, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnInitiallyDisplayedElementPropertyPropertyChanged)));
-    public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register(nameof (HeaderVisibility), typeof (Visibility), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) Visibility.Collapsed, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnHeaderVisibilityPropertyChanged)));
-    public static readonly DependencyProperty FooterVisibilityProperty = DependencyProperty.Register(nameof (FooterVisibility), typeof (Visibility), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) Visibility.Collapsed, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnFooterVisibilityPropertyChanged)));
-    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof (Header), typeof (object), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnHeaderPropertyChanged)));
-    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof (Footer), typeof (object), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnFooterPropertyChanged)));
-    public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(nameof (HeaderTemplate), typeof (DataTemplate), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata(new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnHeaderTemplatePropertyChanged)));
-    public static readonly DependencyProperty FooterTemplateProperty = DependencyProperty.Register(nameof (FooterTemplate), typeof (DataTemplate), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata(new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.OnFooterTemplatePropertyChanged)));
-    public static readonly DependencyProperty DragEnabledProperty = DependencyProperty.Register(nameof (DragEnabled), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) true));
+    public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof (ItemTemplate), typeof (DataTemplate), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnItemTemplatePropertyChanged)));
+    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof (Items), typeof (IList), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnItemsPropertyChanged)));
+    public static readonly DependencyProperty DisplayedElementProperty = DependencyProperty.Register(nameof (DisplayedElement), typeof (FlipViewerDisplayedElementType), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) FlipViewerDisplayedElementType.None));
+    public static readonly DependencyProperty DisplayedItemIndexProperty = DependencyProperty.Register(nameof (DisplayedItemIndex), typeof (int), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((PropertyChangedCallback) null));
+    public static readonly DependencyProperty InitiallyDisplayedElementProperty = DependencyProperty.Register(nameof (InitiallyDisplayedElement), typeof (FlipViewerInitiallyDisplayedElementType), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) FlipViewerInitiallyDisplayedElementType.First, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnInitiallyDisplayedElementPropertyPropertyChanged)));
+    public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register(nameof (HeaderVisibility), typeof (Visibility), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) Visibility.Collapsed, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnHeaderVisibilityPropertyChanged)));
+    public static readonly DependencyProperty FooterVisibilityProperty = DependencyProperty.Register(nameof (FooterVisibility), typeof (Visibility), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) Visibility.Collapsed, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnFooterVisibilityPropertyChanged)));
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof (Header), typeof (object), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnHeaderPropertyChanged)));
+    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof (Footer), typeof (object), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnFooterPropertyChanged)));
+    public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(nameof (HeaderTemplate), typeof (DataTemplate), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata(new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnHeaderTemplatePropertyChanged)));
+    public static readonly DependencyProperty FooterTemplateProperty = DependencyProperty.Register(nameof (FooterTemplate), typeof (DataTemplate), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata(new PropertyChangedCallback(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.OnFooterTemplatePropertyChanged)));
+    public static readonly DependencyProperty DragEnabledProperty = DependencyProperty.Register(nameof (DragEnabled), typeof (bool), typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer), new PropertyMetadata((object) true));
 
     private double ScrollOffset
     {
@@ -72,77 +72,77 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
 
     public DataTemplate ItemTemplate
     {
-      get => (DataTemplate) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.ItemTemplateProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.ItemTemplateProperty, (object) value);
+      get => (DataTemplate) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.ItemTemplateProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.ItemTemplateProperty, (object) value);
     }
 
     public IList Items
     {
-      get => (IList) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.ItemsProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.ItemsProperty, (object) value);
+      get => (IList) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.ItemsProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.ItemsProperty, (object) value);
     }
 
     public FlipViewerDisplayedElementType DisplayedElement
     {
-      get => (FlipViewerDisplayedElementType) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.DisplayedElementProperty);
-      private set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.DisplayedElementProperty, (object) value);
+      get => (FlipViewerDisplayedElementType) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.DisplayedElementProperty);
+      private set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.DisplayedElementProperty, (object) value);
     }
 
     public int DisplayedItemIndex
     {
-      get => (int) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.DisplayedItemIndexProperty);
-      private set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.DisplayedItemIndexProperty, (object) value);
+      get => (int) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.DisplayedItemIndexProperty);
+      private set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.DisplayedItemIndexProperty, (object) value);
     }
 
     public FlipViewerInitiallyDisplayedElementType InitiallyDisplayedElement
     {
       get
       {
-        return (FlipViewerInitiallyDisplayedElementType) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.InitiallyDisplayedElementProperty);
+        return (FlipViewerInitiallyDisplayedElementType) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.InitiallyDisplayedElementProperty);
       }
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.InitiallyDisplayedElementProperty, (object) value);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.InitiallyDisplayedElementProperty, (object) value);
     }
 
     public Visibility HeaderVisibility
     {
-      get => (Visibility) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.HeaderVisibilityProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.HeaderVisibilityProperty, (object) value);
+      get => (Visibility) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.HeaderVisibilityProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.HeaderVisibilityProperty, (object) value);
     }
 
     public Visibility FooterVisibility
     {
-      get => (Visibility) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FooterVisibilityProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FooterVisibilityProperty, (object) value);
+      get => (Visibility) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FooterVisibilityProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FooterVisibilityProperty, (object) value);
     }
 
     public object Header
     {
-      get => this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.HeaderProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.HeaderProperty, value);
+      get => this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.HeaderProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.HeaderProperty, value);
     }
 
     public object Footer
     {
-      get => this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FooterProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FooterProperty, value);
+      get => this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FooterProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FooterProperty, value);
     }
 
     public DataTemplate HeaderTemplate
     {
-      get => (DataTemplate) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.HeaderTemplateProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.HeaderTemplateProperty, (object) value);
+      get => (DataTemplate) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.HeaderTemplateProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.HeaderTemplateProperty, (object) value);
     }
 
     public DataTemplate FooterTemplate
     {
-      get => (DataTemplate) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FooterTemplateProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FooterTemplateProperty, (object) value);
+      get => (DataTemplate) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FooterTemplateProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FooterTemplateProperty, (object) value);
     }
 
     public bool DragEnabled
     {
-      get => (bool) this.GetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.DragEnabledProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.DragEnabledProperty, (object) value);
+      get => (bool) this.GetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.DragEnabledProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.FlipViewer.FlipViewer.DragEnabledProperty, (object) value);
     }
 
     public event EventHandler HeaderDisplayed;
@@ -153,7 +153,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
 
     public FlipViewer()
     {
-      this.DefaultStyleKey = (object) typeof (Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer);
+      this.DefaultStyleKey = (object) typeof (Izi.Travel.Core.Controls.FlipViewer.FlipViewer);
       this.SizeChanged += new SizeChangedEventHandler(this.OnSizeChanged);
     }
 
@@ -233,8 +233,8 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
         this._contentStrip.Children.Add((UIElement) flipViewerItem.RootFrameworkElement);
         this._virtualizedItemPool.Add(flipViewerItem);
       }
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
-        this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
+        this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
       this.ResetDisplayedElement();
       this.ResetItemLayout();
     }
@@ -383,7 +383,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
 
     private void ResetItemLayout()
     {
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
         return;
       this.ResetContentStripGeometry();
       this.PlaceHeader();
@@ -484,7 +484,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     protected override void OnManipulationStarted(ManipulationStartedRoutedEventArgs e)
     {
       base.OnManipulationStarted(e);
-      if (this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating)
+      if (this._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating)
         return;
       this.CompleteDragInertiaAnimation();
     }
@@ -492,12 +492,12 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     protected override void OnManipulationDelta(ManipulationDeltaRoutedEventArgs e)
     {
       base.OnManipulationDelta(e);
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized && this.DragEnabled && this.GetElementCount() > 0)
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized && this.DragEnabled && this.GetElementCount() > 0)
       {
-        this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging;
+        this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging;
         this.DragStartedEventHandler();
       }
-      if (this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging && this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing)
+      if (this._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging && this._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing)
         return;
       Point translation = e.Delta.Translation;
       double x = translation.X;
@@ -509,7 +509,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     protected override void OnManipulationCompleted(ManipulationCompletedRoutedEventArgs e)
     {
       base.OnManipulationCompleted(e);
-      if (this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging && this._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing)
+      if (this._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging && this._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing)
         return;
       if (!this._dragState.GotDragDelta)
         this.ProcessDragDelta(e.Cumulative.Translation.X, e.Cumulative.Translation.Y);
@@ -519,7 +519,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     private void DragStartedEventHandler()
     {
       int elementCount = this.GetElementCount();
-      this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging;
+      this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging;
       this._dragState.LastDragUpdateTime = DateTime.Now;
       this._dragState.DragStartingMediaStripOffset = this.ScrollOffset;
       this._dragState.NetDragDistanceSincleLastDragStagnation = 0.0;
@@ -546,10 +546,10 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     {
       switch (this._state)
       {
-        case Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging:
+        case Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging:
           this.StartDragInertiaAnimation();
           break;
-        case Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing:
+        case Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing:
           this.StartUndoSquishAnimation();
           break;
       }
@@ -646,13 +646,13 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
         return;
       TimeSpan lastDragTimeDelta = DateTime.Now - this._dragState.LastDragUpdateTime;
       this.AnimateToElement(this._displayedElementIndex.Value + this.CalculateDragInertiaAnimationEndingValue(), this.CalculateDragInertiaAnimationDuration(lastDragTimeDelta));
-      this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating;
+      this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating;
     }
 
     private void AnimateToElement(int elementIndex, TimeSpan animationDuration)
     {
       this.ConstructDragInertiaAnimation(-1.0 * this.CalculateElementOffset(elementIndex), animationDuration);
-      this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating;
+      this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating;
       this._dragInertiaAnimation.Begin();
       this._dragState.NewDisplayedElementIndex = elementIndex;
     }
@@ -666,8 +666,8 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     {
       if (this._dragInertiaAnimation == null)
         return;
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating)
-        this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.InertiaAnimating)
+        this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
       if (this._dragInertiaAnimationTranslation.To.HasValue)
         this.ScrollOffset = this._dragInertiaAnimationTranslation.To.Value;
       this._dragInertiaAnimation.Stop();
@@ -694,7 +694,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       }
       double num3 = 1.0 - num2 / 150.0 * (1.0 / 10.0);
       this._compositeTransform.ScaleX = num3;
-      this._state = Math.Abs(num3 - 1.0) < double.Epsilon ? Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging : Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing;
+      this._state = Math.Abs(num3 - 1.0) < double.Epsilon ? Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Dragging : Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.DraggingAndSquishing;
     }
 
     private void StartUndoSquishAnimation()
@@ -716,7 +716,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       this._unsquishAnimation.Children.Add((Timeline) this._unsquishAnimationTranslation);
       this._unsquishAnimation.FillBehavior = FillBehavior.Stop;
       this._unsquishAnimation.Completed += new EventHandler<object>(this.UnsquishAnimationComplete);
-      this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.UnsquishAnimating;
+      this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.UnsquishAnimating;
       this._unsquishAnimation.Begin();
       this._compositeTransform.ScaleX = element.To.Value;
       this._compositeTransform.TranslateX = this._unsquishAnimationTranslation.To.Value;
@@ -724,8 +724,8 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
 
     private void UnsquishAnimationComplete(object sender, object e)
     {
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.UnsquishAnimating)
-        this._state = Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.UnsquishAnimating)
+        this._state = Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized;
       if (this._unsquishAnimationTranslation.To.HasValue)
         this.ScrollOffset = this._unsquishAnimationTranslation.To.Value;
       this._unsquishAnimation.Stop();
@@ -811,7 +811,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
 
     private void InitializeOrReset()
     {
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
       {
         this.InitializeVirtualizationIfReady();
       }
@@ -830,7 +830,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
       this._size = new Size?(e.NewSize);
-      if (this._state == Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
+      if (this._state == Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Uninitialized)
       {
         this.InitializeVirtualizationIfReady();
       }
@@ -945,7 +945,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer flipViewer))
+      if (!(d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer flipViewer))
         return;
       flipViewer.InitializeVirtualizationIfReady();
     }
@@ -954,7 +954,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer flipViewer))
+      if (!(d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer flipViewer))
         return;
       INotifyCollectionChanged oldValue = e.OldValue as INotifyCollectionChanged;
       INotifyCollectionChanged newValue = e.NewValue as INotifyCollectionChanged;
@@ -969,7 +969,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer && (FlipViewerDisplayedElementType) e.NewValue == FlipViewerDisplayedElementType.None)
+      if (d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer && (FlipViewerDisplayedElementType) e.NewValue == FlipViewerDisplayedElementType.None)
         throw new ArgumentException("InitiallyDisplayedElement cannot be set to DisplayedElementType.None");
     }
 
@@ -977,21 +977,21 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      ((Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer) d).InitializeOrReset();
+      ((Izi.Travel.Core.Controls.FlipViewer.FlipViewer) d).InitializeOrReset();
     }
 
     private static void OnFooterVisibilityPropertyChanged(
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      ((Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer) d).InitializeOrReset();
+      ((Izi.Travel.Core.Controls.FlipViewer.FlipViewer) d).InitializeOrReset();
     }
 
     private static void OnHeaderPropertyChanged(
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer flipViewer) || flipViewer._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
+      if (!(d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer flipViewer) || flipViewer._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
         return;
       flipViewer.PlaceHeader();
     }
@@ -1000,7 +1000,7 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer flipViewer) || flipViewer._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
+      if (!(d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer flipViewer) || flipViewer._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
         return;
       flipViewer.PlaceFooter();
     }
@@ -1009,11 +1009,11 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer flipViewer))
+      if (!(d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer flipViewer))
         return;
       DataTemplate newValue = (DataTemplate) e.NewValue;
       flipViewer._headerTemplateInstance = newValue != null ? newValue.LoadContent() as FrameworkElement : (FrameworkElement) null;
-      if (flipViewer._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
+      if (flipViewer._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
         return;
       flipViewer.PlaceHeader();
     }
@@ -1022,11 +1022,11 @@ namespace Izi.Travel.Shell.Core.Controls.FlipViewer
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      if (!(d is Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer flipViewer))
+      if (!(d is Izi.Travel.Core.Controls.FlipViewer.FlipViewer flipViewer))
         return;
       DataTemplate newValue = (DataTemplate) e.NewValue;
       flipViewer._footerTemplateInstance = newValue != null ? newValue.LoadContent() as FrameworkElement : (FrameworkElement) null;
-      if (flipViewer._state != Izi.Travel.Shell.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
+      if (flipViewer._state != Izi.Travel.Core.Controls.FlipViewer.FlipViewer.FlipViewerState.Initialized)
         return;
       flipViewer.PlaceFooter();
     }

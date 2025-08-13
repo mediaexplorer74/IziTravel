@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 //using System.Windows.Threading;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   internal class ClipboardMonitor : IDisposable
   {

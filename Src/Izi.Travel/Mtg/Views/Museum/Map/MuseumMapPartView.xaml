@@ -1,17 +1,10 @@
-<Page x:Class="Izi.Travel.Shell.Mtg.Views.Museum.Map.MuseumMapPartView"
+<Page x:Class="Izi.Travel.Mtg.Views.Museum.Map.MuseumMapPartView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:controls="clr-namespace:Izi.Travel.Shell.Core.Controls"
-      xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
-      xmlns:maps="using:Izi.Travel.Controls.Map"
-      xmlns:i="using:Microsoft.Xaml.Interactivity"
-      xmlns:viewmodel="clr-namespace:Izi.Travel.Shell.Mtg.ViewModels.Tour.Map"
-      xmlns:behaviors="clr-namespace:Izi.Travel.Shell.Core.Components.Behaviors"
-      xmlns:converters="using:Izi.Travel.Shell.Converters"
-      xmlns:local="using:Izi.Travel.Shell.Mtg.Views.Museum.Map"
-      xmlns:toolkit="using:Izi.Travel.Shell.Toolkit.Controls.Maps"
+      xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+      xmlns:converters="using:Izi.Travel.Converters"
       Style="{StaticResource IziTravelPageStyle}"
       mc:Ignorable="d">
 
@@ -47,46 +40,54 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
 
-        <controls:ProgressOverlay Grid.Row="1" IsBusy="{Binding IsBusy}">
-            <Grid>
-                <toolkit:MapControl x:Name="Map"
-                                  ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
-                                  Center="{Binding Center, Mode=TwoWay}"
-                                  MapServiceToken="{Binding MapServiceToken}"
-                                  MapTapped="OnMapTapped"
-                                  MapElementClick="OnMapElementClick"
-                                  Style="{StaticResource IziTravelMapStyle}">
-                    <toolkit:MapControl.MapElements>
-                        <!-- Map elements will be added programmatically -->
-                    </toolkit:MapControl.MapElements>
-                </toolkit:MapControl>
+        <!-- Replaced ProgressOverlay with ProgressRing for MVP -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <ProgressRing IsActive="{Binding IsBusy}" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" 
+                         Width="50" 
+                         Height="50"/>
+                
+            <maps:MapControl x:Name="Map"
+                          ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
+                          Center="{Binding Center, Mode=TwoWay}"
+                          MapTapped="OnMapTapped"
+                          MapElementClick="OnMapElementClick"
+                          Style="{StaticResource IziTravelMapStyle}">
+                <maps:MapControl.MapElements>
+                    <!-- Map elements will be added programmatically -->
+                </maps:MapControl.MapElements>
+            </maps:MapControl>
 
-                <StackPanel Margin="0,248,12,0" 
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Right">
-                    <Button Margin="0,-4,0,0"
-                            Command="{Binding ZoomOutCommand}"
-                            Style="{StaticResource ZoomInMapButtonStyle}">
-                        <Viewbox Width="24" Height="24">
-                            <FontIcon Glyph="&#xE71E;" FontFamily="Segoe MDL2 Assets" />
-                        </Viewbox>
-                    </Button>
-                    <Button Margin="0,-4,0,0"
-                            Command="{Binding ZoomInCommand}"
-                            Style="{StaticResource ZoomOutMapButtonStyle}">
-                        <Viewbox Width="24" Height="24">
-                            <FontIcon Glyph="&#xE721;" FontFamily="Segoe MDL2 Assets" />
-                        </Viewbox>
-                    </Button>
-                    <Button Margin="0,-4,0,0"
-                            Command="{Binding LocateUserCommand}"
-                            Style="{StaticResource CenterMapButtonStyle}">
-                        <Viewbox Width="24" Height="24">
-                            <FontIcon Glyph="&#xE1C3;" FontFamily="Segoe MDL2 Assets" />
-                        </Viewbox>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </controls:ProgressOverlay>
+            <StackPanel Margin="0,248,12,0" 
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right">
+                <Button Margin="0,-4,0,0"
+                        Command="{Binding ZoomOutCommand}"
+                        Style="{StaticResource ZoomInMapButtonStyle}">
+                    <Viewbox Width="24" Height="24">
+                        <FontIcon Glyph="&#xE71E;" FontFamily="Segoe MDL2 Assets" />
+                    </Viewbox>
+                </Button>
+                <Button Margin="0,-4,0,0"
+                        Command="{Binding ZoomInCommand}"
+                        Style="{StaticResource ZoomOutMapButtonStyle}">
+                    <Viewbox Width="24" Height="24">
+                        <FontIcon Glyph="&#xE721;" FontFamily="Segoe MDL2 Assets" />
+                    </Viewbox>
+                </Button>
+                <Button Margin="0,-4,0,0"
+                        Command="{Binding LocateUserCommand}"
+                        Style="{StaticResource CenterMapButtonStyle}">
+                    <Viewbox Width="24" Height="24">
+                        <FontIcon Glyph="&#xE1C3;" FontFamily="Segoe MDL2 Assets" />
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

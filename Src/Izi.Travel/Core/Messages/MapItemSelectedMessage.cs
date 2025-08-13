@@ -1,6 +1,6 @@
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
+﻿using Izi.Travel.Mtg.ViewModels.Tour.Map;
 
-namespace Izi.Travel.Shell.Core.Messages
+namespace Izi.Travel.Core.Messages
 {
     /// <summary>
     /// Message published when a map item is selected

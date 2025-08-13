@@ -1,15 +1,15 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.QuickAccess.Items.QuickAccessInfoItemViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.QuickAccess.Items.QuickAccessInfoItemViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core.Command;
+using Izi.Travel.Core.Command;
 using System;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.QuickAccess.Items
+namespace Izi.Travel.ViewModels.QuickAccess.Items
 {
   public sealed class QuickAccessInfoItemViewModel : QuickAccessBaseItemViewModel
   {
@@ -24,7 +24,8 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess.Items
     {
       get
       {
-        return this._navigateToExploreCommand ?? (this._navigateToExploreCommand = new RelayCommand(new Action<object>(this.ExecuteNavigateToExploreCommand)));
+        return this._navigateToExploreCommand ?? 
+                    (this._navigateToExploreCommand = new RelayCommand(new Action<object>(this.ExecuteNavigateToExploreCommand)));
       }
     }
 

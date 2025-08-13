@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 
-namespace Izi.Travel.Shell.Core.Extensions
+namespace Izi.Travel.Core.Extensions
 {
     public static class StringExtensions
     {
@@ -27,9 +27,6 @@ namespace Izi.Travel.Shell.Core.Extensions
             return value == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public static Visibility ToVisibility(this bool value)
-        {
-            return value ? Visibility.Visible : Visibility.Collapsed;
-        }
+
     }
 }

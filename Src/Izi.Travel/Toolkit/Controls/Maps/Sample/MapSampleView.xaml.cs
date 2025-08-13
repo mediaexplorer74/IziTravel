@@ -1,10 +1,10 @@
-// ********************************************************************
+﻿// ********************************************************************
 // MapSampleView.xaml.cs
 // Code-behind for the MapSampleView
 
 using Windows.UI.Xaml.Controls;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps.Sample
+namespace Izi.Travel.Toolkit.Controls.Maps.Sample
 {
     public sealed partial class MapSampleView : UserControl
     {

@@ -1,15 +1,15 @@
-// IziTravel.Controls.GlobalBusyIndicator
+﻿// IziTravel.Controls.GlobalBusyIndicator
 
 
-using Izi.Travel.Shell.AppServices;
-using Izi.Travel.Shell.Core;
+using Izi.Travel.AppServices;
+using Izi.Travel.Core;
 
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
   public class GlobalBusyIndicator : DependencyObject, IBusyIndicator
   {

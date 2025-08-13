@@ -1,8 +1,8 @@
-// IziTravel.AppServices.ViewModels.MainPivot.NewsViewModel
+﻿// IziTravel.AppServices.ViewModels.MainPivot.NewsViewModel
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.AppServices.DataModels;
-using Izi.Travel.Shell.Communication;
+using Izi.Travel.AppServices.DataModels;
+using Izi.Travel.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Windows.Web.Syndication; //using System.ServiceModel.Syndication;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.ViewModels.MainPivot
+namespace Izi.Travel.AppServices.ViewModels.MainPivot
 {
   public class NewsViewModel : Conductor<Screen>.Collection.OneActive
   {

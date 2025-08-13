@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core
+namespace Izi.Travel.Core
 {
   public static class EnumerableExtensions
   {

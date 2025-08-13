@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace Izi.Travel.Shell.Core.Controls.Flyout
+namespace Izi.Travel.Core.Controls.Flyout
 {
     public abstract class FlyoutBase : DependencyObject
     {

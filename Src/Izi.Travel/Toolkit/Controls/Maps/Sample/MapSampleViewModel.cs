@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // MapSampleViewModel.cs
 // Sample ViewModel demonstrating how to use the Map control
 
@@ -8,7 +8,7 @@ using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Caliburn.Micro;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps.Sample
+namespace Izi.Travel.Toolkit.Controls.Maps.Sample
 {
     public class MapSampleViewModel : Screen
     {

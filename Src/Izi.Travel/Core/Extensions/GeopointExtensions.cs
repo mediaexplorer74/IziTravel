@@ -1,7 +1,7 @@
-using System.Device.Location;
+﻿using System.Device.Location;
 using Windows.Devices.Geolocation;
 
-namespace Izi.Travel.Shell.Core.Extensions
+namespace Izi.Travel.Core.Extensions
 {
     /// <summary>
     /// Extension methods for converting between Geopoint and GeoCoordinate

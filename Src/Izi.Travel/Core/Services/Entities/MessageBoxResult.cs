@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace Izi.Travel.Shell.Core.Services.Entities
+namespace Izi.Travel.Core.Services.Entities
 {
     // UWP replacement for WP8 MessageBoxResult
     public enum MessageBoxResult

@@ -2,7 +2,7 @@
 
 
 #nullable disable
-namespace Izi.Travel.Shell.Converters
+namespace Izi.Travel.Converters
 {
   public class GenericCase
   {

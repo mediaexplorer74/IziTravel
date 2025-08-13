@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Explore.ExploreItemViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.ViewModels.Explore.ExploreItemViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Media;
@@ -10,12 +10,12 @@ using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Geofencing.Primitives;
 using Windows.Devices.Geolocation;
-using Izi.Travel.Shell.Common.Helpers;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Model.Explore;
-using Izi.Travel.Shell.Mtg.Helpers;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
+using Izi.Travel.Common.Helpers;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Model.Explore;
+using Izi.Travel.Mtg.Helpers;
+using Izi.Travel.Mtg.ViewModels.Common.Map;
 using Windows.UI.Xaml.Controls.Maps;
 using System;
 using System.Device.Location;
@@ -23,7 +23,7 @@ using System.Linq.Expressions;
 using Windows.UI.Xaml;
 using Windows.Foundation;
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Explore
+namespace Izi.Travel.ViewModels.Explore
 {
   public class ExploreItemViewModel : BaseMapItemViewModel
   {

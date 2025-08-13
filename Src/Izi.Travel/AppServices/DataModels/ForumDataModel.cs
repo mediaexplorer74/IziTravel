@@ -1,7 +1,7 @@
 ﻿// IziTravel.AppServices.DataModels.ForumDataModel
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.DataModels
+namespace Izi.Travel.AppServices.DataModels
 {
   public class ForumDataModel
   {

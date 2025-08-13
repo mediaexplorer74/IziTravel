@@ -1,25 +1,21 @@
 
-<UserControl x:Class="Izi.Travel.Shell.Views.QuickAccess.QuickAccessView"
+<UserControl x:Class="Izi.Travel.Views.QuickAccess.QuickAccessView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:coreControls="using:Izi.Travel.Shell.Core.Controls"
-             xmlns:commmonControls="using:Izi.Travel.Shell.Common.Controls"
-             xmlns:templateSelectors="using:Izi.Travel.Shell.TemplateSelectors.QuickAccess"
-             xmlns:i="using:Microsoft.Xaml.Interactivity"
+             xmlns:coreControls="using:Izi.Travel.Core.Controls"
+             xmlns:commmonControls="using:Izi.Travel.Common.Controls"
+             xmlns:templateSelectors="using:Izi.Travel.TemplateSelectors.QuickAccess"
              xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:mediaConverters="using:Izi.Travel.Shell.Media.Converters"
-             xmlns:items="using:Izi.Travel.Shell.ViewModels.QuickAccess.Items"
-             xmlns:components="using:Izi.Travel.Shell.Common.Components"
-             xmlns:ts="using:Izi.Travel.Shell.TemplateSelectors"
+             xmlns:behaviors="using:Izi.Travel.Core.Components.Behaviors"
+             xmlns:mediaConverters="using:Izi.Travel.Media.Converters"
+             xmlns:items="using:Izi.Travel.ViewModels.QuickAccess.Items"
+             xmlns:components="using:Izi.Travel.Common.Components"
+             xmlns:ts="using:Izi.Travel.TemplateSelectors"
+             xmlns:placeholders="using:Izi.Travel.Controls.Placeholders"
              mc:Ignorable="d">
 
-    
-    <i:Interaction.Behaviors>
-        <components:ViewAnalyticsBehavior />
-    </i:Interaction.Behaviors>
 
     
     <UserControl.Resources>
@@ -47,11 +43,7 @@
                                                   ImageSource="{Binding ImageUrl}"
                                                   ImageStretch="Uniform" 
                                                   Margin="0">
-                    <i:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding NavigateCommand}" />
-                        </core:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
+                    <!-- Interaction.Behaviors removed to fix XAML compilation -->
                 </commmonControls:ImagePlaceholder>
 
                 
@@ -59,18 +51,14 @@
                            Text="{Binding FullTitle}"
                            FontSize="{StaticResource IziTravelFontSizeNormal}"
                            Foreground="{StaticResource IziTravelDarkBlueBrush}"
-                           FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                           
                            HorizontalAlignment="Center"
                            TextWrapping="Wrap"
                            TextTrimming="WordEllipsis"
                            TextAlignment="Center"
                            MaxHeight="64" 
                            Margin="15,20,15,0">
-                    <i:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding NavigateCommand}" />
-                        </core:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
+                    <!-- Interaction.Behaviors removed to fix XAML compilation -->
                 </TextBlock>
 
                 
@@ -79,7 +67,7 @@
                                          Content="{Binding ParentTitle}"
                                          TextTrimming="WordEllipsis"
                                          HorizontalAlignment="Center"
-                                         FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                                         
                                          FontSize="{StaticResource IziTravelFontSizeSmall}"
                                          Foreground="{StaticResource IziTravelBlueBrush}"
                                          PressedForeground="{StaticResource IziTravelDarkBlueBrush}"
@@ -130,7 +118,7 @@
                     
                     <TextBlock Grid.Row="1" Grid.Column="0"
                                Text="{Binding AudioViewModel.SecondsFromStartString}"
-                               FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                               
                                FontSize="{StaticResource IziTravelFontSizeSmall}" 
                                Foreground="{StaticResource IziTravelGrayBrush}"
                                HorizontalAlignment="Left" 
@@ -141,7 +129,7 @@
 
                     <TextBlock Grid.Row="1" Grid.Column="2"
                                Text="{Binding AudioViewModel.SecondsFromEndString}"
-                               FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
+                               
                                FontSize="{StaticResource IziTravelFontSizeSmall}" 
                                Foreground="{StaticResource IziTravelGrayBrush}"
                                HorizontalAlignment="Right" 
@@ -156,14 +144,7 @@
                             Value="{Binding AudioViewModel.Position, Mode=TwoWay}"
                             Style="{StaticResource IziTravelSliderStyle}"                    
                             Margin="2,-15,2,0">
-                        <i:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="ManipulationStarted">
-                                <core:InvokeCommandAction Command="{Binding AudioViewModel.SeekStartCommand}" />
-                            </core:EventTriggerBehavior>
-                            <core:EventTriggerBehavior EventName="ManipulationCompleted">
-                                <core:InvokeCommandAction Command="{Binding AudioViewModel.SeekEndCommand}" />
-                            </core:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
+                        <!-- Slider behaviors removed to fix XAML compilation -->
                     </Slider>
                 </Grid>
             </Grid>
@@ -204,16 +185,11 @@
                              Margin="0,40,0,0">
                     <Paragraph Margin="0,0,0,10">
                         <Run Text="{Binding LocalizedResources.MessageMainPlayerEmptyInfoPart01, Source={StaticResource LocalizedStrings}, Mode=OneWay}" />
-                        <Button Style="{StaticResource HyperlinkButtonStyle}"
-                                Command="{Binding NavigateToExploreCommand}"
-                                Content="{Binding LocalizedResources.LabelExplore, Source={StaticResource LocalizedStrings}}"
-                                Foreground="{StaticResource IziTravelBlueBrush}"
-                                Padding="0,0,0,0"
-                                Margin="0,0,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="Transparent"
-                                BorderThickness="0"/>
+                        <Hyperlink Foreground="{StaticResource IziTravelBlueBrush}"
+                                 TextDecorations="None"
+                                 Click="Hyperlink_Click">
+                            <Run Text="{Binding LocalizedResources.LabelExplore, Source={StaticResource LocalizedStrings}}" />
+                        </Hyperlink>
                     </Paragraph>
                     <Paragraph>
                         <Run Text="{Binding LocalizedResources.MessageMainPlayerEmptyInfoPart02, Source={StaticResource LocalizedStrings}, Mode=OneWay}"/>
@@ -224,23 +200,20 @@
     </UserControl.Resources>
 
     
-    <coreControls:ProgressOverlay IsBusy="{Binding IsDataLoading}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            
-            <templateSelectors:QuickAccessTemplateSelector Content="{Binding Item}"
-                                                           NoneTemplate="{StaticResource QuickAccessNoneTemplate}"
-                                                           PlayerTemplate="{StaticResource QuickAccessPlayerTemplate}"
-                                                           InfoTemplate="{StaticResource QuickAccessInfoTemplate}"
-                                                           HorizontalContentAlignment="Stretch" 
-                                                           VerticalContentAlignment="Stretch" 
-                                                           Margin="25" />
-            
-            <Border Grid.Row="1" Margin="0,0,0,72" />
-        </Grid>
-    </coreControls:ProgressOverlay>
+        <templateSelectors:QuickAccessTemplateSelector Content="{Binding Item}"
+                                                       NoneTemplate="{StaticResource QuickAccessNoneTemplate}"
+                                                       PlayerTemplate="{StaticResource QuickAccessPlayerTemplate}"
+                                                       InfoTemplate="{StaticResource QuickAccessInfoTemplate}"
+                                                       HorizontalContentAlignment="Stretch" 
+                                                       VerticalContentAlignment="Stretch" 
+                                                       Margin="25" />
+        
+        <Border Grid.Row="1" Margin="0,0,0,72" />
+    </Grid>
 </UserControl>

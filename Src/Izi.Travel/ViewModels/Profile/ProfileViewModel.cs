@@ -1,27 +1,27 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.ProfileViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Profile.ProfileViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Commands;
-using Izi.Travel.Shell.Common.Model;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.ViewModels.Profile.Bookmark;
-using Izi.Travel.Shell.ViewModels.Profile.Download;
-using Izi.Travel.Shell.ViewModels.Profile.History;
-using Izi.Travel.Shell.ViewModels.Profile.Purchase;
-using Izi.Travel.Shell.ViewModels.Profile.Quiz;
-using Izi.Travel.Shell.ViewModels.Profile.Settings;
+using Izi.Travel.Commands;
+using Izi.Travel.Common.Model;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.ViewModels.Profile.Bookmark;
+using Izi.Travel.ViewModels.Profile.Download;
+using Izi.Travel.ViewModels.Profile.History;
+using Izi.Travel.ViewModels.Profile.Purchase;
+using Izi.Travel.ViewModels.Profile.Quiz;
+using Izi.Travel.ViewModels.Profile.Settings;
 
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Windows.UI.Xaml.Input;
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile
+namespace Izi.Travel.ViewModels.Profile
 {
   public class ProfileViewModel : 
     Screen,

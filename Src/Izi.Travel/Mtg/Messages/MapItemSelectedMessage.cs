@@ -1,7 +1,7 @@
-using Caliburn.Micro;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
+﻿using Caliburn.Micro;
+using Izi.Travel.Mtg.ViewModels.Common.Map;
 
-namespace Izi.Travel.Shell.Mtg.Messages
+namespace Izi.Travel.Mtg.Messages
 {
     public class MapItemSelectedMessage
     {

@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 //using Telerik.Windows.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Converters
+namespace Izi.Travel.Converters
 {
   public class BooleanToDataVirtualizationModeConverter : IValueConverter
   {

@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Data;
 //using System.Windows.Data;
 
 #nullable disable
-namespace Izi.Travel.Shell.Converters
+namespace Izi.Travel.Converters
 {
   public class GenericNullConverter : IValueConverter
   {

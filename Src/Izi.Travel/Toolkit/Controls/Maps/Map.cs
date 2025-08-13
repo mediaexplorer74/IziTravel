@@ -1,5 +1,5 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.Maps.Map
+﻿// ********************************************************************
+// Type: Izi.Travel.Toolkit.Controls.Maps.Map
 // Updated for UWP compatibility
 
 using System;
@@ -10,7 +10,7 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Maps;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
     public class Map : DependencyObject
     {

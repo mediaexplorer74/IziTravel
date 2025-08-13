@@ -2,13 +2,14 @@ using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Media;
 
-namespace Izi.Travel.Shell.Core.Controls.Flyout
+namespace Izi.Travel.Core.Controls.Flyout
 {
     public sealed partial class FlyoutDialog : UserControl
     {
         private FlyoutDialogResult _result = FlyoutDialogResult.None;
-        private Flyout _hostFlyout;
+        private Windows.UI.Xaml.Controls.Flyout _hostFlyout;
         
         #region Dependency Properties
 
@@ -134,19 +135,22 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
             if (placementTarget == null)
                 throw new ArgumentNullException(nameof(placementTarget));
 
-            _hostFlyout = new Flyout
+            _hostFlyout = new Windows.UI.Xaml.Controls.Flyout
             {
                 Content = this,
-                Placement = FlyoutPlacementMode.Bottom
+                Placement = Windows.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.Bottom
             };
 
             _hostFlyout.Closed += OnFlyoutClosed;
-            _hostFlyout.Show();
+            _hostFlyout.ShowAt(placementTarget);
         }
 
         public void Hide()
         {
-            _hostFlyout?.Hide();
+            if (_hostFlyout != null)
+            {
+                _hostFlyout.Hide();
+            }
         }
 
         #endregion
@@ -194,7 +198,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Controls.Flyout
+namespace Izi.Travel.Core.Controls.Flyout
 {
   public class FlyoutDialog : UserControl
   {
@@ -210,7 +214,7 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
     public static readonly DependencyProperty HyperlinkContentProperty = DependencyProperty.Register(nameof (HyperlinkContent), typeof (object), typeof (FlyoutDialog), new PropertyMetadata((PropertyChangedCallback) null));
     public static readonly DependencyProperty IsHyperlinkVisibleProperty = DependencyProperty.Register(nameof (IsHyperlinkVisible), typeof (bool), typeof (FlyoutDialog), new PropertyMetadata((object) false));
     internal UserControl PartFlyoutDialog;
-    internal Izi.Travel.Shell.Core.Controls.Flyout.Flyout PartFlyout;
+    internal Izi.Travel.Core.Controls.Flyout.Flyout PartFlyout;
     private bool _contentLoaded;
 
     public event TypedEventHandler<FlyoutDialog, FlyoutDialogResult> Closed

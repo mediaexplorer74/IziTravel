@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
+using Izi.Travel.Mtg.ViewModels.Common.Map;
 
-namespace Izi.Travel.Shell.Mtg.Services
+namespace Izi.Travel.Mtg.Services
 {
     public interface IMapService
     {

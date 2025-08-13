@@ -1,10 +1,10 @@
-// IziTravel.AppServices.ViewModels.Forum.ForumPageViewModel
+﻿// IziTravel.AppServices.ViewModels.Forum.ForumPageViewModel
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.AppServices.Controllers;
-using Izi.Travel.Shell.AppServices.DataModels;
-using Izi.Travel.Shell.Communication;
-using Izi.Travel.Shell.Communication.Model;
+using Izi.Travel.AppServices.Controllers;
+using Izi.Travel.AppServices.DataModels;
+using Izi.Travel.Communication;
+using Izi.Travel.Communication.Model;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.ViewModels.Forum
+namespace Izi.Travel.AppServices.ViewModels.Forum
 {
   public class ForumPageViewModel : Screen
   {

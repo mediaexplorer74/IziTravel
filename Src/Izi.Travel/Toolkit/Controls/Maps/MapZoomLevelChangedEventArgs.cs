@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
     public class MapZoomLevelChangedEventArgs : EventArgs
     {

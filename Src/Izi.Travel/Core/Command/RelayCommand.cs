@@ -1,40 +1,105 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Command.RelayCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
-using System;
-
-#nullable disable
-namespace Izi.Travel.Shell.Core.Command
+namespace Izi.Travel.Core.Command
 {
-  public class RelayCommand : BaseCommand
-  {
-    private readonly Action<object> _execute;
-    private readonly Func<object, bool> _canExecute;
-
-    public RelayCommand(Action<object> execute)
-      : this(execute, (Func<object, bool>) null)
+    /// <summary>
+    /// A command that relays its functionality to a delegate
+    /// </summary>
+    public class RelayCommand : BaseCommand
     {
+        private readonly Func<object, Task> _executeAsync;
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
+
+        /// <summary>
+        /// Initializes a new instance of the RelayCommand class
+        /// </summary>
+        /// <param name="execute">The action to execute when the command is invoked</param>
+        /// <param name="canExecute">The function that determines if the command can execute</param>
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+            : base(canExecute)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the RelayCommand class for async operations
+        /// </summary>
+        /// <param name="executeAsync">The async action to execute when the command is invoked</param>
+        /// <param name="canExecute">The function that determines if the command can execute</param>
+        public RelayCommand(Func<object, Task> executeAsync, Func<object, bool> canExecute = null)
+            : base(canExecute)
+        {
+            _executeAsync = executeAsync ?? throw new ArgumentNullException(nameof(executeAsync));
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnExecuteAsync(object parameter)
+        {
+            if (_executeAsync != null)
+            await _executeAsync(parameter);
+            else
+                _execute(parameter);
+        }
     }
 
-    public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
+    /// <summary>
+    /// A generic command that relays its functionality to a delegate
+    /// </summary>
+    /// <typeparam name="T">The type of the command parameter</typeparam>
+    public class RelayCommand<T> : BaseCommand
     {
-      this._execute = execute != null ? execute : throw new ArgumentNullException(nameof (execute));
-      this._canExecute = canExecute;
-    }
+        private readonly Func<T, Task> _executeAsync;
+        private readonly Action<T> _execute;
+        private readonly Func<T, bool> _canExecute;
 
-    public override bool CanExecute(object parameter)
-    {
-      return this._canExecute == null || this._canExecute(parameter);
-    }
+        /// <summary>
+        /// Initializes a new instance of the RelayCommand class
+        /// </summary>
+        /// <param name="execute">The action to execute when the command is invoked</param>
+        /// <param name="canExecute">The function that determines if the command can execute</param>
+        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
+            : base(p => canExecute == null || (p is T && canExecute((T)p)))
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
 
-    public override void Execute(object parameter)
-    {
-      if (!this.CanExecute(parameter) || this._execute == null)
-        return;
-      this._execute(parameter);
+        /// <summary>
+        /// Initializes a new instance of the RelayCommand class for async operations
+        /// </summary>
+        /// <param name="executeAsync">The async action to execute when the command is invoked</param>
+        /// <param name="canExecute">The function that determines if the command can execute</param>
+        public RelayCommand(Func<T, Task> executeAsync, Func<T, bool> canExecute = null)
+            : base(p => canExecute == null || (p is T && canExecute((T)p)))
+        {
+            _executeAsync = executeAsync ?? throw new ArgumentNullException(nameof(executeAsync));
+            _canExecute = canExecute;
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnExecuteAsync(object parameter)
+        {
+            if (parameter is T typedParameter)
+            {
+                if (_executeAsync != null)
+                    await _executeAsync(typedParameter);
+                else
+                    _execute(typedParameter);
+            }
+            else if (parameter == null && default(T) == null)
+            {
+                if (_executeAsync != null)
+                    await _executeAsync(default);
+                else
+                    _execute(default);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid command parameter type", nameof(parameter));
+            }
+        }
     }
-  }
 }

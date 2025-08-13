@@ -1,8 +1,8 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapChildControl
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Toolkit.Controls.Maps.MapChildControl
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 
 using Izi.Travel.Data.Entities.Common;
@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Controls;
 //using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
   [Windows.UI.Xaml.Markup.ContentProperty(Name="Content")]//"Content")]
   public class MapChildControl : ContentControl

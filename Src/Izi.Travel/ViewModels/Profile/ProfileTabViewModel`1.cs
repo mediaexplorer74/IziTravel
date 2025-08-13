@@ -1,21 +1,21 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.ProfileTabViewModel`1
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Profile.ProfileTabViewModel`1
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Commands;
-using Izi.Travel.Shell.Common.Model;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Model.Profile;
+using Izi.Travel.Commands;
+using Izi.Travel.Common.Model;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Model.Profile;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Windows.UI.Xaml.Input;
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile
+namespace Izi.Travel.ViewModels.Profile
 {
   public abstract class ProfileTabViewModel<TItemViewModel> : 
     Conductor<IScreen>,

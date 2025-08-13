@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 //using Telerik.Windows.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction.Behaviors
+namespace Izi.Travel.Interaction.Behaviors
 {
   public class ListBoxBehavior
   {

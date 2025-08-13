@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="Izi.Travel.Common.Controls.ImagePlaceholder"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot">
+        <Border Background="{StaticResource SystemControlBackgroundBaseLowBrush}" 
+                Visibility="{x:Bind ShowPlaceholder, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Path Data="M0,0 L1,0 0.5,1 Z" 
+                  Fill="{StaticResource SystemControlForegroundBaseMediumLowBrush}"
+                  Stretch="Uniform" 
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Width="24"
+                  Height="24"/>
+        </Border>
+        <Image x:Name="ImageControl" 
+               Source="{x:Bind ImageSource, Mode=OneWay}"
+               Stretch="{x:Bind ImageStretch, Mode=OneWay}"
+               Visibility="{x:Bind ShowImage, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+    </Grid>
+</UserControl>

@@ -1,5 +1,5 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.Maps.MapOverlay
+﻿// ********************************************************************
+// Type: Izi.Travel.Toolkit.Controls.Maps.MapOverlay
 // Updated for UWP compatibility
 
 using System;
@@ -9,7 +9,7 @@ using Windows.Devices.Geolocation;
 using Izi.Travel.Data.Entities.Common;
 using Windows.Foundation;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
     public class MapOverlay : DependencyObject
     {

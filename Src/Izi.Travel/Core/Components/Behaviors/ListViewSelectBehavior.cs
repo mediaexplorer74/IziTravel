@@ -1,10 +1,10 @@
-using Windows.UI.Xaml.Input;
+﻿using Windows.UI.Xaml.Input;
 using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Windows.Input;
 
-namespace Izi.Travel.Shell.Core.Components.Behaviors
+namespace Izi.Travel.Core.Components.Behaviors
 {
     public class ListViewSelectBehavior : Behavior<ListView>
     {

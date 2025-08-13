@@ -1,11 +1,12 @@
+﻿
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.TourPlayback;
 using Izi.Travel.Business.Managers;
-using Izi.Travel.Shell.Core.Controls.Flyout;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Core.Services.Entities;
-using Izi.Travel.Shell.ViewModels;
+using Izi.Travel.Core.Controls.Flyout;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Core.Services.Entities;
+using Izi.Travel.ViewModels;
 using Izi.Travel.Utility;
 using System;
 using System.Diagnostics;
@@ -18,16 +19,31 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.ComponentModel;
 
-namespace Izi.Travel.Shell.Views
+
+
+
+namespace Izi.Travel.Views
 {
-    public sealed partial class MainView : Page
+    public sealed partial class MainView : Page, Caliburn.Micro.IScreen
     {
+        public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public bool IsActive => throw new NotImplementedException();
+
+        public bool IsNotifying { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public MainView()
         {
             this.InitializeComponent();
             this.Loaded += MainView_Loaded;
         }
+
+        public event EventHandler<ActivationEventArgs> Activated;
+        public event EventHandler<DeactivationEventArgs> AttemptingDeactivation;
+        public event EventHandler<DeactivationEventArgs> Deactivated;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private async void MainView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -67,14 +83,20 @@ namespace Izi.Travel.Shell.Views
                     //await file.SetLengthAsync(ApplicationData.Current.LocalFolder.AvailableFreeSpace - 62914560L);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             //if (VisualTreeHelper.GetOpenPopups().Any<Popup>() || !(this.DataContext is MainViewModel dataContext))
             //    return;
-            /*if (dataContext.ActiveItem != dataContext.ExploreViewModel)
+
+            var dataContext = this.DataContext as MainViewModel;
+
+            if (dataContext.ActiveItem != dataContext.ExploreViewModel)
             {
                 MainViewModel mainViewModel = dataContext;
                 mainViewModel.ActiveItem = (IScreen)mainViewModel.ExploreViewModel;
@@ -90,7 +112,38 @@ namespace Izi.Travel.Shell.Views
                     //    return;
                     Application.Current.Exit();
                 }));
-            }*/
+            }
+        }
+
+        public void Activate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deactivate(bool close)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CanClose(Action<bool> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TryClose(bool? dialogResult = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyOfPropertyChange(string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Refresh()
+        {
+            throw new NotImplementedException();
         }
     }
 }
+

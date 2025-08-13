@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Media.ViewModels.Audio.AudioContentViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Media.ViewModels.Audio.AudioContentViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Analytics.Parameters;
@@ -13,8 +13,8 @@ using Izi.Travel.Business.Extensions;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
-using Izi.Travel.Shell.Common.Controls;
-using Izi.Travel.Shell.Core.Command;
+using Izi.Travel.Common.Controls;
+using Izi.Travel.Core.Command;
 using System;
 using System.Linq.Expressions;
 using System.Threading;
@@ -22,7 +22,7 @@ using Windows.UI.Xaml;
 using Windows.Foundation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Media.ViewModels.Audio
+namespace Izi.Travel.Media.ViewModels.Audio
 {
   public sealed class AudioContentViewModel : PropertyChangedBase
   {

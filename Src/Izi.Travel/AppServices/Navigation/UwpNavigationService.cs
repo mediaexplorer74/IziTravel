@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using INavigationService = Izi.Travel.Shell.AppServices.ViewModels.MainPivot.INavigationService;
+using INavigationService = Izi.Travel.AppServices.ViewModels.MainPivot.INavigationService;
 using Windows.UI.Xaml.Media.Animation;
 using System.Threading.Tasks;
 
-namespace Izi.Travel.Shell.AppServices.Navigation
+namespace Izi.Travel.AppServices.Navigation
 {
     /// <summary>
     /// A UWP implementation of the INavigationService interface.

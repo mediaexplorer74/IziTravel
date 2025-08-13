@@ -1,27 +1,33 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Common.Commands.LaunchUriCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
-using Izi.Travel.Shell.Core.Command;
+using Izi.Travel.Core.Command;
 using System;
+using System.Threading.Tasks;
 using Windows.System;
 
-#nullable disable
-namespace Izi.Travel.Shell.Common.Commands
+namespace Izi.Travel.Common.Commands
 {
-  public class LaunchUriCommand : BaseCommand
-  {
-    private readonly Uri _uri;
-
-    public LaunchUriCommand(Uri uri) => this._uri = uri;
-
-    public override bool CanExecute(object parameter) => true;
-
-    public override async void Execute(object parameter)
+    /// <summary>
+    /// Command to handle launching a URI
+    /// </summary>
+    public class LaunchUriCommand : BaseCommand
     {
-      int num = await Launcher.LaunchUriAsync(this._uri) ? 1 : 0;
+        private readonly Uri _uri;
+
+        /// <summary>
+        /// Initializes a new instance of the LaunchUriCommand class
+        /// </summary>
+        /// <param name="uri">The URI to launch</param>
+        public LaunchUriCommand(Uri uri) : base(null)
+        {
+            _uri = uri ?? throw new ArgumentNullException(nameof(uri));
+        }
+
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter) => true;
+
+        /// <inheritdoc/>
+        protected override async Task OnExecuteAsync(object parameter)
+        {
+            await Launcher.LaunchUriAsync(_uri);
+        }
     }
-  }
 }

@@ -1,13 +1,13 @@
-// IziTravel.AppServices.Controllers.ForumController
+﻿// IziTravel.AppServices.Controllers.ForumController
 
-using Izi.Travel.Shell.AppServices.DataModels;
-using Izi.Travel.Shell.Communication.Model;
+using Izi.Travel.AppServices.DataModels;
+using Izi.Travel.Communication.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.Controllers
+namespace Izi.Travel.AppServices.Controllers
 {
   public class ForumController
   {

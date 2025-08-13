@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
+using Izi.Travel.Mtg.ViewModels.Tour.Map;
 
-namespace Izi.Travel.Shell.Core.Services
+namespace Izi.Travel.Core.Services
 {
     public class MapService : IMapService, IDisposable
     {

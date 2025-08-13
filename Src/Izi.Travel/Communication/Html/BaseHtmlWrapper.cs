@@ -4,7 +4,7 @@ using System;
 using System.Text.RegularExpressions;
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication.Html
+namespace Izi.Travel.Communication.Html
 {
   public class BaseHtmlWrapper
   {

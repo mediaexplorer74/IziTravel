@@ -1,33 +1,69 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Featured.FeaturedListFlyoutViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
 using Caliburn.Micro;
-using Izi.Travel.Shell.Common.ViewModels.Flyout;
+using Izi.Travel.Common.ViewModels.Flyout;
+using Izi.Travel.Core.Command;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Featured
+namespace Izi.Travel.ViewModels.Featured
 {
-  public sealed class FeaturedListFlyoutViewModel : FlyoutViewModel
-  {
-    private readonly FeaturedListViewModel _listViewModel;
-
-    public FeaturedListViewModel ListViewModel => this._listViewModel;
-
-    public FeaturedListFlyoutViewModel()
+    public sealed class FeaturedListFlyoutViewModel : FlyoutViewModel
     {
-      this._listViewModel = IoC.Get<FeaturedListViewModel>();
-      this._listViewModel.ExploreCommand = this.CloseCommand;
-    }
+        private readonly FeaturedListViewModel _listViewModel;
+        private bool _isRefreshing;
 
-    protected override void OnOpening()
-    {
-      base.OnOpening();
-      if (!this._listViewModel.RefreshCommand.CanExecute((object) null))
-        return;
-      this._listViewModel.RefreshCommand.Execute((object) null);
+        public FeaturedListViewModel ListViewModel => _listViewModel;
+
+        public FeaturedListFlyoutViewModel()
+        {
+            _listViewModel = IoC.Get<FeaturedListViewModel>();
+            _listViewModel.ExploreCommand = CloseCommand;
+        }
+
+        protected override void OnOpening()
+        {
+            base.OnOpening();
+            
+            if (_isRefreshing)
+                return;
+                
+            _isRefreshing = true;
+            
+            try
+            {
+                var refreshCommand = _listViewModel.RefreshCommand;
+                if (refreshCommand == null || !refreshCommand.CanExecute(null))
+                    return;
+
+                if (refreshCommand is IAsyncCommand asyncCommand)
+                {
+                    // Fire and forget the async operation
+                    _ = asyncCommand.ExecuteAsync(null)
+                        .ContinueWith(t => 
+                        {
+                            if (t.IsFaulted)
+                            {
+                                // Log the error or handle it appropriately
+                                System.Diagnostics.Debug.WriteLine($"Error executing refresh command: {t.Exception}");
+                            }
+                        });
+                }
+                else if (refreshCommand is ICommand syncCommand)
+                {
+                    // Execute sync command directly
+                    syncCommand.Execute(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in OnOpening: {ex}");
+                throw;
+            }
+            finally
+            {
+                _isRefreshing = false;
+            }
+        }
     }
-  }
 }

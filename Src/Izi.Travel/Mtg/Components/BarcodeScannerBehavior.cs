@@ -1,17 +1,17 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Components.BarcodeScannerBehavior
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.Components.BarcodeScannerBehavior
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Mtg.Controls;
+using Izi.Travel.Mtg.Controls;
 using System;
 using Windows.UI.Xaml;
 using Microsoft.Xaml.Interactivity;
 using System.Windows.Input;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Components
+namespace Izi.Travel.Mtg.Components
 {
   public class BarcodeScannerBehavior : Behavior<BarcodeScanner>
   {

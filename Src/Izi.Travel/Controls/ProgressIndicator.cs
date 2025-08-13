@@ -4,7 +4,7 @@
 // MVID: CDB98E47-00BC-4074-98E2-E8BD94FCE6F3
 // Assembly location: C:\Users\Admin\Desktop\RE\IziTravel\IziTravel.dll
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     internal class ProgressIndicator
     {

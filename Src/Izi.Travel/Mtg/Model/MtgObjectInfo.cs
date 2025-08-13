@@ -1,15 +1,15 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Model.MtgObjectInfo
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Mtg.Model.MtgObjectInfo
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Services;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Model
+namespace Izi.Travel.Mtg.Model
 {
   public class MtgObjectInfo
   {

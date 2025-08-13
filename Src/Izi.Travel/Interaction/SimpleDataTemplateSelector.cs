@@ -4,7 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   public class SimpleDataTemplateSelector : ContentControl
   {

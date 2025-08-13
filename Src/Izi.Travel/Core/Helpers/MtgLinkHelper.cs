@@ -1,8 +1,8 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Helpers.MtgLinkHelper
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Core.Helpers.MtgLinkHelper
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Utility.Extensions;
 using System;
@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Helpers
+namespace Izi.Travel.Core.Helpers
 {
   public static class MtgLinkHelper
   {

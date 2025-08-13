@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +18,7 @@ using System.Diagnostics;
 //using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.Views.Application
+namespace Izi.Travel.Settings.Views.Application
 {
     public sealed partial class SettingsAppLanguageView : Page //PhoneApplicationPage
     {

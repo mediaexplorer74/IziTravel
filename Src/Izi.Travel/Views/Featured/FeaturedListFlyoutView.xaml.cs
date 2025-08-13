@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Izi.Travel.Shell.Views.Featured
+namespace Izi.Travel.Views.Featured
 {
     public sealed partial class FeaturedListFlyoutView : UserControl
     {

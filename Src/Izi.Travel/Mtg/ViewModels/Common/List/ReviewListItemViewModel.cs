@@ -1,16 +1,16 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Common.List.ReviewListItemViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Mtg.ViewModels.Common.List.ReviewListItemViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Common.ViewModels.List;
-using Izi.Travel.Shell.Core.Resources;
+using Izi.Travel.Common.ViewModels.List;
+using Izi.Travel.Core.Resources;
 using System;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Common.List
+namespace Izi.Travel.Mtg.ViewModels.Common.List
 {
   public class ReviewListItemViewModel
   {

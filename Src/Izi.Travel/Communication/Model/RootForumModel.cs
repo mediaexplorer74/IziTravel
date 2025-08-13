@@ -1,7 +1,7 @@
 ﻿// Type: IziTravel.Communication.Model.RootForumModel
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication.Model
+namespace Izi.Travel.Communication.Model
 {
   internal class RootForumModel : ForumModel
   {

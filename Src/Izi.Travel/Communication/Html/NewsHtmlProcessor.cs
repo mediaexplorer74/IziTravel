@@ -1,7 +1,7 @@
 ﻿// IziTravel.Communication.Html.NewsHtmlProcessor
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication.Html
+namespace Izi.Travel.Communication.Html
 {
   public class NewsHtmlProcessor : BaseHtmlWrapper
   {

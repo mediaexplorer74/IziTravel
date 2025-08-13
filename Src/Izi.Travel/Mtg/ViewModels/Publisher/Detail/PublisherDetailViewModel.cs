@@ -1,22 +1,22 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail.PublisherDetailViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.ViewModels.Publisher.Detail.PublisherDetailViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Common.Model;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Mtg.Messages;
-using Izi.Travel.Shell.Mtg.ViewModels.Common;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail.Interfaces;
+using Izi.Travel.Common.Model;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Mtg.Messages;
+using Izi.Travel.Mtg.ViewModels.Common;
+using Izi.Travel.Mtg.ViewModels.Common.Detail.Interfaces;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Input;
 using System.Windows.Input;
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
+namespace Izi.Travel.Mtg.ViewModels.Publisher.Detail
 {
   public class PublisherDetailViewModel : 
     Conductor<IScreen>.Collection.OneActive,
@@ -50,7 +50,7 @@ namespace Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail
     {
       get
       {
-        return this._nowPlayingCommand ?? (this._nowPlayingCommand = (BaseCommand) new Izi.Travel.Shell.Mtg.Commands.NowPlayingCommand((IScreen) this));
+        return this._nowPlayingCommand ?? (this._nowPlayingCommand = (BaseCommand) new Izi.Travel.Mtg.Commands.NowPlayingCommand((IScreen) this));
       }
     }
 

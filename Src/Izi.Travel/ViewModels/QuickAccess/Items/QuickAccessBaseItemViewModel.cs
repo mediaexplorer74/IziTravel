@@ -1,13 +1,13 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.QuickAccess.Items.QuickAccessBaseItemViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.QuickAccess.Items.QuickAccessBaseItemViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.QuickAccess.Items
+namespace Izi.Travel.ViewModels.QuickAccess.Items
 {
   public abstract class QuickAccessBaseItemViewModel : PropertyChangedBase
   {

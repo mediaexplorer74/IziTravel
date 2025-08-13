@@ -1,20 +1,20 @@
-<Page x:Class="Izi.Travel.Shell.Settings.Views.Application.SettingsAppLocationView"
+<Page x:Class="Izi.Travel.Settings.Views.Application.SettingsAppLocationView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
-        xmlns:controls="using:Izi.Travel.Shell.Controls"
+        xmlns:commoncontrols="using:Izi.Travel.Common.Controls"
+        xmlns:controls="using:Izi.Travel.Controls"
                             
         xmlns:i="using:Microsoft.Xaml.Interactivity"
-        xmlns:components="using:Izi.Travel.Shell.Common.Components"
+        xmlns:components="using:Izi.Travel.Common.Components"
                             
         mc:Ignorable="d"
         Style="{StaticResource IziTravelPageStyle}">
     
     <i:Interaction.Behaviors>
-        <components:ViewAnalyticsBehavior />
+    
     </i:Interaction.Behaviors>
 
     

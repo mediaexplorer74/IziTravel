@@ -1,6 +1,6 @@
-// IziTravel.Communication.ForumDataService
+﻿// IziTravel.Communication.ForumDataService
 
-using Izi.Travel.Shell.Communication.Model;
+using Izi.Travel.Communication.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using HtmlAgilityPack;
 
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication
+namespace Izi.Travel.Communication
 {
   public class ForumDataService
   {

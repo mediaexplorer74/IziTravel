@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication
+namespace Izi.Travel.Communication
 {
   public class HttpCommunicator
   {

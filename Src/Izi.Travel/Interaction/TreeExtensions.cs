@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   public static class TreeExtensions
   {

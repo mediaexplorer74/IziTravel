@@ -1,14 +1,14 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Explore.Flyouts.ExploreFlyoutLocationViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.ViewModels.Explore.Flyouts.ExploreFlyoutLocationViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Extensions;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Extensions;
 using Windows.UI.Xaml.Controls.Maps;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Explore.Flyouts
+namespace Izi.Travel.ViewModels.Explore.Flyouts
 {
   public sealed class ExploreFlyoutLocationViewModel : ExploreFlyoutViewModel
   {

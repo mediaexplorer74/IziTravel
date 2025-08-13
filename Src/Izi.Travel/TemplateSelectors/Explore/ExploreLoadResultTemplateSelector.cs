@@ -1,14 +1,14 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.TemplateSelectors.Explore.ExploreLoadResultTemplateSelector
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.TemplateSelectors.Explore.ExploreLoadResultTemplateSelector
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Components;
-using Izi.Travel.Shell.Model.Explore;
+using Izi.Travel.Core.Components;
+using Izi.Travel.Model.Explore;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.TemplateSelectors.Explore
+namespace Izi.Travel.TemplateSelectors.Explore
 {
   public class ExploreLoadResultTemplateSelector : DataTemplateSelector
   {

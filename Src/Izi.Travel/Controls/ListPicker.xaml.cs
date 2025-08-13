@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     [ContentProperty(Name = "ItemTemplate")]
     public sealed partial class ListPicker : UserControl

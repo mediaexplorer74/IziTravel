@@ -1,24 +1,32 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Commands.FeedbackCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Settings.ViewModels.Application;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Settings.ViewModels.Application;
+using System;
+using System.Threading.Tasks;
 
-#nullable disable
-namespace Izi.Travel.Shell.Commands
+namespace Izi.Travel.Commands
 {
-  public class FeedbackCommand : BaseCommand
-  {
-    public override bool CanExecute(object parameter) => true;
-
-    public override void Execute(object parameter)
+    /// <summary>
+    /// Command to navigate to the feedback page
+    /// </summary>
+    public class FeedbackCommand : BaseCommand
     {
-      ShellServiceFacade.NavigationService.UriFor<SettingsAppFeedbackMessageViewModel>().Navigate();
+        /// <summary>
+        /// Initializes a new instance of the FeedbackCommand class
+        /// </summary>
+        public FeedbackCommand() : base(null)
+        {
+        }
+
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter) => true;
+
+        /// <inheritdoc/>
+        protected override Task OnExecuteAsync(object parameter)
+        {
+            ShellServiceFacade.NavigationService.UriFor<SettingsAppFeedbackMessageViewModel>().Navigate();
+            return Task.CompletedTask;
+        }
     }
-  }
 }

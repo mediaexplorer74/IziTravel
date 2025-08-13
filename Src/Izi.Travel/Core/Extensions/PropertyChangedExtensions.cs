@@ -1,8 +1,8 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Extensions.PropertyChangedExtensions
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Core.Extensions.PropertyChangedExtensions
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using System;
@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Extensions
+namespace Izi.Travel.Core.Extensions
 {
   public static class PropertyChangedExtensions
   {

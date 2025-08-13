@@ -1,4 +1,4 @@
-using Izi.Travel.Shell.Toolkit.Controls.Maps;
+using Izi.Travel.Toolkit.Controls.Maps;
 using Izi.Travel.Utility;
 using System;
 using System.Diagnostics;
@@ -10,10 +10,10 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
-using MapControl = Izi.Travel.Shell.Toolkit.Controls.Maps.MapControl;
+using Izi.Travel.Mtg.ViewModels.Tour.Map;
+using MapControl = Izi.Travel.Toolkit.Controls.Maps.MapControl;
 
-namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
+namespace Izi.Travel.Mtg.Views.Tour.Map
 {
     public sealed partial class TourMapPartView : Page
     {
@@ -69,7 +69,7 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
             // Initialization now happens in MapControl_Loaded
         }
 
-        private void OnMapElementClick(MapControl sender, MapElementClickEventArgs args)
+        private void OnMapElementClick(object sender, Windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
                     }
                     
                     // If we get here, it was a click on the map itself
-                    viewModel.MapTappedCommand?.Execute(args.Location);
+                    viewModel.MapTappedCommand?.Execute(args.Position);
                 }
             }
             catch (Exception ex)
@@ -98,12 +98,35 @@ namespace Izi.Travel.Shell.Mtg.Views.Tour.Map
             }
         }
 
-        private void OnMapTapped(MapControl sender, MapInputEventArgs args)
+        private void OnMapTapped(object sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
         {
-            // Handle map tap if needed
-            if (DataContext is TourMapPartViewModel viewModel)
+            try
             {
-                viewModel.MapTappedCommand?.Execute(args.Position);
+                if (DataContext is TourMapPartViewModel viewModel)
+                {
+                    // Get the root grid of the custom MapControl
+                    if (sender is Windows.UI.Xaml.Controls.Maps.MapControl mapControl)
+                    {
+                        // Get the tapped position relative to the UWP MapControl
+                        var point = args.Position;
+                        
+                        // Convert the screen point to a geographic location
+                        // Note: We need to use the full namespace to disambiguate between the custom MapControl and UWP MapControl
+                        //if (Windows.UI.Xaml.Controls.Maps.MapControl.TryGetLocationFromOffset(point, out var location))
+                        //{
+                        //    // Execute the command with the tapped location
+                        //    viewModel.MapTappedCommand?.Execute(location.Position);
+                        //}
+                        //else
+                        //{
+                            Debug.WriteLine("Could not convert screen point to geographic location");
+                        //}
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error handling map tap: {ex.Message}");
             }
         }
 

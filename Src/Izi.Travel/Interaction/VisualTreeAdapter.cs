@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Media;
 
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   public class VisualTreeAdapter : ILinqTree<DependencyObject>
   {

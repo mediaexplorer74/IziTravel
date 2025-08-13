@@ -1,8 +1,8 @@
 // ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Explore.ExploreViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Explore.ExploreViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
@@ -14,19 +14,18 @@ using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Geofencing.Geotracker;
 using Izi.Travel.Geofencing.Primitives;
-using Izi.Travel.Shell.Common.Commands;
-using Izi.Travel.Shell.Common.Model;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Core.Themes;
-using Izi.Travel.Shell.Model.Explore;
-using Izi.Travel.Shell.Mtg.Helpers;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
-using Izi.Travel.Shell.ViewModels.Explore.Flyouts;
-using Izi.Travel.Shell.ViewModels.Featured;
-using Izi.Travel.Shell.Views.Explore;
+using Izi.Travel.Common.Model;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Core.Themes;
+using Izi.Travel.Model.Explore;
+using Izi.Travel.Mtg.Helpers;
+using Izi.Travel.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.ViewModels.Explore.Flyouts;
+using Izi.Travel.ViewModels.Featured;
+using Izi.Travel.Views.Explore;
 using Izi.Travel.Utility.Extensions;
 using Windows.UI.Xaml.Controls.Maps;
 using System;
@@ -43,12 +42,12 @@ using Windows.UI.Xaml.Media;
 using Windows.Foundation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
-using Izi.Travel.Shell.Toolkit.Controls.Maps;
+using Izi.Travel.Toolkit.Controls.Maps;
 using Windows.UI;
 using System.Windows.Input;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Explore
+namespace Izi.Travel.ViewModels.Explore
 {
   public sealed class ExploreViewModel : 
     Screen,
@@ -100,20 +99,20 @@ namespace Izi.Travel.Shell.ViewModels.Explore
     private ExploreLoadResult _loadResult;
     private readonly ObservableCollection<MapElement> _selectedMapItemRouteElements;
     private ExploreItemViewModel _previousSelectedItem;
-    private BaseCommand _navigateToNetworkSettingsCommand;
-    private RelayCommand _openFeaturedGuidesCommand;
-    private RelayCommand _locateUserCommand;
-    private RelayCommand _zoomInCommand;
-    private RelayCommand _zoomOutCommand;
-    private RelayCommand _refreshCommand;
-    private RelayCommand _loadListDataCommand;
-    private RelayCommand _loadMapDataCommand;
-    private RelayCommand _clearMapSelectionCommand;
-    private RelayCommand _expandClusterCommand;
-    private RelayCommand _clearSearchStringCommand;
-    private RelayCommand _searchCommand;
-    private RelayCommand _toggleExploreModeCommand;
-    private RelayCommand _navigateCommand;
+    private IAsyncCommand _navigateToNetworkSettingsCommand;
+    private IAsyncCommand _openFeaturedGuidesCommand;
+    private IAsyncCommand _locateUserCommand;
+    private IAsyncCommand _zoomInCommand;
+    private IAsyncCommand _zoomOutCommand;
+    private IAsyncCommand _refreshCommand;
+    private IAsyncCommand _loadListDataCommand;
+    private IAsyncCommand _loadMapDataCommand;
+    private IAsyncCommand _clearMapSelectionCommand;
+    private IAsyncCommand _expandClusterCommand;
+    private IAsyncCommand _clearSearchStringCommand;
+    private IAsyncCommand _searchCommand;
+    private IAsyncCommand _toggleExploreModeCommand;
+    private IAsyncCommand _navigateCommand;
 
     public override string DisplayName
     {
@@ -443,234 +442,215 @@ namespace Izi.Travel.Shell.ViewModels.Explore
       this._selectedMapItemRouteElements = new ObservableCollection<MapElement>();
     }
 
-    public BaseCommand NavigateToNetworkSettingsCommand
+    public IAsyncCommand NavigateToNetworkSettingsCommand
     {
       get
       {
-        return this._navigateToNetworkSettingsCommand ?? (this._navigateToNetworkSettingsCommand = (BaseCommand) new LaunchUriCommand(new Uri("ms-settings-wifi:")));
+        return this._navigateToNetworkSettingsCommand ?? (this._navigateToNetworkSettingsCommand = new AsyncCommand(
+          async () => await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings-wifi:")),
+          () => true));
       }
     }
 
-    public RelayCommand OpenFeaturedGuidesCommand
+    public IAsyncCommand OpenFeaturedGuidesCommand
     {
       get
       {
-        return this._openFeaturedGuidesCommand ?? (this._openFeaturedGuidesCommand = new RelayCommand(new Action<object>(this.ExecuteOpenFeaturedGuidesCommand)));
+        return this._openFeaturedGuidesCommand ?? (this._openFeaturedGuidesCommand = new AsyncCommand(
+          async () => await Task.Run(() => new FeaturedListTask().Show()),
+          () => true));
       }
     }
 
-    private void ExecuteOpenFeaturedGuidesCommand(object parameter)
-    {
-      new FeaturedListTask().Show();
-    }
-
-    public RelayCommand LocateUserCommand
+    public IAsyncCommand LocateUserCommand
     {
       get
       {
-        return this._locateUserCommand ?? (this._locateUserCommand = new RelayCommand(new Action<object>(this.ExecuteLocateUserCommand), new Func<object, bool>(this.CanExecuteLocateUserCommand)));
+        return this._locateUserCommand ?? (this._locateUserCommand = new AsyncCommand(
+          async () =>
+          {
+            if (!await DialogHelper.CheckForLocationServices())
+              return;
+            this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.AroundMe;
+            this.SetMapView(ExploreLocationItem.AroundMe);
+            await this.RefreshItemsDataAsync();
+          },
+          () => !this.IsForegroundBusy && !this.IsBusy));
       }
     }
 
-    private bool CanExecuteLocateUserCommand(object parameter)
-    {
-      return !this.IsForegroundBusy && !this.IsBusy;
-    }
-
-    private async void ExecuteLocateUserCommand(object parameter)
-    {
-      if (!await DialogHelper.CheckForLocationServices())
-        return;
-      this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.AroundMe;
-      this.SetMapView(ExploreLocationItem.AroundMe);
-      await this.RefreshItemsDataAsync();
-    }
-
-    public RelayCommand ZoomInCommand
+    public IAsyncCommand ZoomInCommand
     {
       get
       {
-        return this._zoomInCommand ?? (this._zoomInCommand = new RelayCommand((Action<object>) (x => this.ViewZoomLevel = Math.Max(this.ViewZoomLevel - 1.0, 1.0)), (Func<object, bool>) (x => this.ViewZoomLevel > 1.0)));
+        return this._zoomInCommand ?? (this._zoomInCommand = new AsyncCommand(
+          () => Task.Run(() => this.ViewZoomLevel = Math.Max(this.ViewZoomLevel - 1.0, 1.0)),
+          () => this.ViewZoomLevel > 1.0));
       }
     }
 
-    public RelayCommand ZoomOutCommand
+    public IAsyncCommand ZoomOutCommand
     {
       get
       {
-        return this._zoomOutCommand ?? (this._zoomOutCommand = new RelayCommand((Action<object>) (x => this.ViewZoomLevel = Math.Min(this.ViewZoomLevel + 1.0, 20.0)), (Func<object, bool>) (x => this.ViewZoomLevel < 20.0)));
+        return this._zoomOutCommand ?? (this._zoomOutCommand = new AsyncCommand(
+          () => Task.Run(() => this.ViewZoomLevel = Math.Min(this.ViewZoomLevel + 1.0, 20.0)),
+          () => this.ViewZoomLevel < 20.0));
       }
     }
 
-    public RelayCommand RefreshCommand
+    public IAsyncCommand RefreshCommand
     {
       get
       {
-        return this._refreshCommand ?? (this._refreshCommand = new RelayCommand(new Action<object>(this.ExecuteRefreshCommand), new Func<object, bool>(this.CanExecuteRefreshCommand)));
+        return this._refreshCommand ?? (this._refreshCommand = new AsyncCommand(
+          async () => await this.RefreshItemsDataAsync(),
+          () => !this.IsForegroundBusy && !this.IsBusy));
       }
     }
 
-    private bool CanExecuteRefreshCommand(object parameter)
-    {
-      return !this.IsForegroundBusy && !this.IsBusy;
-    }
-
-    private async void ExecuteRefreshCommand(object parameter)
-    {
-      await this.RefreshItemsDataAsync();
-    }
-
-    public RelayCommand LoadListDataCommand
+    public IAsyncCommand LoadListDataCommand
     {
       get
       {
-        return this._loadListDataCommand ?? (this._loadListDataCommand = new RelayCommand(new Action<object>(this.ExecuteLoadListDataCommand), new Func<object, bool>(this.CanExecuteLoadListDataCommand)));
+        return this._loadListDataCommand ?? (this._loadListDataCommand = new AsyncCommand(
+          async () => await this.LoadItemsDataAsync(true),
+          () => !this.IsItemsDataLoading && !this.IsListHidden));
       }
     }
 
-    private bool CanExecuteLoadListDataCommand(object parameter)
-    {
-      return !this.IsItemsDataLoading && !this.IsListHidden;
-    }
-
-    private async void ExecuteLoadListDataCommand(object parameter)
-    {
-      await this.LoadItemsDataAsync(true);
-    }
-
-    public RelayCommand LoadMapDataCommand
+    public IAsyncCommand LoadMapDataCommand
     {
       get
       {
-        return this._loadMapDataCommand ?? (this._loadMapDataCommand = new RelayCommand(new Action<object>(this.ExecuteLoadMapDataCommand), new Func<object, bool>(this.CanExecuteLoadMapDataCommand)));
-      }
-    }
-
-    private bool CanExecuteLoadMapDataCommand(object parameter)
-    {
-      return !this.IsMapViewChanging && !this.IsItemsDataLoading && this.IsListHidden;
-    }
-
-        private async void ExecuteLoadMapDataCommand(object parameter)
-        {
+        return this._loadMapDataCommand ?? (this._loadMapDataCommand = new AsyncCommand(
+          async () =>
+          {
             if (this.LoadResult == ExploreLoadResult.ErrorNetwork || this.LoadResult == ExploreLoadResult.ErrorUnknown)
-                return;
+              return;
+              
             if (this.FlyoutLocationViewModel.LocationSelected)
             {
-                this.FlyoutLocationViewModel.LocationSelected = false;
+              this.FlyoutLocationViewModel.LocationSelected = false;
+              return;
             }
-            else
+
+            ExploreLocationItem selectedLocationItem = this.FlyoutLocationViewModel.SelectedLocationItem;
+            if (selectedLocationItem != ExploreLocationItem.MapLocation)
             {
-                ExploreLocationItem selectedLocationItem = this.FlyoutLocationViewModel.SelectedLocationItem;
-                if (selectedLocationItem != ExploreLocationItem.MapLocation)
-                {
-                    if (this.Center == null || selectedLocationItem.Location == null || selectedLocationItem.LocationRectangle == null 
-                        || selectedLocationItem.LocationRectangle.Center == null)
-                        return;
-                    this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.MapLocation;
-                    this._mapLocationCenter = this.Center;
-                }
-                else if (this._mapLocationCenter != null && selectedLocationItem.Location != null)
-                {
-                    this._mapLocationCenter = this.Center;
-                }
-                await this.LoadItemsDataAsync();
+              if (this.Center == null || selectedLocationItem.Location == null || selectedLocationItem.LocationRectangle == null 
+                  || selectedLocationItem.LocationRectangle.Center == null)
+                return;
+                
+              this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.MapLocation;
+              this._mapLocationCenter = this.Center;
             }
-        }
-
-        public RelayCommand ClearMapSelectionCommand
-    {
-      get
-      {
-        return this._clearMapSelectionCommand ?? (this._clearMapSelectionCommand = new RelayCommand(new Action<object>(this.ExecuteClearMapSelectionCommand)));
+            else if (this._mapLocationCenter != null && selectedLocationItem.Location != null)
+            {
+              this._mapLocationCenter = this.Center;
+            }
+            
+            await this.LoadItemsDataAsync();
+          },
+          () => !this.IsMapViewChanging && !this.IsItemsDataLoading && this.IsListHidden));
       }
     }
 
-    private void ExecuteClearMapSelectionCommand(object parameter)
-    {
-      this.SelectedMapItem = (ExploreItemViewModel) null;
-    }
-
-    public RelayCommand ExpandClusterCommand
+    public IAsyncCommand ClearMapSelectionCommand
     {
       get
       {
-        return this._expandClusterCommand ?? (this._expandClusterCommand = new RelayCommand(new Action<object>(this.ExecuteExpandClusterCommand)));
+        return this._clearMapSelectionCommand ?? (this._clearMapSelectionCommand = new AsyncCommand(
+          () => 
+          {
+            this.SelectedMapItem = (ExploreItemViewModel) null;
+            return Task.CompletedTask;
+          },
+          () => true));
       }
     }
 
-    private void ExecuteExpandClusterCommand(object parameter)
-    {
-      if (!(parameter is ExploreItemViewModel exploreItemViewModel) || !exploreItemViewModel.IsCluster)
-        return;
-      this.ViewBounds = exploreItemViewModel.ClusterBounds;
-    }
-
-    public RelayCommand ClearSearchStringCommand
+    public IAsyncCommand ExpandClusterCommand
     {
       get
       {
-        return this._clearSearchStringCommand ?? (this._clearSearchStringCommand = new RelayCommand(new Action<object>(this.ExecuteClearSearchStringCommand), new Func<object, bool>(this.CanExecuteClearSearchStringCommand)));
+        return this._expandClusterCommand ?? (this._expandClusterCommand = new AsyncCommand(
+          (parameter) => 
+          {
+            if (parameter is ExploreItemViewModel exploreItemViewModel && exploreItemViewModel.IsCluster)
+            {
+              this.ViewBounds = exploreItemViewModel.ClusterBounds;
+            }
+            return Task.CompletedTask;
+          },
+          () => true));
       }
     }
 
-    private bool CanExecuteClearSearchStringCommand(object parameter)
-    {
-      return !string.IsNullOrEmpty(this.Query) && !this.IsItemsDataLoading;
-    }
-
-    private async void ExecuteClearSearchStringCommand(object parameter)
-    {
-      this.Query = string.Empty;
-      await this.RefreshItemsDataAsync();
-      this.SetExploreMode(false);
-    }
-
-    public RelayCommand SearchCommand
+    public IAsyncCommand ClearSearchStringCommand
     {
       get
       {
-        return this._searchCommand ?? (this._searchCommand = new RelayCommand(new Action<object>(this.ExecuteSearchCommand), new Func<object, bool>(this.CanExecuteSearchCommand)));
+        return this._clearSearchStringCommand ?? (this._clearSearchStringCommand = new AsyncCommand(
+          async () =>
+          {
+            this.Query = string.Empty;
+            await this.RefreshItemsDataAsync();
+            this.SetExploreMode(false);
+          },
+          () => !string.IsNullOrEmpty(this.Query) && !this.IsItemsDataLoading));
       }
     }
 
-    private bool CanExecuteSearchCommand(object parameter) => !this.IsItemsDataLoading;
-
-    private async void ExecuteSearchCommand(object parameter)
-    {
-      this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.MapLocation;
-      this.FlyoutTypeViewModel.SelectedItem = this.FlyoutTypeViewModel.Items.First<KeyValueModel>();
-      AnalyticsHelper.SendSearch(this.Query);
-      await this.RefreshItemsDataAsync();
-      this.SetExploreMode(false);
-    }
-
-    public RelayCommand ToggleExploreModeCommand
+    public IAsyncCommand SearchCommand
     {
       get
       {
-        return this._toggleExploreModeCommand ?? (this._toggleExploreModeCommand = new RelayCommand(new Action<object>(this.ExecuteToggleExploreModeCommand)));
+        return this._searchCommand ?? (this._searchCommand = new AsyncCommand(
+          async () =>
+          {
+            this.FlyoutLocationViewModel.SelectedLocationItem = ExploreLocationItem.MapLocation;
+            this.FlyoutTypeViewModel.SelectedItem = this.FlyoutTypeViewModel.Items.First<KeyValueModel>();
+            AnalyticsHelper.SendSearch(this.Query);
+            await this.RefreshItemsDataAsync();
+            this.SetExploreMode(false);
+          },
+          () => !this.IsItemsDataLoading));
       }
     }
 
-    private void ExecuteToggleExploreModeCommand(object parameter)
-    {
-      this.SetExploreMode(!this.IsListHidden);
-    }
-
-    public RelayCommand NavigateCommand
+    public IAsyncCommand ToggleExploreModeCommand
     {
       get
       {
-        return this._navigateCommand ?? (this._navigateCommand = new RelayCommand(new Action<object>(this.ExecuteNavigateCommand)));
+        return this._toggleExploreModeCommand ?? (this._toggleExploreModeCommand = new AsyncCommand(
+          () => 
+          {
+            this.SetExploreMode(!this.IsListHidden);
+            return Task.CompletedTask;
+          },
+          () => true));
       }
     }
 
-    private void ExecuteNavigateCommand(object parameter)
+    public IAsyncCommand NavigateCommand
     {
-      if (!(parameter is ExploreItemViewModel exploreItemViewModel))
-        return;
-      ShellServiceFacade.NavigationService.UriFor<DetailPartViewModel>().WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Uid), exploreItemViewModel.Uid).WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Language), exploreItemViewModel.Language).Navigate();
+      get
+      {
+        return this._navigateCommand ?? (this._navigateCommand = new AsyncCommand(
+          (parameter) => 
+          {
+            if (parameter is ExploreItemViewModel exploreItemViewModel)
+            {
+              ShellServiceFacade.NavigationService.UriFor<DetailPartViewModel>()
+                .WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Uid), exploreItemViewModel.Uid)
+                .WithParam<string>((Expression<Func<DetailPartViewModel, string>>) (x => x.Language), exploreItemViewModel.Language)
+                .Navigate();
+            }
+            return Task.CompletedTask;
+          },
+          () => true));
+      }
     }
 
     protected override void OnInitialize()

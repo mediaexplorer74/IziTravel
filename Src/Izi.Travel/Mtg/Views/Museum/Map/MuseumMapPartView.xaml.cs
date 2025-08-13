@@ -10,11 +10,11 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Mtg.ViewModels.Museum.Map;
-using Izi.Travel.Shell.Toolkit.Controls.Maps;
+using Izi.Travel.Mtg.ViewModels.Museum.Map;
+using Izi.Travel.Toolkit.Controls.Maps;
 using Windows.Storage.Streams;
 
-namespace Izi.Travel.Shell.Mtg.Views.Museum.Map
+namespace Izi.Travel.Mtg.Views.Museum.Map
 {
     public sealed partial class MuseumMapPartView : Page
     {
@@ -169,7 +169,7 @@ namespace Izi.Travel.Shell.Mtg.Views.Museum.Map
             }
         }
 
-        private void OnMapElementClick(Toolkit.Controls.Maps.MapControl sender, MapElementClickEventArgs args)
+        private void OnMapElementClick(Windows.UI.Xaml.Controls.Maps.MapControl sender, MapElementClickEventArgs args)
         {
             // Handle map element click if needed
             if (args.MapElements.Count > 0 && DataContext is MuseumMapPartViewModel viewModel)
@@ -194,7 +194,7 @@ namespace Izi.Travel.Shell.Mtg.Views.Museum.Map
             }
         }
 
-        private void OnMapTapped(Toolkit.Controls.Maps.MapControl sender, MapInputEventArgs args)
+        private void OnMapTapped(Windows.UI.Xaml.Controls.Maps.MapControl sender, MapInputEventArgs args)
         {
             // Handle map tap if needed
             if (DataContext is MuseumMapPartViewModel viewModel)

@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace Izi.Travel.Shell.Core.Transitions
+namespace Izi.Travel.Core.Transitions
 {
     // Minimal shims to replace WP8 TransitionElement/ITransition with UWP-friendly types
     public abstract class TransitionElement : DependencyObject

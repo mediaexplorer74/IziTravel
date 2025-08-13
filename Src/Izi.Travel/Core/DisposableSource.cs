@@ -3,7 +3,7 @@
 using System;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core
+namespace Izi.Travel.Core
 {
   public class DisposableSource : IDisposable
   {

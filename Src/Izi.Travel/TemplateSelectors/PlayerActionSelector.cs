@@ -1,16 +1,16 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.TemplateSelectors.PlayerActionSelector
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.TemplateSelectors.PlayerActionSelector
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Core.Components;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Player.Items;
-using Izi.Travel.Shell.ViewModels.QuickAccess.Items;
+using Izi.Travel.Core.Components;
+using Izi.Travel.Mtg.ViewModels.Common.Player.Items;
+using Izi.Travel.ViewModels.QuickAccess.Items;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.TemplateSelectors
+namespace Izi.Travel.TemplateSelectors
 {
   public class PlayerActionSelector : DataTemplateSelector
   {

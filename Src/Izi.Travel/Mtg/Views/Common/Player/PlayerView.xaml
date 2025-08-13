@@ -1,20 +1,20 @@
-<UserControl x:Class="Izi.Travel.Shell.Mtg.Views.Common.Player.PlayerView"
+<UserControl x:Class="Izi.Travel.Mtg.Views.Common.Player.PlayerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:items="using:Izi.Travel.Shell.Mtg.ViewModels.Common.Player.Items"
-             xmlns:corecontrols="using:Izi.Travel.Shell.Core.Controls"
-             xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
+             xmlns:items="using:Izi.Travel.Mtg.ViewModels.Common.Player.Items"
+             xmlns:corecontrols="using:Izi.Travel.Core.Controls"
+             xmlns:commoncontrols="using:Izi.Travel.Common.Controls"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:templateSelectors="using:Izi.Travel.Shell.Mtg.TemplateSelectors"
-             xmlns:transitions="using:Izi.Travel.Shell.Core.Transitions"
-             xmlns:extensions="using:Izi.Travel.Shell.Core.Components.Extensions"
-             xmlns:mediaConverters="using:Izi.Travel.Shell.Media.Converters"
-             xmlns:flyout="using:Izi.Travel.Shell.Core.Controls.Flyout"
-             xmlns:quiz="using:Izi.Travel.Shell.Mtg.Views.Quiz"
-             xmlns:ts="using:Izi.Travel.Shell.TemplateSelectors"
+             xmlns:behaviors="using:Izi.Travel.Core.Components.Behaviors"
+             xmlns:templateSelectors="using:Izi.Travel.Mtg.TemplateSelectors"
+             xmlns:transitions="using:Izi.Travel.Core.Transitions"
+             xmlns:extensions="using:Izi.Travel.Core.Components.Extensions"
+             xmlns:mediaConverters="using:Izi.Travel.Media.Converters"
+             xmlns:flyout="using:Izi.Travel.Core.Controls.Flyout"
+             xmlns:quiz="using:Izi.Travel.Mtg.Views.Quiz"
+             xmlns:ts="using:Izi.Travel.TemplateSelectors"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -142,7 +142,6 @@
                         <TextBlock Grid.Row="0"
                                    Grid.Column="0"
                                    Text="{Binding SelectedItem.AudioViewModel.SecondsFromStartString}"
-                                   FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
                                    FontSize="{StaticResource IziTravelFontSizeSmall}"
                                    Foreground="{StaticResource IziTravelGrayBrush}"
                                    HorizontalAlignment="Left"
@@ -153,7 +152,6 @@
                         <TextBlock Grid.Row="0"
                                    Grid.Column="1"
                                    Text="{Binding SelectedItem.AudioViewModel.SecondsFromEndString}"
-                                   FontFamily="{StaticResource IziTravelFontFamilySegoeSemibold}"
                                    FontSize="{StaticResource IziTravelFontSizeSmall}"
                                    Foreground="{StaticResource IziTravelGrayBrush}"
                                    HorizontalAlignment="Right"
@@ -197,62 +195,37 @@
                 </StackPanel>
 
                 
-                <corecontrols:ExpandablePanel x:Name="QuizPanel" 
-                                              ImageSource="/Assets/Icons/appbar.quiz.png"                                         
-                                              VerticalAlignment="Top" 
-                                              HorizontalAlignment="Right"
-                                              Margin="0,-47,13,0"
-                                              Background="{StaticResource IziTravelQuizBlueBrush}"
-                                              IsExpanded="{Binding SelectedItem.IsQuizExpanded, Mode=TwoWay}"
-                                              Command="{Binding SelectedItem.ExpandQuizCommand}"
-                                              RenderTransformOrigin="0.5,0.5"
-                                              extensions:UIElementExtensions.TransitionIsVisible="{Binding IsQuizVisible}">
-                    
-                    <extensions:UIElementExtensions.TransitionInElement>
-                        <transitions:CustomTransition>
-                            <transitions:CustomTransition.Storyboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                     From="0.0" To="1.0" 
-                                                     Duration="0:0:0.150" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
-                                                     From="0.2" To="1.0" 
-                                                     Duration="0:0:0.150" EasingFunction="{StaticResource EaseIn}" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
-                                                     From="0.2" To="1.0" 
-                                                     Duration="0:0:0.150" 
-                                                     EasingFunction="{StaticResource EaseIn}" />
-                                </Storyboard>
-                            </transitions:CustomTransition.Storyboard>
-                        </transitions:CustomTransition>
-                    </extensions:UIElementExtensions.TransitionInElement>
-                    <extensions:UIElementExtensions.TransitionOutElement>
-                        <transitions:CustomTransition>
-                            <transitions:CustomTransition.Storyboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                     From="1.0" To="0.0" 
-                                                     Duration="0:0:0.150" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
-                                                     From="1.0" To="0.2" 
-                                                     Duration="0:0:0.150" EasingFunction="{StaticResource EaseIn}" />
-                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
-                                                     From="1.0" To="0.2" 
-                                                     Duration="0:0:0.150" 
-                                                     EasingFunction="{StaticResource EaseIn}" />
-                                </Storyboard>
-                            </transitions:CustomTransition.Storyboard>
-                        </transitions:CustomTransition>
-                    </extensions:UIElementExtensions.TransitionOutElement>
-
-                    
-                    <corecontrols:ExpandablePanel.RenderTransform>
-                        <CompositeTransform x:Name="QuizPanelTransform" ScaleX="1.0" ScaleY="1.0" />
-                    </corecontrols:ExpandablePanel.RenderTransform>
-                    
-                    
-                    <quiz:QuizView DataContext="{Binding SelectedItem.QuizViewModel}" />
-                </corecontrols:ExpandablePanel>
+                <!-- Replaced Expander with ComboBox for MVP -->
+                <ComboBox x:Name="QuizPanel"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Bottom"
+                         Background="{StaticResource IziTravelLightBrush}"
+                         Foreground="{StaticResource IziTravelDarkBrush}"
+                         Margin="0,0,0,0"
+                         Padding="0"
+                         BorderThickness="0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Assets/Icons/appbar.quiz.png" 
+                                       Width="24" 
+                                       Height="24"
+                                       Margin="12,0,8,0"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding LocalizedResources.LabelQuiz, Source={StaticResource LocalizedStrings}}"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBoxItem>
+                        <quiz:QuizView DataContext="{Binding SelectedItem.QuizViewModel}" 
+                                     Height="300"/>
+                    </ComboBoxItem>
+                </ComboBox>
             </Grid>
         </Grid>
     </corecontrols:ProgressOverlay>

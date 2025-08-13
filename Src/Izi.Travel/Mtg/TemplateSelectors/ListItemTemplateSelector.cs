@@ -1,17 +1,17 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.TemplateSelectors.ListItemTemplateSelector
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Mtg.TemplateSelectors.ListItemTemplateSelector
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Components;
-using Izi.Travel.Shell.Mtg.ViewModels.Collection.List;
-using Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List;
-using Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List;
+using Izi.Travel.Core.Components;
+using Izi.Travel.Mtg.ViewModels.Collection.List;
+using Izi.Travel.Mtg.ViewModels.Exhibit.List;
+using Izi.Travel.Mtg.ViewModels.TouristAttraction.List;
 using System;
 using Windows.UI.Xaml;
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.TemplateSelectors
+namespace Izi.Travel.Mtg.TemplateSelectors
 {
   public class ListItemTemplateSelector : DataTemplateSelector
   {

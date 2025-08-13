@@ -1,9 +1,9 @@
-<ResourceDictionary
+﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Izi.Travel.Shell.Controls">
+    xmlns:placeholders="using:Izi.Travel.Controls.Placeholders">
 
-    <Style TargetType="controls:LongListSelector">
+    <Style TargetType="placeholders:LongListSelector">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="TabNavigation" Value="Once"/>
         <Setter Property="IsTabStop" Value="True"/>
@@ -11,7 +11,7 @@
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:LongListSelector">
+                <ControlTemplate TargetType="placeholders:LongListSelector">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}">

@@ -1,23 +1,36 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Featured.FeaturedListTask
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
-using Izi.Travel.Shell.Views.Featured;
+using Izi.Travel.Views.Featured;
+using Izi.Travel.Core.Command;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Featured
+namespace Izi.Travel.ViewModels.Featured
 {
-  public sealed class FeaturedListTask
-  {
-    public void Show()
+    public sealed class FeaturedListTask
     {
-      FeaturedListFlyoutViewModel listFlyoutViewModel = new FeaturedListFlyoutViewModel();
-      new FeaturedListFlyoutView().DataContext = (object) listFlyoutViewModel;
-      if (!listFlyoutViewModel.OpenCommand.CanExecute((object) null))
-        return;
-      listFlyoutViewModel.OpenCommand.Execute((object) null);
+        public async Task ShowAsync()
+        {
+            var listFlyoutViewModel = new FeaturedListFlyoutViewModel();
+            new FeaturedListFlyoutView().DataContext = listFlyoutViewModel;
+            
+            var command = listFlyoutViewModel.OpenCommand;
+            if (command == null || !command.CanExecute(null))
+                return;
+
+            if (command is IAsyncCommand asyncCommand)
+            {
+                await asyncCommand.ExecuteAsync(null);
+            }
+            else if (command is ICommand syncCommand)
+            {
+                syncCommand.Execute(null);
+            }
+        }
+
+        // Keep the old method for backward compatibility
+        public void Show()
+        {
+            ShowAsync().GetAwaiter().GetResult();
+        }
     }
-  }
 }

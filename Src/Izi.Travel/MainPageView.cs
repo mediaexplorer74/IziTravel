@@ -1,6 +1,6 @@
 ﻿// IziTravel.App
 
-namespace Izi.Travel.Shell
+namespace Izi.Travel
 {
     internal class MainPageView
     {

@@ -1,8 +1,8 @@
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     [ContentProperty(Name = "Header")]
     public sealed partial class ToggleSwitch : UserControl

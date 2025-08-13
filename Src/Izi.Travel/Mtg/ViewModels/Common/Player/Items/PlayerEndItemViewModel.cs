@@ -1,17 +1,17 @@
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Mtg.Helpers;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Mtg.Helpers;
+using Izi.Travel.Mtg.ViewModels.Common.Detail;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 using Windows.UI.Xaml.Navigation;
 
-namespace Izi.Travel.Shell.Mtg.ViewModels.Common.Player.Items
+namespace Izi.Travel.Mtg.ViewModels.Common.Player.Items
 {
     public class PlayerEndItemViewModel : PlayerItemViewModel
     {

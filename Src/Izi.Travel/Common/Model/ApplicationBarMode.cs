@@ -1,4 +1,4 @@
-namespace Izi.Travel.Shell.Common.Model
+﻿namespace Izi.Travel.Common.Model
 {
     // Minimal replacement for WP8 ApplicationBarMode used by ScreenProperties
     public enum ApplicationBarMode

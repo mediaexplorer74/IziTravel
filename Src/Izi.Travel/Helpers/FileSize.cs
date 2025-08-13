@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Izi.Travel.Shell
+namespace Izi.Travel
 {
     public static class ExtensionMethods
     {

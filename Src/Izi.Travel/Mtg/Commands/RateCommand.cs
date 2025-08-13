@@ -1,37 +1,53 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Commands.RateCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Mtg.Helpers;
-using Izi.Travel.Shell.Mtg.ViewModels.Common;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Mtg.Helpers;
+using Izi.Travel.Mtg.ViewModels.Common;
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
-#nullable disable
-namespace Izi.Travel.Shell.Mtg.Commands
+namespace Izi.Travel.Mtg.Commands
 {
-  public class RateCommand : BaseCommand
-  {
-    private readonly MtgObject _mtgObject;
-
-    public RateCommand(MtgObject mtgObject) => this._mtgObject = mtgObject;
-
-    public override bool CanExecute(object parameter)
+    /// <summary>
+    /// Command to handle rating of MTG objects
+    /// </summary>
+    public class RateCommand : BaseCommand
     {
-      return this._mtgObject != null && RateHelper.CanRate(this._mtgObject.Uid, this._mtgObject.Hash);
-    }
+        private readonly MtgObject _mtgObject;
 
-    public override void Execute(object parameter)
-    {
-      if (this._mtgObject == null || this._mtgObject.MainContent == null)
-        return;
-      ShellServiceFacade.NavigationService.UriFor<RatePartViewModel>().WithParam<string>((Expression<Func<RatePartViewModel, string>>) (x => x.Uid), this._mtgObject.Uid).WithParam<MtgObjectType>((Expression<Func<RatePartViewModel, MtgObjectType>>) (x => x.Type), this._mtgObject.Type).WithParam<string>((Expression<Func<RatePartViewModel, string>>) (x => x.Hash), this._mtgObject.Hash).WithParam<string>((Expression<Func<RatePartViewModel, string>>) (x => x.Language), this._mtgObject.MainContent.Language).WithParam<string>((Expression<Func<RatePartViewModel, string>>) (x => x.Title), this._mtgObject.MainContent.Title).Navigate();
+        /// <summary>
+        /// Initializes a new instance of the RateCommand class
+        /// </summary>
+        /// <param name="mtgObject">The MTG object to rate</param>
+        public RateCommand(MtgObject mtgObject) : base(null)
+        {
+            _mtgObject = mtgObject;
+        }
+
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter)
+        {
+            return _mtgObject != null && RateHelper.CanRate(_mtgObject.Uid, _mtgObject.Hash);
+        }
+
+        /// <inheritdoc/>
+        protected override Task OnExecuteAsync(object parameter)
+        {
+            if (_mtgObject?.MainContent == null)
+                return Task.CompletedTask;
+                
+            ShellServiceFacade.NavigationService
+                .UriFor<RatePartViewModel>()
+                .WithParam(x => x.Uid, _mtgObject.Uid)
+                .WithParam(x => x.Type, _mtgObject.Type)
+                .WithParam(x => x.Hash, _mtgObject.Hash)
+                .WithParam(x => x.Language, _mtgObject.MainContent.Language)
+                .WithParam(x => x.Title, _mtgObject.MainContent.Title)
+                .Navigate();
+                
+            return Task.CompletedTask;
+        }
     }
-  }
 }

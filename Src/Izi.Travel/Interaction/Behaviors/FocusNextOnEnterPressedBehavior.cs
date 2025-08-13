@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction.Behaviors
+namespace Izi.Travel.Interaction.Behaviors
 {
   public class FocusNextOnEnterPressedBehavior //: SafeBehavior<Control>
   {

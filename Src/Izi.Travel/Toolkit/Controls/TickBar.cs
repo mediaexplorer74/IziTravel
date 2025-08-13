@@ -1,8 +1,8 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.TickBar
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Toolkit.Controls.TickBar
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using System.Linq;
 using Windows.Foundation;
@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
 #nullable disable
-namespace Izi.Travel.Shell.Toolkit.Controls
+namespace Izi.Travel.Toolkit.Controls
 {
   public sealed class TickBar : Control
   {

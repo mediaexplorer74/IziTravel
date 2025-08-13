@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 // Alias the Windows.UI.Xaml.Controls.Maps.Map to avoid conflict with our custom Map class
 using WindowsMap = Windows.UI.Xaml.Controls.Maps;
-using Izi.Travel.Shell.Toolkit.Controls.Maps;
+using Izi.Travel.Toolkit.Controls.Maps;
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Filters;
@@ -22,24 +22,24 @@ using Izi.Travel.Business.Extensions;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Common.Controls;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Controls.Flyout;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Core.Services.Entities;
-using Izi.Travel.Shell.Mtg.Commands;
-using Izi.Travel.Shell.Mtg.Helpers;
-using Izi.Travel.Shell.Mtg.Interfaces;
-using Izi.Travel.Shell.Mtg.Messages;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map.Flyouts;
+using Izi.Travel.Common.Controls;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Controls.Flyout;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Core.Services.Entities;
+using Izi.Travel.Mtg.Commands;
+using Izi.Travel.Mtg.Helpers;
+using Izi.Travel.Mtg.Interfaces;
+using Izi.Travel.Mtg.Messages;
+using Izi.Travel.Mtg.ViewModels.Common.Map;
+using Izi.Travel.Mtg.ViewModels.Tour.Map.Flyouts;
 using Izi.Travel.Utility.Extensions;
 using Windows.UI.Xaml.Controls.Maps;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Tour.Map
+namespace Izi.Travel.Mtg.ViewModels.Tour.Map
 {
     public class TourMapPartViewModel : Screen, IHandle<MapItemSelectedMessage>
     {

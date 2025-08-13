@@ -1,4 +1,4 @@
-// IziTravel.App
+﻿// IziTravel.App
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using Izi.Travel.Shell.Core.Themes;
+using Izi.Travel.Core.Themes;
 using Izi.Travel.Business;
 using Izi.Travel.Business.Entities.Culture;
 using Izi.Travel.Business.Entities.Data;
@@ -28,49 +28,49 @@ using Izi.Travel.Business.Entities.Settings;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
-using Izi.Travel.Shell.Core.Services;
+using Izi.Travel.Core.Services;
 using Izi.Travel.Geofencing;
 using Izi.Travel.Geofencing.Geotracker;
-using Izi.Travel.Shell.Core;
-using Izi.Travel.Shell.Core.Attributes;
-using Izi.Travel.Shell.Core.Context;
-using Izi.Travel.Shell.Core.Helpers;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services.Contract;
-using Izi.Travel.Shell.Core.Services.Implementation;
-using Izi.Travel.Shell.Media.ViewModels;
-using Izi.Travel.Shell.Media.ViewModels.Image;
-using Izi.Travel.Shell.Media.ViewModels.Video;
-using Izi.Travel.Shell.Mtg.Helpers;
-using Izi.Travel.Shell.Mtg.ViewModels.Collection.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Collection.List;
-using Izi.Travel.Shell.Mtg.ViewModels.Common;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.List;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Player;
-using Izi.Travel.Shell.Mtg.ViewModels.Exhibit.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List;
-using Izi.Travel.Shell.Mtg.ViewModels.Museum.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Museum.Map;
-using Izi.Travel.Shell.Mtg.ViewModels.Publisher.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Quiz;
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
-using Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.Detail;
-using Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List;
-using Izi.Travel.Shell.Settings.ViewModels;
-using Izi.Travel.Shell.Settings.ViewModels.Application;
-using Izi.Travel.Shell.Settings.ViewModels.Internal;
-using Izi.Travel.Shell.ViewModels;
-using Izi.Travel.Shell.ViewModels.Explore;
-using Izi.Travel.Shell.ViewModels.Featured;
-using Izi.Travel.Shell.ViewModels.Profile;
-using Izi.Travel.Shell.ViewModels.Profile.Bookmark;
-using Izi.Travel.Shell.ViewModels.Profile.Download;
-using Izi.Travel.Shell.ViewModels.Profile.History;
-using Izi.Travel.Shell.ViewModels.Profile.Purchase;
-using Izi.Travel.Shell.ViewModels.Profile.Quiz;
-using Izi.Travel.Shell.ViewModels.QuickAccess;
+using Izi.Travel.Core;
+using Izi.Travel.Core.Attributes;
+using Izi.Travel.Core.Context;
+using Izi.Travel.Core.Helpers;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services.Contract;
+using Izi.Travel.Core.Services.Implementation;
+using Izi.Travel.Media.ViewModels;
+using Izi.Travel.Media.ViewModels.Image;
+using Izi.Travel.Media.ViewModels.Video;
+using Izi.Travel.Mtg.Helpers;
+using Izi.Travel.Mtg.ViewModels.Collection.Detail;
+using Izi.Travel.Mtg.ViewModels.Collection.List;
+using Izi.Travel.Mtg.ViewModels.Common;
+using Izi.Travel.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.Mtg.ViewModels.Common.List;
+using Izi.Travel.Mtg.ViewModels.Common.Player;
+using Izi.Travel.Mtg.ViewModels.Exhibit.Detail;
+using Izi.Travel.Mtg.ViewModels.Exhibit.List;
+using Izi.Travel.Mtg.ViewModels.Museum.Detail;
+using Izi.Travel.Mtg.ViewModels.Museum.Map;
+using Izi.Travel.Mtg.ViewModels.Publisher.Detail;
+using Izi.Travel.Mtg.ViewModels.Quiz;
+using Izi.Travel.Mtg.ViewModels.Tour.Detail;
+using Izi.Travel.Mtg.ViewModels.Tour.Map;
+using Izi.Travel.Mtg.ViewModels.TouristAttraction.Detail;
+using Izi.Travel.Mtg.ViewModels.TouristAttraction.List;
+using Izi.Travel.Settings.ViewModels;
+using Izi.Travel.Settings.ViewModels.Application;
+using Izi.Travel.Settings.ViewModels.Internal;
+using Izi.Travel.ViewModels;
+using Izi.Travel.ViewModels.Explore;
+using Izi.Travel.ViewModels.Featured;
+using Izi.Travel.ViewModels.Profile;
+using Izi.Travel.ViewModels.Profile.Bookmark;
+using Izi.Travel.ViewModels.Profile.Download;
+using Izi.Travel.ViewModels.Profile.History;
+using Izi.Travel.ViewModels.Profile.Purchase;
+using Izi.Travel.ViewModels.Profile.Quiz;
+using Izi.Travel.ViewModels.QuickAccess;
 using Izi.Travel.Utility;
 
 using System.Diagnostics;
@@ -82,15 +82,16 @@ using System.Threading.Tasks;
 
 using Caliburn.Micro;
 using Newtonsoft.Json;
-using Izi.Travel.Shell.Mtg.Interfaces;
+using Izi.Travel.Mtg.Interfaces;
 using Windows.Services.Maps;
+using Izi.Travel.Views;
 
-namespace Izi.Travel.Shell
+namespace Izi.Travel
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : CaliburnApplication
+    public sealed partial class App //: CaliburnApplication
     {
         private WinRTContainer container;
         private bool _reset;
@@ -98,22 +99,25 @@ namespace Izi.Travel.Shell
 
         static App()
         {
-            LogManager.GetLog = (Func<Type, ILog>)(type => (ILog)new CustomLogger(type));
-            App.Logger = LogManager.GetLog(typeof(App));
+            //LogManager.GetLog = (Func<Type, ILog>)(type => (ILog)new CustomLogger(type));
+            //App.Logger = LogManager.GetLog(typeof(App));
         }
 
         public App()
         {
             InitializeComponent();
-            Suspending += OnSuspending;
-            Resuming += OnResuming;
-            ThemeHelper.OverrideSystemColors();
+            //Suspending += OnSuspending;
+            //Resuming += OnResuming;
+
+            //ThemeHelper.OverrideSystemColors();
         }
 
         protected override void Configure()
         {
             container = new WinRTContainer();
+
             container.RegisterWinRTServices();
+            
             container.PerRequest<MainPageViewModel>();
             
             // Register the UWP phone service
@@ -122,15 +126,17 @@ namespace Izi.Travel.Shell
             // Register map services
             //container.Singleton<IMapService, MapService>();
             
-            // Register view models
+            // Register view models (old place)
             container.PerRequest<DetailPartViewModel>();
             container.PerRequest<TourMapPartViewModel>();
             
             // Configure Caliburn.Micro for UWP
-            MessageBinder.SpecialValues.Add("$clickeditem", 
-                context => ((ItemClickEventArgs)context.EventArgs).ClickedItem);
-            
-            // RegisterNavigationService is called in PrepareViewFirst; no manual adapter needed
+            //MessageBinder.SpecialValues.Add("$clickeditem", 
+            //    context => ((ItemClickEventArgs)context.EventArgs).ClickedItem);
+
+            // Register view models (experimental - new place)
+            //container.PerRequest<DetailPartViewModel>();
+            //container.PerRequest<TourMapPartViewModel>();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)
@@ -140,14 +146,42 @@ namespace Izi.Travel.Shell
             
             // Initialize our ShellServiceFacade with the root frame
             ShellServiceFacade.Initialize(rootFrame);
-            
-            // Set up navigation events if needed
-            rootFrame.Navigating += OnRootFrameNavigating;
-            rootFrame.Navigated += OnRootFrameNavigated;
-            
+
+            // Set up navigation events if needed (-)
+            //rootFrame.Navigating += OnRootFrameNavigating;
+            //rootFrame.Navigated += OnRootFrameNavigated;
+
             // Display the root view
-            DisplayRootView<MainPageView>();
+            //DisplayRootView<MainPageView>();
+            //DisplayRootView<MainView>();
         }
+
+        // !
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            //    DisplayRootView<MainPageView>();
+            DisplayRootView<MainView>();
+        }
+
+        // !
+        protected override object GetInstance(Type service, string key)
+        {
+            return container.GetInstance(service, key);
+        }
+
+        // !
+        protected override IEnumerable<object> GetAllInstances(Type service)
+        {
+            return container.GetAllInstances(service);
+        }
+
+
+        // !
+        protected override void BuildUp(object instance)
+        {
+            container.BuildUp(instance);
+        }
+
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
@@ -212,25 +246,40 @@ namespace Izi.Travel.Shell
         private async Task SaveAppStateAsync()
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            
+
             // Save download processes
-            var processes = ServiceFacade.DownloadManager.GetProcesses().Select(p => new
+
+            localSettings.Values["DownloadProcesses"] = default;
+
+            try
             {
-                p.Uid,
-                p.Key,
-                p.Title,
-                State = p.State.ToString(),
-                p.IsRestored,
-                Error = p.Error?.ToString(),
-                Content = p.Content?.Select(c => c.Uid).ToList()
-            }).ToList();
-            
-            localSettings.Values["DownloadProcesses"] = JsonConvert.SerializeObject(processes);
-            
+                localSettings.Values["DownloadProcesses"] = JsonConvert.SerializeObject(ServiceFacade.DownloadManager.GetProcesses().Select(p => new
+                {
+                    p.Uid,
+                    p.Key,
+                    p.Title,
+                    State = p.State.ToString(),
+                    p.IsRestored,
+                    Error = p.Error?.ToString(),
+                    Content = p.Content?.Select(c => c.Uid).ToList()
+                }).ToList());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("set localSettings.Values[DownloadProcesses] error: " + ex.Message);
+            }
+
             // Save app settings
-            var appSettings = ServiceFacade.SettingsService.GetAppSettings();
-            localSettings.Values["AppSettings"] = JsonConvert.SerializeObject(appSettings);
-            
+            try
+            {
+                AppSettings appSettings = ServiceFacade.SettingsService.GetAppSettings();
+                localSettings.Values["AppSettings"] = JsonConvert.SerializeObject(appSettings);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Failed to save app settings: " + ex.Message);
+            }
+
             // Navigation state saving skipped in UWP port for now
         }
 
@@ -287,9 +336,7 @@ namespace Izi.Travel.Shell
             //_reset = e.NavigationMode == NavigationMode.Reset;
         }
 
-        private static void OnDownloadProcessStateChanged(
-            DownloadManager manager,
-            DownloadProcess process)
+        private static void OnDownloadProcessStateChanged( DownloadManager manager,   DownloadProcess process)
         {
             Execute.OnUIThread(() =>
             {
@@ -324,6 +371,7 @@ namespace Izi.Travel.Shell
             });
         }
 
+      
         private static void StopProcessAudio(DownloadProcess process)
         {
             var nowPlaying = ServiceFacade.AudioService.NowPlaying;
@@ -337,5 +385,5 @@ namespace Izi.Travel.Shell
         }
     }
 
-    // Removed custom FrameAdapter; using Caliburn.Micro's built-in navigation service instead
+   
 }

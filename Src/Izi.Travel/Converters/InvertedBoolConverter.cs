@@ -5,7 +5,7 @@ using System.Globalization;
 using Windows.UI.Xaml.Data;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Converters//Izi.Travel.Shell.Converters
+namespace Izi.Travel.Core.Converters//Izi.Travel.Converters
 {
   public class InvertedBoolConverter : IValueConverter
   {  

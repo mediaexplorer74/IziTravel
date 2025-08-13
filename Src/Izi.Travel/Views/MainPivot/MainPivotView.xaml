@@ -1,4 +1,4 @@
-
+﻿
 <Page
     x:Class="IziTravel.Views.MainPivot.MainPivotView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7,31 +7,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mainPivot="clr-namespace:IziTravel.AppServices.ViewModels.MainPivot;assembly=IziTravel.AppServices"
-    xmlns:ctrl="clr-namespace:IziTravel.Controls"
+    xmlns:ctrl="using:Izi.Travel.Controls"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    xmlns:cnv="clr-namespace:IziTravel.Converters"
+    xmlns:cnv="clr-namespace:Izi.Travel.Controls.Placeholders;assembly=Izi.Travel"
     xmlns:mainPivot1="clr-namespace:IziTravel.Views.MainPivot"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:placeholders="using:Izi.Travel.Controls.Placeholders"
     mc:Ignorable="d" 
     d:DesignWidth="480" 
     d:DesignHeight="768"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DataContext="{d:DesignInstance mainPivot:MainPivotViewModel}">
 
     <Page.Resources>
-        <cnv:MarginSelector x:Key="MarginSelector"
-                          Portrait="0 10 0 0"
-                          LandscapeLeft="72 0 24 0"
-                          LandscapeRight="0 0 72 0"/>
+        <placeholders:MarginSelector x:Key="MarginSelector"
+                                  Portrait="0 10 0 0"
+                                  LandscapeLeft="72 0 24 0"
+                                  LandscapeRight="0 0 72 0"/>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Pivot Margin="{Binding Source={StaticResource OrientationMgr}, Path=Orientation, Converter={StaticResource MarginSelector}}">
             <Pivot.Title>
-                <mainPivot1:HeaderControl />
+                <ctrl:HeaderControl />
             </Pivot.Title>
 
             <PivotItem Header="новости">

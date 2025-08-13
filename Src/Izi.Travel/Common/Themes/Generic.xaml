@@ -1,6 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:Izi.Travel.Shell.Common.Controls">  
+                    xmlns:controls="using:Izi.Travel.Common.Controls">  
     
     <Style TargetType="controls:ImagePlaceholder">
         <Setter Property="Background" Value="{StaticResource IziTravelGrayBrush}" />

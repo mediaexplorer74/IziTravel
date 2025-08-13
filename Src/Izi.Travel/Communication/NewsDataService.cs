@@ -1,6 +1,6 @@
-// IziTravel.Communication.NewsDataService
+﻿// IziTravel.Communication.NewsDataService
 
-using Izi.Travel.Shell.Communication.Html;
+using Izi.Travel.Communication.Html;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -11,7 +11,7 @@ using Windows.Web.Syndication;//using System.ServiceModel.Syndication;
 //using MSPToolkit.Encodings;
 
 #nullable disable
-namespace Izi.Travel.Shell.Communication
+namespace Izi.Travel.Communication
 {
   public class NewsDataService
   {

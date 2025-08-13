@@ -1,74 +1,161 @@
 using Microsoft.Xaml.Interactivity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using System.Windows.Input;
+using System.Threading.Tasks;
+using Izi.Travel.Core.Command;
 
-namespace Izi.Travel.Shell.Core.Components.Behaviors
+namespace Izi.Travel.Core.Components.Behaviors
 {
+    /// <summary>
+    /// Behavior for handling loading more items when scrolling in a ListView
+    /// </summary>
     public class ListViewLoadBehavior : Behavior<ListView>
     {
-        public static readonly DependencyProperty LoadCommandProperty = DependencyProperty.Register(nameof(LoadCommand), typeof(System.Windows.Input.ICommand), typeof(ListViewLoadBehavior), new PropertyMetadata(null));
-        public static readonly DependencyProperty LoadItemCommandProperty = DependencyProperty.Register(nameof(LoadItemCommand), typeof(System.Windows.Input.ICommand), typeof(ListViewLoadBehavior), new PropertyMetadata(null));
+        private bool _isLoading;
+        private const int LoadThreshold = 5; // Number of items from the end to trigger load more
 
-        public System.Windows.Input.ICommand LoadCommand
+        public static readonly DependencyProperty LoadCommandProperty = 
+            DependencyProperty.Register(nameof(LoadCommand), typeof(ICommand), typeof(ListViewLoadBehavior), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty LoadItemCommandProperty = 
+            DependencyProperty.Register(nameof(LoadItemCommand), typeof(ICommand), typeof(ListViewLoadBehavior), new PropertyMetadata(null));
+
+        public ICommand LoadCommand
         {
-            get => (System.Windows.Input.ICommand)GetValue(LoadCommandProperty);
+            get => (ICommand)GetValue(LoadCommandProperty);
             set => SetValue(LoadCommandProperty, value);
         }
 
-        public System.Windows.Input.ICommand LoadItemCommand
+        public ICommand LoadItemCommand
         {
-            get => (System.Windows.Input.ICommand)GetValue(LoadItemCommandProperty);
+            get => (ICommand)GetValue(LoadItemCommandProperty);
             set => SetValue(LoadItemCommandProperty, value);
         }
 
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.ContainerContentChanging += AssociatedObject_ContainerContentChanging;
+            
+            if (AssociatedObject == null) return;
+            
+            // Handle container content changing for virtualization
+            AssociatedObject.ContainerContentChanging += OnContainerContentChanging;
+            
+            // Handle scroll viewer changes for infinite scroll
+            AssociatedObject.Loaded += OnLoaded;
+            
+            // Handle item click/selection
+            AssociatedObject.ItemClick += OnItemClick;
         }
 
         protected override void OnDetaching()
         {
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.ContainerContentChanging -= OnContainerContentChanging;
+                AssociatedObject.Loaded -= OnLoaded;
+                AssociatedObject.ItemClick -= OnItemClick;
+            }
+            
             base.OnDetaching();
-            AssociatedObject.ContainerContentChanging -= AssociatedObject_ContainerContentChanging;
         }
 
-        private void AssociatedObject_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (args.InRecycleQueue) return;
-
-            if (LoadCommand != null && AssociatedObject.ItemsSource != null)
+            // In UWP, get ScrollViewer via VisualTreeHelper or extension: simply try GetDescendant.
+            var scrollViewer = FindScrollViewer(AssociatedObject);
+            if (scrollViewer != null)
             {
-                // Safely get the count of items
-                int itemCount = 0;
-                if (AssociatedObject.ItemsSource is ICollection collection)
-                {
-                    itemCount = collection.Count;
-                }
-                else if (AssociatedObject.ItemsSource is IEnumerable<object> enumerable)
-                {
-                    itemCount = System.Linq.Enumerable.Count(enumerable);
-                }
+                scrollViewer.ViewChanged += OnViewChanged;
+            }
+        }
 
-                // Only proceed if we have items
-                if (itemCount > 0 && args.ItemIndex == itemCount - 1)
-                {
-                    if (LoadCommand.CanExecute(null))
-                    {
-                        LoadCommand.Execute(null);
-                    }
-                }
+        private static ScrollViewer FindScrollViewer(DependencyObject root)
+        {
+            if (root == null) return null;
+            if (root is ScrollViewer sv) return sv;
+
+            int count = Windows.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(root);
+            for (int i = 0; i < count; i++)
+            {
+                var child = Windows.UI.Xaml.Media.VisualTreeHelper.GetChild(root, i);
+                var result = FindScrollViewer(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        private async void OnViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (_isLoading || LoadCommand == null || !(sender is ScrollViewer scrollViewer) || 
+                !(AssociatedObject?.ItemsSource is ICollection items) || items.Count == 0)
+            {
+                return;
             }
 
-            if (LoadItemCommand != null && AssociatedObject.ItemsSource != null)
+            // Check if we're near the bottom of the list
+            var scrollPosition = scrollViewer.VerticalOffset;
+            var maxScroll = scrollViewer.ScrollableHeight;
+            var threshold = Math.Max(100, scrollViewer.ViewportHeight * 0.2); // 20% of viewport or 100px
+
+            if (maxScroll - scrollPosition <= threshold)
             {
-                if (LoadItemCommand.CanExecute(args.Item))
+                await ExecuteLoadCommandAsync();
+            }
+        }
+
+        private void OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            if (args.InRecycleQueue || LoadItemCommand == null) 
+                return;
+
+            // Check if this is one of the last few items
+            if (AssociatedObject?.ItemsSource is ICollection items && args.ItemIndex >= items.Count - LoadThreshold - 1)
+            {
+                _ = ExecuteLoadCommandAsync();
+            }
+
+            // Execute item load command if available
+            if (LoadItemCommand?.CanExecute(args.Item) == true)
+            {
+                LoadItemCommand.Execute(args.Item);
+            }
+        }
+
+        private void OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (LoadItemCommand?.CanExecute(e.ClickedItem) == true)
+            {
+                LoadItemCommand.Execute(e.ClickedItem);
+            }
+        }
+
+        private async Task ExecuteLoadCommandAsync()
+        {
+            if (_isLoading || LoadCommand == null || !LoadCommand.CanExecute(null))
+                return;
+
+            try
+            {
+                _isLoading = true;
+                
+                if (LoadCommand is IAsyncCommand asyncCommand)
                 {
-                    LoadItemCommand.Execute(args.Item);
+                    await asyncCommand.ExecuteAsync(null);
                 }
+                else
+                {
+                    LoadCommand.Execute(null);
+                }
+            }
+            finally
+            {
+                _isLoading = false;
             }
         }
     }

@@ -1,13 +1,13 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Settings.ViewModels.Application.SettingsAppLicenseViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Settings.ViewModels.Application.SettingsAppLicenseViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Settings.Model;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Settings.Model;
 using Izi.Travel.Utility;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Linq;
 using System.Reflection;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.ViewModels.Application
+namespace Izi.Travel.Settings.ViewModels.Application
 {
   public class SettingsAppLicenseViewModel : Screen
   {
@@ -37,9 +37,9 @@ namespace Izi.Travel.Shell.Settings.ViewModels.Application
     {
       try
       {
-         Izi.Travel.Shell.Settings.Model.LicenseInfo data = new LicenseInfo();
-        /*Izi.Travel.Shell.Settings.Model.LicenseInfo data = XmlSerializerHelper.Deserialize<Izi.Travel.Shell.Settings.Model.LicenseInfo>(
-            Assembly.GetExecutingAssembly().GetManifestResourceStream("Izi.Travel.Shell.Settings.Model.licenses.xml"));
+         Izi.Travel.Settings.Model.LicenseInfo data = new LicenseInfo();
+        /*Izi.Travel.Settings.Model.LicenseInfo data = XmlSerializerHelper.Deserialize<Izi.Travel.Settings.Model.LicenseInfo>(
+            Assembly.GetExecutingAssembly().GetManifestResourceStream("Izi.Travel.Settings.Model.licenses.xml"));
         if (data == null || data.Packages == null || data.Licenses == null)
           return;
         data.Packages.ForEach((Action<Package>) (x => x.License = data.Licenses.FirstOrDefault<License>((Func<License, bool>) (y => y.Id == x.LicenseId))));

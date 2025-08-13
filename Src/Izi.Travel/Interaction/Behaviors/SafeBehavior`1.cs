@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Navigation;
 //using System.Windows.Navigation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction.Behaviors
+namespace Izi.Travel.Interaction.Behaviors
 {
     /*
   public abstract class SafeBehavior<T> : Behavior<T> where T : FrameworkElement

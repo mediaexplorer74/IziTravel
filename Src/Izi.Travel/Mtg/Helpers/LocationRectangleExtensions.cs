@@ -1,15 +1,15 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Helpers.LocationRectangleExtensions
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.Helpers.LocationRectangleExtensions
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Data.Entities.Common;
 using Windows.Devices.Geolocation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Helpers
+namespace Izi.Travel.Mtg.Helpers
 {
   public static class LocationRectangleExtensions
   {

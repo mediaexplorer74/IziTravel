@@ -4,10 +4,10 @@
     
     
     
-    <FontFamily x:Key="IziTravelFontFamilySegoeNormal">Segoe WP</FontFamily>
+    <!--FontFamily x:Key="IziTravelFontFamilySegoeNormal">Segoe WP</FontFamily>
     <FontFamily x:Key="IziTravelFontFamilySegoeSemilight">Segoe WP SemiLight</FontFamily>
     <FontFamily x:Key="IziTravelFontFamilySegoeSemibold">Segoe WP Semibold</FontFamily>
-    <FontFamily x:Key="IziTravelFontFamilySegoeLight">Segoe WP Light</FontFamily>
+    <FontFamily x:Key="IziTravelFontFamilySegoeLight">Segoe WP Light</FontFamily-->
            
     
     

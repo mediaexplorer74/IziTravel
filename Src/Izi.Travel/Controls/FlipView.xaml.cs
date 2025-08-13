@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -8,9 +8,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
-using Izi.Travel.Shell.Core.Converters;
+using Izi.Travel.Core.Converters;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     [ContentProperty(Name = "ItemTemplate")]
     public sealed partial class FlipView : UserControl

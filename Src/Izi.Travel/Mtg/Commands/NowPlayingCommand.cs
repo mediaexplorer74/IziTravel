@@ -1,73 +1,80 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Commands.NowPlayingCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Mtg.Helpers;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Mtg.Helpers;
 using System;
+using System.Threading.Tasks;
 using Windows.Foundation;
 
-#nullable disable
-namespace Izi.Travel.Shell.Mtg.Commands
+namespace Izi.Travel.Mtg.Commands
 {
-  public class NowPlayingCommand : BaseCommand
-  {
-    private readonly IScreen _owner;
-
-    public NowPlayingCommand(IScreen owner)
+    /// <summary>
+    /// Command to handle the "Now Playing" functionality
+    /// </summary>
+    public class NowPlayingCommand : BaseCommand
     {
-      this._owner = owner;
-      if (owner == null)
-        return;
-      owner.Activated += new EventHandler<ActivationEventArgs>(this.OnOwnerActivated);
-      owner.Deactivated += new EventHandler<DeactivationEventArgs>(this.OnOwnerDeactivated);
-    }
+        private readonly IScreen _owner;
 
-    private bool CanExecute(out AudioTrackInfo track)
-    {
-      track = null;
-      AudioTrackInfo nowPlaying = ServiceFacade.AudioService.NowPlaying;
-      if (nowPlaying == null)
-        return false;
-      track = nowPlaying;
-      return true;
-    }
+        /// <summary>
+        /// Initializes a new instance of the NowPlayingCommand class
+        /// </summary>
+        /// <param name="owner">The owner screen</param>
+        public NowPlayingCommand(IScreen owner) : base(null)
+        {
+            _owner = owner;
+            if (owner == null)
+                return;
+                
+            owner.Activated += OnOwnerActivated;
+            owner.Deactivated += OnOwnerDeactivated;
+        }
 
-    public override bool CanExecute(object parameter)
-    {
-      AudioTrackInfo track;
-      return this.CanExecute(out track);
-    }
+        private bool CanExecute(out AudioTrackInfo track)
+        {
+            track = null;
+            var nowPlaying = ServiceFacade.AudioService.NowPlaying;
+            if (nowPlaying == null)
+                return false;
+                
+            track = nowPlaying;
+            return true;
+        }
 
-    public override void Execute(object parameter)
-    {
-      AudioTrackInfo track;
-      if (!this.CanExecute(out track))
-        return;
-      NavigationHelper.NavigateToAudio(track.MtgObjectType, track.MtgObjectUid, track.Language, track.MtgParentUid);
-    }
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter)
+        {
+            AudioTrackInfo track;
+            return CanExecute(out track);
+        }
 
-    private void OnOwnerActivated(object sender, ActivationEventArgs activationEventArgs)
-    {
-      this.RaiseCanExecuteChanged();
-      ServiceFacade.AudioService.NowPlayingChanged += Instance_NowPlayingChanged;
-    }
+        /// <inheritdoc/>
+        protected override Task OnExecuteAsync(object parameter)
+        {
+            AudioTrackInfo track;
+            if (!CanExecute(out track))
+                return Task.CompletedTask;
+                
+            NavigationHelper.NavigateToAudio(track.MtgObjectType, track.MtgObjectUid, track.Language, track.MtgParentUid);
+            return Task.CompletedTask;
+        }
 
-    private void OnOwnerDeactivated(object sender, DeactivationEventArgs deactivationEventArgs)
-    {
-      ServiceFacade.AudioService.NowPlayingChanged -= Instance_NowPlayingChanged;
-    }
+        private void OnOwnerActivated(object sender, ActivationEventArgs e)
+        {
+            RaiseCanExecuteChanged();
+            ServiceFacade.AudioService.NowPlayingChanged += Instance_NowPlayingChanged;
+        }
 
-    private void Instance_NowPlayingChanged(object sender, AudioTrackInfo e)
-    {
-      this.RaiseCanExecuteChanged();
-    }
+        private void OnOwnerDeactivated(object sender, DeactivationEventArgs e)
+        {
+            ServiceFacade.AudioService.NowPlayingChanged -= Instance_NowPlayingChanged;
+        }
+
+        private void Instance_NowPlayingChanged(object sender, AudioTrackInfo e)
+        {
+            RaiseCanExecuteChanged();
+        }
   }
 }

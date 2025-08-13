@@ -1,8 +1,8 @@
-using Windows.Devices.Geolocation;
+﻿using Windows.Devices.Geolocation;
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core.Models;
+using Izi.Travel.Core.Models;
 
-namespace Izi.Travel.Shell.Mtg.ViewModels.Tour.Map
+namespace Izi.Travel.Mtg.ViewModels.Tour.Map
 {
     public class MapItemViewModel : PropertyChangedBase
     {

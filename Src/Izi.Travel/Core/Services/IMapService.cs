@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
+using Izi.Travel.Mtg.ViewModels.Tour.Map;
 
-namespace Izi.Travel.Shell.Core.Services
+namespace Izi.Travel.Core.Services
 {
     public interface IMapService
     {

@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.Views.Application
+namespace Izi.Travel.Settings.Views.Application
 {
     public sealed partial class SettingsAppAboutView : Page //PhoneApplicationPage
     {
@@ -26,7 +26,7 @@ namespace Izi.Travel.Shell.Settings.Views.Application
         }
     }
 }
-/*namespace Izi.Travel.Shell.Settings.Views.Application
+/*namespace Izi.Travel.Settings.Views.Application
 {
     public sealed partial class SettingsAppAboutView : Page
     {

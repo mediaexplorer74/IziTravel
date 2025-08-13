@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
-namespace Izi.Travel.Shell.Views.MainPivot
+namespace Izi.Travel.Views.MainPivot
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

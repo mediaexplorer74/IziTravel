@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // MapControl.xaml.cs
 // Code-behind for the MapControl user control
 
@@ -10,7 +10,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
     public partial class MapControl : UserControl
     {

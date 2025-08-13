@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.Download.ProfileDownloadListViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.ViewModels.Profile.Download.ProfileDownloadListViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
@@ -11,13 +11,13 @@ using Izi.Travel.Business.Entities.Filters;
 using Izi.Travel.Business.Managers;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
-using Izi.Travel.Shell.Common.ViewModels.List;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Controls.Flyout;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Core.Services.Entities;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Detail;
+using Izi.Travel.Common.ViewModels.List;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Controls.Flyout;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Core.Services.Entities;
+using Izi.Travel.Mtg.ViewModels.Common.Detail;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +29,7 @@ using Windows.UI.Xaml;
 using Windows.Foundation;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile.Download
+namespace Izi.Travel.ViewModels.Profile.Download
 {
   public class ProfileDownloadListViewModel : BaseListViewModel<ProfileDownloadListItemViewModel>
   {

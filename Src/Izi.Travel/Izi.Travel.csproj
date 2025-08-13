@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Izi.Travel.Shell</RootNamespace>
+    <RootNamespace>Izi.Travel</RootNamespace>
     <AssemblyName>IziTravel</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -119,15 +119,29 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Placeholder Controls -->
+    <Compile Include="Controls\Placeholders\PlaceholderControls.cs" />
+    <Page Include="Common\Themes\AppBarStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Placeholders\PlaceholderStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <!-- Temporarily removed HeaderControl.xaml to resolve duplicate entry issue -->
+    <Compile Include="Controls\HeaderControl.xaml.cs">
+      <DependentUpon>HeaderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPageView.cs" />
     <Compile Include="Mtg\Messages\MapItemSelectedMessage.cs" />
     <Compile Include="Core\Extensions\CollectionExtensions.cs" />
     <Compile Include="Core\Extensions\UiExtensions.cs" />
     <Compile Include="Core\Services\IPhoneService.cs" />
     <Compile Include="Helpers\GeoHelper.cs" />
-    <Compile Include="Controls\HeaderControl.xaml.cs">
-      <DependentUpon>HeaderControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\QmsControl.xaml.cs">
       <DependentUpon>QmsControl.xaml</DependentUpon>
     </Compile>
@@ -142,9 +156,6 @@
     </Compile>
     <Compile Include="Controls\Map\MapItemControl.xaml.cs">
       <DependentUpon>MapItemControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Common\Controls\PhoneTextBox.xaml.cs">
-      <DependentUpon>PhoneTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Controls\PhoneSlider.xaml.cs">
       <DependentUpon>PhoneSlider.xaml</DependentUpon>
@@ -185,7 +196,6 @@
     <Compile Include="Commands\RateApplicationCommand.cs" />
     <Compile Include="Common\Commands\LaunchUriCommand.cs" />
     <Compile Include="Common\Components\ViewAnalyticsBehavior.cs" />
-    <Compile Include="Common\Controls\ImagePlaceholder.cs" />
     <Compile Include="Common\Controls\PageTitleControl.xaml.cs">
       <DependentUpon>PageTitleControl.xaml</DependentUpon>
     </Compile>
@@ -203,7 +213,22 @@
     <Compile Include="Common\ViewModels\List\BaseListViewModel`1.cs" />
     <Compile Include="Common\ViewModels\List\BaseListWithSearchViewModel`1.cs" />
     <Compile Include="Common\ViewModels\List\IListViewModel.cs" />
+    <Compile Include="Common\ViewModels\List\IListViewModelBase.cs" />
     <Compile Include="Common\ViewModels\List\IListWithSearchViewModel.cs" />
+    <Page Include="Common\Controls\ImagePlaceholder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LabeledRating.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Common\Controls\ImagePlaceholder.xaml.cs">
+      <DependentUpon>ImagePlaceholder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LabeledRating.xaml.cs">
+      <DependentUpon>LabeledRating.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Communication\ForumDataService.cs" />
     <Compile Include="Communication\Html\BaseHtmlWrapper.cs" />
     <Compile Include="Communication\Html\NewsHtmlProcessor.cs" />
@@ -235,12 +260,12 @@
     <Compile Include="Converters\StringEmptinessToVisibilityConverter.cs" />
     <Compile Include="Core\Attributes\ViewAttribute.cs" />
     <Compile Include="Core\Buffer.cs" />
+    <Compile Include="Core\Command\AsyncCommandBase.cs" />
     <Compile Include="Core\Command\BaseCommand.cs" />
+    <Compile Include="Core\Command\IAsyncCommand.cs" />
     <Compile Include="Core\Command\RelayCommand.cs" />
-    <Compile Include="Core\Command\RelayCommand`1.cs" />
     <Compile Include="Core\Components\Behaviors\ControlSetFocusBehavior.cs" />
     <Compile Include="Core\Components\Behaviors\LongListSelectorLoadBehavior.cs" />
-    <Compile Include="Core\Components\Behaviors\LongListSelectorSelectBehavior.cs" />
     <Compile Include="Core\Components\Behaviors\ListViewLoadBehavior.cs" />
     <Compile Include="Core\Components\Behaviors\ListViewSelectBehavior.cs" />
     <Compile Include="Core\Components\Behaviors\MapCenterChangedEventArgs.cs" />
@@ -270,25 +295,34 @@
     <Compile Include="Core\Components\Extensions\TextBlockExtensions.cs" />
     <Compile Include="Core\Components\Extensions\UIElementExtensions.cs" />
     <Compile Include="Core\Components\UIElementHelper.cs" />
-    <Compile Include="Core\Constants\PhoneStateKeys.cs" />
     <Compile Include="Core\Context\FrameNavigationContext.cs" />
     <Compile Include="Core\Context\IFrameNavigationContext.cs" />
-    <Compile Include="Core\Controls\ActionImageButton.cs" />
+    <Compile Include="Core\Context\INavigationContext.cs" />
+    <Compile Include="Core\Context\NavigationContext.cs" />
+    <Compile Include="Core\Context\NavigationParameter.cs" />
+    <Compile Include="Core\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Core\Converters\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="Media\Converters\PercentageToPointConverter.cs" />
+    <Compile Include="Media\Converters\PercentageToLargeArcConverter.cs" />
     <Compile Include="Core\Controls\ActionRoundButton.cs" />
+    <Compile Include="Core\Controls\ActionImageButton.cs" />
     <Compile Include="Core\Controls\ActionRoundRadioButton.cs" />
     <Compile Include="Core\Controls\CircleSegment.cs" />
-    <Compile Include="Core\Controls\ExpandablePanel.cs" />
     <Compile Include="Core\Controls\ExpandableTextBlock.cs" />
-    <Compile Include="Core\Controls\FlipViewer\DragState.cs" />
-    <Compile Include="Core\Controls\FlipViewer\FlipViewer.cs" />
     <Compile Include="Core\Controls\FlipViewer\FlipViewerDisplayedElementType.cs" />
     <Compile Include="Core\Controls\FlipViewer\FlipViewerInitiallyDisplayedElementType.cs" />
     <Compile Include="Core\Controls\FlipViewer\FlipViewerItem.cs" />
     <Compile Include="Core\Controls\FlipViewer\FlipViewerItemDisplayedEventArgs.cs" />
-    <Compile Include="Core\Controls\Flyout\Flyout.cs" />
-    <Compile Include="Core\Controls\Flyout\FlyoutBase.cs" />
-    <Compile Include="Core\Controls\Flyout\FlyoutBehavior.cs" />
-    <Compile Include="Core\Controls\Flyout\FlyoutCollection.cs" />
+    <Compile Include="Core\Controls\FlipViewer\DragState.cs" />
+    <Compile Include="Core\Controls\FlipViewer\FlipViewer.cs" />
+    <Compile Include="Core\Controls\ExpandablePanel.cs" />
+    <Compile Include="Toolkit\Controls\FlipView.cs" />
+    <Compile Include="Toolkit\Controls\FlipViewItem.cs" />
+    <Compile Include="Core\Controls\ImagePlaceholder.cs" />
+    <Compile Include="Core\Controls\WrapPanel.cs" />
+    <Compile Include="Core\Controls\Flyout\FlyoutCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Core\Controls\Flyout\FlyoutDialog.xaml.cs">
       <DependentUpon>FlyoutDialog.xaml</DependentUpon>
     </Compile>
@@ -407,6 +441,7 @@
     <Compile Include="Model\Explore\ExploreMapClusterType.cs" />
     <Compile Include="Model\Profile\ProfileType.cs" />
     <Compile Include="Model\QuickAccess\QuickAccessMode.cs" />
+    <Compile Include="Mtg\Converters\RatingToStarsConverter.cs" />
     <Compile Include="Mtg\Commands\NowPlayingCommand.cs" />
     <Compile Include="Mtg\Commands\OpenImageCommand.cs" />
     <Compile Include="Mtg\Commands\OpenQrCodeScannerCommand.cs" />
@@ -420,6 +455,7 @@
     <Compile Include="Mtg\Components\Enums\FlyoutSearchActivationMode.cs" />
     <Compile Include="Mtg\Components\Enums\FlyoutSearchCloseMode.cs" />
     <Compile Include="Mtg\Components\Enums\FlyoutSearchNavigationMode.cs" />
+    <Compile Include="Mtg\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Mtg\Components\Tasks\BarcodeScannerTask.cs" />
     <Compile Include="Mtg\Components\Tasks\BaseSearchTask.cs" />
     <Compile Include="Mtg\Components\Tasks\NumpadSearchTask.cs" />
@@ -701,8 +737,6 @@
     <Compile Include="TemplateSelectors\Explore\ExploreLoadResultTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\PlayerActionSelector.cs" />
     <Compile Include="TemplateSelectors\QuickAccess\QuickAccessTemplateSelector.cs" />
-    <Compile Include="Toolkit\Controls\FlipView.cs" />
-    <Compile Include="Toolkit\Controls\FlipViewItem.cs" />
     <Compile Include="Toolkit\Controls\InternalUtils.cs" />
     <Compile Include="Toolkit\Controls\Maps\CollectionChangeListener`1.cs" />
     <Compile Include="Toolkit\Controls\Maps\DependencyObjectCollection.cs" />
@@ -759,6 +793,7 @@
     <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Movie.cs" />
     <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkListItemViewModel.cs" />
     <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkListViewModel.cs" />
     <Compile Include="ViewModels\Profile\Bookmark\ProfileBookmarkTabViewModel.cs" />
@@ -950,10 +985,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Common\Controls\PhoneTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Common\Controls\PurchaseFlyoutDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -971,10 +1002,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LongListSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PhoneTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1295,14 +1322,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <!--SDKReference Include="Windows.Foundation.UniversalApiContract, Version=10.0.15063.0">
-      <Name>Windows.Foundation.UniversalApiContract</Name>
-    </SDKReference-->
     <SDKReference Include="WindowsMobile, Version=10.0.15063.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Uwp" Version="3.0.0" />
     <PackageReference Include="Caliburn.Micro">
       <Version>3.2.0</Version>
     </PackageReference>

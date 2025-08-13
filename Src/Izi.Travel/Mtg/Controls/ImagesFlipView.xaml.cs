@@ -1,17 +1,17 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Controls.ImagesFlipView
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// ********************************************************************
+// Type: Izi.Travel.Mtg.Controls.ImagesFlipView
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Business.Entities.Media;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Media.Provider;
-using Izi.Travel.Shell.Media.ViewModels;
-using Izi.Travel.Shell.Toolkit.Controls;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Media.Provider;
+using Izi.Travel.Media.ViewModels;
+using Izi.Travel.Toolkit.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ using Windows.UI.Xaml;
 using Izi.Travel.Utility.Extensions;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Controls
+namespace Izi.Travel.Mtg.Controls
 {
   public partial class ImagesFlipView : UserControl
   {
@@ -74,7 +74,7 @@ namespace Izi.Travel.Shell.Mtg.Controls
       addedItem.IsSelected = true;
     }
 
-    private void Image_OnTap(object sender, GestureEventArgs e)
+    private void Image_OnTapped(object sender, TappedRoutedEventArgs e)
     {
       if (!(this.FlipView.SelectedItem is ImagesFlipViewItem selectedItem))
         return;
@@ -89,6 +89,9 @@ namespace Izi.Travel.Shell.Mtg.Controls
       MediaPlayerDataProvider.Instance.MediaDataUid = selectedItem.Uid;
       ShellServiceFacade.NavigationService.UriFor<MediaPlayerPartViewModel>().WithParam<MediaFormat>((Expression<Func<MediaPlayerPartViewModel, MediaFormat>>) 
           (x => x.MediaFormat), MediaFormat.Image).Navigate();
+      
+      // Mark the event as handled to prevent it from bubbling up
+      e.Handled = true;
     }
 
   

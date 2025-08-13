@@ -1,8 +1,8 @@
 // ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.QuickAccess.QuickAccessViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.QuickAccess.QuickAccessViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
@@ -12,16 +12,16 @@ using Izi.Travel.Business.Extensions;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services;
 using Izi.Travel.Business.Services.Contract;
-using Izi.Travel.Shell.Common.Model;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Mtg.Components.Enums;
-using Izi.Travel.Shell.Mtg.Components.Tasks;
-using Izi.Travel.Shell.Mtg.Model;
-using Izi.Travel.Shell.Mtg.ViewModels.Common;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Numpad;
-using Izi.Travel.Shell.ViewModels.QuickAccess.Items;
+using Izi.Travel.Common.Model;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Mtg.Components.Enums;
+using Izi.Travel.Mtg.Components.Tasks;
+using Izi.Travel.Mtg.Model;
+using Izi.Travel.Mtg.ViewModels.Common;
+using Izi.Travel.Mtg.ViewModels.Common.Numpad;
+using Izi.Travel.ViewModels.QuickAccess.Items;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +33,7 @@ using Windows.Foundation;
 using System.Windows.Input;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.QuickAccess
+namespace Izi.Travel.ViewModels.QuickAccess
 {
   public class QuickAccessViewModel : 
     Screen,
@@ -55,11 +55,11 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess
     private QuickAccessBaseItemViewModel _item;
     private QuickAccessInfoItemViewModel _itemInfo;
     private QuickAccessPlayerItemViewModel _playItem;
-    private RelayCommand _qrCodeScannerCommand;
-    private RelayCommand _showNumpadCommand;
-    private RelayCommand _forwardCommand;
-    private RelayCommand _backwardCommand;
-    private RelayCommand _nowPlayingCommand;
+    private IAsyncCommand _qrCodeScannerCommand;
+    private IAsyncCommand _showNumpadCommand;
+    private IAsyncCommand _forwardCommand;
+    private IAsyncCommand _backwardCommand;
+    private IAsyncCommand _nowPlayingCommand;
 
     public string ImageUrl => "/Assets/Icons/tab.nowplaying.png";
 
@@ -133,111 +133,112 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess
       this.Properties = screenProperties;
     }
 
-    public RelayCommand QrCodeScannerCommand
+    public IAsyncCommand QrCodeScannerCommand
     {
       get
       {
-        return this._qrCodeScannerCommand ?? (this._qrCodeScannerCommand = new RelayCommand(new Action<object>(this.ExecuteQrCodeScannerCommand)));
+        return this._qrCodeScannerCommand ?? (this._qrCodeScannerCommand = new AsyncCommand(
+          () => 
+          {
+            BarcodeScannerTask barcodeScannerTask = new BarcodeScannerTask();
+            barcodeScannerTask.ParentScreen = (IScreen) this;
+            barcodeScannerTask.ActivationMode = FlyoutSearchActivationMode.None;
+            barcodeScannerTask.NavigationMode = FlyoutSearchNavigationMode.None;
+            barcodeScannerTask.CloseMode = FlyoutSearchCloseMode.Handler;
+            barcodeScannerTask.Show();
+            return Task.CompletedTask;
+          },
+          () => true));
       }
     }
 
-    private void ExecuteQrCodeScannerCommand(object parameter)
-    {
-      BarcodeScannerTask barcodeScannerTask = new BarcodeScannerTask();
-      barcodeScannerTask.ParentScreen = (IScreen) this;
-      barcodeScannerTask.ActivationMode = FlyoutSearchActivationMode.None;
-      barcodeScannerTask.NavigationMode = FlyoutSearchNavigationMode.None;
-      barcodeScannerTask.CloseMode = FlyoutSearchCloseMode.Handler;
-      barcodeScannerTask.Show();
-    }
-
-    public RelayCommand ShowNumpadCommand
+    public IAsyncCommand ShowNumpadCommand
     {
       get
       {
-        return this._showNumpadCommand ?? (this._showNumpadCommand = new RelayCommand(new Action<object>(this.ExecuteShowNumpadCommand), new Func<object, bool>(this.CanExecutedShowNumpadCommand)));
+        return this._showNumpadCommand ?? (this._showNumpadCommand = new AsyncCommand(
+          (parameter) => 
+          {
+            if (!(this.Item is QuickAccessPlayerItemViewModel playerItemViewModel) || playerItemViewModel.MtgObjectParent == null)
+              return Task.CompletedTask;
+              
+            NumpadSearchTask numpadSearchTask = new NumpadSearchTask();
+            numpadSearchTask.ParentScreen = (IScreen) this;
+            numpadSearchTask.ParentUid = playerItemViewModel.MtgObjectParent.Uid;
+            numpadSearchTask.ParentType = playerItemViewModel.MtgObjectParent.Type;
+            numpadSearchTask.ParentLanguage = playerItemViewModel.Language;
+            numpadSearchTask.ActivationMode = FlyoutSearchActivationMode.None;
+            numpadSearchTask.NavigationMode = FlyoutSearchNavigationMode.None;
+            numpadSearchTask.CloseMode = FlyoutSearchCloseMode.Handler;
+            numpadSearchTask.Show();
+            return Task.CompletedTask;
+          },
+          () => 
+          {
+            if (this.IsDataLoading || !(this.Item is QuickAccessPlayerItemViewModel playerItemViewModel) || playerItemViewModel.MtgObjectParent == null)
+              return false;
+            return playerItemViewModel.MtgObjectParent.Type == MtgObjectType.Museum || 
+                   playerItemViewModel.MtgObjectParent.Type == MtgObjectType.Collection;
+          }));
       }
     }
 
-    private bool CanExecutedShowNumpadCommand(object parameter)
-    {
-      if (this.IsDataLoading || !(this.Item is QuickAccessPlayerItemViewModel playerItemViewModel) || playerItemViewModel.MtgObjectParent == null)
-        return false;
-      return playerItemViewModel.MtgObjectParent.Type == MtgObjectType.Museum || playerItemViewModel.MtgObjectParent.Type == MtgObjectType.Collection;
-    }
-
-    private void ExecuteShowNumpadCommand(object parameter)
-    {
-      if (!(this.Item is QuickAccessPlayerItemViewModel playerItemViewModel) || playerItemViewModel.MtgObjectParent == null)
-        return;
-      NumpadSearchTask numpadSearchTask = new NumpadSearchTask();
-      numpadSearchTask.ParentScreen = (IScreen) this;
-      numpadSearchTask.ParentUid = playerItemViewModel.MtgObjectParent.Uid;
-      numpadSearchTask.ParentType = playerItemViewModel.MtgObjectParent.Type;
-      numpadSearchTask.ParentLanguage = playerItemViewModel.Language;
-      numpadSearchTask.ActivationMode = FlyoutSearchActivationMode.None;
-      numpadSearchTask.NavigationMode = FlyoutSearchNavigationMode.None;
-      numpadSearchTask.CloseMode = FlyoutSearchCloseMode.Handler;
-      numpadSearchTask.Show();
-    }
-
-    public RelayCommand ForwardCommand
+    public IAsyncCommand ForwardCommand
     {
       get
       {
-        return this._forwardCommand ?? (this._forwardCommand = new RelayCommand(new Action<object>(this.ExecuteForwardCommand), new Func<object, bool>(this.CanExecuteForwardCommand)));
+        return this._forwardCommand ?? (this._forwardCommand = new AsyncCommand(
+          (parameter) => 
+          {
+            this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromPlayerItem(this.Item as QuickAccessPlayerItemViewModel, new bool?(true), false));
+            return Task.CompletedTask;
+          },
+          () => !this.IsDataLoading && this.Item is QuickAccessPlayerItemViewModel playerItemViewModel && playerItemViewModel.HasNext));
       }
     }
 
-    private bool CanExecuteForwardCommand(object parameter)
-    {
-      return !this.IsDataLoading && this.Item is QuickAccessPlayerItemViewModel playerItemViewModel && playerItemViewModel.HasNext;
-    }
-
-    private void ExecuteForwardCommand(object parameter)
-    {
-      this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromPlayerItem(this.Item as QuickAccessPlayerItemViewModel, new bool?(true), false));
-    }
-
-    public RelayCommand BackwardCommand
+    public IAsyncCommand BackwardCommand
     {
       get
       {
-        return this._backwardCommand ?? (this._backwardCommand = new RelayCommand(new Action<object>(this.ExecuteBackwardCommand), new Func<object, bool>(this.CanExecuteBackwardCommand)));
+        return this._backwardCommand ?? (this._backwardCommand = new AsyncCommand(
+          (parameter) => 
+          {
+            this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromPlayerItem(this.Item as QuickAccessPlayerItemViewModel, new bool?(false), false));
+            return Task.CompletedTask;
+          },
+          () => !this.IsDataLoading && this.Item is QuickAccessPlayerItemViewModel playerItemViewModel && playerItemViewModel.HasPrevious));
       }
     }
 
-    private bool CanExecuteBackwardCommand(object parameter)
-    {
-      return !this.IsDataLoading && this.Item is QuickAccessPlayerItemViewModel playerItemViewModel && playerItemViewModel.HasPrevious;
-    }
-
-    private void ExecuteBackwardCommand(object parameter)
-    {
-      this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromPlayerItem(this.Item as QuickAccessPlayerItemViewModel, new bool?(false), false));
-    }
-
-    public RelayCommand NowPlayingCommand
+    public IAsyncCommand NowPlayingCommand
     {
       get
       {
-        return this._nowPlayingCommand ?? (this._nowPlayingCommand = new RelayCommand(new Action<object>(this.ExecuteNowPlayingCommand), new Func<object, bool>(this.CanExecuteNowPlayingCommand)));
+        return this._nowPlayingCommand ?? (this._nowPlayingCommand = new AsyncCommand(
+          async (parameter) => 
+          {
+            if (this.Item is QuickAccessPlayerItemViewModel playerItemViewModel && 
+                ServiceFacade.AudioService.IsNowPlaying(playerItemViewModel.Uid, playerItemViewModel.Language))
+            {
+              await Task.Run(() => this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromTrackInfoCurrent(new bool?(), false)));
+            }
+            else
+            {
+              await Task.Run(() => this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromPlayerItem(this._playItem, new bool?(), false)));
+            }
+          },
+          () => 
+          {
+            if (this.IsDataLoading)
+              return false;
+              
+            AudioTrackInfo currentTrackInfo = ServiceFacade.AudioService.GetCurrentTrackInfo();
+            return currentTrackInfo != null && 
+                   (!(this.Item is QuickAccessPlayerItemViewModel playerItemViewModel) || 
+                    !(playerItemViewModel.Key == currentTrackInfo.Key));
+          }));
       }
-    }
-
-    private bool CanExecuteNowPlayingCommand(object parameter)
-    {
-      if (this.IsDataLoading)
-        return false;
-      AudioTrackInfo currentTrackInfo = ServiceFacade.AudioService.GetCurrentTrackInfo();
-      return currentTrackInfo != null && (!(this.Item is QuickAccessPlayerItemViewModel playerItemViewModel) || !(playerItemViewModel.Key == currentTrackInfo.Key));
-    }
-
-    private void ExecuteNowPlayingCommand(object parameter)
-    {
-      if (this.Item is QuickAccessPlayerItemViewModel playerItemViewModel && ServiceFacade.AudioService.IsNowPlaying(playerItemViewModel.Uid, playerItemViewModel.Language))
-        return;
-      this.LoadDataAsync(QuickAccessViewModel.LoadDataQuery.FromTrackInfoCurrent(new bool?(), false));
     }
 
     protected override void OnActivate()
@@ -301,7 +302,7 @@ namespace Izi.Travel.Shell.ViewModels.QuickAccess
         if (query.AutoPlay && playerItemViewModel != null && playerItemViewModel.AudioViewModel.HasAudio && playerItemViewModel.AudioViewModel.PlayCommand.CanExecute((object) null))
         {
           this._playItem = playerItemViewModel;
-          playerItemViewModel.AudioViewModel.PlayCommand.Execute((object) null);
+          ((ICommand)playerItemViewModel.AudioViewModel.PlayCommand).Execute((object) null);
         }
       }
     }

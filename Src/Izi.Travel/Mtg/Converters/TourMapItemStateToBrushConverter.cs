@@ -1,16 +1,16 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Converters.TourMapItemStateToBrushConverter
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.Converters.TourMapItemStateToBrushConverter
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Mtg.ViewModels.Tour.Map;
+using Izi.Travel.Mtg.ViewModels.Tour.Map;
 using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Converters
+namespace Izi.Travel.Mtg.Converters
 {
   public class TourMapItemStateToBrushConverter : IValueConverter
   {

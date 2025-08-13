@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 //using System.Windows.Markup;
 
 #nullable disable
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
   public class CultureAwarePage : Page
   {

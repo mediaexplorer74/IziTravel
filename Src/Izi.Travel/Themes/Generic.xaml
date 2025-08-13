@@ -1,17 +1,32 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Izi.Travel.Shell.Core.Controls"
-    xmlns:tiles="using:Izi.Travel.Shell.Core.Controls.Tiles"
-    xmlns:flipViewer="using:Izi.Travel.Shell.Core.Controls.FlipViewer"
-    xmlns:mtgcontrols="using:Izi.Travel.Shell.Mtg.Controls"
-    xmlns:corecontrols="using:Izi.Travel.Shell.Core.Controls"
-    xmlns:mediacontrols="using:Izi.Travel.Shell.Media.Controls"
-    xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
+    xmlns:controls="using:Izi.Travel.Core.Controls"
+    xmlns:tiles="using:Izi.Travel.Core.Controls.Tiles"
+    xmlns:flipViewer="using:Izi.Travel.Core.Controls.FlipViewer"
+    xmlns:mtgcontrols="using:Izi.Travel.Mtg.Controls"
+    xmlns:corecontrols="using:Izi.Travel.Core.Controls"
+    xmlns:mediacontrols="using:Izi.Travel.Media.Controls"
+    xmlns:commoncontrols="using:Izi.Travel.Common.Controls"
     xmlns:toolkitcontrols="using:Izi.Travel.Toolkit.Controls"
-    xmlns:rating="using:Izi.Travel.Shell.Controls"
-    xmlns:local="using:Izi.Travel.Shell.Controls">
+    xmlns:rating="using:Izi.Travel.Controls"
+    xmlns:local="using:Izi.Travel.Controls">
 
+    <Color x:Key="IziTravelDarkColor">#FF293640</Color>
+    <Color x:Key="IziTravelLightColor">#FFFFFFFF</Color>
+    <Color x:Key="IziTravelBlueColor">#FF0D5A99</Color>
+    <Color x:Key="IziTravelDarkBlueColor">#FF41586b</Color>
+    <Color x:Key="IziTravelLightBlueColor">#FFA6BFD3</Color>
+    <Color x:Key="IziTravelDarkGrayColor">#FF8F9295</Color>
+    <Color x:Key="IziTravelGrayColor">#FFB2BABF</Color>
+    <Color x:Key="IziTravelLightGrayColor">#FFEEEEEF</Color>
+    <Color x:Key="IziTravelVioletColor">#FFD60D46</Color>
+    <Color x:Key="IziTravelGreenColor">#FF1AC480</Color>
+    <Color x:Key="IziTravelQuizBlueColor">#FF1295FF</Color>
+
+
+    <!-- All brushes now use direct color values to prevent resource loading issues -->
+    
     <Style TargetType="corecontrols:ViewboxTextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="MaxFontSize" Value="24" />
@@ -24,7 +39,7 @@
                                Text="{TemplateBinding Text}"
                                TextAlignment="{TemplateBinding TextAlignment}" 
                                TextWrapping="{TemplateBinding TextWrapping}"
-                               TextTrimming="{TemplateBinding TextTrimming}" />
+                              />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -37,7 +52,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="UseOptimizedManipulationRouting" Value="False"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="FlipViewItem">
@@ -83,7 +98,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:PhoneSlider" x:Key="PhoneSliderStyle">
+    <Style TargetType="toolkitcontrols:PhoneSlider" x:Key="PhoneSliderStyle">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Maximum" Value="10"/>
@@ -131,7 +146,8 @@
                             <Rectangle Height="12" IsHitTestVisible="False" Margin="0,22,0,50" Fill="Transparent">
                                 <Rectangle.Resources>
                                     <Style TargetType="Rectangle">
-                                        <Setter Property="Fill" Value="{TemplateBinding Foreground}" />
+                                        <!--Value="{TemplateBinding Foreground}"-->
+                                            <Setter Property="Fill" Value="Cyan" />
                                         <Setter Property="Opacity" Value="0.3" />
                                     </Style>
                                 </Rectangle.Resources>
@@ -155,7 +171,8 @@
                             <Rectangle Width="12" IsHitTestVisible="False" Margin="18,0,18,0" Fill="Transparent">
                                 <Rectangle.Resources>
                                     <Style TargetType="Rectangle">
-                                        <Setter Property="Fill" Value="{TemplateBinding Foreground}" />
+                                        <!-- Value="{TemplateBinding Foreground}" -->
+                                            <Setter Property="Fill" Value="Cyan" />
                                         <Setter Property="Opacity" Value="0.3" />
                                     </Style>
                                 </Rectangle.Resources>
@@ -413,7 +430,7 @@
                                 Grid.Row="0"
                                 Background="{StaticResource ControlPanelBackgroundBrush}">
                             <TextBlock Text="{TemplateBinding Title}"
-                                    FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                                    
                                     FontSize="{StaticResource IziTravelFontSizeNormal}"
                                     Foreground="{StaticResource IziTravelLightBrush}"
                                     HorizontalAlignment="Left" 
@@ -510,7 +527,7 @@
                                    Text="{TemplateBinding Number}" 
                                    Foreground="{StaticResource IziTravelBlueBrush}" 
                                    FontSize="22"
-                                   FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                                    
                                    Margin="0,12,12,12" 
                                    Visibility="{Binding ShowNumber, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}" />
 
@@ -522,7 +539,7 @@
                                        Foreground="{StaticResource IziTravelDarkBrush}" 
                                        FontSize="22"
                                        MaxHeight="60"
-                                       FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                                        
                                        Margin="0,0,12,0"
                                        TextWrapping="Wrap" />
 
@@ -563,7 +580,7 @@
                                    Text="{TemplateBinding Number}" 
                                    Foreground="{StaticResource IziTravelBlueBrush}" 
                                    FontSize="22"
-                                   FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                                    
                                    Margin="0,12,12,12" 
                                    Visibility="{Binding ShowNumber, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}" />
 
@@ -572,7 +589,7 @@
                                    Text="{TemplateBinding Title}"
                                    Foreground="{StaticResource IziTravelDarkBrush}"
                                    FontSize="22"
-                                   FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                                   
                                    Margin="0,12,12,-1"
                                    TextWrapping="Wrap"
                                    TextTrimming="WordEllipsis" />
@@ -688,7 +705,7 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Foreground" Value="{StaticResource IziTravelDarkBrush}" />
         <Setter Property="FontSize" Value="{StaticResource IziTravelFontSizeNormal}" />
-        <Setter Property="FontFamily" Value="{StaticResource IziTravelFontFamilySegoeNormal}" />
+    
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TextButton">
@@ -718,52 +735,24 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:LabeledRating">
-        <Setter Property="FontSize" Value="{StaticResource IziTravelFontSizeSmall}" />
-        <Setter Property="Foreground" Value="{StaticResource IziTravelDarkGrayBrush}" />
-        <Setter Property="FilledItemBackground" Value="{StaticResource IziTravelDarkBrush}" />
-        <Setter Property="UnfilledItemBackground" Value="{StaticResource IziTravelGrayBrush}" />
-        <Setter Property="ItemMargin" Value="3" />
-        <Setter Property="ItemsWidth" Value="115" />
-        <Setter Property="ItemsHeight" Value="22" />
-        <Setter Property="LabelMargin" Value="8,-1,15,0" />
+
+
+    
+    <Style TargetType="controls:ImagePlaceholder">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:LabeledRating">
-                    <Border Background="{TemplateBinding Background}" 
-                            Padding="{TemplateBinding Padding}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <rating:RatingControl x:Name="PartRating"
-                                                Grid.Column="0"
-                                                Margin="-3,1,0,3"
-                                                Background="Transparent"
-                                                Height="{TemplateBinding ItemsHeight}"
-                                                Width="{TemplateBinding ItemsWidth}"
-                                                Value="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource RoundToHalfConverter}, Mode=OneWay}"
-                                                IsReadOnly="True"
-                                                VerticalAlignment="Top"
-                                                HorizontalAlignment="Left"
-                                                FilledBrush="{StaticResource IziTravelDarkBrush}"
-                                                UnfilledBrush="{StaticResource IziTravelGrayBrush}"
-                                                Maximum="5" />
-                            <TextBlock Grid.Column="1"
-                                       Margin="{TemplateBinding LabelMargin}"
-                                       Text="{TemplateBinding Label}"
-                                       VerticalAlignment="Top"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" />
-                        </Grid>
-                    </Border>
+                <ControlTemplate TargetType="controls:ImagePlaceholder">
+                    <Grid>
+                        <Image Source="{TemplateBinding Source}"
+                               Stretch="{TemplateBinding Stretch}"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    
     <Style TargetType="controls:ProgressOverlay">
         <Setter Property="Template">
             <Setter.Value>
@@ -834,7 +823,6 @@
                                    TextTrimming="{TemplateBinding TextTrimming}"
                                    Foreground="{TemplateBinding Foreground}"
                                    Text="{TemplateBinding Content}"
-                                   FontFamily="{TemplateBinding FontFamily}" 
                                    FontSize="{TemplateBinding FontSize}" />
                     </Grid>
                 </ControlTemplate>
@@ -873,9 +861,7 @@
                             <ContentControl.RenderTransform>
                                 <CompositeTransform ScaleX="1" ScaleY="1"/>
                             </ContentControl.RenderTransform>
-                            <ContentControl.RenderTransformOrigin>
-                                <Point X="0.5" Y="0.5" />
-                            </ContentControl.RenderTransformOrigin>
+                            <ContentControl.RenderTransformOrigin>0.5,0.5</ContentControl.RenderTransformOrigin>
                         </ContentControl>
                         <ContentControl Name="PartZoomedInContent" 
                                         Content="{TemplateBinding ZoomedInView}" 
@@ -884,9 +870,7 @@
                             <ContentControl.RenderTransform>
                                 <CompositeTransform ScaleX="1" ScaleY="1"/>
                             </ContentControl.RenderTransform>
-                            <ContentControl.RenderTransformOrigin>
-                                <Point X="0.5" Y="0.5" />
-                            </ContentControl.RenderTransformOrigin>
+                            <ContentControl.RenderTransformOrigin>0.5,0.5</ContentControl.RenderTransformOrigin>
                         </ContentControl>
                     </Grid>
                 </ControlTemplate>

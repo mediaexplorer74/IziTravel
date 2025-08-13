@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.DataModels
+namespace Izi.Travel.AppServices.DataModels
 {
   public class NewsItemDataModel : PropertyChangedBase
   {

@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Izi.Travel.Shell.Core.Services
+namespace Izi.Travel.Core.Services
 {
     /// <summary>
     /// Interface for phone-specific services

@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Izi.Travel.Shell.Controls;
+using Izi.Travel.Controls;
 
-namespace Izi.Travel.Shell.Views.Featured
+namespace Izi.Travel.Views.Featured
 {
     public sealed partial class FeaturedPartView : Page
     {

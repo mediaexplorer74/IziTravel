@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   public interface ILinqTree<T>
   {

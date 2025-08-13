@@ -1,8 +1,8 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Museum.Map.MuseumMapPartViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Mtg.ViewModels.Museum.Map.MuseumMapPartViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
@@ -10,17 +10,17 @@ using Izi.Travel.Business.Entities.Filters;
 using Izi.Travel.Business.Extensions;
 using Izi.Travel.Business.Helper;
 using Izi.Travel.Business.Services;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Mtg.Commands;
-using Izi.Travel.Shell.Mtg.ViewModels.Common.Map;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Mtg.Commands;
+using Izi.Travel.Mtg.ViewModels.Common.Map;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Museum.Map
+namespace Izi.Travel.Mtg.ViewModels.Museum.Map
 {
   public class MuseumMapPartViewModel : BaseMapViewModel
   {

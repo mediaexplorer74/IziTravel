@@ -1,6 +1,6 @@
-﻿using Izi.Travel.Shell.Mtg.ViewModels.Museum.Map;
+﻿using Izi.Travel.Mtg.ViewModels.Museum.Map;
 
-namespace Izi.Travel.Shell.Mtg.Views.Museum.Map
+namespace Izi.Travel.Mtg.Views.Museum.Map
 {
     interface IMapItem
     {

@@ -1,15 +1,15 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Helpers.TourHelper
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Mtg.Helpers.TourHelper
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
 using Izi.Travel.Geofencing.Helpers;
 using Izi.Travel.Geofencing.Primitives;
 using Izi.Travel.Helpers;
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Core.Themes;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Core.Themes;
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.Helpers
+namespace Izi.Travel.Mtg.Helpers
 {
   public static class TourHelper
   {

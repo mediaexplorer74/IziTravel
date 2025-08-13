@@ -1,5 +1,5 @@
-<UserControl
-    x:Class="Izi.Travel.Shell.Controls.PhoneTextBox"
+﻿<UserControl
+    x:Class="Izi.Travel.Controls.PhoneTextBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -241,9 +241,9 @@
     
     <TextBox x:Name="TextBox"
              Style="{StaticResource PhoneTextBoxStyle}"
-             Text="{x:Bind Text, Mode=TwoWay}"
-             PlaceholderText="{x:Bind PlaceholderText, Mode=OneWay}"
-             InputScope="{x:Bind InputScope}"
+             Text="TEXT"
+             PlaceholderText=""
+             InputScope="{Binding InputScope}"
              IsSpellCheckEnabled="False"
              IsTextPredictionEnabled="False"
              TextWrapping="NoWrap"

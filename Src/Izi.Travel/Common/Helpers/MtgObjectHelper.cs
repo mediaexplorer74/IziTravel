@@ -1,15 +1,15 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Common.Helpers.MtgObjectHelper
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Common.Helpers.MtgObjectHelper
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Core.Resources;
+using Izi.Travel.Core.Resources;
 using System.Text;
 
 #nullable disable
-namespace Izi.Travel.Shell.Common.Helpers
+namespace Izi.Travel.Common.Helpers
 {
   public static class MtgObjectHelper
   {

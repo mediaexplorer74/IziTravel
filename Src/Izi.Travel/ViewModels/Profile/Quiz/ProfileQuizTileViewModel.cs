@@ -1,14 +1,14 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Profile.Quiz.ProfileQuizTileViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.ViewModels.Profile.Quiz.ProfileQuizTileViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Resources;
-using Izi.Travel.Shell.Model.Profile;
+using Izi.Travel.Core.Resources;
+using Izi.Travel.Model.Profile;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Profile.Quiz
+namespace Izi.Travel.ViewModels.Profile.Quiz
 {
   public class ProfileQuizTileViewModel : ProfileTileViewModel
   {

@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     public class LongListSelector : ListView
     {

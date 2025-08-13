@@ -1,4 +1,4 @@
-// ********************************************************************
+﻿// ********************************************************************
 // MapControlHelper.cs
 // Helper class for initializing and managing the MapControl in UWP
 
@@ -7,7 +7,7 @@ using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI.Xaml.Controls.Maps;
 
-namespace Izi.Travel.Shell.Toolkit.Controls.Maps
+namespace Izi.Travel.Toolkit.Controls.Maps
 {
     public static class MapControlHelper
     {

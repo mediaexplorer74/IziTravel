@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="Izi.Travel.Shell.Mtg.Views.Common.List.ChildrenListView"
+<UserControl x:Class="Izi.Travel.Mtg.Views.Common.List.ChildrenListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"             
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
-             xmlns:controls="using:Izi.Travel.Shell.Mtg.Controls"
-             xmlns:templateSelectors="using:Izi.Travel.Shell.Mtg.TemplateSelectors"
-             xmlns:exhibitlist="using:Izi.Travel.Shell.Mtg.ViewModels.Exhibit.List"
-             xmlns:talist="using:Izi.Travel.Shell.Mtg.ViewModels.TouristAttraction.List"
+             xmlns:behaviors="using:Izi.Travel.Core.Components.Behaviors"
+             xmlns:controls="using:Izi.Travel.Mtg.Controls"
+             xmlns:templateSelectors="using:Izi.Travel.Mtg.TemplateSelectors"
+             xmlns:exhibitlist="using:Izi.Travel.Mtg.ViewModels.Exhibit.List"
+             xmlns:talist="using:Izi.Travel.Mtg.ViewModels.TouristAttraction.List"
              mc:Ignorable="d">
     
 
@@ -68,8 +68,8 @@
         
         <TextBlock Grid.Row="1" 
                    Text="{Binding LocalizedResources.ActionLoading, Source={StaticResource LocalizedStrings}}" 
-                   FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
-                   FontSize="{StaticResource IziTravelFontSizeMedium}"
+                   
+                   FontSize="26}"
                    Foreground="{StaticResource IziTravelDarkGrayBrush}"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Left"
@@ -99,14 +99,14 @@
         </ListView>
         <StackPanel Grid.Row="1">
             <TextBlock Text="{Binding LocalizedResources.SearchNoResults, Source={StaticResource LocalizedStrings}}" 
-                       FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
-                       FontSize="{StaticResource IziTravelFontSizeMedium}"
+                       
+                       FontSize="26"
                        Opacity="0.5"
                        VerticalAlignment="Top"
                        Visibility="{Binding NoResults, Converter={StaticResource BoolToVisibilityConverter}}" />
             <TextBlock Text="{Binding LocalizedResources.MessageListIsEmpty, Source={StaticResource LocalizedStrings}}" 
-                       FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
-                       FontSize="{StaticResource IziTravelFontSizeMedium}"
+                       
+                       FontSize="26"
                        Opacity="0.5"
                        VerticalAlignment="Top"  
                        Visibility="{Binding IsListEmpty, Converter={StaticResource BoolToVisibilityConverter}}" />

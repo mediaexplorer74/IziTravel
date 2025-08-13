@@ -1,44 +1,59 @@
-﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.Commands.OpenQuizCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
-
 using Caliburn.Micro;
 using Izi.Travel.Business.Entities.Data;
-using Izi.Travel.Shell.Common.Controls;
-using Izi.Travel.Shell.Core.Command;
-using Izi.Travel.Shell.Core.Helpers;
-using Izi.Travel.Shell.Core.Services;
-using Izi.Travel.Shell.Mtg.ViewModels.Quiz;
+using Izi.Travel.Common.Controls;
+using Izi.Travel.Core.Command;
+using Izi.Travel.Core.Helpers;
+using Izi.Travel.Core.Services;
+using Izi.Travel.Mtg.ViewModels.Quiz;
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
-#nullable disable
-namespace Izi.Travel.Shell.Mtg.Commands
+namespace Izi.Travel.Mtg.Commands
 {
-  public class OpenQuizCommand : BaseCommand
-  {
-    private readonly MtgObject _mtgObject;
-    private readonly MtgObject _mtgObjectRoot;
-
-    public bool HasQuiz { get; }
-
-    public OpenQuizCommand(MtgObject mtgObject, MtgObject mtgObjectRoot)
+    /// <summary>
+    /// Command to handle opening a quiz
+    /// </summary>
+    public class OpenQuizCommand : BaseCommand
     {
-      this._mtgObject = mtgObject;
-      this._mtgObjectRoot = mtgObjectRoot;
-      this.HasQuiz = this._mtgObject?.MainContent?.Quiz != null;
-    }
+        private readonly MtgObject _mtgObject;
+        private readonly MtgObject _mtgObjectRoot;
 
-    public override bool CanExecute(object parameter) => this.HasQuiz;
+        /// <summary>
+        /// Gets a value indicating whether the quiz is available
+        /// </summary>
+        public bool HasQuiz { get; }
 
-    public override void Execute(object parameter)
-    {
-      if (!this.HasQuiz || !PurchaseFlyoutDialog.ConditionalShow(this._mtgObjectRoot))
-        return;
-      PhoneStateHelper.SetParameter<MtgObject>("MtgObjectFull", this._mtgObject);
-      ShellServiceFacade.NavigationService.UriFor<QuizPartViewModel>().WithParam<string>((Expression<Func<QuizPartViewModel, string>>) (x => x.Uid), this._mtgObject.Uid).WithParam<string>((Expression<Func<QuizPartViewModel, string>>) (x => x.Language), this._mtgObject.Language).Navigate();
+        /// <summary>
+        /// Initializes a new instance of the OpenQuizCommand class
+        /// </summary>
+        /// <param name="mtgObject">The MTG object containing the quiz</param>
+        /// <param name="mtgObjectRoot">The root MTG object</param>
+        public OpenQuizCommand(MtgObject mtgObject, MtgObject mtgObjectRoot) : base(null)
+        {
+            _mtgObject = mtgObject ?? throw new ArgumentNullException(nameof(mtgObject));
+            _mtgObjectRoot = mtgObjectRoot ?? throw new ArgumentNullException(nameof(mtgObjectRoot));
+            HasQuiz = _mtgObject?.MainContent?.Quiz != null;
+        }
+
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter) => HasQuiz;
+
+        /// <inheritdoc/>
+        protected override Task OnExecuteAsync(object parameter)
+        {
+            if (!HasQuiz || !PurchaseFlyoutDialog.ConditionalShow(_mtgObjectRoot))
+                return Task.CompletedTask;
+
+            PhoneStateHelper.SetParameter("MtgObjectFull", _mtgObject);
+            
+            ShellServiceFacade.NavigationService
+                .UriFor<QuizPartViewModel>()
+                .WithParam(x => x.Uid, _mtgObject.Uid)
+                .WithParam(x => x.Language, _mtgObject.Language)
+                .Navigate();
+
+            return Task.CompletedTask;
+        }
     }
-  }
 }

@@ -1,8 +1,8 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Toolkit.Controls.FlipView
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Toolkit.Controls.FlipView
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 
 using System;
@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
 #nullable disable
-namespace Izi.Travel.Shell.Toolkit.Controls
+namespace Izi.Travel.Toolkit.Controls
 {
   [TemplatePart(Name = "ScrollingHost", Type = typeof (ScrollViewer))]
   [TemplatePart(Name = "ItemsPresenter", Type = typeof (ItemsPresenter))]

@@ -1,8 +1,8 @@
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 #nullable disable
-namespace Izi.Travel.Shell.Media.Views
+namespace Izi.Travel.Media.Views
 {
     public sealed partial class MediaPlayerPartView : Page
     {

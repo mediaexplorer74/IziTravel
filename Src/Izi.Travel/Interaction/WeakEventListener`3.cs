@@ -3,7 +3,7 @@
 using System;
 
 #nullable disable
-namespace Izi.Travel.Shell.Interaction
+namespace Izi.Travel.Interaction
 {
   public class WeakEventListener<TInstance, TSource, TEventArgs> where TInstance : class
   {

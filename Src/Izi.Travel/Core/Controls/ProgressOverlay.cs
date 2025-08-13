@@ -1,17 +1,17 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Controls.ProgressOverlay
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Core.Controls.ProgressOverlay
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Resources;
+using Izi.Travel.Core.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Controls
+namespace Izi.Travel.Core.Controls
 {
   [TemplateVisualState(Name = "Normal", GroupName = "CommonStates")]
   [TemplateVisualState(Name = "Busy", GroupName = "CommonStates")]

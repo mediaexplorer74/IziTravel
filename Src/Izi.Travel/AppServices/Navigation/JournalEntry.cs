@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using Windows.Foundation;
 
-namespace Izi.Travel.Shell.AppServices.Navigation
+namespace Izi.Travel.AppServices.Navigation
 {
     /// <summary>
     /// Represents an entry in the navigation history of a Frame.

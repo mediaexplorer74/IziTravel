@@ -1,26 +1,59 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Command.BaseCommand
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
-// MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using System;
-using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace Izi.Travel.Shell.Core.Command
+namespace Izi.Travel.Core.Command
 {
-    public abstract class BaseCommand : PropertyChangedBase, System.Windows.Input.ICommand
+    /// <summary>
+    /// Base class for all commands in the application
+    /// </summary>
+    public abstract class BaseCommand : AsyncCommandBase, IAsyncCommand, ICommand
     {
-        public abstract bool CanExecute(object parameter);
+        private readonly Func<object, bool> _canExecute;
+        private bool _isExecuting;
 
-        public abstract void Execute(object parameter);
-
-        public void RaiseCanExecuteChanged()
+        /// <summary>
+        /// Initializes a new instance of the BaseCommand class
+        /// </summary>
+        /// <param name="canExecute">Function that determines if the command can execute</param>
+        protected BaseCommand(Func<object, bool> canExecute = null)
         {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            _canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter)
+        {
+            return !_isExecuting && (_canExecute?.Invoke(parameter) ?? true);
+        }
+
+        /// <inheritdoc/>
+        public override async Task ExecuteAsync(object parameter)
+        {
+            if (!CanExecute(parameter))
+                return;
+
+            try
+            {
+                _isExecuting = true;
+                RaiseCanExecuteChanged();
+                
+                await OnExecuteAsync(parameter);
+            }
+            finally
+            {
+                _isExecuting = false;
+                RaiseCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
+        /// Executes the command asynchronously
+        /// </summary>
+        /// <param name="parameter">The parameter for the command</param>
+        /// <returns>A task representing the asynchronous operation</returns>
+        protected abstract Task OnExecuteAsync(object parameter);
     }
 }
 

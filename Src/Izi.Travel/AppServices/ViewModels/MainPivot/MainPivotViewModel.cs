@@ -1,14 +1,14 @@
-// IziTravel.AppServices.ViewModels.MainPivot.MainPivotViewModel
+﻿// IziTravel.AppServices.ViewModels.MainPivot.MainPivotViewModel
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.AppServices.DataModels;
+using Izi.Travel.AppServices.DataModels;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
 #nullable disable
-namespace Izi.Travel.Shell.AppServices.ViewModels.MainPivot
+namespace Izi.Travel.AppServices.ViewModels.MainPivot
 {
   public class MainPivotViewModel : Screen
   {

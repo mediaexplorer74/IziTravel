@@ -17,7 +17,7 @@ using System;
 using System.Diagnostics;
 
 #nullable disable
-namespace Izi.Travel.Shell.Settings.Views.Application
+namespace Izi.Travel.Settings.Views.Application
 {
     public sealed partial class SettingsAppLocationView : Page //PhoneApplicationPage
     {

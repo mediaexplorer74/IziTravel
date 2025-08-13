@@ -1,10 +1,10 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Core.Controls.Flyout.Flyout
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Core.Controls.Flyout.Flyout
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Core.Helpers;
+using Izi.Travel.Core.Helpers;
 using Windows.UI;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
 #nullable disable
-namespace Izi.Travel.Shell.Core.Controls.Flyout
+namespace Izi.Travel.Core.Controls.Flyout
 {
   public class Flyout : FlyoutBase
   {
@@ -33,12 +33,12 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
     private Rectangle _rectangle;
     private Color _systemTrayColor;
         internal FlyoutPlacementMode Placement;
-        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof (Content), typeof (UIElement), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null));
-    public static readonly DependencyProperty OverlayBrushProperty = DependencyProperty.Register(nameof (OverlayBrush), typeof (Brush), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.OnOverlayBrushPropertyChanged)));
-    public static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register(nameof (Background), typeof (Brush), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.OnBackgroundPropertyChanged)));
-    public static readonly DependencyProperty IsFullScreenProperty = DependencyProperty.Register(nameof (IsFullScreen), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) false));
-    public static readonly DependencyProperty CloseOnNavigationProperty = DependencyProperty.Register(nameof (CloseOnNavigation), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) true));
-    public static readonly DependencyProperty HideApplicationBarProperty = DependencyProperty.Register(nameof (HideApplicationBar), typeof (bool), typeof (Izi.Travel.Shell.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) true));
+        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof (Content), typeof (UIElement), typeof (Izi.Travel.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null));
+    public static readonly DependencyProperty OverlayBrushProperty = DependencyProperty.Register(nameof (OverlayBrush), typeof (Brush), typeof (Izi.Travel.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Core.Controls.Flyout.Flyout.OnOverlayBrushPropertyChanged)));
+    public static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register(nameof (Background), typeof (Brush), typeof (Izi.Travel.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) null, new PropertyChangedCallback(Izi.Travel.Core.Controls.Flyout.Flyout.OnBackgroundPropertyChanged)));
+    public static readonly DependencyProperty IsFullScreenProperty = DependencyProperty.Register(nameof (IsFullScreen), typeof (bool), typeof (Izi.Travel.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) false));
+    public static readonly DependencyProperty CloseOnNavigationProperty = DependencyProperty.Register(nameof (CloseOnNavigation), typeof (bool), typeof (Izi.Travel.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) true));
+    public static readonly DependencyProperty HideApplicationBarProperty = DependencyProperty.Register(nameof (HideApplicationBar), typeof (bool), typeof (Izi.Travel.Core.Controls.Flyout.Flyout), new PropertyMetadata((object) true));
 
     private bool IsSystemTrayVisible
     {
@@ -51,38 +51,38 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
 
     public UIElement Content
     {
-      get => (UIElement) this.GetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ContentProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.ContentProperty, (object) value);
+      get => (UIElement) this.GetValue(Izi.Travel.Core.Controls.Flyout.Flyout.ContentProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.Flyout.Flyout.ContentProperty, (object) value);
     }
 
     public Brush OverlayBrush
     {
-      get => (Brush) this.GetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.OverlayBrushProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.OverlayBrushProperty, (object) value);
+      get => (Brush) this.GetValue(Izi.Travel.Core.Controls.Flyout.Flyout.OverlayBrushProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.Flyout.Flyout.OverlayBrushProperty, (object) value);
     }
 
     public Brush Background
     {
-      get => (Brush) this.GetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.BackgroundProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.BackgroundProperty, (object) value);
+      get => (Brush) this.GetValue(Izi.Travel.Core.Controls.Flyout.Flyout.BackgroundProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.Flyout.Flyout.BackgroundProperty, (object) value);
     }
 
     public bool IsFullScreen
     {
-      get => (bool) this.GetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.IsFullScreenProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.IsFullScreenProperty, (object) value);
+      get => (bool) this.GetValue(Izi.Travel.Core.Controls.Flyout.Flyout.IsFullScreenProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.Flyout.Flyout.IsFullScreenProperty, (object) value);
     }
 
     public bool CloseOnNavigation
     {
-      get => (bool) this.GetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.CloseOnNavigationProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.CloseOnNavigationProperty, (object) value);
+      get => (bool) this.GetValue(Izi.Travel.Core.Controls.Flyout.Flyout.CloseOnNavigationProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.Flyout.Flyout.CloseOnNavigationProperty, (object) value);
     }
 
     public bool HideApplicationBar
     {
-      get => (bool) this.GetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.HideApplicationBarProperty);
-      set => this.SetValue(Izi.Travel.Shell.Core.Controls.Flyout.Flyout.HideApplicationBarProperty, (object) value);
+      get => (bool) this.GetValue(Izi.Travel.Core.Controls.Flyout.Flyout.HideApplicationBarProperty);
+      set => this.SetValue(Izi.Travel.Core.Controls.Flyout.Flyout.HideApplicationBarProperty, (object) value);
     }
 
     protected override void ShowImpl()
@@ -195,11 +195,11 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      Izi.Travel.Shell.Core.Controls.Flyout.Flyout flyout1 = d as Izi.Travel.Shell.Core.Controls.Flyout.Flyout;
+      Izi.Travel.Core.Controls.Flyout.Flyout flyout1 = d as Izi.Travel.Core.Controls.Flyout.Flyout;
       SolidColorBrush oldValue = e.OldValue as SolidColorBrush;
       if (e.NewValue is SolidColorBrush newValue && (oldValue == null || newValue.Color != oldValue.Color || newValue.Opacity != oldValue.Opacity))
       {
-        Izi.Travel.Shell.Core.Controls.Flyout.Flyout flyout2 = flyout1;
+        Izi.Travel.Core.Controls.Flyout.Flyout flyout2 = flyout1;
         SolidColorBrush solidColorBrush = new SolidColorBrush(newValue.Color);
         solidColorBrush.Opacity = newValue.Opacity;
         flyout2.Background = (Brush) solidColorBrush;
@@ -213,11 +213,11 @@ namespace Izi.Travel.Shell.Core.Controls.Flyout
       DependencyObject d,
       DependencyPropertyChangedEventArgs e)
     {
-      Izi.Travel.Shell.Core.Controls.Flyout.Flyout flyout1 = d as Izi.Travel.Shell.Core.Controls.Flyout.Flyout;
+      Izi.Travel.Core.Controls.Flyout.Flyout flyout1 = d as Izi.Travel.Core.Controls.Flyout.Flyout;
       SolidColorBrush oldValue = e.OldValue as SolidColorBrush;
       if (e.NewValue is SolidColorBrush newValue && (oldValue == null || newValue.Color != oldValue.Color || newValue.Opacity != oldValue.Opacity))
       {
-        Izi.Travel.Shell.Core.Controls.Flyout.Flyout flyout2 = flyout1;
+        Izi.Travel.Core.Controls.Flyout.Flyout flyout2 = flyout1;
         SolidColorBrush solidColorBrush = new SolidColorBrush(newValue.Color);
         solidColorBrush.Opacity = newValue.Opacity;
         flyout2.OverlayBrush = (Brush) solidColorBrush;

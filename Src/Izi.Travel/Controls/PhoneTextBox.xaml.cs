@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.Foundation;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     public sealed partial class PhoneTextBox : UserControl
     {
@@ -45,6 +45,23 @@ namespace Izi.Travel.Shell.Controls
         {
             this.InitializeComponent();
             this.Loaded += PhoneTextBox_Loaded;
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the text when delete button is clicked
+            Text = string.Empty;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update the Text property when the text changes
+            Text = ((TextBox)sender).Text;
+        }
+
+        private void ContentElement_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            // Handle scroll viewer view changed if needed
         }
 
         private void PhoneTextBox_Loaded(object sender, RoutedEventArgs e)
@@ -99,6 +116,12 @@ namespace Izi.Travel.Shell.Controls
                 control.UpdatePlaceholderTextVisibility();
                 control.UpdateDeleteButtonVisibility();
             }
+        }
+
+        private void ContentElement_ViewChanged(object sender, Windows.UI.Xaml.Controls.ScrollViewerViewChangedEventArgs e)
+        {
+            // Empty implementation to satisfy the XAML event handler
+            // No specific action needed for this event in the MVP
         }
 
         private static InputScope CreateDefaultInputScope()

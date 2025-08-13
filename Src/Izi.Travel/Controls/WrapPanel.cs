@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Izi.Travel.Shell.Controls
+namespace Izi.Travel.Controls
 {
     public class WrapPanel : Panel
     {

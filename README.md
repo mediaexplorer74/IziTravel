@@ -1,4 +1,4 @@
-# IziTravel  v10.0.0.0-prealpha ("reburn" codename) - reburn branch 
+# IziTravel v10.0.50-prealpha ("reburn" codename) - reburn branch 
 ![Logo](Images/logo.png)
 
 ## About
@@ -30,7 +30,7 @@ Very early bird; draft UWP application to "parse" Izi.Travel web site on some wi
 
 ## Status
 - In 2025, I decided to automate porting with help: Deepseek, WindSurf IDE & Trae IDE + VSCode&RooCode
-- Work-in-progress (so, 100500 bugs still here/there!)
+- Work-in-progress (so, yea… it's ven compiled… BUT 100500 bugs still here/there!)
 
 ![RnD](Images/RnD.png)
 

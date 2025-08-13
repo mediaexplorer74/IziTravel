@@ -1,15 +1,15 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.Common.Model.ButtonInfo
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.Common.Model.ButtonInfo
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
 #nullable disable
-namespace Izi.Travel.Shell.Common.Model
+namespace Izi.Travel.Common.Model
 {
   public class ButtonInfo : PropertyChangedBase
   {

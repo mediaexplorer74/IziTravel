@@ -1,14 +1,14 @@
 ﻿// ********************************************************************
-// Type: Izi.Travel.Shell.Mtg.ViewModels.Quiz.FlyoutQuizCommentViewModel
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+// Type: Izi.Travel.Mtg.ViewModels.Quiz.FlyoutQuizCommentViewModel
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
-using Izi.Travel.Shell.Common.ViewModels.Flyout;
-using Izi.Travel.Shell.Core.Extensions;
+using Izi.Travel.Common.ViewModels.Flyout;
+using Izi.Travel.Core.Extensions;
 
 #nullable disable
-namespace Izi.Travel.Shell.Mtg.ViewModels.Quiz
+namespace Izi.Travel.Mtg.ViewModels.Quiz
 {
   public class FlyoutQuizCommentViewModel : FlyoutViewModel
   {

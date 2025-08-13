@@ -1,18 +1,18 @@
-// ********************************************************************
-// Type: Izi.Travel.Shell.ViewModels.Explore.ExploreLocationItem
-// Assembly: Izi.Travel.Shell, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
+﻿// ********************************************************************
+// Type: Izi.Travel.ViewModels.Explore.ExploreLocationItem
+// Assembly: Izi.Travel, Version=2.3.4.18, Culture=neutral, PublicKeyToken=null
 // MVID: A80CFBDE-81BF-4633-8B4B-CE4786A327B5
-// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.Shell.dll
+// Assembly location: C:\Users\Admin\Desktop\RE\Izi.Travel\Izi.Travel.dll
 
 using Caliburn.Micro;
-using Izi.Travel.Shell.Core.Extensions;
-using Izi.Travel.Shell.Core.Resources;
+using Izi.Travel.Core.Extensions;
+using Izi.Travel.Core.Resources;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Devices.Geolocation;
 using Izi.Travel.Business.Entities.Data;
 
 #nullable disable
-namespace Izi.Travel.Shell.ViewModels.Explore
+namespace Izi.Travel.ViewModels.Explore
 {
   public class ExploreLocationItem : PropertyChangedBase
   {

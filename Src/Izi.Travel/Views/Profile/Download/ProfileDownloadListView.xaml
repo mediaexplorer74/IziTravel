@@ -1,23 +1,23 @@
-<UserControl x:Class="Izi.Travel.Shell.Views.Profile.Download.ProfileDownloadListView"
+<UserControl x:Class="Izi.Travel.Views.Profile.Download.ProfileDownloadListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:components="using:Izi.Travel.Shell.Common.Components"
-             xmlns:controls="using:Izi.Travel.Shell.Core.Controls"
-             xmlns:behaviors="using:Izi.Travel.Shell.Core.Components.Behaviors"
+             xmlns:components="using:Izi.Travel.Common.Components"
+             xmlns:controls="using:Izi.Travel.Core.Controls"
+             xmlns:behaviors="using:Izi.Travel.Core.Components.Behaviors"
              
-             xmlns:commoncontrols="using:Izi.Travel.Shell.Common.Controls"
-             xmlns:coreconverters="using:Izi.Travel.Shell.Core.Converters"
-             xmlns:converters="using:Izi.Travel.Shell.Mtg.Converters"
-             xmlns:download="using:Izi.Travel.Shell.ViewModels.Profile.Download"
+             xmlns:commoncontrols="using:Izi.Travel.Common.Controls"
+             xmlns:coreconverters="using:Izi.Travel.Core.Converters"
+             xmlns:converters="using:Izi.Travel.Mtg.Converters"
+             xmlns:download="using:Izi.Travel.ViewModels.Profile.Download"
              mc:Ignorable="d">
 
     
-    <i:Interaction.Behaviors>
-        <components:ViewAnalyticsBehavior />
-    </i:Interaction.Behaviors>
+    <!--i:Interaction.Behaviors>
+        
+    </i:Interaction.Behaviors-->
 
     
     <UserControl.Resources>
@@ -74,7 +74,7 @@
                            FlowDirection="{Binding Language, Converter={StaticResource LanguageToFlowDirectionConverter}}"
                            Foreground="{StaticResource IziTravelDarkBrush}" 
                            FontSize="{StaticResource IziTravelFontSizeNormal}"
-                           FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}" 
+                            
                            TextWrapping="Wrap"
                            TextTrimming="WordEllipsis" 
                            MaxHeight="62" />
@@ -83,7 +83,7 @@
                 <TextBlock Grid.Row="1" Grid.Column="1"
                            Foreground="{StaticResource IziTravelDarkGrayBrush}" 
                            FontSize="{StaticResource IziTravelFontSizeSmall}"
-                           FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                           
                            Text="{Binding Type, Converter={StaticResource MtgObjectTypeToStringConverter}}"
                            TextTrimming="WordEllipsis"
                            Margin="0,5,0,0" />
@@ -92,7 +92,7 @@
                 <TextBlock Grid.Row="1" Grid.Column="2"
                            Foreground="{Binding IsUpdating, Converter={StaticResource IsUpdatingToForegroungConverter}}"
                            FontSize="{StaticResource IziTravelFontSizeSmall}"
-                           FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                           
                            Text="{Binding StateDownloadedString}"
                            HorizontalAlignment="Right"
                            Margin="0,5,0,0" 
@@ -113,7 +113,7 @@
                 <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                            Foreground="{StaticResource IziTravelVioletBrush}"
                            FontSize="{StaticResource IziTravelFontSizeSmall}"
-                           FontFamily="{StaticResource IziTravelFontFamilySegoeNormal}"
+                           
                            Text="{Binding LocalizedResources.MessageDownloadItemError, Source={StaticResource LocalizedStrings}}"
                            Margin="0,5,0,0" 
                            VerticalAlignment="Top" 
@@ -133,9 +133,11 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListBox.ItemContainerStyle>
-                <i:Interaction.Behaviors>
+                
+                <!--i:Interaction.Behaviors>
                     <behaviors:SelectorSelectBehavior SelectCommand="{Binding NavigateCommand}" />
-                </i:Interaction.Behaviors>
+                </i:Interaction.Behaviors-->
+                
                 <ListBox.Template>
                     <ControlTemplate TargetType="ListBox">
                         <ScrollViewer x:Name="ScrollViewer"
